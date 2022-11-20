@@ -85,6 +85,44 @@ AddEventHandler("sa_ffa:SearchRandomGame", function(args)
     GetRandomGame(source, Games, args)
 end)
 
+RegisterNetEvent("sa_ffa:PlayerKilled")
+AddEventHandler("sa_ffa:PlayerKilled", function(KillData)
+    local killed = source
+    local killer = KillData.killerServerId
+
+    if KillData.killerServerId ~= nil then
+        TriggerClientEvent('sa_ffa:UpdatePlayerStats', killed, 'killed')
+        TriggerClientEvent('sa_ffa:UpdatePlayerStats', killer, 'killer')
+    else 
+        TriggerClientEvent('sa_ffa:UpdatePlayerStats', killed, 'killed')
+        print("bist du dumm")
+    end
+end)
+
+
+RegisterNetEvent("sa_ffa:SaveStats")
+AddEventHandler("sa_ffa:SaveStats", function(PlayerStats)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local identifier = xPlayer.getIdentifier()
+    local result = MySQL.prepare.await('SELECT * FROM ffa WHERE identifier = ?',{identifier})
+
+    if result == nil then
+        print("insert")
+        MySQL.Async.execute('INSERT INTO ffa (identifier, kills, deaths) VALUES (@identifier, @kills, @deaths)', {
+            ['identifier'] = identifier,
+            ['kills'] = PlayerStats.kills,
+            ['deaths'] = PlayerStats.deaths
+        })
+    else 
+        print("update")
+        MySQL.Async.execute('UPDATE ffa SET kills = @kills, deaths = @deaths WHERE identifier = @identifier', {
+            ['identifier'] = identifier,
+            ['kills'] = PlayerStats.kills,
+            ['deaths'] = PlayerStats.deaths
+        })
+    end
+end)
+
 
 --[[ Functions ]]
 function ChangeWeaponState(Player, State, Loadout)
