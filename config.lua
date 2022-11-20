@@ -7,6 +7,8 @@ Config.StandardDimension = 0
 Config.Invincible = false
 Config.DisabledNPCS = true
 Config.EnterCoords = vector3(1628.2857666016,2552.1848144531,45.564849853516)
+Config.UnlimitedAmmo = true
+Config.WeaponAmmo = 1000
 
 Config.SendNotifyClient = function (msg)
     ESX.ShowNotification(msg)
