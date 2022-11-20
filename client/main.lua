@@ -7,13 +7,13 @@ local ActiveClientGame = {}
 RegisterCommand('Create', function(source, args) -- Arg: Name, passwort, Max, Privat, Modus, Map
     --if not isInDimension then
     Config.SendNotifyClient("Raum wird erstellt...")
-    TriggerServerEvent('FFA:CreateGame', args)
+    TriggerServerEvent('sa_ffa:CreateGame', args)
     --end
 end)
 
 RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
     --if not isInDimension then
-    TriggerServerEvent("FFA:JoinGame", args)
+    TriggerServerEvent("sa_ffa:JoinGame", args)
     --ESX.ShowNotification("Raum wird betreten...")
     --else
     --ESX.ShowNotification("Du bist bereits in einem Raum!")
@@ -22,7 +22,7 @@ end)
 
 -- Test Befehl: search SG 3
 RegisterCommand('Search', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
-    TriggerServerEvent("FFA:SearchRandomGame", args)
+    TriggerServerEvent("sa_ffa:SearchRandomGame", args)
     ESX.ShowNotification("Spielsuche gestartet!")
 end)
 
@@ -33,20 +33,20 @@ end)
 RegisterCommand('Leave', function(source, args)
     --if isInDimension then
     Loadout('Leave', nil)
-    TriggerServerEvent('FFA:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
+    TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
     ActiveClientGame = {}
     --else
-    --ESX.ShowNotification("Du bist in keiner FFA Lobby!")
+    --ESX.ShowNotification("Du bist in keiner sa_ffa Lobby!")
     --end
 end)
 
-RegisterNetEvent("FFA:FoundRandomGame")
-AddEventHandler("FFA:FoundRandomGame", function()
+RegisterNetEvent("sa_ffa:FoundRandomGame")
+AddEventHandler("sa_ffa:FoundRandomGame", function()
     isInDimension = true
 end)
 
-RegisterNetEvent("FFA:JoinGameClient")
-AddEventHandler("FFA:JoinGameClient", function(ActiveGame, PlayerWeapons)
+RegisterNetEvent("sa_ffa:JoinGameClient")
+AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     PlayerLoadout = PlayerWeapons
     ActiveClientGame = ActiveGame
     Loadout('Join', ActiveGame.Modus)
@@ -54,8 +54,8 @@ AddEventHandler("FFA:JoinGameClient", function(ActiveGame, PlayerWeapons)
     isInDimension = true
 end)
 
-RegisterNetEvent("FFA:LeaveGameClient")
-AddEventHandler("FFA:LeaveGameClient", function(Modus)
+RegisterNetEvent("sa_ffa:LeaveGameClient")
+AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     Loadout('Leave', Modus)
     isInDimension = false
 end)

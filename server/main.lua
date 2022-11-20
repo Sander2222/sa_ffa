@@ -3,8 +3,8 @@ local Games = {
 
 }
 
-RegisterNetEvent('FFA:CreateGame')
-AddEventHandler('FFA:CreateGame', function(UserCreateInfo) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
+RegisterNetEvent('sa_ffa:CreateGame')
+AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfo) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
     local xPlayer = ESX.GetPlayerFromId(source)
     local PlayerLoadout = xPlayer.getLoadout()
     local IsNameValid = 0
@@ -41,8 +41,8 @@ AddEventHandler('FFA:CreateGame', function(UserCreateInfo) -- Arg: Name 1, Passw
     end
 end)
 
-RegisterNetEvent('FFA:JoinGame')
-AddEventHandler('FFA:JoinGame', function(args) -- Arg: Name, Passwort
+RegisterNetEvent('sa_ffa:JoinGame')
+AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
     local xPlayer = ESX.GetPlayerFromId(source)
     local NameValid = false
     local PasswordValid = false
@@ -73,15 +73,15 @@ AddEventHandler('FFA:JoinGame', function(args) -- Arg: Name, Passwort
     end
 end)
 
-RegisterNetEvent('FFA:LeaveGame')
-AddEventHandler('FFA:LeaveGame', function(PlayerWeapons, ActiveClientGame)
+RegisterNetEvent('sa_ffa:LeaveGame')
+AddEventHandler('sa_ffa:LeaveGame', function(PlayerWeapons, ActiveClientGame)
     ChangeWeaponState(source, "leave", PlayerWeapons)
     LeaveGame(source, ActiveClientGame)
     UsedDimension = UsedDimension + 1
 end)
 
-RegisterNetEvent("FFA:SearchRandomGame")
-AddEventHandler("FFA:SearchRandomGame", function(args)
+RegisterNetEvent("sa_ffa:SearchRandomGame")
+AddEventHandler("sa_ffa:SearchRandomGame", function(args)
     GetRandomGame(source, Games, args)
 end)
 
@@ -106,7 +106,7 @@ end
 function JoinGame(Player, GameInfo, Loadout)
     ChangeWeaponState(source, 'join', Loadout)
     SetPlayerRoutingBucket(Player, GameInfo.Dimension)
-    TriggerClientEvent('FFA:JoinGameClient', Player, GameInfo, Loadout)
+    TriggerClientEvent('sa_ffa:JoinGameClient', Player, GameInfo, Loadout)
     ChangePlayerCount(Player, GameInfo, "join")
 
     if not Config.DisabledNPCS then
@@ -117,7 +117,7 @@ end
 function LeaveGame(Player, GameInfo)
     SetPlayerRoutingBucket(Player, Config.StandardDimension)
     print(GetPlayerName(Player) .. " hat verlassen")
-    TriggerClientEvent('FFA:LeaveGameClient', Player, 'testg')
+    TriggerClientEvent('sa_ffa:LeaveGameClient', Player, 'testg')
     ChangePlayerCount(Player, GameInfo, "leave")
 end
 
@@ -161,7 +161,7 @@ function GetRandomGame(Player, lobbys, args) --Arg: Map (args[1]), Modus (args[2
                 if ClientMap == (nil or '') then
                     --Hier kommst du rein wenn keine map ist und keinen Modus
                     Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..v.Name)
-                    TriggerClientEvent("FFA:FoundRandomGame", Player)
+                    TriggerClientEvent("sa_ffa:FoundRandomGame", Player)
                     JoinGame(Player, v, xPlayer.getLoadout())
                     LobbyFound = true
                     break
@@ -169,7 +169,7 @@ function GetRandomGame(Player, lobbys, args) --Arg: Map (args[1]), Modus (args[2
                     --Hier kommst du rein wenn du keinem Modus hast aber eine Map
                     if v.Map == ClientMap then
                         Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..v.Name)
-                        TriggerClientEvent("FFA:FoundRandomGame", Player)
+                        TriggerClientEvent("sa_ffa:FoundRandomGame", Player)
                         JoinGame(Player, v, xPlayer.getLoadout())
                         LobbyFound = true
                         break
@@ -179,14 +179,14 @@ function GetRandomGame(Player, lobbys, args) --Arg: Map (args[1]), Modus (args[2
                 if ClientModus == v.Modus then
                     if ClientMap == (nil or '') then
                         Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..v.Name)
-                        TriggerClientEvent("FFA:FoundRandomGame", Player)
+                        TriggerClientEvent("sa_ffa:FoundRandomGame", Player)
                         JoinGame(Player, v, xPlayer.getLoadout())
                         LobbyFound = true
                         break
                     else
                         if v.Map == ClientMap then
                             Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..v.Name)
-                            TriggerClientEvent("FFA:FoundRandomGame", Player)
+                            TriggerClientEvent("sa_ffa:FoundRandomGame", Player)
                             JoinGame(Player, v, xPlayer.getLoadout())
                             LobbyFound = true
                             break
