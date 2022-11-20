@@ -1,7 +1,10 @@
 local isInDimension = nil
 local PlayerLoadout = {}
 local ActiveClientGame = {}
-
+local PlayerStats = {
+    kills = 0,
+    deaths = 0 
+}
 
 -- Test Befehl: create Arena1 23 3 0 2 SG
 RegisterCommand('Create', function(source, args) -- Arg: Name, passwort, Max, Privat, Modus, Map
@@ -35,6 +38,7 @@ RegisterCommand('Leave', function(source, args)
     Loadout('Leave', nil)
     TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
     ActiveClientGame = {}
+    TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
     --else
     --ESX.ShowNotification("Du bist in keiner sa_ffa Lobby!")
     --end
@@ -60,10 +64,22 @@ AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     isInDimension = false
 end)
 
+RegisterNetEvent("sa_ffa:UpdatePlayerStats")
+AddEventHandler("sa_ffa:UpdatePlayerStats", function(Type)
+
+    if Type == 'killed' then
+        PlayerStats.deaths = PlayerStats.deaths + 1
+    elseif Type == 'killer' then
+        PlayerStats.kills = PlayerStats.kills + 1 
+    end
+
+end)
+
 AddEventHandler('esx:onPlayerDeath', function(data)
 
     -- if istInDimension then
             Citizen.Wait(1000)
+            TriggerServerEvent('sa_ffa:PlayerKilled', data)
             TriggerEvent('esx_ambulancejob:revive')
             Wait(1000)
             Loadout('Join', ActiveClientGame.Modus)
@@ -102,9 +118,14 @@ function Loadout(Type, Modus)
         for i,v in ipairs(Config.Modus) do
             if tonumber(v.Modus) == tonumber(ActiveClientGame.Modus) then
                 for j,k in ipairs(v.Weapons) do
-                    GiveWeaponToPed(ped, GetHashKey(k), 1, 0, 0)
+                    if Config.UnlimitedAmmo then
+                        GiveWeaponToPed(ped, GetHashKey(k), 1, 0, 0)
+                        SetPedInfiniteAmmoClip(ped, true)
+                    else
+                        GiveWeaponToPed(ped, GetHashKey(k), Config.WeaponAmmo, 0, 0)
+                    end
                 end
-                SetPedInfiniteAmmoClip(ped, true)
+
             end
         end
     elseif Type == 'Leave' then
