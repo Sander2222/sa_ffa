@@ -55,8 +55,7 @@ AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
                 PasswordValid = true
                 if tonumber(v.Players) > tonumber(v.MaxPlayer) then
                     GameIsFull = false
-                    print("Room wurde gefunden! Room: " .. v.Name)
-                    roomfound = true
+                    Config.SendNotifyServer(source, "Room wurde gefunden! Room: " .. v.Name)
                     JoinGame(source, v, xPlayer.getLoadout())
                     break
                 end
@@ -65,11 +64,11 @@ AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
     end
 
     if not NameValid and not PasswordValid then
-        print("Es wurde kein Spiel mit passendem Namen gefunden")
+        Config.SendNotifyServer(source, "Es wurde kein Spiel mit passendem Namen gefunden")
     elseif not PasswordValid then
-        print("Das Game wurde gefunden aber das Passwort ist falsch")
+        Config.SendNotifyServer(source, "Das Game wurde gefunden aber das Passwort ist falsch")
     elseif GameIsFull then
-        print("Passwort und Name war richtig aber das Game ist voll")
+        Config.SendNotifyServer(source, "Passwort und Name war richtig aber das Game ist voll")
     end
 end)
 
@@ -93,9 +92,15 @@ AddEventHandler("sa_ffa:PlayerKilled", function(KillData)
     if KillData.killerServerId ~= nil then
         TriggerClientEvent('sa_ffa:UpdatePlayerStats', killed, 'killed')
         TriggerClientEvent('sa_ffa:UpdatePlayerStats', killer, 'killer')
+        if Config.NotifyForKill then
+            Config.SendNotifyServer(killed, ('Du wurdest von %s getötet'):format(GetPlayerName(killer)))
+            Config.SendNotifyServer(killer, ('Du hast %s getötet'):format(GetPlayerName(killer)))
+        end
     else 
         TriggerClientEvent('sa_ffa:UpdatePlayerStats', killed, 'killed')
-        print("bist du dumm")
+        if Config.NotifyForKill then
+            Config.SendNotifyServer(killed, 'Du hast dich selber getötet')
+        end
     end
 end)
 
@@ -107,14 +112,12 @@ AddEventHandler("sa_ffa:SaveStats", function(PlayerStats)
     local result = MySQL.prepare.await('SELECT * FROM ffa WHERE identifier = ?',{identifier})
 
     if result == nil then
-        print("insert")
         MySQL.Async.execute('INSERT INTO ffa (identifier, kills, deaths) VALUES (@identifier, @kills, @deaths)', {
             ['identifier'] = identifier,
             ['kills'] = PlayerStats.kills,
             ['deaths'] = PlayerStats.deaths
         })
     else 
-        print("update")
         MySQL.Async.execute('UPDATE ffa SET kills = @kills, deaths = @deaths WHERE identifier = @identifier', {
             ['identifier'] = identifier,
             ['kills'] = PlayerStats.kills,
@@ -154,7 +157,6 @@ end
 
 function LeaveGame(Player, GameInfo)
     SetPlayerRoutingBucket(Player, Config.StandardDimension)
-    print(GetPlayerName(Player) .. " hat verlassen")
     TriggerClientEvent('sa_ffa:LeaveGameClient', Player, 'testg')
     ChangePlayerCount(Player, GameInfo, "leave")
 end
@@ -166,11 +168,9 @@ function ChangePlayerCount(Player, ActiveGame, State)
 
     if State == "join" then
         ActiveGame.Players = ActiveGame.Players + 1
-        print("Spieler in der Lobby: " ..ActiveGame.Name)
     elseif State == "leave" then
         for k, v in ipairs(Games) do
             if v.Name == ActiveGame then
-                print("Spieler wird gelöscht")
                 v.Players = v.Players - 1
                 if v.Players <= 0 then
                     Config.SendNotifyServer(Player, "Da du die letzte Person in dem Game warst wurde die Lobby gelöscht")
@@ -179,8 +179,6 @@ function ChangePlayerCount(Player, ActiveGame, State)
                 break
             end
         end
-        --print(ESX.DumpTable(ActiveGame))
-         --print(ActiveGame.Players.. "Spieler sind gerade in Lobby: " ..ActiveGame.Name.. "Neuer verlassen")
     end
 end
 
@@ -232,7 +230,6 @@ function GetRandomGame(Player, lobbys, args) --Arg: Map (args[1]), Modus (args[2
     end
 
     if not LobbyFound then
-        print("kein Game gefunden")
         Config.SendNotifyServer(source, 'Es wurde kein Lobby gefunden bitte versuche es gleich nochmal')
     end
 end

@@ -162,7 +162,5 @@ function Loadout(Type, Modus)
             end
         end
         ESX.Game.Teleport(ped, Config.EnterCoords, function()end)
-    else
-        print("Error")
     end
 end
