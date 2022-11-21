@@ -7,30 +7,30 @@ local ActiveMapInfo = {
 }
 local PlayerStats = {
     kills = 0,
-    deaths = 0 
+    deaths = 0
 }
 
 -- Test Befehl: create Arena1 23 3 0 2 SG
 RegisterCommand('Create', function(source, args) -- Arg: Name, passwort, Max, Privat, Modus, Map
-    --if not isInDimension then
-    Config.SendNotifyClient("Raum wird erstellt...")
-    TriggerServerEvent('sa_ffa:CreateGame', args)
-    --end
+    if not isInDimension then
+        Config.SendNotifyClient("Raum wird erstellt...")
+        TriggerServerEvent('sa_ffa:CreateGame', args)
+    end
 end)
 
 RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
-    --if not isInDimension then
-    TriggerServerEvent("sa_ffa:JoinGame", args)
-    --ESX.ShowNotification("Raum wird betreten...")
-    --else
-    --ESX.ShowNotification("Du bist bereits in einem Raum!")
-    --end
+    if not isInDimension then
+        TriggerServerEvent("sa_ffa:JoinGame", args)
+        Config.SendNotifyClient("Raum wird betreten...")
+    else
+        Config.SendNotifyClient("Du bist bereits in einem Raum!")
+    end
 end)
 
 -- Test Befehl: search SG 3
 RegisterCommand('Search', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
     TriggerServerEvent("sa_ffa:SearchRandomGame", args)
-    ESX.ShowNotification("Spielsuche gestartet!")
+    Config.SendNotifyClient("Spielsuche gestartet!")
 end)
 
 RegisterCommand('game', function(source, args)
@@ -38,19 +38,14 @@ RegisterCommand('game', function(source, args)
 end)
 
 RegisterCommand('Leave', function(source, args)
-    --if isInDimension then
-    Loadout('Leave', nil)
-    TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
-    ActiveClientGame = {}
-    TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
-    --else
-    --ESX.ShowNotification("Du bist in keiner sa_ffa Lobby!")
-    --end
-end)
-
-RegisterNetEvent("sa_ffa:FoundRandomGame")
-AddEventHandler("sa_ffa:FoundRandomGame", function()
-    isInDimension = true
+    if isInDimension then
+        Loadout('Leave', nil)
+        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
+        ActiveClientGame = {}
+        TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
+    else
+        Config.SendNotifyClient("Du bist in keiner sa_ffa Lobby!")
+    end
 end)
 
 RegisterNetEvent("sa_ffa:JoinGameClient")

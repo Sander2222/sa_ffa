@@ -199,7 +199,6 @@ function GetRandomGame(Player, lobbys, args) --Arg: Map (args[1]), Modus (args[2
                 if ClientMap == (nil or '') then
                     --Hier kommst du rein wenn keine map ist und keinen Modus
                     Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..v.Name)
-                    TriggerClientEvent("sa_ffa:FoundRandomGame", Player)
                     JoinGame(Player, v, xPlayer.getLoadout())
                     LobbyFound = true
                     break
@@ -207,7 +206,6 @@ function GetRandomGame(Player, lobbys, args) --Arg: Map (args[1]), Modus (args[2
                     --Hier kommst du rein wenn du keinem Modus hast aber eine Map
                     if v.Map == ClientMap then
                         Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..v.Name)
-                        TriggerClientEvent("sa_ffa:FoundRandomGame", Player)
                         JoinGame(Player, v, xPlayer.getLoadout())
                         LobbyFound = true
                         break
@@ -217,14 +215,12 @@ function GetRandomGame(Player, lobbys, args) --Arg: Map (args[1]), Modus (args[2
                 if ClientModus == v.Modus then
                     if ClientMap == (nil or '') then
                         Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..v.Name)
-                        TriggerClientEvent("sa_ffa:FoundRandomGame", Player)
                         JoinGame(Player, v, xPlayer.getLoadout())
                         LobbyFound = true
                         break
                     else
                         if v.Map == ClientMap then
                             Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..v.Name)
-                            TriggerClientEvent("sa_ffa:FoundRandomGame", Player)
                             JoinGame(Player, v, xPlayer.getLoadout())
                             LobbyFound = true
                             break
