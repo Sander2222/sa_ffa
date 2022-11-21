@@ -1,6 +1,10 @@
 local isInDimension = nil
 local PlayerLoadout = {}
 local ActiveClientGame = {}
+local ActiveMapInfo = {
+    ActiveMapCenter = nil,
+    ActiveMapRadius = nil
+}
 local PlayerStats = {
     kills = 0,
     deaths = 0 
@@ -104,9 +108,30 @@ function Teleport()
             DoScreenFadeOut(100)
             ESX.Game.Teleport(PlayerPedId(), v.Teleports[math.random(1, #v.Teleports)], function()end)
             DoScreenFadeIn(100)
+            ActiveMapInfo.ActiveMapCenter = v.MapCenter
+            ActiveMapInfo.ActiveMapRadius = v.MaxRadius
         end
     end
 end
+
+Citizen.CreateThread(function()
+
+    while true do
+        if isInDimension then
+            local dist = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), ActiveMapInfo.ActiveMapCenter)
+
+            if dist >= ActiveMapInfo.ActiveMapRadius then
+                Teleport()
+                Config.SendNotifyClient("Du warst außerhalb der Zone und wurdest wieder zurück telepotier")
+            end
+            Wait(1000)
+        else 
+            Wait(5000)
+        end
+
+        Wait(1)
+    end
+end)
 
 function Loadout(Type, Modus)
     
@@ -141,10 +166,7 @@ function Loadout(Type, Modus)
                 SetPedInfiniteAmmoClip(ped, false)
             end
         end
-
-        ESX.Game.Teleport(ped, Config.EnterCoords, function()
-            
-        end)
+        ESX.Game.Teleport(ped, Config.EnterCoords, function()end)
     else
         print("Error")
     end
