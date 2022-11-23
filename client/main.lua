@@ -13,7 +13,7 @@ local PlayerStats = {
 -- Test Befehl: create Arena1 23 3 0 2 SG
 RegisterCommand('Create', function(source, args) -- Arg: Name, passwort, Max, Privat, Modus, Map
     if not isInDimension then
-        Config.SendNotifyClient("Raum wird erstellt...")
+        Config.SendNotifyClient("Raum wird erstellt bitte warte...")
         TriggerServerEvent('sa_ffa:CreateGame', args)
     end
 end)
@@ -76,25 +76,25 @@ end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
 
-    -- if istInDimension then
-            Citizen.Wait(1000)
-            TriggerServerEvent('sa_ffa:PlayerKilled', data)
-            TriggerEvent('esx_ambulancejob:revive')
-            Wait(1000)
-            Loadout('Join', ActiveClientGame.Modus)
-            Teleport()
-            NetworkSetFriendlyFireOption(false)
-            SetCanAttackFriendly(GetPlayerPed(-1), false, false)
-            if Config.Invincible then
-                SetEntityInvincible(GetPlayerPed(-1), true)
-            end
-            Citizen.Wait(3000)
-            NetworkSetFriendlyFireOption(true)
-            SetCanAttackFriendly(GetPlayerPed(-1), true, true)
-        if Config.Invincible then
-            SetEntityInvincible(GetPlayerPed(-1), false)
-        end
-    -- end
+    if isInDimension then
+    Citizen.Wait(1000)
+    TriggerServerEvent('sa_ffa:PlayerKilled', data)
+    TriggerEvent('esx_ambulancejob:revive')
+    Wait(1000)
+    Loadout('Join', ActiveClientGame.Modus)
+    Teleport()
+    NetworkSetFriendlyFireOption(false)
+    SetCanAttackFriendly(GetPlayerPed(-1), false, false)
+    if Config.Invincible then
+        SetEntityInvincible(GetPlayerPed(-1), true)
+    end
+    Citizen.Wait(3000)
+    NetworkSetFriendlyFireOption(true)
+    SetCanAttackFriendly(GetPlayerPed(-1), true, true)
+    if Config.Invincible then
+        SetEntityInvincible(GetPlayerPed(-1), false)
+    end
+    end
 end)
 
 function Teleport()

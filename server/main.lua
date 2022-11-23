@@ -4,14 +4,14 @@ local Games = {
 }
 
 RegisterNetEvent('sa_ffa:CreateGame')
-AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfo) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
+AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
     local xPlayer = ESX.GetPlayerFromId(source)
     local PlayerLoadout = xPlayer.getLoadout()
     local IsNameValid = 0
     
     if #Games > 0 then
         for i,v in ipairs(Games) do
-            if v.Name ~= UserCreateInfo[1] then
+            if v.Name ~= UserCreateInfoA[1] then
                 IsNameValid = IsNameValid + 1
             else 
                 Config.SendNotifyServer(source, 'Diesen Raum gibt es schon erstelle einen neuen!')
@@ -22,14 +22,14 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfo) -- Arg: Name 1, Pa
 
     if IsNameValid == #Games then
         local NewGame = {
-            Name = UserCreateInfo[1],
-            Password = UserCreateInfo[2],
-            MaxPlayer = UserCreateInfo[3],
+            Name = UserCreateInfoA[1],
+            Password = UserCreateInfoA[2],
+            MaxPlayer = UserCreateInfoA[3],
             --Players muss 0 sein weil standard 0 Spieler in einer Runde sind
             Players = 0,
-            PrivateGame = UserCreateInfo[4],
-            Modus = UserCreateInfo[5],
-            Map = UserCreateInfo[6],
+            PrivateGame = UserCreateInfoA[4],
+            Modus = UserCreateInfoA[5],
+            Map = UserCreateInfoA[6],
             Dimension = UsedDimension
         }
     
@@ -37,7 +37,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfo) -- Arg: Name 1, Pa
         
         JoinGame(source, NewGame, PlayerLoadout)
         UsedDimension = UsedDimension + 1
-        SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfo[1], UserCreateInfo[2]))
+        SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA[1], UserCreateInfoA[2]))
         Config.SendNotifyServer(source, 'ein Raum wurde erstellt mit dem Namen: ' ..NewGame.Name)
     end
 end)
@@ -146,9 +146,9 @@ function ChangeWeaponState(Player, State, Loadout)
 end
 
 function JoinGame(Player, GameInfo, Loadout)
+    TriggerClientEvent('sa_ffa:JoinGameClient', Player, GameInfo, Loadout)
     ChangeWeaponState(source, 'join', Loadout)
     SetPlayerRoutingBucket(Player, GameInfo.Dimension)
-    TriggerClientEvent('sa_ffa:JoinGameClient', Player, GameInfo, Loadout)
     ChangePlayerCount(Player, GameInfo, "join")
 
     if not Config.DisabledNPCS then
@@ -235,6 +235,10 @@ function GetRandomGame(Player, lobbys, args) --Arg: Map (args[1]), Modus (args[2
         Config.SendNotifyServer(source, 'Es wurde kein Lobby gefunden bitte versuche es gleich nochmal')
     end
 end
+
+AddEventHandler('playerDropped', function (reason)
+    print('Player ' .. GetPlayerName(source) .. ' dropped (Reason: ' .. reason .. ')')
+  end)
 
 
 --- DEBUG
