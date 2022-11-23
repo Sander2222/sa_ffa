@@ -57,6 +57,7 @@ AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
                 if tonumber(v.Players) > tonumber(v.MaxPlayer) then
                     GameIsFull = false
                     Config.SendNotifyServer(source, "Room wurde gefunden! Room: " .. v.Name)
+                    SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), v.Name))
                     JoinGame(source, v, xPlayer.getLoadout())
                     break
                 end
@@ -77,7 +78,6 @@ RegisterNetEvent('sa_ffa:LeaveGame')
 AddEventHandler('sa_ffa:LeaveGame', function(PlayerWeapons, ActiveClientGame)
     ChangeWeaponState(source, "leave", PlayerWeapons)
     LeaveGame(source, ActiveClientGame)
-    UsedDimension = UsedDimension + 1
 end)
 
 RegisterNetEvent("sa_ffa:SearchRandomGame")
@@ -158,7 +158,7 @@ end
 
 function LeaveGame(Player, GameInfo)
     SetPlayerRoutingBucket(Player, Config.StandardDimension)
-    TriggerClientEvent('sa_ffa:LeaveGameClient', Player, 'testg')
+    TriggerClientEvent('sa_ffa:LeaveGameClient', Player, GameInfo.Modus)
     ChangePlayerCount(Player, GameInfo, "leave")
 end
 
@@ -176,6 +176,7 @@ function ChangePlayerCount(Player, ActiveGame, State)
                 if v.Players <= 0 then
                     Config.SendNotifyServer(Player, "Da du die letzte Person in dem Game warst wurde die Lobby gelöscht")
                     table.remove(Games, k )
+                    SendDiscord((SvConfig.WebhookText['LobbyDeleted']):format(v.Name))
                 end
                 break
             end
