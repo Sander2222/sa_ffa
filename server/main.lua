@@ -14,7 +14,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfo) -- Arg: Name 1, Pa
             if v.Name ~= UserCreateInfo[1] then
                 IsNameValid = IsNameValid + 1
             else 
-                Config.SendNotifyServer(source, 'Diesen Raum gibt es schon erstelle einen  neuen!')
+                Config.SendNotifyServer(source, 'Diesen Raum gibt es schon erstelle einen neuen!')
                 break
             end
         end
@@ -37,6 +37,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfo) -- Arg: Name 1, Pa
         
         JoinGame(source, NewGame, PlayerLoadout)
         UsedDimension = UsedDimension + 1
+        SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfo[1], UserCreateInfo[2]))
         Config.SendNotifyServer(source, 'ein Raum wurde erstellt mit dem Namen: ' ..NewGame.Name)
     end
 end)
@@ -251,3 +252,22 @@ end, false)
 RegisterCommand("checkffa", function(source, args, rawCommand)
     print(ESX.DumpTable(Games))
 end, false)
+
+ESX.RegisterServerCallback('sa_ffa:GetAllGames', function(source, cb)
+    cb(Games)
+end)
+
+--Discord
+function SendDiscord(message)
+    local embed = {
+          {
+              ["color"] = SvConfig.WebhookColor,
+              ["title"] = SvConfig.WebhookName,
+              ["description"] = message,
+              ["footer"] = {
+                  ["text"] = SvConfig.WebhookFooter,
+              },
+          }
+      }
+    PerformHttpRequest(SvConfig.Webhook, function(err, text, headers) end, 'POST', json.encode({username = name, embeds = embed}), { ['Content-Type'] = 'application/json' })
+end
