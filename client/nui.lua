@@ -15,7 +15,7 @@ ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
     end
 
     SendNuiMessage({
-        typeS = 'create',
+        type = 'create',
         ModusA = Config.Modus,
         MapsA = Config.Maps,
         ActiveGamePlayerN = ActiveGamePlayer,
@@ -27,18 +27,18 @@ end)
 ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
 
     SendNuiMessage({
-        typeS = 'search',
+        type = 'search',
         ActiveGames = ActiveGames
     })
 end)
 
 --Join
 SendNuiMessage({
-    typeS = 'join',
+    type = 'join',
 })
 
 --leave
 SendNuiMessage({
-    typeS = 'leave',
+    type = 'leave',
     ClientGame = ActiveClientGame
 })

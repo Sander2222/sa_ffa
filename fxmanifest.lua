@@ -22,3 +22,11 @@ client_scripts {
 	'client/main.lua',
 	'client/nui.lua'
 }
+
+ui_page ('html/ui.html')
+
+files {
+    'html/index.html',
+    'html/app.css',
+    'html/app.js'
+}
