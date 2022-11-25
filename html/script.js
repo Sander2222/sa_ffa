@@ -38,7 +38,7 @@ function AddGameSearch(MaxPlayer, Player, Modus, Map, Name) {
   <div class="ffa">
   <p>${Map}</p>
   <hr class="center-diamond">
-  <img src="images/Würfelpark.webp">
+  <img src="images/${Map}.webp">
 
   <div class="ffa-infos">
       <h1>Players:</h1>

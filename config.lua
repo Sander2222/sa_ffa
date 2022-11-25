@@ -65,7 +65,6 @@ Config.Maps = {
     {
         Map = 1,
         Name = 'SG',
-        ImagePath = 'html/img/SG.1',
         MaxPlayer = 187,
         MapCenter = vector3(1644.9177246094,2513.39453125,45.564910888672),
         MaxRadius = 200,
@@ -83,7 +82,6 @@ Config.Maps = {
     {
         Map = 2,
         Name = 'WP',
-        ImagePath = 'html/img/WP.1',
         MaxPlayer = 187,
         MapCenter = vector3(198.85273742676,-931.42071533203,30.689985275269),
         MaxRadius = 200,
