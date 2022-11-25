@@ -99,7 +99,7 @@ end)
 
 function Teleport()
     for i,v in ipairs(Config.Maps) do
-        if v.Name == ActiveClientGame.Map then
+        if tonumber(v.Map) == tonumber(ActiveClientGame.Map) then
             DoScreenFadeOut(100)
             ESX.Game.Teleport(PlayerPedId(), v.Teleports[math.random(1, #v.Teleports)], function()end)
             DoScreenFadeIn(100)
