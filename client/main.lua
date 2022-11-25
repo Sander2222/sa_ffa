@@ -38,7 +38,7 @@ RegisterCommand('game', function(source, args)
 end)
 
 RegisterCommand('Leave', function(source, args)
-    if isInDimension then
+    if isInDimension or Config.Debug then
         Loadout('Leave', nil)
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
         ActiveClientGame = {}

@@ -3,6 +3,7 @@ Config = {}
 --Dings bums ähmmm hier Mapping Menü reinmachen oder Fragen wenn game created wird (GTA 5 Basic Menü)
 -- Wenn wer diesen Kommentar lösht fick ich seine Mutter
 
+Config.Debug = true
 Config.StandardDimension = 0
 Config.Invincible = false
 Config.DisabledNPCS = true
