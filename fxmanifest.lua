@@ -23,10 +23,17 @@ client_scripts {
 	'client/nui.lua'
 }
 
-ui_page ('html/ui.html')
+ui_page ('html/index.html')
 
 files {
     'html/index.html',
-    'html/app.css',
-    'html/app.js'
+    'html/style.css',
+    'html/script.js',
+    'html/assets/css/*.css',
+	'html/images/*.png',
+	'html/images/*.jpg',
+	'html/images/*.gif',
+	'html/images/*.webp',
+	'html/lines.svg',
+	'html/panel_lines.svg'
 }
