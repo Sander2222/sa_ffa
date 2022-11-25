@@ -34,25 +34,28 @@
 
   top: 15%;
 
-  width: 95%;
+  width: 97.4%;
   height: 80%;
 
   background: rgba(255, 255, 255, 0.096);
   border-radius: 10px;
 
   display: flex;
-  
 }
 
 .container .ffa-menu .ffa-liste .top-bar p {
   position: absolute;
 
+
   color: transparent;
   background: linear-gradient(0deg, rgba(var(--main-color-rgb), 1) 20%, rgba(var(--main-color-rgb), 0.5) 80%);
   background-clip: text;
   -webkit-background-clip: text;
-  font-size: 30px;
-  font-weight: 600;
+  transform: skew(-15deg);
+  font-family: 'RobotDreamer', sans-serif;
+  text-shadow: 0 0 30px rgba(var(--main-color-rgb), 1);
+  font-size: 60px;
+  font-weight: 500;
 }
 
 .container .ffa-menu .ffa-liste .top-bar {
@@ -64,14 +67,38 @@
   height: 10%;
 
   border-radius: 10px;
-  background: #111;
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.container .ffa-menu .ffa-liste .ffa {
+
+
+.container .ffa-menu .ffa-liste .ffa-items {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  overflow-y: scroll;
+}
+
+.container .ffa-menu .ffa-liste .ffa-items::-webkit-scrollbar {
+  width: 10px;
+  background: rgba(255, 255, 255, 0.24);
+  border-radius: 2px;
+}
+
+.container .ffa-menu .ffa-liste .ffa-items::-webkit-scrollbar-thumb {
+  width: 10px;
+  background: rgba(var(--main-color-rgb), 1);
+  box-shadow: 0 0 10px rgba(var(--main-color-rgb), 1);
+  
+  border-radius: 2px;
+}
+
+.container .ffa-menu .ffa-liste .ffa-items .ffa {
   position: relative;
 
   min-width: 345px;
@@ -85,13 +112,13 @@
   border-top-right-radius: 5px;
   margin: 10px;
 
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
-.container .ffa-menu .ffa-liste .ffa::before {
+.container .ffa-menu .ffa-liste .ffa-items .ffa::before {
   content: "";
   position: absolute;
 
@@ -106,7 +133,7 @@
   z-index: 2;
 }
 
-.container .ffa-menu .ffa-liste .ffa p {
+.container .ffa-menu .ffa-liste .ffa-items .ffa p {
   position: absolute;
 
   top: 5%;
@@ -116,7 +143,7 @@
   z-index: 2;
 }
 
-.container .ffa-menu .ffa-liste .ffa img {
+.container .ffa-menu .ffa-liste .ffa-items .ffa img {
   position: absolute;
 
   transform: translateY(-20px);
@@ -128,7 +155,7 @@
   z-index: 1;
 }
 
-.container .ffa-menu .ffa-liste .ffa .ffa-infos {
+.container .ffa-menu .ffa-liste .ffa-items .ffa .ffa-infos {
   position: absolute;
 
   top: 25%;
@@ -147,7 +174,7 @@
   transition: 0.2s;
 }
 
-.container .ffa-menu .ffa-liste .ffa .ffa-infos:hover {
+.container .ffa-menu .ffa-liste .ffa-items .ffa .ffa-infos:hover {
     background: rgba(17, 17, 17, 0.541);
 }
 
@@ -157,7 +184,7 @@
     color: rgba(255, 255, 255, 0.76);
 }
 
-.container .ffa-menu .ffa-liste .ffa .ffa-infos h3 {
+.container .ffa-menu .ffa-liste .ffa-items .ffa .ffa-infos h3 {
     position: absolute;
     bottom: -4%;
     left: 12%;
@@ -170,9 +197,9 @@
 }
 
 hr {
-    position: relative;
+    position: absolute;
     border: 0;
-    top: -30%;
+    top: 8%;
     height: 3px;
     width: 50%;
     margin: 30px auto;

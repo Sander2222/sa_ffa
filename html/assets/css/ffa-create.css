@@ -1,10 +1,10 @@
 :root {
-  --main-color-rgb: 255, 196, 0; /* Orange */
   --main-color-rgb: 0, 255, 34; /* Grün */
-  --main-color-rgb: 255, 0, 0; /* Rot */
-  --main-color-rgb: 0, 38, 255; /* Dunkel Blau */
-  --main-color-rgb: 143, 0, 255; /* Lila */
+  --main-color-rgb: 255, 196, 0; /* Orange */
   --main-color-rgb: 0, 153, 255; /* Hellblau */
+  --main-color-rgb: 0, 38, 255; /* Dunkel Blau */
+  --main-color-rgb: 255, 0, 0; /* Rot */
+  --main-color-rgb: 143, 0, 255; /* Lila */
 }
 
 .container .ffa-menu .ffa-create {
