@@ -21,7 +21,10 @@ window.addEventListener('message', function (event) {
     }
   } else if (item.state === 'add') {
     if (item.type === 'search') {
-      AddGameSearch(item.maxplayers, item.players, item.modus, item.map, item.name)
+      $(".ffa-items").html("");
+      if (item.maxplayers != null && item.maxplayers != undefined) {
+        AddGameSearch(item.maxplayers, item.players, item.modus, item.map, item.name)
+      }
     }
   } else if (item.state === 'close') {
     $('body').hide()
@@ -31,38 +34,42 @@ window.addEventListener('message', function (event) {
 
 function AddGameSearch(MaxPlayer, Player, Modus, Map, Name) {
 
-  $('#ffa-items').append(`
+  $('.ffa-items').append(`
   <div class="ffa">
-  <p>` + Map + `</p>
+  <p>${Map}</p>
   <hr class="center-diamond">
   <img src="images/Würfelpark.webp">
 
   <div class="ffa-infos">
       <h1>Players:</h1>
-      <span>` + Player + `/` + MaxPlayer + `</span>
+      <span>${Player}/${MaxPlayer}</span>
       <h2>Mode:</h2>
-      <span>` + Modus + `</span>
+      <span>${Modus}</span>
   </div>
   
-  <button onclick="JoinSearchedMatch('` + Name + `')">BEITRETEN</button>
+  <button onclick="JoinSearchedMatch('${Name}')">BEITRETEN</button>
 </div>
   `)
 }
 
 function JoinSearchedMatch(Name) {
-  console.log("ssuo")
   $.post('https://sa_ffa/JoinSearchedMatch', JSON.stringify({ Game: Name }));
+
+  $(".ffa-items").html("");
+  Close()
 }
 
 
-document.onkeyup = function(data) {
+document.onkeyup = function (data) {
   if (data.which == 27) {
-      console.log("lol")
-      $.post('https://sa_ffa/exit', JSON.stringify({}));
-      return
+    Close()
   }
 };
 
+function Close() {
+  $.post('https://sa_ffa/exit', JSON.stringify({}));
+
+}
 
 
 
