@@ -1,0 +1,35 @@
+@keyframes action {
+    0%,100% {
+        bottom: -50%;
+    }
+    50% {
+        bottom: -20%;
+        box-shadow: var(--shadow-white);
+        width: 100%;
+    }
+}
+
+@keyframes kill {
+    0% {
+        opacity: 0;
+        left: -10%;
+    }
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes delete {
+    0% {
+        opacity: 0.5;
+        filter: blur(5px);
+    }
+    50% {
+        opacity: 0;
+        filter: blur(0);
+    }
+    100% {
+        opacity: 0;
+    }
+}
