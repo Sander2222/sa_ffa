@@ -25,6 +25,7 @@ end
 Config.Modus = {
     {
         Modus = 1,
+        Name = 'Gambo 1',
         Weapons = {
             "weapon_pistol",
             "weapon_appistol",
@@ -33,6 +34,7 @@ Config.Modus = {
     },
     {
         Modus = 2,
+        Name = 'Gambo 2',
         Weapons = {
             "WEAPON_PISTOL",
             "WEAPON_APPISTOL",
@@ -41,6 +43,7 @@ Config.Modus = {
     },
     {
         Modus = 3,
+        Name = 'Gambo 3',
         Weapons = {
             "WEAPON_PISTOL",
             "WEAPON_APPISTOL",
@@ -59,6 +62,7 @@ Config.Modus = {
 
 Config.Maps = {
     {
+        Map = 1,
         Name = 'SG',
         ImagePath = 'html/img/SG.1',
         MaxPlayer = 187,
@@ -76,10 +80,11 @@ Config.Maps = {
         }
     },
     {
+        Map = 2,
         Name = 'WP',
         ImagePath = 'html/img/WP.1',
         MaxPlayer = 187,
-        MapCenter = vector3(1644.9177246094,2513.39453125,45.564910888672),
+        MapCenter = vector3(198.85273742676,-931.42071533203,30.689985275269),
         MaxRadius = 200,
         Teleports = {
             vector3(257.35, -873.52, 28.21),
