@@ -46,6 +46,7 @@ RegisterNUICallback("close", function() end)
 local AllGames = {}
 
 RegisterCommand('ui', function(source, args)
+    local Map
     -- Search
     ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
 
@@ -54,18 +55,24 @@ RegisterCommand('ui', function(source, args)
         SetNuiFocus(true, true)
         SendNUIMessage({state = 'show', type = 'search'})
 
+
         for i, v in ipairs(ActiveGames) do
-            print("1")
             if tonumber(v.PrivateGame) == 0 and tonumber(v.MaxPlayer) >
                 tonumber(v.Players) then
+                    local MapName, ModusName  = GiveDataBack(v.Modus, v.Map)
+
+                    while ModusName == nil and MapName == nil do
+                        wait(1)
+                    end
+
                 SendNUIMessage({
                     state = 'add',
                     type = 'search',
                     players = v.Players,
                     maxplayers = v.MaxPlayer,
-                    map = v.Map,
+                    map = MapName,
                     name = v.Name,
-                    modus = v.Modus
+                    modus = ModusName
                 })
             end
         end
@@ -78,9 +85,7 @@ RegisterNUICallback('JoinSearchedMatch', function(data, cb)
 
     for i, v in ipairs(AllGames) do
         if data.Game == v.Name then
-            print("Game gefunden")
             TriggerServerEvent("sa_ffa:SearchRandomGame", v)
-            print(ESX.DumpTable(v))
             AllGames = {}
         end
     end
@@ -92,3 +97,28 @@ RegisterNUICallback('exit', function(data, cb)
         state = 'close'
     })
 end)
+
+--Please dont ask
+function GiveDataBack(Modus, Map)
+    local MapName
+    local ModusName
+
+    for i,v in ipairs(Config.Modus) do
+        if tonumber(v.Modus) == tonumber(Modus)  then
+            ModusName = v.Name
+            print("modus")
+        end
+    end
+
+    for i,v in ipairs(Config.Maps) do
+        if tonumber(v.Map) == tonumber(Map) then
+            MapName = v.Name
+        end
+    end
+
+    while MapName == nil and ModusName == nil do
+        Wait(0)
+    end
+
+    return MapName, ModusName
+end
