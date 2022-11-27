@@ -18,6 +18,11 @@ window.addEventListener('message', function (event) {
 
     } else if (item.type === "leave") {
 
+    } else if (item.type === "score") {
+      display()
+      change_window(2)
+      displaySlides(currentIndex);
+      $('body').show()
     }
   } else if (item.state === 'add') {
     if (item.type === 'search') {
@@ -25,6 +30,18 @@ window.addEventListener('message', function (event) {
       if (item.maxplayers != null && item.maxplayers != undefined) {
         AddGameSearch(item.maxplayers, item.players, item.modus, item.map, item.name)
       }
+    } else if (item.type === 'score') {
+      var kills = item.kill
+      var deaths = item.death
+      var rounded = Math.round(((kills / deaths) + Number.EPSILON) * 100) / 100;
+
+      if (isNaN(rounded) || rounded === Infinity) {
+        $('#kd').text("0")
+      } else {
+        $('#kd').text(rounded)
+      }
+      $('#deaths').text(item.death)
+      $('#kills').text(item.kill)
     }
   } else if (item.state === 'close') {
     $('body').hide()
