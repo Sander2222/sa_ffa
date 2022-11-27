@@ -121,8 +121,8 @@ AddEventHandler("sa_ffa:SaveStats", function(PlayerStats)
     else 
         MySQL.Async.execute('UPDATE ffa SET kills = @kills, deaths = @deaths WHERE identifier = @identifier', {
             ['identifier'] = identifier,
-            ['kills'] = PlayerStats.kills,
-            ['deaths'] = PlayerStats.deaths
+            ['kills'] = result.kills + PlayerStats.kills,
+            ['deaths'] = result.deaths + PlayerStats.deaths
         })
     end
 end)
