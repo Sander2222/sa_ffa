@@ -10,7 +10,7 @@ local PlayerStats = {
     deaths = 0
 }
 
--- Test Befehl: create Arena1 23 3 0 2 SG
+-- Test Befehl: create Arena1 23 3 0 2 1
 RegisterCommand('Create', function(source, args) -- Arg: Name, passwort, Max, Privat, Modus, Map
     if not isInDimension then
         Config.SendNotifyClient("Raum wird erstellt bitte warte...")
@@ -54,12 +54,14 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     ActiveClientGame = ActiveGame
     Loadout('Join', ActiveGame.Modus)
     Teleport()
+    ChangeClientscoreboard('show')
     isInDimension = true
 end)
 
 RegisterNetEvent("sa_ffa:LeaveGameClient")
 AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     Loadout('Leave', Modus)
+    ChangeClientscoreboard('close')
     isInDimension = false
 end)
 
@@ -109,6 +111,7 @@ function Teleport()
     end
 end
 
+--zum dist checkn
 Citizen.CreateThread(function()
 
     while true do
@@ -124,6 +127,19 @@ Citizen.CreateThread(function()
             Wait(5000)
         end
 
+        Wait(1)
+    end
+end)
+
+--Aktualisiert KDA UI etc.
+Citizen.CreateThread(function()
+    while true do
+        if isInDimension then
+            UpdateKDA(PlayerStats.kills, PlayerStats.deaths)
+            Wait(100)
+        else 
+            Wait(2000)
+        end
         Wait(1)
     end
 end)
@@ -164,3 +180,20 @@ function Loadout(Type, Modus)
         ESX.Game.Teleport(ped, Config.EnterCoords, function()end)
     end
 end
+
+
+--
+--DEBUG
+--DEBUG
+--DEBUG
+--
+
+-- Test Befehl: kills 3
+RegisterCommand('kills', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+    PlayerStats.kills = args[1]
+end)
+
+-- Test Befehl: deaths 3
+RegisterCommand('deaths', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+    PlayerStats.deaths = args[1]
+end)
