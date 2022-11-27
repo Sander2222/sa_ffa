@@ -23,14 +23,7 @@ RegisterNUICallback("close", function() end)
 --         })
 --     end)
 
--- --Search
--- ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
 
---     SendNuiMessage({
---         type = 'search',
---         ActiveGames = ActiveGames
---     })
--- end)
 
 -- --Join
 -- SendNuiMessage({
@@ -79,7 +72,7 @@ RegisterCommand('ui', function(source, args)
     end)
 end)
 
---search
+--search Callback
 RegisterNUICallback('JoinSearchedMatch', function(data, cb)
     print(data.Game)
 
@@ -91,6 +84,7 @@ RegisterNUICallback('JoinSearchedMatch', function(data, cb)
     end
 end)
 
+--Exit
 RegisterNUICallback('exit', function(data, cb)
     SetNuiFocus(false, false)
     SendNUIMessage({
@@ -98,13 +92,30 @@ RegisterNUICallback('exit', function(data, cb)
     })
 end)
 
+
+function UpdateKDA(Death, Kill)
+        SendNUIMessage({
+        state = 'add',
+        type = 'score',
+        death = Death,
+        kill = Kill
+    })
+end
+
+function ChangeClientscoreboard(State)
+    SendNUIMessage({
+        state = State,
+        type = 'score'
+    })
+end
+
 --Please dont ask
 function GiveDataBack(Modus, Map)
     local MapName
     local ModusName
 
     for i,v in ipairs(Config.Modus) do
-        if tonumber(v.Modus) == tonumber(Modus)  then
+        if tonumber(v.Modus) == tonumber(Modus) then
             ModusName = v.Name
             print("modus")
         end
