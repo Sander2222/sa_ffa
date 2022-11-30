@@ -11,6 +11,9 @@ Config.EnterCoords = vector3(1628.2857666016,2552.1848144531,45.564849853516)
 Config.UnlimitedAmmo = true
 Config.WeaponAmmo = 1000
 Config.NotifyForKill = true
+Config.SendDiscordStats = true
+Config.SendDisordStatsTime = '17:58'
+Config.SendDiscordScoreboardLimit = 1
 
 Config.SendNotifyClient = function (msg)
     ESX.ShowNotification(msg)

@@ -218,17 +218,80 @@ ESX.RegisterServerCallback('sa_ffa:GetAllGames', function(source, cb)
     cb(Games)
 end)
 
---Discord
+-- Discord
+-- Discord
+-- Discord
+
+
 function SendDiscord(message)
     local embed = {
           {
               ["color"] = SvConfig.WebhookColor,
-              ["title"] = SvConfig.WebhookName,
+              ["title"] = SvConfig.WebhookNameLogs,
               ["description"] = message,
               ["footer"] = {
                   ["text"] = SvConfig.WebhookFooter,
               },
           }
       }
-    PerformHttpRequest(SvConfig.Webhook, function(err, text, headers) end, 'POST', json.encode({username = name, embeds = embed}), { ['Content-Type'] = 'application/json' })
+    PerformHttpRequest(SvConfig.WebhookLogs, function(err, text, headers) end, 'POST', json.encode({username = name, embeds = embed}), { ['Content-Type'] = 'application/json' })
 end
+
+function SendFFAScoreboard(message)
+    local embed = {
+          {
+              ["color"] = SvConfig.WebhookColor,
+              ["title"] = SvConfig.WebhookNameLogsScoreboard,
+              ["description"] = message,
+              ["footer"] = {
+                  ["text"] = SvConfig.WebhookFooter,
+              },
+          }
+      }
+    PerformHttpRequest(SvConfig.WebhookScoreboard, function(err, text, headers) end, 'POST', json.encode({username = name, embeds = embed}), { ['Content-Type'] = 'application/json' })
+end
+
+Citizen.CreateThread(function()
+    local IsSend = false
+    while Config.SendDiscordStats do
+        t = os.date ("*t")
+        local ActiveTime = tostring(t.hour) .. ':' .. tostring(t.sec)
+        --Checkt alle 60 sek 
+        if Config.Debug then
+            Wait(500)
+        else
+            Wait(60000)
+        end
+
+        if ActiveTime == Config.SendDisordStatsTime then
+            if not IsSend then
+                local message = ''
+                local finish = false
+            
+                local result = MySQL.query.await('SELECT ffa.*, users.* FROM ffa INNER JOIN users ON ffa.identifier = users.identifier ORDER BY ffa.kills DESC LIMIT ' ..tostring(Config.SendDiscordScoreboardLimit), {})
+                if result then
+                    for i = 1, #result do
+                        local row = result[i]
+                        print(row.identifier, row.firstname, row.lastname)
+                        message = message .. 'Platz: **' .. i .. '**\nName: **' .. row.firstname .. ' ' .. row.lastname .. '**\n' ..'Kills: **' .. row.kills .. '**\n Deaths: **' .. row.deaths .. '**\n' .. '\n\n'
+                        if i == #result then
+                            finish = true
+                        end
+                    end
+                    while not finish do
+                        Wait(1)
+                    end
+                    SendFFAScoreboard(message)
+                    finish = false
+                    message = ''
+                else
+                    message = 'Es gibt gerade noch keine Daten für das Scoreboard'
+                    SendFFAScoreboard(message)
+                    finish = false
+                    message = ''
+                end
+                IsSend = true
+            end
+        end
+    end
+end)
