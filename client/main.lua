@@ -135,7 +135,7 @@ end)
 Citizen.CreateThread(function()
     while true do
         if isInDimension then
-            UpdateKDA(PlayerStats.kills, PlayerStats.deaths)
+            UpdateKDA(PlayerStats.deaths, PlayerStats.kills)
             Wait(100)
         else 
             Wait(2000)
@@ -189,7 +189,7 @@ end
 --
 
 -- Test Befehl: kills 3
-RegisterCommand('kills', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+RegisterCommand('kils', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
     PlayerStats.kills = args[1]
 end)
 
