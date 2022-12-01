@@ -189,7 +189,7 @@ end
 --
 
 -- Test Befehl: kills 3
-RegisterCommand('kils', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+RegisterCommand('kills', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
     PlayerStats.kills = args[1]
 end)
 
