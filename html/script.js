@@ -1,4 +1,4 @@
-window.addEventListener('message', function (event) {
+window.addEventListener('message', async function (event) {
   var item = event.data;
 
   if (item.state === 'show') {
@@ -33,21 +33,56 @@ window.addEventListener('message', function (event) {
     } else if (item.type === 'score') {
       var kills = item.kill
       var deaths = item.death
-      var rounded = Math.round(((kills / deaths) + Number.EPSILON) * 100) / 100;
-
-      if (isNaN(rounded) || rounded === Infinity) {
-        $('#kd').text("0")
-      } else {
-        $('#kd').text(rounded)
-      }
-      $('#deaths').text(item.death)
-      $('#kills').text(item.kill)
+      ChangeScoreboards(kills, deaths)
     }
   } else if (item.state === 'close') {
     $('body').hide()
   }
 })
 
+var PKills = 0
+var PDeaths = 0 
+var PRounded = NaN
+
+async function ChangeScoreboards(kills, deaths) {
+  var rounded = Math.round(((kills / deaths) + Number.EPSILON) * 100) / 100;
+
+  if ( (!isNaN(PRounded) ||  !isNaN(rounded))) {
+    if (PRounded != rounded) {
+      console.log("kd")
+      if (isNaN(rounded) || rounded === Infinity) {
+        document.getElementById("kd").innerText = "0";
+        document.getElementById("add-kd").classList.add("action");
+        await wait(0.5);
+        document.getElementById("add-kd").classList.remove("action");
+      } else {
+        document.getElementById("kd").innerText = rounded;
+        document.getElementById("add-kd").classList.add("action");
+        await wait(0.5);
+        document.getElementById("add-kd").classList.remove("action");
+      }
+    PRounded = rounded
+    }
+  }
+
+  if (PKills != kills) {
+    console.log("kill")
+    document.getElementById("kills").innerText = kills;
+    document.getElementById("add-kills").classList.add("action");
+    await wait(0.5);
+    document.getElementById("add-kills").classList.remove("action");
+    PKills = kills
+  }
+
+  if (PDeaths != deaths) {
+    console.log("death")
+    document.getElementById("deaths").innerText = deaths;
+    document.getElementById("add-death").classList.add("action");
+    await wait(0.5);
+    document.getElementById("add-death").classList.remove("action");
+    PDeaths = deaths
+  }
+}
 
 function AddGameSearch(MaxPlayer, Player, Modus, Map, Name) {
 
@@ -170,6 +205,7 @@ for(screen of windows) {
 function setSlides(num) {
   displaySlides(currentIndex += num)
 }
+
 function displaySlides(num) {
   var x;
   var slides = document.getElementsByClassName("preview");
@@ -184,7 +220,7 @@ function displaySlides(num) {
   slides[currentIndex - 1].style.display = "block";
 }
 
-async function change_stats(name, wert) {
+async function ChangeStats(name, wert) {
   if (name === "kills") {
     document.getElementById("kills").innerText = wert;
     document.getElementById("add-kills").classList.add("action");
