@@ -3,12 +3,10 @@ window.addEventListener('message', async function (event) {
 
   if (item.state === 'show') {
     if (item.type === "create") {
-      
       display()
       change_window(0)
       displaySlides(currentIndex);
       $('body').show()
-
     } else if (item.type === "join") {
 
     } else if (item.type === "search") {
@@ -21,32 +19,24 @@ window.addEventListener('message', async function (event) {
     } else if (item.type === "leave") {
 
     } else if (item.type === "score") {
-
       display()
       change_window(2)
       displaySlides(currentIndex);
       $('body').show()
-
     }
   } else if (item.state === 'add') {
     if (item.type === 'search') {
-
       $(".ffa-items").html("");
       if (item.maxplayers != null && item.maxplayers != undefined) {
         AddGameSearch(item.maxplayers, item.players, item.modus, item.map, item.name)
       }
-
     } else if (item.type === 'score') {
-
       var kills = item.kill
       var deaths = item.death
       ChangeScoreboards(kills, deaths)
-
     }
   } else if (item.state === 'close') {
-
     $('body').hide()
-
   }
 })
 
