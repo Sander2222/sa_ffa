@@ -1,4 +1,5 @@
 local isInDimension = nil
+local cam = nil
 local PlayerLoadout = {}
 local ActiveClientGame = {}
 local ActiveMapInfo = {
@@ -53,7 +54,19 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     PlayerLoadout = PlayerWeapons
     ActiveClientGame = ActiveGame
     Loadout('Join', ActiveGame.Modus)
-    Teleport()
+
+    if Config.UseCamAnimations then
+    --Cams
+        cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)
+        PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
+        SetCamActive(cam, true)
+        RenderScriptCams(true, true, Config.CamWait, true, true)
+        Citizen.Wait(Config.CamWait)
+        Teleport('first')
+    else 
+        Teleport()
+    end
+
     ChangeClientscoreboard('show')
     isInDimension = true
 end)
@@ -79,34 +92,53 @@ end)
 AddEventHandler('esx:onPlayerDeath', function(data)
 
     if isInDimension then
-    Citizen.Wait(1000)
-    TriggerServerEvent('sa_ffa:PlayerKilled', data)
-    TriggerEvent('esx_ambulancejob:revive')
-    Wait(1000)
-    Loadout('Join', ActiveClientGame.Modus)
-    Teleport()
-    NetworkSetFriendlyFireOption(false)
-    SetCanAttackFriendly(GetPlayerPed(-1), false, false)
-    if Config.Invincible then
-        SetEntityInvincible(GetPlayerPed(-1), true)
-    end
-    Citizen.Wait(3000)
-    NetworkSetFriendlyFireOption(true)
-    SetCanAttackFriendly(GetPlayerPed(-1), true, true)
-    if Config.Invincible then
-        SetEntityInvincible(GetPlayerPed(-1), false)
-    end
+        Citizen.Wait(1000)
+        TriggerServerEvent('sa_ffa:PlayerKilled', data)
+        TriggerEvent('esx_ambulancejob:revive')
+        Wait(1000)
+        Loadout('Join', ActiveClientGame.Modus)
+        Teleport()
+        NetworkSetFriendlyFireOption(false)
+        SetCanAttackFriendly(GetPlayerPed(-1), false, false)
+        if Config.Invincible then
+            SetEntityInvincible(GetPlayerPed(-1), true)
+        end
+        Citizen.Wait(3000)
+        NetworkSetFriendlyFireOption(true)
+        SetCanAttackFriendly(GetPlayerPed(-1), true, true)
+        if Config.Invincible then
+            SetEntityInvincible(GetPlayerPed(-1), false)
+        end
     end
 end)
 
-function Teleport()
-    for i,v in ipairs(Config.Maps) do
-        if tonumber(v.Map) == tonumber(ActiveClientGame.Map) then
-            DoScreenFadeOut(100)
-            ESX.Game.Teleport(PlayerPedId(), v.Teleports[math.random(1, #v.Teleports)], function()end)
-            DoScreenFadeIn(100)
-            ActiveMapInfo.ActiveMapCenter = v.MapCenter
-            ActiveMapInfo.ActiveMapRadius = v.MaxRadius
+function Teleport(Type)
+    if Type == 'first' then 
+        for i,v in ipairs(Config.Maps) do
+            if tonumber(v.Map) == tonumber(ActiveClientGame.Map) then
+                local RandomPoint = v.Teleports[math.random(1, #v.Teleports)]
+
+                RenderScriptCams(false, true, Config.CamWait, true, true)
+
+                DoScreenFadeOut(100)
+                ESX.Game.Teleport(PlayerPedId(), RandomPoint, function()end)
+                DoScreenFadeIn(100)
+                ActiveMapInfo.ActiveMapCenter = v.MapCenter
+                ActiveMapInfo.ActiveMapRadius = v.MaxRadius
+
+                SetCamActive(cam, false)
+                DestroyCam(cam, true)
+            end
+        end
+    else 
+        for i,v in ipairs(Config.Maps) do
+            if tonumber(v.Map) == tonumber(ActiveClientGame.Map) then
+                DoScreenFadeOut(100)
+                ESX.Game.Teleport(PlayerPedId(), v.Teleports[math.random(1, #v.Teleports)], function()end)
+                DoScreenFadeIn(100)
+                ActiveMapInfo.ActiveMapCenter = v.MapCenter
+                ActiveMapInfo.ActiveMapRadius = v.MaxRadius
+            end
         end
     end
 end
@@ -177,6 +209,7 @@ function Loadout(Type, Modus)
                 SetPedInfiniteAmmoClip(ped, false)
             end
         end
+        -- Cams zum Back TP hin
         ESX.Game.Teleport(ped, Config.EnterCoords, function()end)
     end
 end

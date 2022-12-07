@@ -14,6 +14,8 @@ Config.NotifyForKill = true
 Config.SendDiscordStats = true
 Config.SendDisordStatsTime = '17:58'
 Config.SendDiscordScoreboardLimit = 1
+Config.UseCamAnimations = true
+Config.CamWait = 2500
 
 Config.SendNotifyClient = function (msg)
     ESX.ShowNotification(msg)
