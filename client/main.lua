@@ -40,7 +40,8 @@ end)
 
 RegisterCommand('Leave', function(source, args)
     if isInDimension or Config.Debug then
-        Loadout('Leave', nil)
+        -- bitte nochmal schauen ob das so passt
+        --Loadout('Leave', nil)
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
         ActiveClientGame = {}
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
@@ -128,6 +129,7 @@ function Teleport(Type)
 
                 SetCamActive(cam, false)
                 DestroyCam(cam, true)
+                cam = nil
             end
         end
     else 
@@ -210,7 +212,20 @@ function Loadout(Type, Modus)
             end
         end
         -- Cams zum Back TP hin
+        cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)
+        PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
+        SetCamActive(cam, true)
+        print("leave")
+        RenderScriptCams(true, true, Config.CamWait, true, true)
+        Citizen.Wait(Config.CamWait)
+
+        RenderScriptCams(false, true, Config.CamWait, true, true)
         ESX.Game.Teleport(ped, Config.EnterCoords, function()end)
+
+        SetCamActive(cam, false)
+        DestroyCam(cam, true)
+        cam = nil
+
     end
 end
 
