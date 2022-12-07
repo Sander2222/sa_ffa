@@ -23,6 +23,13 @@ client_scripts {
 	'client/nui.lua'
 }
 
+exports {
+	'FFAUISearch'
+}
+
+--Export to open FFA Search UI client side
+exports['sa_ffa']:FFAUISearch()
+
 ui_page ('html/index.html')
 
 files {
