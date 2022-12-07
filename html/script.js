@@ -59,7 +59,6 @@ async function ChangeScoreboards(kills, deaths) {
 
   if ( (!isNaN(PRounded) ||  !isNaN(rounded))) {
     if (PRounded != rounded) {
-      console.log("kd")
       if (isNaN(rounded) || rounded === Infinity) {
         document.getElementById("kd").innerText = "0";
         document.getElementById("add-kd").classList.add("action");
@@ -76,7 +75,6 @@ async function ChangeScoreboards(kills, deaths) {
   }
 
   if (PKills != kills) {
-    console.log("kill")
     document.getElementById("kills").innerText = kills;
     document.getElementById("add-kills").classList.add("action");
     await wait(0.5);
@@ -85,7 +83,6 @@ async function ChangeScoreboards(kills, deaths) {
   }
 
   if (PDeaths != deaths) {
-    console.log("death")
     document.getElementById("deaths").innerText = deaths;
     document.getElementById("add-death").classList.add("action");
     await wait(0.5);
