@@ -29,9 +29,9 @@ exports {
 }
 
 --Export to open FFA Search UI client side
-exports['sa_ffa']:FFAUISearch()
+--exports['sa_ffa']:FFAUISearch()
 --Export to open FFA Create UI client side
-exports['sa_ffa']:FFAUICreate()
+--exports['sa_ffa']:FFAUICreate()
 
 ui_page ('html/index.html')
 
