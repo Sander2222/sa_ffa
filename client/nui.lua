@@ -39,12 +39,8 @@ RegisterNUICallback("close", function() end)
 local AllGames = {}
 
 RegisterCommand('ui', function(source, args)
-
+    local Map
     -- Search
-
-end)
-
-function FFAUISearch()
     ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
 
         AllGames = ActiveGames
@@ -74,11 +70,12 @@ function FFAUISearch()
             end
         end
     end)
-end
+end)
 
 --search Callback
 RegisterNUICallback('JoinSearchedMatch', function(data, cb)
-    
+    print(data.Game)
+
     for i, v in ipairs(AllGames) do
         if data.Game == v.Name then
             TriggerServerEvent("sa_ffa:SearchRandomGame", v)
