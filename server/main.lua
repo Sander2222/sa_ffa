@@ -146,8 +146,9 @@ function ChangeWeaponState(Player, State, Loadout)
 end
 
 function JoinGame(Player, GameInfo, Loadout)
+    ChangeWeaponState(Player, 'join', Loadout)
+    Wait(1000)
     TriggerClientEvent('sa_ffa:JoinGameClient', Player, GameInfo, Loadout)
-    ChangeWeaponState(source, 'join', Loadout)
     SetPlayerRoutingBucket(Player, GameInfo.Dimension)
     ChangePlayerCount(Player, GameInfo, "join")
 

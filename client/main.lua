@@ -34,16 +34,9 @@ RegisterCommand('Search', function(source, args) -- Arg: Map, Modus (Die braucht
     Config.SendNotifyClient("Spielsuche gestartet!")
 end)
 
-RegisterCommand('game', function(source, args)
-    print(ESX.DumpTable(ActiveClientGame))
-end)
-
 RegisterCommand('Leave', function(source, args)
     if isInDimension or Config.Debug then
-        -- bitte nochmal schauen ob das so passt
-        --Loadout('Leave', nil)
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
-        ActiveClientGame = {}
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
     else
         Config.SendNotifyClient("Du bist in keiner sa_ffa Lobby!")
@@ -58,6 +51,7 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
 
     if Config.UseCamAnimations then
     --Cams
+        FreezeEntityPosition(GetPlayerPed(), true)
         cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)
         PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
         SetCamActive(cam, true)
@@ -120,10 +114,10 @@ function Teleport(Type)
                 local RandomPoint = v.Teleports[math.random(1, #v.Teleports)]
 
                 RenderScriptCams(false, true, Config.CamWait, true, true)
-
                 DoScreenFadeOut(100)
                 ESX.Game.Teleport(PlayerPedId(), RandomPoint, function()end)
                 DoScreenFadeIn(100)
+                FreezeEntityPosition(GetPlayerPed(), false)
                 ActiveMapInfo.ActiveMapCenter = v.MapCenter
                 ActiveMapInfo.ActiveMapRadius = v.MaxRadius
 
@@ -204,23 +198,29 @@ function Loadout(Type, Modus)
         SetEntityHealth(ped, 200)
         SetPedArmour(ped, 0)
         for i,v in ipairs(Config.Modus) do
+            er(ActiveClientGame.Modus)
+            er(v.Modus)
             if tonumber(v.Modus) == tonumber(ActiveClientGame.Modus) then
+                er(v.Modus)
                 for j,k in ipairs(v.Weapons) do
                     RemoveWeaponFromPed(ped, GetHashKey(k))
                 end
                 SetPedInfiniteAmmoClip(ped, false)
             end
         end
+
+        ActiveClientGame = {}
         -- Cams zum Back TP hin
+        FreezeEntityPosition(GetPlayerPed(), true)
         cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)
         PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
         SetCamActive(cam, true)
-        print("leave")
         RenderScriptCams(true, true, Config.CamWait, true, true)
         Citizen.Wait(Config.CamWait)
 
         RenderScriptCams(false, true, Config.CamWait, true, true)
         ESX.Game.Teleport(ped, Config.EnterCoords, function()end)
+        FreezeEntityPosition(GetPlayerPed(), false)
 
         SetCamActive(cam, false)
         DestroyCam(cam, true)
@@ -245,3 +245,12 @@ end)
 RegisterCommand('deaths', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
     PlayerStats.deaths = args[1]
 end)
+
+RegisterCommand('game', function(source, args)
+    print(ESX.DumpTable(ActiveClientGame))
+end)
+
+
+function er(msg)
+    print(msg)
+end
