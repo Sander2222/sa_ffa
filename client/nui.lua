@@ -85,6 +85,7 @@ RegisterNUICallback('CreateGame', function(data, cb)
     SendNUIMessage({
         state = 'close'
     })
+    TriggerServerEvent('sa_ffa:CreateGame', data)
 end)
 
 function UpdateKDA(Death, Kill)
