@@ -1,0 +1,10 @@
+{
+    "Lua.diagnostics.globals": [
+        "RegisterCommand",
+        "TriggerServerEvent",
+        "RegisterNetEvent",
+        "FreezeEntityPosition",
+        "GetPlayerPed",
+        "CreateCamWithParams"
+    ]
+}
