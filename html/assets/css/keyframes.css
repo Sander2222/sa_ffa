@@ -1,35 +1,334 @@
 @keyframes action {
-    0%,100% {
-        bottom: -50%;
-    }
-    50% {
-        bottom: -20%;
-        box-shadow: var(--shadow-white);
-        width: 100%;
-    }
+  0%,
+  100% {
+    bottom: -50%;
+  }
+  50% {
+    bottom: -20%;
+    box-shadow: var(--shadow-white);
+    width: 100%;
+  }
 }
 
 @keyframes kill {
-    0% {
-        opacity: 0;
-        left: -10%;
-    }
-    100% {
-        left: 0;
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+    left: -10%;
+  }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes delete {
-    0% {
-        opacity: 0.5;
-        filter: blur(5px);
-    }
-    50% {
-        opacity: 0;
-        filter: blur(0);
-    }
-    100% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0.5;
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 0;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes loader-1 {
+  to {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+  }
+}
+@keyframes loader-2 {
+  to {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+  }
+}
+@keyframes loader-3 {
+  to {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+  }
+}
+
+@keyframes load {
+  0% {
+    filter: blur(20px);
+  }
+  50% {
+    filter: blur(5px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
+
+@keyframes shine {
+  0%,
+  10% {
+    background: #222 -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(#222),
+        to(#222),
+        color-stop(0.5, #fff)
+      ) 0 0 no-repeat;
+    background-size: 150px;
+    background-clip: text;
+    animation: shine 5s infinite;
+    -webkit-background-size: 150px;
+    -webkit-background-clip: text;
+    background-position: -1000px;
+  }
+  20% {
+    background: #222 -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(#222),
+        to(#222),
+        color-stop(0.5, #fff)
+      ) 0 0 no-repeat;
+    background-size: 150px;
+    background-clip: text;
+    animation: shine 5s infinite;
+    -webkit-background-size: 150px;
+    -webkit-background-clip: text;
+    background-position: top left;
+  }
+  90% {
+    background: #222 -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(#222),
+        to(#222),
+        color-stop(0.5, #fff)
+      ) 0 0 no-repeat;
+    background-size: 150px;
+    background-clip: text;
+    animation: shine 5s infinite;
+    -webkit-background-size: 150px;
+    -webkit-background-clip: text;
+    background-position: top right;
+  }
+  100% {
+    background: #222 -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(#222),
+        to(#222),
+        color-stop(0.5, #fff)
+      ) 0 0 no-repeat;
+    background-size: 150px;
+    background-clip: text;
+    animation: shine 5s infinite;
+    -webkit-background-size: 150px;
+    -webkit-background-clip: text;
+    background-position: 1000px;
+  }
+}
+
+@keyframes killin {
+  0% {
+    right: 50%;
+  }
+  100% {
+    right: 100%;
+  }
+}
+
+@keyframes deathin {
+  0% {
+    left: 50%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.skull-anim {
+  animation: skull 1s forwards;
+}
+
+@keyframes skull {
+  75%,
+  40% {
+    filter: brightness(0.8) drop-shadow(0 0 20px #f00);
+    -webkit-filter: invert(0%);
+    transform: scale(0.8);
+  }
+  50% {
+    filter: brightness(0.8) drop-shadow(0 0 20px #f00);
+    -webkit-filter: invert(100%);
+    transform: scale(1);
+  }
+}
+
+@keyframes title {
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(var(--main-color-rgb), 1);
+  }
+  50% {
+    text-shadow: 0 0 5px rgba(var(--main-color-rgb), 1),
+      0 0 20px rgba(var(--main-color-rgb), 1);
+  }
+  70%,
+  80%,
+  90% {
+    text-shadow: 0 0 5px rgba(var(--main-color-rgb), 1);
+  }
+}
+
+@keyframes btn-rotate {
+  100% {
+    left: -50%;
+  }
+  50% {
+    left: 100%;
+  }
+}
+
+
+/* ffa-create btn-lock */
+@-moz-keyframes bling {
+  50% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 12;
+  }
+  100% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 9;
+  }
+}
+@-webkit-keyframes bling {
+  50% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 12;
+  }
+  100% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 9;
+  }
+}
+@-o-keyframes bling {
+  50% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 12;
+  }
+  100% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 9;
+  }
+}
+@keyframes bling {
+  50% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 12;
+  }
+  100% {
+    stroke-dasharray: 3;
+    stroke-dashoffset: 9;
+  }
+}
+@-moz-keyframes locked {
+  50% {
+    transform: translateY(1px);
+  }
+}
+@-webkit-keyframes locked {
+  50% {
+    transform: translateY(1px);
+  }
+}
+@-o-keyframes locked {
+  50% {
+    transform: translateY(1px);
+  }
+}
+@keyframes locked {
+  50% {
+    transform: translateY(1px);
+  }
+}
+
+
+@keyframes getlittle {
+  0% {
+    overflow: hidden;
+    width: 100%;
+    height: 1%;
+  }
+  50% {
+    overflow: hidden;
+    width: 0;
+    height: 10%;
+  }
+  100% {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+  }
+}
+
+@keyframes back {
+  0% {
+    filter: hue-rotate(360deg);
+    box-shadow: 0 0 10px rgba(var(--main-color-rgb),1);
+  }
+  100% {
+    filter: hue-rotate(0deg);
+    box-shadow: 0 0 10px rgba(var(--main-color-rgb),1);
+  }
+}
+
+
+@keyframes slideup {
+  0% {
+    bottom: -718px;
+  }
+  100% {
+    bottom: 0px;
+  }
+}
+
+.slideup {
+  animation: slideup 1s forwards;
+}
+
+.slidedown {
+  animation: slidedown 1s forwards;
+}
+
+@keyframes slideup {
+  0% {
+    bottom: -710px;
+  }
+  100% {
+    bottom: 0;
+  }
+
+}
+
+@keyframes slidedown {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: -710px;
+  }
+
 }

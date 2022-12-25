@@ -1,0 +1,125 @@
+.container .ffa-menu .ffa-join {
+    position: absolute;
+    
+    top: 5%;
+    
+    width: 20%;
+    height: 20%;
+    
+    *background: rgba(var(--main-color-rgb),0.3);
+    *background: linear-gradient(0deg, rgba(87, 0, 114, 0) 20%, rgba(var(--main-color-rgb),0.4) 80%);
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 8%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    *animation: backOutUp 1s forwards;
+   *animation: backInDown 1s forwards;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.container .ffa-menu .ffa-join::before {
+    content: 'Beitreten';
+    position: absolute;
+
+    top: -20%;
+
+    color: #fff;
+
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    border-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 23px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .ffa-menu .ffa-join::after {
+    content: '';
+    position: absolute;
+
+    top: 0;
+
+    width: 100%;
+    height: 2%;
+
+    background: rgba(var(--main-color-rgb),1);
+    box-shadow: 0 0 10px rgba(var(--main-color-rgb),1);
+}
+
+.container .ffa-menu .ffa-join input {
+    position: relative;
+
+    top: -10%;
+    width: 200px;
+    height: 25px;
+
+    background: rgba(0, 0, 0, 0.4);
+    outline: none;
+    border: none;
+    color: #fff;
+    *border-left: 2px solid rgba(var(--main-color-rgb),0.1);
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: 0.2s;
+    caret-color: rgba(var(--main-color-rgb),1);
+}
+
+.container .ffa-menu .ffa-join input::placeholder {
+    color: var(--text-color);
+}
+
+.container .ffa-menu .ffa-join input:focus {
+    border: 2px solid rgba(var(--main-color-rgb),1);
+    border-radius: 5px;
+}
+
+.container .ffa-menu .ffa-join input:focus::placeholder {
+    color: #fff;
+}
+
+.container .ffa-menu .ffa-join button {
+    position: absolute;
+
+    bottom: 20%;
+
+    width: 150px;
+    height: 35px;
+
+    outline: none;
+    border: none;
+    background: rgba(var(--main-color-rgb),0.5);
+    background: radial-gradient(
+      140% 160% at 0% 0%,
+      rgba(var(--main-color-rgb),0.5) 10%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(var(--main-color-rgb),0.5) 90%
+    );
+
+
+    backdrop-filter: blur(30px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    transition: 0.2s;
+    cursor: pointer;
+
+}
+
+.container .ffa-menu .ffa-join button:hover {
+    *padding: 0px 10px;
+    width: 200px;
+    box-shadow: 0 0 40px rgba(var(--main-color-rgb),1);
+    background: rgba(var(--main-color-rgb),0.6);
+}

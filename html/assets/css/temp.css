@@ -91,3 +91,79 @@
     display: block;
     opacity: 1;
   }
+
+
+
+
+
+
+/* 
+.container .ffa-menu .ffa-create ul {
+  position: absolute;
+
+  top: 13%;
+
+  width: 90%;
+  height: 80%;
+
+  border: 2px solid #fff;
+}
+
+.container .ffa-menu .ffa-create .input-list {
+  position: absolute;
+
+  top: 20%;
+
+  width: 90%;
+  height: 90%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.container .ffa-menu .ffa-create .input-list input[type="text"]:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.842);
+  color: #000;
+}
+
+.container .ffa-menu .ffa-create .input-list input[type="number"]:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.842);
+  color: #000;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+  
+.container .ffa-menu .ffa-create .input-list input[type="text"], input[type="number"] {
+  position: relative;
+
+  top: 10px;
+
+  width: 18%;
+  height: 7%;
+
+  background: rgba(86, 2, 126, 0.658);
+  border: none;
+  border-top: 1px solid #fff;
+  border-radius: 3px;
+  color: #fff;
+  outline: none;
+
+  display: inline-flex;
+  margin-left: 20px;
+
+  transition: 0.3s;
+}
+
+ */

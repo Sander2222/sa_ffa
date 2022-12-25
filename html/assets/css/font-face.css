@@ -4,12 +4,12 @@
 }
 
 @font-face {
-    font-family: "Storm Gust";
+    font-family: "StormGust";
     src: url(../fonts/Storm\ Gust.ttf);
 }
 
 @font-face {
-    font-family: "Explore Demo";
+    font-family: "ExploreDemo";
     src: url(../fonts/Explore\ Demo.ttf);
 }
 
@@ -24,10 +24,40 @@
 }
 
 @font-face {
-    font-family: "Robot Dreamer";
+    font-family: "RobotDreamer";
     src: url(../fonts/Robot\ Dreamer\ Bold.ttf);
 }
 @font-face {
-    font-family: "Robot Dreamer Bold";
+    font-family: "RobotDreamerBold";
     src: url(../fonts/Robot\ Dreamer.ttf);
+}
+
+@font-face {
+    font-family: "BadBrush";
+    src: url(../fonts/Bad\ Brush.ttf);
+}
+
+@font-face {
+    font-family: "LsmVulpy-Regular";
+    src: url(../fonts/LsmVulpy-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Winter-City";
+    src: url(../fonts/Winter-City.ttf);
+}
+
+@font-face {
+    font-family: "DistorterDemoRegular";
+    src: url(../fonts/DistorterDemoRegular.ttf);
+}
+
+@font-face {
+    font-family: "whoahsouce";
+    src: url(../fonts/whoahsouce.ttf);
+}
+
+@font-face {
+    font-family: "SuperRoadDemoRegular";
+    src: url(../fonts/SuperRoadDemoRegular.ttf);
 }
