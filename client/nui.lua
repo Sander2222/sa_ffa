@@ -12,6 +12,7 @@ function FFAUICreate()
         print("lul")
         SetNuiFocus(true, true)
         SendNUIMessage({
+            state = "show",
             type = "create",
             ModusA = Config.Modus,
             MapsA = Config.Maps,
@@ -20,6 +21,11 @@ function FFAUICreate()
         })
     end)
 end
+
+RegisterCommand('nui', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+    FFAUICreate()
+    --[[ UI WIRD GEÖFFNET ]]
+end)
 
 function FFAUISearch()
     ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
@@ -73,6 +79,13 @@ RegisterNUICallback('exit', function(data, cb)
     })
 end)
 
+RegisterNUICallback('CreateGame', function(data, cb)
+    print(ESX.DumpTable(data))
+    SetNuiFocus(false, false)
+    SendNUIMessage({
+        state = 'close'
+    })
+end)
 
 function UpdateKDA(Death, Kill)
         SendNUIMessage({
