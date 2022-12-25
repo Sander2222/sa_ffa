@@ -88,12 +88,13 @@ RegisterNUICallback('CreateGame', function(data, cb)
     TriggerServerEvent('sa_ffa:CreateGame', data)
 end)
 
-function UpdateKDA(Death, Kill)
+function UpdateKDA(Death, Kill, Name)
         SendNUIMessage({
         state = 'add',
         type = 'score',
         death = Death,
-        kill = Kill
+        kill = Kill,
+        Name = Name
     })
 end
 

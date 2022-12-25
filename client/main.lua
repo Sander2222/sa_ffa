@@ -163,7 +163,7 @@ end)
 Citizen.CreateThread(function()
     while true do
         if isInDimension then
-            UpdateKDA(PlayerStats.deaths, PlayerStats.kills)
+            UpdateKDA(PlayerStats.deaths, PlayerStats.kills, ActiveClientGame.Name)
             Wait(100)
         else 
             Wait(2000)

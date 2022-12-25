@@ -42,7 +42,7 @@ window.addEventListener('message', async function (event) {
 
       var kills = item.kill
       var deaths = item.death
-      ChangeScoreboards(kills, deaths)
+      ChangeScoreboards(kills, deaths, item.Name)
 
     }
   } else if (item.state === 'close') {
@@ -56,9 +56,10 @@ var PKills = 0
 var PDeaths = 0 
 var PRounded = NaN
 
-async function ChangeScoreboards(kills, deaths) {
+async function ChangeScoreboards(kills, deaths, Name) {
   var rounded = Math.round(((kills / deaths) + Number.EPSILON) * 100) / 100;
   document.getElementById("skull-kill").style.animation = "";
+  document.getElementById("ffa-ingame-name").innerText = Name;
 
   if ( (!isNaN(PRounded) ||  !isNaN(rounded))) {
     if (PRounded != rounded) {
