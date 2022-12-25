@@ -11,7 +11,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
     
     if #Games > 0 then
         for i,v in ipairs(Games) do
-            if v.Name ~= UserCreateInfoA[1] then
+            if v.Name ~= UserCreateInfoA.Name then
                 IsNameValid = IsNameValid + 1
             else 
                 Config.SendNotifyServer(source, 'Diesen Raum gibt es schon erstelle einen neuen!')
@@ -22,17 +22,18 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
 
     if IsNameValid == #Games then
         local NewGame = {
-            Name = UserCreateInfoA[1],
-            Password = UserCreateInfoA[2],
-            MaxPlayer = UserCreateInfoA[3],
+            Name = UserCreateInfoA.Name,
+            Password = UserCreateInfoA.Password,
+            MaxPlayer = tonumber(UserCreateInfoA.MaxPlayer),
             --Players muss 0 sein weil standard 0 Spieler in einer Runde sind
             Players = 0,
-            PrivateGame = UserCreateInfoA[4],
-            Modus = UserCreateInfoA[5],
-            Map = UserCreateInfoA[6],
+            PrivateGame = UserCreateInfoA.Private,
+            Modus = UserCreateInfoA.Mode,
+            Map = 2,
             Dimension = UsedDimension
         }
     
+        print("Es funktioniert")
         table.insert(Games, NewGame)
         
         JoinGame(source, NewGame, PlayerLoadout)
