@@ -36,6 +36,7 @@ exports {
 ui_page ('html/index.html')
 
 files {
+	'html/images/skull.png',
     'html/index.html',
     'html/style.css',
     'html/script.js',
