@@ -60,8 +60,6 @@ async function ChangeScoreboards(kills, deaths) {
   var rounded = Math.round(((kills / deaths) + Number.EPSILON) * 100) / 100;
   document.getElementById("skull-kill").style.animation = "";
 
-  console.log(rounded)
-
   if ( (!isNaN(PRounded) ||  !isNaN(rounded))) {
     if (PRounded != rounded) {
       if (isNaN(rounded) || rounded === Infinity) {
@@ -254,7 +252,6 @@ $(document).ready(async function () {
   
   document.getElementById("inpLock").onclick = function() {
     ffa_isroom_privat = document.getElementById("inpLock").checked;
-    console.log(document.getElementById("inpLock").checked);
     if(document.getElementById("inpLock").checked === true) {
       document.getElementById("room-type").innerText = "Room: Privat";
       document.getElementById("room-type").style.color = "#f00";
