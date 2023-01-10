@@ -5,7 +5,8 @@ local Games = {
 
 RegisterNetEvent('sa_ffa:CreateGame')
 AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
-    local xPlayer = ESX.GetPlayerFromId(source)
+    local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
     local PlayerLoadout = xPlayer.getLoadout()
     local IsNameValid = 0
     
@@ -14,7 +15,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
             if v.Name ~= UserCreateInfoA.Name then
                 IsNameValid = IsNameValid + 1
             else 
-                Config.SendNotifyServer(source, 'Diesen Raum gibt es schon erstelle einen neuen!')
+                Config.SendNotifyServer(_source, 'Diesen Raum gibt es schon erstelle einen neuen!')
                 break
             end
         end
@@ -36,10 +37,10 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         print("Es funktioniert")
         table.insert(Games, NewGame)
         
-        JoinGame(source, NewGame, PlayerLoadout)
+        JoinGame(_source, NewGame, PlayerLoadout)
         UsedDimension = UsedDimension + 1
         SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA[1], UserCreateInfoA[2]))
-        Config.SendNotifyServer(source, 'ein Raum wurde erstellt mit dem Namen: ' ..NewGame.Name)
+        Config.SendNotifyServer(_source, 'ein Raum wurde erstellt mit dem Namen: ' ..NewGame.Name)
     end
 end)
 
@@ -55,7 +56,7 @@ AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
             NameValid = true
             if v.Password == args[2] then
                 PasswordValid = true
-                if tonumber(v.Players) > tonumber(v.MaxPlayer) then
+                if tonumber(v.Players) < tonumber(v.MaxPlayer) then
                     GameIsFull = false
                     Config.SendNotifyServer(source, "Room wurde gefunden! Room: " .. v.Name)
                     SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), v.Name))
@@ -96,7 +97,7 @@ AddEventHandler("sa_ffa:PlayerKilled", function(KillData)
         TriggerClientEvent('sa_ffa:UpdatePlayerStats', killer, 'killer')
         if Config.NotifyForKill then
             Config.SendNotifyServer(killed, ('Du wurdest von %s getötet'):format(GetPlayerName(killer)))
-            Config.SendNotifyServer(killer, ('Du hast %s getötet'):format(GetPlayerName(killer)))
+            Config.SendNotifyServer(killer, ('Du hast %s getötet'):format(GetPlayerName(killed)))
         end
     else 
         TriggerClientEvent('sa_ffa:UpdatePlayerStats', killed, 'killed')
