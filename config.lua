@@ -58,6 +58,7 @@ Config.Modus = {
     },
     {
         Modus = 4,
+        Name = 'ficken sie sich',
         Weapons = {
             "WEAPON_PISTOL",
             "WEAPON_APPISTOL",
