@@ -5,8 +5,10 @@ function FFAUICreate()
         local ActiveGamePlayer = 0
         local Number = #ActiveGames
 
-        for i,v in ipairs(ActiveGames) do
-            ActiveGamePlayer = ActiveGamePlayer + ActiveGames.Players
+        for i, v in ipairs(ActiveGames) do
+            print(v.Players)
+            print(type(v.Players))
+            ActiveGamePlayer = ActiveGamePlayer + v.Players
         end
 
         print("lul")
@@ -19,6 +21,16 @@ function FFAUICreate()
             ActiveGamePlayerN = ActiveGamePlayer,
             MaxGamesN = Number
         })
+        
+        for i,v in ipairs(Config.Modus) do
+            SendNUIMessage({
+                state = "add",
+                type = "create",
+                ModeNumber = v.Modus,
+                ModeName = v.Name
+            })
+        end
+
     end)
 end
 
