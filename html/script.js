@@ -31,7 +31,10 @@ window.addEventListener('message', async function (event) {
 
     }
   } else if (item.state === 'add') {
-    if (item.type === 'search') {
+    if (item.type === 'create') {
+
+      AddMode(item.ModeNumber, item.ModeName)
+    } else if (item.type === 'search') {
 
       $(".ffa-items").html("");
       if (item.maxplayers != null && item.maxplayers != undefined) {
@@ -94,6 +97,14 @@ async function ChangeScoreboards(kills, deaths, Name) {
     document.getElementById("death-title").classList.toggle("shine");
     PDeaths = deaths
   }
+}
+
+function AddMode(ModeNumber, ModeName) {
+  $('.slide').append(`
+
+  <li><a id="${ModeNumber}" onclick="setmode(${ModeNumber}, '${ModeName}')">${ModeName}</a></li>
+
+`)
 }
 
 function AddGameSearch(MaxPlayer, Player, Modus, Map, Name) {
@@ -264,14 +275,6 @@ $(document).ready(async function () {
       document.getElementById("room-type").style.textShadow = "0 0 5px #0f0";
     }
   }
-  
-  
-  /* displaySlides(currentIndex);
-  for(var i=0;i<100;i++) {
-    await wait(1)
-    triggerskull()
-    console.log(i);
-  } */
 });
 
 async function showinput() {
