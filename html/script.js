@@ -32,8 +32,15 @@ window.addEventListener('message', async function (event) {
     }
   } else if (item.state === 'add') {
     if (item.type === 'create') {
+      console.log("folgv")
+      if (item.status === 'modus') {
+        AddMode(item.ModeNumber, item.ModeName)
+      } else if (item.status === 'maps') {
+        AddMap(item.MapNumber, item.ModeName, item.MapMaxPlayer )
+      } else if (item.status === 'maps2') {
+          change_ffa_map(0)
+      }
 
-      AddMode(item.ModeNumber, item.ModeName)
     } else if (item.type === 'search') {
 
       $(".ffa-items").html("");
@@ -101,11 +108,17 @@ async function ChangeScoreboards(kills, deaths, Name) {
 
 function AddMode(ModeNumber, ModeName) {
   $('.slide').append(`
-
   <li><a id="${ModeNumber}" onclick="setmode(${ModeNumber}, '${ModeName}')">${ModeName}</a></li>
-
 `)
 }
+
+function AddMap(Number, Name, MaxPlayer) {
+  console.log("lsol")
+  ffa_pics.push({name: "images/" + Name +".png", label: "" + Name + "", index: Number})
+}
+
+let ffa_pics = [
+]
 
 function AddGameSearch(MaxPlayer, Player, Modus, Map, Name) {
 
@@ -352,16 +365,8 @@ function change_window(window) {
     document.getElementById("room-type").innerText = "Room: Privat";
     document.getElementById("room-type").style.color = "#f00";
     document.getElementById("room-type").style.textShadow = "0 0 5px #f00";
-    change_ffa_map(0)
   }
 }
-
-let ffa_pics = [
-  {name: "assets/images/ffa-orte/Würfelpark.webp", label: "Würfelpark", index: 1},
-  {name: "assets/images/ffa-orte/Trailerpark.webp", label: "Trailerpark", index: 2},
-  {name: "assets/images/ffa-orte/Schrottplatz.webp", label: "Schrottplatz", index: 3},
-  {name: "assets/images/ffa-orte/Prison.png", label: "Gefängnis", index: 4}
-]
 
 async function change_ffa_map(direction) {
   const element = document.getElementById("ffa-maps");
@@ -379,7 +384,7 @@ async function change_ffa_map(direction) {
     if(picture.index === current_index) {
       element.src = picture.name
       document.getElementById("nav-selected").innerText = picture.label;
-      current_map = picture.label
+      current_map = picture.index
     }
   }
 
