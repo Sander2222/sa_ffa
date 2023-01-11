@@ -55,10 +55,8 @@ Citizen.CreateThread(function()
 		IsAt = false
 
         for key, value in pairs(Config.EnterCoords) do
-            local dist = #(GetEntityCoords(ped) - vector3(value.x, value.y, value.z))
-            --local dist = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), vector3(value.x, value.y, value.z))
+            local dist = #(GetEntityCoords(ped) - vector3(value[1], value[2], value[3]))
 
-            print(dist)
             if dist <= 2.0 then
                 IsClose = true
                 IsAt = true
@@ -76,7 +74,7 @@ Citizen.CreateThread(function()
 			Wait(950) 
         end
 		if IsAt then
-            ESX.ShowHelpNotification("Drücke ~INPUT_CONTEXT~ um etwas zu kaufen")
+            ESX.ShowHelpNotification(Config.Local['PressE'])
             if IsControlJustReleased(0, 38) then
                 FFAUICreate()
             end

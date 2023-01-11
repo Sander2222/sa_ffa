@@ -27,9 +27,10 @@ Config.SendNotifyServer = function (source, msg)
     xPlayer.showNotification(msg)
 end
 
+
+
 Config.EnterCoords = {
     {1628.2857666016,2552.1848144531,45.564849853516},
-    {1628.2857666016,2552.1848144531,45.564849853516}
 }
 
 
@@ -107,4 +108,8 @@ Config.Maps = {
             vector3(162.91, -913.14, 29.21),
         }
     }
+}
+
+Config.Local = {
+    ['PressE'] = 'Drücke ~INPUT_CONTEXT~ um etwas zu kaufen',
 }
