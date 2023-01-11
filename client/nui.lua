@@ -16,20 +16,40 @@ function FFAUICreate()
         SendNUIMessage({
             state = "show",
             type = "create",
-            ModusA = Config.Modus,
             MapsA = Config.Maps,
             ActiveGamePlayerN = ActiveGamePlayer,
             MaxGamesN = Number
         })
         
+        --Add Mode
         for i,v in ipairs(Config.Modus) do
             SendNUIMessage({
                 state = "add",
                 type = "create",
+                status = "modus",
                 ModeNumber = v.Modus,
                 ModeName = v.Name
             })
         end
+
+        --Add Maps
+        for i,v in ipairs(Config.Maps) do
+            SendNUIMessage({
+                state = "add",
+                type = "create",
+                status = "maps",
+                MapNumber = v.Map,
+                ModeName = v.Name,
+                MapMaxPlayer = v.MaxPlayer
+            })
+        end
+
+        --load maps in NUI
+        SendNUIMessage({
+            state = "add",
+            type = "create",
+            status = "maps2"
+        })
 
     end)
 end
