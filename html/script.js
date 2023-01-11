@@ -112,6 +112,13 @@ function AddMode(ModeNumber, ModeName) {
 `)
 }
 
+function setmode(mode, name) {
+  ffa_mode = mode;
+  ffa_mode_name = name;
+  
+  document.getElementById("ffa-mode").innerText = "Mode: " + name;
+}
+
 function AddMap(Number, Name, MaxPlayer) {
   console.log("lsol")
   ffa_pics.push({name: "images/" + Name +".png", label: "" + Name + "", index: Number})
@@ -246,21 +253,6 @@ var ffa_mode_name = "";
 var ffa_isroom_privat = false;
 let current_index = 1;
 
-const ffa_create_name = document.getElementById("ffa-create-name");
-const ffa_create_password = document.getElementById("ffa-create-password");
-const ffa_create_maxplayers = document.getElementById("ffa-create-maxplayers");
-
-const ffa_join_name = document.getElementById("ffa-join-name");
-const ffa_join_password = document.getElementById("ffa-join-password");
-
-const ffa_infos_players = document.getElementById("ffa-infos-players");
-const ffa_infos_mode = document.getElementById("ffa-infos-mode");
-
-const ffa_ingame_players = document.getElementById("ffa-ingame-players");
-const ffa_ingame_kd = document.getElementById("ffa-ingame-kd");
-const ffa_player_kills = document.getElementById("kills");
-const ffa_player_deaths = document.getElementById("deaths");
-
 
 $(document).ready(async function () {
   // display()
@@ -329,15 +321,6 @@ function loader(time) {
     $(".ffa-menu").fadeIn();
   }, time * 1000)
 }
-
-function setmode(mode, name) {
-  ffa_mode = mode;
-  ffa_mode_name = name;
-  
-  document.getElementById("ffa-mode").innerText = "Mode: " + name;
-  console.log("FFA MODE: " + ffa_mode_name)
-}
-
 
 function display() {
   for(screens of windows)
