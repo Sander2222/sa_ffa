@@ -12,8 +12,8 @@ Config.UnlimitedAmmo = true
 Config.WeaponAmmo = 1000
 Config.NotifyForKill = true
 Config.SendDiscordStats = true
-Config.SendDisordStatsTime = '17:58'
-Config.SendDiscordScoreboardLimit = 1
+Config.SendDisordStatsTime = '01:35'
+Config.SendDiscordScoreboardLimit = 10
 Config.UseCamAnimations = true
 Config.CamWait = 2500
 

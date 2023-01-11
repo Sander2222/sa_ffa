@@ -34,7 +34,6 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
             Dimension = UsedDimension
         }
     
-        print("Es funktioniert")
         table.insert(Games, NewGame)
         
         JoinGame(_source, NewGame, PlayerLoadout)
@@ -258,7 +257,12 @@ Citizen.CreateThread(function()
     local IsSend = false
     while Config.SendDiscordStats do
         t = os.date ("*t")
-        local ActiveTime = tostring(t.hour) .. ':' .. tostring(t.sec)
+        local hour = tostring(t.hour)
+
+        if hour <= "9" then
+            hour = "0" ..tostring(t.hour)
+        end
+        local ActiveTime = hour .. ':' .. tostring(t.min)
         --Checkt alle 60 sek 
         if Config.Debug then
             Wait(500)
@@ -275,7 +279,6 @@ Citizen.CreateThread(function()
                 if result then
                     for i = 1, #result do
                         local row = result[i]
-                        print(row.identifier, row.firstname, row.lastname)
                         message = message .. 'Platz: **' .. i .. '**\nName: **' .. row.firstname .. ' ' .. row.lastname .. '**\n' ..'Kills: **' .. row.kills .. '**\n Deaths: **' .. row.deaths .. '**\n' .. '\n\n'
                         if i == #result then
                             finish = true
