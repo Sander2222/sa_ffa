@@ -30,7 +30,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
             Players = 0,
             PrivateGame = UserCreateInfoA.Private,
             Modus = UserCreateInfoA.Mode,
-            Map = 2,
+            Map = UserCreateInfoA.Map,
             Dimension = UsedDimension
         }
     
