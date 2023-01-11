@@ -6,19 +6,17 @@ function FFAUICreate()
         local Number = #ActiveGames
 
         for i, v in ipairs(ActiveGames) do
-            print(v.Players)
-            print(type(v.Players))
             ActiveGamePlayer = ActiveGamePlayer + v.Players
         end
 
-        print("lul")
         SetNuiFocus(true, true)
         SendNUIMessage({
             state = "show",
             type = "create",
             MapsA = Config.Maps,
-            ActiveGamePlayerN = ActiveGamePlayer,
-            MaxGamesN = Number
+            -- Soon im UI
+            -- ActiveGamePlayerN = ActiveGamePlayer,
+            -- MaxGamesN = Number
         })
         
         --Add Mode
