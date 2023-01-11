@@ -43,6 +43,47 @@ RegisterCommand('Leave', function(source, args)
     end
 end)
 
+local IsClose = false 
+local IsAt = false 
+
+Citizen.CreateThread(function()
+    local ped = PlayerPedId()
+    while true do
+        Wait(950)
+
+        IsClose = false
+		IsAt = false
+
+        for key, value in pairs(Config.EnterCoords) do
+            local dist = #(GetEntityCoords(ped) - vector3(value.x, value.y, value.z))
+            --local dist = GetDistanceBetweenCoords(GetEntityCoords(GetPlayerPed(-1)), vector3(value.x, value.y, value.z))
+
+            print(dist)
+            if dist <= 2.0 then
+                IsClose = true
+                IsAt = true
+            elseif dist <= 4.0 then
+                IsClose = true
+            end
+        end
+    end
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        Wait(1)
+		if  not IsClose then
+			Wait(950) 
+        end
+		if IsAt then
+            ESX.ShowHelpNotification("Drücke ~INPUT_CONTEXT~ um etwas zu kaufen")
+            if IsControlJustReleased(0, 38) then
+                FFAUICreate()
+            end
+		end
+    end
+end)
+
 RegisterNetEvent("sa_ffa:JoinGameClient")
 AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     PlayerLoadout = PlayerWeapons
