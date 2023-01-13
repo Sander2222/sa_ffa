@@ -196,29 +196,31 @@ end
 
 AddEventHandler('playerDropped', function (reason)
     print('Player ' .. GetPlayerName(source) .. ' dropped (Reason: ' .. reason .. ')')
-  end)
-
-
---- DEBUG
---- DEBUG
---- DEBUG
-
-RegisterCommand("check", function(source, args, rawCommand)
-    print(GetPlayerRoutingBucket(source))
-end, false)
-
-RegisterCommand("put", function(source, args, rawCommand)
-    SetPlayerRoutingBucket(source, tonumber(args[1]))
-    SetRoutingBucketEntityLockdownMode(tonumber(args[1]), 'inactive')
-end, false)
-
-RegisterCommand("checkffa", function(source, args, rawCommand)
-    print(ESX.DumpTable(Games))
-end, false)
-
-ESX.RegisterServerCallback('sa_ffa:GetAllGames', function(source, cb)
-    cb(Games)
 end)
+
+
+--- DEBUG
+--- DEBUG
+--- DEBUG
+
+if Config.debug then
+    RegisterCommand("check", function(source, args, rawCommand)
+        print(GetPlayerRoutingBucket(source))
+    end, false)
+
+    RegisterCommand("put", function(source, args, rawCommand)
+        SetPlayerRoutingBucket(source, tonumber(args[1]))
+        SetRoutingBucketEntityLockdownMode(tonumber(args[1]), 'inactive')
+    end, false)
+
+    RegisterCommand("checkffa", function(source, args, rawCommand)
+        print(ESX.DumpTable(Games))
+    end, false)
+
+    ESX.RegisterServerCallback('sa_ffa:GetAllGames', function(source, cb)
+        cb(Games)
+    end)
+end
 
 -- Discord
 -- Discord
