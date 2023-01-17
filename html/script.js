@@ -7,9 +7,7 @@ window.addEventListener('message', async function (event) {
   if (item.state === 'show') {
     if (item.type === "create") {
       
-      display()
-      change_window("ffa-create")
-      $('body').show()
+      $('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()
 
     } else if (item.type === "join") {
 
@@ -36,9 +34,10 @@ window.addEventListener('message', async function (event) {
       if (item.status === 'modus') {
         AddMode(item.ModeNumber, item.ModeName)
       } else if (item.status === 'maps') {
+        console.log("wtd")
         AddMap(item.MapNumber, item.ModeName, item.MapMaxPlayer )
       } else if (item.status === 'maps2') {
-          change_ffa_map(0)
+
       }
 
     } else if (item.type === 'search') {
@@ -120,8 +119,12 @@ function setmode(mode, name) {
 }
 
 function AddMap(Number, Name, MaxPlayer) {
-  console.log("lsol")
-  ffa_pics.push({name: "images/" + Name +".png", label: "" + Name + "", index: Number})
+  $('.map-menu').append(`
+  <div class="map" onclick="change_map(${Number})">
+      <img src="images/${Name}.png">
+      <span>${Name}</span>
+  </div>
+`) 
 }
 
 let ffa_pics = [
@@ -233,6 +236,11 @@ function create_ffa() {
 
 
 
+{/* <a onclick="$('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()">FFA Erstellen</a>
+<a onclick="$('.ffa-liste').fadeIn();$('.ffa-create').hide();$('.ffa-scoreboard').hide()">FFA Suchen</a>
+<a onclick="$('.ffa-scoreboard').fadeIn();$('.ffa-create').hide();$('.ffa-liste').hide()">FFA Scoreboard</a>
+
+ */}
 
 
 
@@ -242,290 +250,251 @@ function create_ffa() {
 
 
 
+let mode = "Gambio";
+let map = "Würfelpark";
+let FFaSearch_Visuability = "Privat";
 
-
-
-
-var currentIndex = 1;
-var current_map = null;
-var ffa_mode = null;
-var ffa_mode_name = "";
-var ffa_isroom_privat = false;
-let current_index = 1;
-
-
-$(document).ready(async function () {
-  // display()
-  // change_window("ffa-liste")
-    $('body').hide()
-  
-  //showinput()
-  
-  //notify("FFA", "Du hast eine Killstreak von 10 Kills", "success")
-  //notify("FFA", "Du hast eine Killstreak von 10 Kills", "success")
-  
-  //loader(1)
-  //$('.ffa-create *').hide()
-  
-  document.getElementById("inpLock").onclick = function() {
-    ffa_isroom_privat = document.getElementById("inpLock").checked;
-    if(document.getElementById("inpLock").checked === true) {
-      document.getElementById("room-type").innerText = "Room: Privat";
-      document.getElementById("room-type").style.color = "#f00";
-      document.getElementById("room-type").style.textShadow = "0 0 5px #f00";
-    }
-    else {
-      document.getElementById("room-type").innerText = "Room: Public";
-      document.getElementById("room-type").style.color = "#0f0";
-      document.getElementById("room-type").style.textShadow = "0 0 5px #0f0";
-    }
-  }
+$(document).ready(function () {
+  AddFFA("DieProfis", 1, 2, 10, "Würfelpark.webp", "Penis");
+  AddFFA("Dieofis", "12345678", 2, 10, "Prison.png", "anal");
+  AddFFA("DiePfis", 1, 2, 10, "Prison.png", "sander");
+  AddFFA("DiePfis", "12345678", 2, 10, "Prison.png", "Oli");
+  AddFFA("DiePis", 1, 2, 10, "Prison.png", "Peni");
+  AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Ps");
+  AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Pis");
+  AddFFA("Difis", "12345678", 2, 10, "Würfelpark.webp", "Peis");
+  AddFFA("Dieofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
+  AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
+  AddFFA("Diefis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
+  AddFFA("Dieofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
+  AddFFA("ofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
 });
 
-async function showinput() {
-  const input_cancelbtn = document.getElementById("cancel-btn");
-  const input_confirmbtn = document.getElementById("confirm-btn");
-  const input_content = document.getElementById("ffa-search-name");
-  
-  $(`#input_mainwindow`).fadeIn();
-  
-  input_confirmbtn.addEventListener("click", function() {
-    if(input_content.value === "") {
-      notify("FFA", "Eingabe ungültig", "error")
+function SearchFFA(keys) {
+  let FFAList = document.querySelector(".liste");
+  let FFAs = FFAList.querySelectorAll(".ffa");
+
+  FFAs.forEach((e) => {
+    if (
+      e
+        .querySelector(".ffa-map")
+        .querySelector(".name")
+        .innerText.toLowerCase()
+        .includes(keys.toLowerCase())
+    ) {
+      e.classList.remove("hidden");
+      FFAList.prepend(e);
+    } else {
+      e.classList.add("hidden");
     }
-    else {
-      $(`#input-window`).fadeOut();
-      join_searched_room()
+  });
+}
+
+function SearchMap(keys) {
+  let FFAList = document.querySelector(".liste");
+  let FFAs = FFAList.querySelectorAll(".ffa");
+  FFAs.forEach((e) => {
+
+    if(e.querySelector(".ffa-map").classList.forEach((elem) => {
+      if(elem.toLowerCase().includes(keys.toLowerCase())) {
+        e.classList.remove("hidden");
+        FFAList.prepend(e);
+      }
+      else {
+        e.classList.add("hidden");
+      }
+    }));
+  });
+}
+
+function SearchMode(keys) {
+  let FFAList = document.querySelector(".liste");
+  let FFAs = FFAList.querySelectorAll(".ffa");
+
+  FFAs.forEach((e) => {
+    if (
+      e
+        .querySelector(".Mode-Name")
+        .innerText.toLowerCase()
+        .includes(keys.toLowerCase())
+    ) {
+      e.classList.remove("hidden");
+      FFAList.prepend(e);
+    } else {
+      e.classList.add("hidden");
     }
-  })
-  input_cancelbtn.addEventListener("click", function() {
-    $(`#input-window`).fadeOut();
-  })
-  
-  //await document.getElementById("cancel-btn").onclick()
-  
+  });
 }
 
-function join_searched_room(id) {
-  let room_id = id;
-  
-  notify("FFA", "Raum wird betreten")
+/* Diese Funktion wird ausgeführt um den Modus bei der Liste zu nehmen und es in die [mode] Varible zu Speichern */
+function change_mode(type) {
+  let Modelist = document.querySelector(".mode-menu");
+  let Modes = Modelist.querySelectorAll(".modus");
+  let Current_Mode = document.querySelector(`.${type}`);
+
+  Modes.forEach((e) => {
+    e.classList.remove("active");
+  });
+  Current_Mode.classList.add("active");
+  mode = type;
+  console.log("New MODUS: " + mode);
 }
 
-function loader(time) {
-  $(".loader").fadeIn();
-  $(".ffa-menu").hide();
-  $(".ffa-menu::before").show();
-  setTimeout(() => {
-    $(".loader").fadeOut();
-    $(".ffa-menu").fadeIn();
-  }, time * 1000)
+/* Diese Funktion wird ausgeführt um die Map bei der Liste zu nehmen und es in die [map] Varible zu Speichern */
+function change_map(type) {
+  let Modelist = document.querySelector(".map-menu");
+  let Modes = Modelist.querySelectorAll(".map");
+  let Current_Map = document.querySelector(`.${type}`);
+
+  Modes.forEach((e) => {
+    e.classList.remove("active");
+  });
+  Current_Map.classList.add("active");
+  map = type;
+  console.log("New MAP: " + map);
 }
 
-function display() {
-  for(screens of windows)
-  if(screens !== "ffa-menu") {
-    $(`.${screens}`).hide();
+/* Diese Funktion ist nur für den Map Slide zu öffnen */
+let already_map = false;
+function open_maps() {
+  if (!already_map) {
+    already_map = true;
+    $(".map-menu").fadeIn();
+  } else {
+    already_map = false;
+    $(".map-menu").fadeOut();
   }
 }
 
-function change_window(window) {
-  for (wind of windows) {
-    if(window === wind) {
-      $(`.${window}`).fadeIn();
-    }
-    else {
-      $(`.${wind}`).hide();
-    }
-  }
-  if(window === "ffa-search") {
-    for(var a=0;a<10;a++) {
-      add_game(`Arena-${Math.random().toString(36).slice(8)}`, "2", "10", "Rage", "Schrottplatz")
-    }
-  }
-  if(window === "ffa-create") {
-    document.getElementById("inpLock").checked = true;
-    document.getElementById("room-type").innerText = "Room: Privat";
-    document.getElementById("room-type").style.color = "#f00";
-    document.getElementById("room-type").style.textShadow = "0 0 5px #f00";
+/* Diese Funktion ist nur für den Mode Slide zu öffnen */
+let already_mode = false;
+function open_modes() {
+  if (!already_mode) {
+    already_mode = true;
+    $(".mode-menu").fadeIn();
+  } else {
+    already_mode = false;
+    $(".mode-menu").fadeOut();
   }
 }
 
-async function change_ffa_map(direction) {
-  const element = document.getElementById("ffa-maps");
-  
-  current_index = current_index += direction;
+function ChangeFFAVisual(type) {
+  document.querySelector(".Privat").classList.remove("active");
+  document.querySelector(".Öffentlich").classList.remove("active");
+  document.querySelector(`.${type}`).classList.add("active");
+  FFaSearch_Visuability = type;
 
-  for(picture of ffa_pics) {
-    if(current_index > 4) {
-      current_index = 1;
-    }
-    else if(current_index < 1) {
-      current_index = 4;
-    }
+  let FFAList = document.querySelector(".liste");
+  let FFAs = FFAList.querySelectorAll(".ffa");
 
-    if(picture.index === current_index) {
-      element.src = picture.name
-      document.getElementById("nav-selected").innerText = picture.label;
-      current_map = picture.index
-    }
+  console.log(FFaSearch_Visuability);
+
+  if(type === 'Öffentlich') {
+    FFAs.forEach((e) => {
+      if(e.classList.contains("NOPASSWORD")) {
+        console.log("Hat kein Passwort");
+        FFAList.prepend(e);
+        e.classList.remove('hidden');
+      }
+      else {
+        console.log("Hat Passwort");
+        e.classList.add("hidden")
+      }
+    })
   }
+  else {
+    FFAs.forEach((e) => {
+      if(!e.classList.contains("NOPASSWORD")) {
+        console.log("Hat kein Passwort");
+        FFAList.prepend(e);
+        e.classList.remove('hidden');
+      }
+      else {
+        console.log("Hat Passwort");
+        e.classList.add("hidden")
+      }
+    })
 
-  console.log(current_map);
-}
-
-async function slideup() {
-  const element = document.getElementById("container");
-  element.classList.remove("slideup");
-  await wait(0.2)
-  element.classList.toggle("slideup");
-
-}
-
-async function slidedown() {
-  const element = document.getElementById("container");
-  element.classList.remove("slidedown");
-  await wait(0.2)
-  element.classList.toggle("slidedown");
-}
-
-async function triggerskull() {
-  const skull = document.getElementById("skull-kill");
-}
-
-let blacklisted_words = ["nigger", "nigga", "niggers", "niger", "hitler", "adolf", "penis", "hurensohn", "nutte", "schwanz", "pedo", "milf", "hitl", "nega", "negga", "porn", "porno", "nazi", "anal", "shit", "neonazi", "huan", "huansohn", "hure"]
-var characters = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
-
-function hasSpecialChars(str) {
-  const specialCharsSet = new Set('^[!@#%/^&*()_+\-=\[\]{};:"|,.<>\/?]*$');
-  for (let letter of str) {
-    if (specialCharsSet.has(letter)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function checkifstringhasblacklistedwords() {
-  if (blacklisted_words.some(v => input_name.value.toLowerCase().includes(v))) {
-    //Wenn ein blacklisted wort drinnen ist dann
   }
 }
 
-function gettime() {
-  let today = new Date();
-  let hours = today.getHours();
-  let minutes = today.getMinutes();
-  let seconds = today.getSeconds();
-  let day = today.getDay() + 2;
-  let month = today.getMonth() + 1;
-  let year = today.getFullYear();
-
-  if (minutes <= 9) {
-    minutes = `0${minutes}`;
+function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
+  if(document.querySelector(`.${Name}-${Password}`)) {
+    //console.log("Existiert");
   }
-
-  let current_date = `${day}.${month}.${year}`;
-  let current_time = `${hours}:${minutes}`;
-
-  document.getElementById("time").innerText = current_time;
-  document.getElementById("date").innerText = current_date;
-}
-
-async function kill(killer, target) {
-  await wait(0.5);
-  let id = Math.random().toString(36).slice(2);
-
-  $(".ffa-killfeed").append(`
-    <div class="kill" style="display: none;" id="${id}">
-      <h1>${killer}</h1>
-      <p>killed</p>
-      <h2>${target}</h2>
-    </div>
-  
-  `);
-  $(`#${id}`).fadeIn(200);
-
-  setTimeout(async () => {
-    const toRemove = document.getElementById(id);
-    $(`#${id}`).fadeOut();
-    await wait(1);
-    toRemove.remove();
-  }, 5000);
-}
-
-
-
-async function notify(title, message, type) {
-  let id = Math.random().toString(36).slice(2);
-  
-  $(".notify-area").append(`
-  <div class="notify ${type}" id="notify-${id}">
-  <audio src="assets/sounds/notify_in.mp3" id="notify-soundin-${id}"></audio>
-  <audio src="assets/sounds/notify_out.mp3" id="notify-soundout-${id}"></audio>
-  <h1 class="${type}">${title}</h1>
-  <h2>${message}</h2>
-  </div>
-  
-  `);
-  let notify_soundin = document.getElementById(`notify-soundin-${id}`);
-  let notify_soundout = document.getElementById(`notify-soundout-${id}`);
-  notify_soundin.volume = 0.05;
-  notify_soundout.volume = 0.01;
-  notify_soundin.play();
-  
-  setTimeout(async () => {
-    notify_soundin.pause();
-    notify_soundout.play();
-    const toRemove = document.getElementById(`notify-${id}`);
-
-    toRemove.style.animation = "backOutLeft 1s forwards";
-    $(`#${id}`).fadeOut();
-    await wait(1);
-    toRemove.remove();
-  }, 5000);
-}
-
-function search_games() {
-  
-}
-
-
-async function add_game(roomname, players, maxplayers, mode, map) {
-  
-  $(".founded-ffas").append(`
-    <div class="ffa-found" id="${roomname}">
-      <p id="ffa-found-searchname">${roomname}</p>
-      <hr class="center-diamond" style="width: 50%; top: 18%;">
-
-      <div class="middle-boxes">
-        <img src="assets/images/ffa-orte/${map}.webp">
-
-        <div class="ffa-infos">
-            <h1>Players:</h1>
-            <span id="ffa-infos-players">${players}/${maxplayers}</span>
-            <h2>Mode:</h2>
-            <span id="ffa-infos-mode">${mode}</span>
+  else {
+    //console.log("Existiert nicht");
+    if(Password == 0 || Password == 1) {
+      $(".liste").append(`
+        <div class="ffa ${Name} NOPASSWORD">
+          <div class="ffa-map ${Map}">
+            <img src="assets/images/ffa-orte/${Map}">
+            <div class="name">${Name}</div>
+            <div class="players">${Players}/${MaxPlayers} Spieler</div>
+          </div>
+          <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
+          <span>Passwort geschützt</span>
+          <div class="ffa-password">
+            <i class="fa-solid fa-lock"></i>
+            <input type="text" placeholder="Password" id="${Password}">
+          </div>
+          <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
         </div>
-      </div>
+      `);
+    }
+    else {
+      $(".liste").append(`
+        <div class="ffa ${Name}-${Password}">
+          <div class="ffa-map ${Map}">
+            <img src="assets/images/ffa-orte/${Map}">
+            <div class="name">${Name}</div>
+            <div class="players">${Players}/${MaxPlayers} Spieler</div>
+          </div>
+          <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
+          <span>Passwort geschützt</span>
+          <div class="ffa-password">
+            <i class="fa-solid fa-lock"></i>
+            <input type="text" placeholder="Password" id="${Password}">
+          </div>
+          <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
+        </div>
+      `);
 
-      <button onclick="join_game(${roomname})">BEITRETEN</button>
+    }
+  }
+}
+
+function JoinGame(Name,Password) {
+  let TheGameListItem = document.querySelector(`.${Name}-${Password}`);
+
+  console.log(TheGameListItem.getElementsByTagName("input").value);
+}
+
+/* 
+async function message(killer, target){
+  await wait(0.5)
+  let id = Math.random().toString(36).slice(2);
+  
+  $('.kill-feed').append(`
+    <div class="new-kill" id="${id}">
+      <span id="killer">${killer}</span>
+      <span id="target">${target}</span>
     </div>
   
-  `);
-
+  `)
+  $(`#${id}`).fadeIn();
+  
+  setTimeout( async ()=>{
+    const toRemove = document.getElementById(id);
+    await wait(0.2);
+    document.getElementById(id).style.animation = "delete 1s forwards";
+    await wait(1);
+    toRemove.remove();
+  }, 5000);
 }
-
-function join_game(game) {
-  // post an client
-}
-
+ */
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-}
-
-function test(_callback) {
-  _callback();
 }
 
 async function wait(time) {
