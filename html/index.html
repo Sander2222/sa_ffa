@@ -5,435 +5,157 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MADE BY OLI</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/a6c44b414d.js" crossorigin="anonymous"></script>
     <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="assets/css/keyframes.css">
-    <link rel="stylesheet" href="assets/css/ffamenu.css">
-    <link rel="stylesheet" href="assets/css/ffa-create.css">
-    <link rel="stylesheet" href="assets/css/font-face.css">
-    <link rel="stylesheet" href="assets/css/ffa-ingame.css">
-    <link rel="stylesheet" href="assets/css/ffa-join.css">
-    <link rel="stylesheet" href="assets/css/ffa-infos.css">
-    <link rel="stylesheet" href="assets/css/ffa-list.css">
-    <link rel="stylesheet" href="assets/css/ffa-search.css">
     <script src="script.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/icons/death.png">
+    
 </head>
 
 <body>
     <div class="container" id="container">
         
-        <div class="notify-area">
-            <!-- <div class="notify error">
-                <audio src="assets/sounds/notify.mp3" id="notify-sound" volume="0.3"></audio>
-                <h1 class="error">Information</h1>
-                <h2>Passwort ist zu kurz!</h2>
-            </div> -->
-        </div>
-
-        <div class="loader" style="display: none;">
-            <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
-            <span>Loading...</span>
-        </div>
-
-        <div class="input-window" id="input-window" style="display: none;">
-            <div class="input" id="input-box">
-                <input type="text" name="ffa-search-name" id="ffa-search-name" placeholder="Enter Roomname">
-                <ul>
-                    <li><button id="cancel-btn">Abbrechen</button></li>
-                    <li><button id="confirm-btn">Bestätigen</button></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- <div class="ingame" style="display: none;">
-            <div class="stats">
-                <div class="deaths">
-                    <h1 id="add-death"></h1>
-                    <img src="assets/images/icons/death.png">
-                    <span id="deaths">30</span>
-                </div>
-                <div class="kills">
-                    <h1 id="add-kills"></h1>
-                    <img src="assets/images/icons/kills.png">
-                    <span id="kills">20</span>
-                </div>
-                <div class="kd">
-                    <h1 id="add-kd"></h1>
-                    <p>KD:</p>
-                    <span id="kd">0.55</span>
-                </div>
-            </div>
+        <ul class="loader" style="display: none;">
+            <li class="center"></li>
+            <li class="item item-1"></li>
+            <li class="item item-2"></li>
+            <li class="item item-3"></li>
+            <li class="item item-4"></li>
+            <li class="item item-5"></li>
+            <li class="item item-6"></li>
+            <li class="item item-7"></li>
+            <li class="item item-8"></li>
+        </ul>
         
-            <div class="player-count">
-                <p>Spieler</p>
-                <span id="players">15/30</span>
-                <span class="material-symbols-outlined count-icon">group</span>
+        <div class="ffa-create" style="display: none;">
+            <img src="images/box.png" class="aad">
+            
+            <h1>Create Your FFA</h1>
+            <h2>Gebe hier ein</h2>
+            
+            <div class="name">
+                <i class="fa-solid fa-circle-user"></i>
+                <input type="text" placeholder="Name">
             </div>
-        
-            <div class="kill-feed">
-                <div class="killfeed-top" data-title="FFA LOGS"></div>
+            <div class="pa">
+                <div class="password">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="text" placeholder="Password" id="FFA-Password" disabled>
+                </div>
+                
+                <input id="pw-on-off" type="checkbox" onclick="if(!document.getElementById('pw-on-off').checked){document.getElementById('FFA-Password').disabled = true;document.getElementById('FFA-Password').value = '';}else{document.getElementById('FFA-Password').disabled = false;}">
             </div>
-        </div> -->
-
-        <div class="ffa-killfeed">
+            <div class="maxplayers">
+                <i class="fa-solid fa-people-group"></i>
+                <input type="text" placeholder="Max Players (MAX 10)">
+            </div>
+            <!-- Das is weil sonst verschwindet der Modus immer wenn man drückt --><div class="ma">
+                <div class="mode" onclick="open_modes()">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <button>Wähle den Modus</button>
+                    <span class="arrow">></span>
+                </div>
+                <main class="mode-menu" style="display: none;">
+                    <div class="modus Gambio active" onclick="change_mode('Gambio')">
+                        <i class="fa-solid fa-user-ninja"></i>
+                        <span>Gambio</span>
+                    </div>
+                    <div class="modus Rage" onclick="change_mode('Rage')">
+                        <i class="fa-solid fa-person-praying"></i>
+                        <span>Rage</span>
+                    </div>
+                    <div class="modus Normal" onclick="change_mode('Normal')">
+                        <i class="fa-solid fa-user-ninja"></i>
+                        <span>Normal</span>
+                    </div>
+                    <div class="modus Pistol" onclick="change_mode('Pistol')">
+                        <i class="fa-solid fa-gun"></i>
+                        <span>Pistol</span>
+                    </div>
+                    <div class="modus Sniper" onclick="change_mode('Sniper')">
+                        <i class="fa-solid fa-cross"></i>
+                        <span>Sniper</span>
+                    </div>
+                </main>
+            </div>
+            <!-- Hier das gleiche --><div class="mp">
+                
+                <div class="map" onclick="open_maps()">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <button>Wähle eine Map</button>
+                    <span class="arrow">></span>
+                </div>
+                <main class="map-menu" style="display: none;">
+                    <!-- Hier weden Maps reingeladen -->
+                </main>
+            </div>
+            <div class="create">FFA ERSTELLEN</div>
         </div>
-
-        <div class="ffa-ui">
-            <h6>RAVE SERVICE</h6>
-
+        <div class="ffa-liste" style="display: none;">
+            <img src="images/box.png" class="aad">
+            <h1>FFA Liste</h1>
+            <div class="switch">
+                <div class="Privat active" onclick="ChangeFFAVisual('Privat')">Privat</div>
+                <div class="Öffentlich" onclick="ChangeFFAVisual('Öffentlich')">Öffentlich</div>
+            </div>
+            <input type="text" placeholder="Modus" id="Search-Mode" oninput="SearchMode(document.getElementById('Search-Mode').value)">
+            <input type="text" placeholder="Map" id="Search-Map" oninput="SearchMap(document.getElementById('Search-Map').value)">
+            <div class="search">
+                <input type="text" placeholder="Gebe den Namen ein" oninput="SearchFFA(document.getElementById('Search-Name').value)" id="Search-Name">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            
+            <div class="liste">
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="assets/images/ffa-orte/Würfelpark.webp">
+                        <div class="name">DeinName</div>
+                        <div class="players">8/10 Spieler</div>
+                    </div>
+                    <div class="Mode">Mode: <h1 class="Mode-Name">Gambio</h1></div>
+                    <span>Passwort geschützt</span>
+                    <div class="ffa-password">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="text" placeholder="Password">
+                    </div>
+                    <div class="join">Beitreten</div>
+                </div>
+            </div>
+        </div>
+        <div class="ffa-scoreboard">
+            <h6>SA FFA</h6>
+            
             <div class="kills">
                 <h1 id="kill-title">KILLS</h1>
-                <span id="kills">0</span>
+                <span id="kills">30</span>
             </div>
             <div class="deaths">
                 <h1 id="death-title">DEATHS</h1>
-                <span id="deaths">0</span>
+                <span id="deaths">10</span>
             </div>
-
-
+            
+            
             <div class="middle-content">
                 <h1>FFA STATS</h1>
-
-                <div class="players-inroom">
-                    <h2>Name</h2>
-                    <span id="ffa-ingame-name">5/10</span>
+                
+                <div class="playtime">
+                    <h2>Playtime</h2>
+                    <span id="ffa-ingame-players">10:50</span>
                 </div>
-
+                
                 <div class="player-kd">
-                    <h3 id="add-kd">KD</h3>
-                    <span id="ffa-ingame-kd">0</span>
-                </div>
-
-                <img src="images/skull.png" id="skull-kill">
-            </div>
-        </div>
-
-        <div class="ffa-menu">
-            <div class="ffa-liste">
-
-                <div class="top-bar">
-                    <p>FFA LISTE</p>
-
-                    <div class="search">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                </div>
-
-                <div class="ffa-items">
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                    <div class="ffa">
-                        <p>WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        <img src="assets/images/ffa-orte/Würfelpark.webp">
-    
-                        <div class="ffa-infos">
-                            <h1>Players:</h1>
-                            <span id="ffa-infos-players">5/10</span>
-                            <h2>Mode:</h2>
-                            <span id="ffa-infos-mode">Gambo</span>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="ffa-search">
-                <div class="top-bar">
-                    <p>FFA LISTE</p>
-                </div>
-
-                <div class="search-box">
-                    <input class="search-game">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                </div>
-
-                <div class="founded-ffas">
-                    <div class="ffa-found">
-                        <p id="ffa-found-searchname">WÜRFELPARK</p>
-                        <hr class="center-diamond" style="width: 50%; top: 18%;">
-                        
-                        <div class="middle-boxes">
-                            <img src="assets/images/ffa-orte/Würfelpark.webp">
-        
-                            <div class="ffa-infos">
-                                <h1>Players:</h1>
-                                <span id="ffa-infos-players">5/10</span>
-                                <h2>Mode:</h2>
-                                <span id="ffa-infos-mode">Gambo</span>
-                            </div>
-                        </div>
-                        
-                        <button>BEITRETEN</button>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="ffa-create" id="ffa-create">
-
-                <div class="input-container">
-                    <input type="text" maxlength="8" minlength="3" required="" id="ffa-create-name"/>
-                    <label>Name MAX(8)</label>		
-                </div>
-                <div class="input-container">
-                    <input type="text" maxlength="8" required="" id="ffa-create-password"/>
-                    <label>Password MAX(8)</label>		
-                </div>
-                <div class="input-container">
-                    <input type="text" maxlength="2" minlength="1" required="" id="ffa-create-maxplayers"/>
-                    <label>Max Players</label>
-                </div>
-
-                <div class="ffa-options">
-                    <div class="room-type">
-                        <label for="inpLock" style="color: #fff; text-shadow: 0 0 5px #fff;" id="room-type">Room: Closed</label>
-                        <input id="inpLock" type="checkbox"/>
-                        <label class="btn-lock" for="inpLock">
-                            <svg width="36" height="40" viewBox="0 0 36 40">
-                                <path class="lockb" d="M27 27C27 34.1797 21.1797 40 14 40C6.8203 40 1 34.1797 1 27C1 19.8203 6.8203 14 14 14C21.1797 14 27 19.8203 27 27ZM15.6298 26.5191C16.4544 25.9845 17 25.056 17 24C17 22.3431 15.6569 21 14 21C12.3431 21 11 22.3431 11 24C11 25.056 11.5456 25.9845 12.3702 26.5191L11 32H17L15.6298 26.5191Z"></path>
-                                <path class="lock" d="M6 21V10C6 5.58172 9.58172 2 14 2V2C18.4183 2 22 5.58172 22 10V21"></path>
-                                <path class="bling" d="M29 20L31 22"></path>
-                                <path class="bling" d="M31.5 15H34.5"></path>
-                                <path class="bling" d="M29 10L31 8"></path>
-                            </svg>
-                        </label>
-                    </div>
-    
-                    <div class="Map-preview">
-                        <img src="" id="ffa-maps">
-                        <!-- <img src="assets/images/ffa-orte/Würfelpark.webp" class="preview" data="Würfelpark">
-                        <img src="assets/images/ffa-orte/Trailerpark.webp" class="preview" data="Trailerpark">
-                        <img src="assets/images/ffa-orte/Schrottplatz.webp" class="preview" data="Schrottplatz">
-                        <img src="assets/images/ffa-orte/Prison.png" class="preview" data="Prison"> -->
-                        <span></span>
-    
-                        <div class="nav">
-                            <span id="nav-back" onclick="change_ffa_map(-1)"><</span>
-                            <h1 id="nav-selected">Maps</h1>
-                            <span id="nav-next" onclick="change_ffa_map(1)">></span>
-                        </div>
-    
-                        
-                    </div>
-                    
-                    <nav>
-                        <label for="touch"><span id="ffa-mode">Modus</span></label>
-                        <input type="checkbox" id="touch">
-                        <ul class="slide">
-                        </ul>
-                    </nav> 
+                    <h3>KD</h3>
+                    <span id="ffa-ingame-kd">0.33</span>
                 </div>
                 
-                <div id="create-ffa" onclick="create_ffa()">Create</div>
-            </div>
-            
-            <div class="ffa-info-card" style="display: none;">
-                <span class="material-symbols-outlined" id="close-menu">close</span>
-                <p>FFA Würfelpark</p>
-                <hr class="center-diamond" style="top: -35%;">
-                
-                <div class="infos">
-                    <div class="Players">
-                        <h1>Players</h1>
-                        <hr class="center-diamond" style="top: -20%;">
-                        <span>5/10</span>
-                    </div>
-                    <div class="IsPrivat">
-                        <h1>Privat</h1>
-                        <hr class="center-diamond" style="top: -20%;">
-                        <span>No</span>
-                    </div>
-                    <div class="MaxPlayers">
-                        <h1>Max Players</h1>
-                        <hr class="center-diamond" style="top: -20%;">
-                        <span>10 Players</span>
-                    </div>
-                    <div class="Modus">
-                        <h1>Modus</h1>
-                        <hr class="center-diamond" style="top: -20%;">
-                        <span>Gambo</span>
-                    </div>
-                    <div class="Password">
-                        <h1>Password</h1>
-                        <hr class="center-diamond" style="top: -20%;">
-                        <span>No</span>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="ffa-join">
-                <input type="text" name="room-name" id="ffa-join-name" placeholder="Roomname">
-                <input type="text" name="room-password" id="ffa-join-password" placeholder="Password">
-                <button>Beitreten</button>
+                <img src="skull.png" id="skull-kill">
             </div>
         </div>
-
     </div>
+    
 </body>
 
 </html>
