@@ -17,6 +17,14 @@
 
 <body>
     <div class="container" id="container">
+
+        <div class="notify-area">
+            <!-- <div class="notify error">
+                <audio src="assets/sounds/notify.mp3" id="notify-sound" volume="0.3"></audio>
+                <h1 class="error">Information</h1>
+                <h2>Passwort ist zu kurz!</h2>
+            </div> -->
+        </div>
         
         <ul class="loader" style="display: none;">
             <li class="center"></li>
@@ -38,7 +46,7 @@
             
             <div class="name">
                 <i class="fa-solid fa-circle-user"></i>
-                <input type="text" placeholder="Name">
+                <input id="FFA-Name" type="text" placeholder="Name">
             </div>
             <div class="pa">
                 <div class="password">
@@ -73,7 +81,7 @@
                     <!-- Hier weden Maps reingeladen -->
                 </main>
             </div>
-            <div class="create">FFA ERSTELLEN</div>
+            <div class="create" onclick="create_ffa()">FFA ERSTELLEN</div>
         </div>
         <div class="ffa-liste" style="display: none;">
             <img src="images/box.png" class="aad">

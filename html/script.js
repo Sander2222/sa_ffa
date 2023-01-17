@@ -177,7 +177,7 @@ function Close() {
 
 
 function create_ffa() {
-  let input_name = document.getElementById("ffa-create-name");
+  let input_name = document.getElementById("FFA-Name");
   let input_password = document.getElementById("ffa-create-password");
   let input_maxplayers = document.getElementById("ffa-create-maxplayers");
   // "ffa_isroom_privat" |check if room is privat/public
@@ -220,9 +220,35 @@ function create_ffa() {
   //display()
 }
 
+async function notify(title, message, type) {
+  let id = Math.random().toString(36).slice(2);
+  
+  $(".notify-area").append(`
+  <div class="notify ${type}" id="notify-${id}">
+  <audio src="assets/sounds/notify_in.mp3" id="notify-soundin-${id}"></audio>
+  <audio src="assets/sounds/notify_out.mp3" id="notify-soundout-${id}"></audio>
+  <h1 class="${type}">${title}</h1>
+  <h2>${message}</h2>
+  </div>
+  
+  `);
+  let notify_soundin = document.getElementById(`notify-soundin-${id}`);
+  let notify_soundout = document.getElementById(`notify-soundout-${id}`);
+  notify_soundin.volume = 0.05;
+  notify_soundout.volume = 0.01;
+  notify_soundin.play();
+  
+  setTimeout(async () => {
+    notify_soundin.pause();
+    notify_soundout.play();
+    const toRemove = document.getElementById(`notify-${id}`);
 
-
-
+    toRemove.style.animation = "backOutLeft 1s forwards";
+    $(`#${id}`).fadeOut();
+    await wait(1);
+    toRemove.remove();
+  }, 5000);
+}
 
 
 
