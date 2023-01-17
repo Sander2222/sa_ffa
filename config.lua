@@ -37,7 +37,9 @@ Config.EnterCoords = {
 Config.Modus = {
     {
         Modus = 1,
+        title = 'gambo1',
         Name = 'Gambo 1',
+        Icon = 'fa-solid fa-user-ninja',
         Weapons = {
             "weapon_pistol",
             "weapon_appistol",
@@ -46,7 +48,9 @@ Config.Modus = {
     },
     {
         Modus = 2,
+        title = 'gambo2',
         Name = 'Gambo 2',
+        Icon = 'fa-solid fa-person-praying',
         Weapons = {
             "WEAPON_PISTOL",
             "WEAPON_APPISTOL",
@@ -55,7 +59,9 @@ Config.Modus = {
     },
     {
         Modus = 3,
+        title = 'gambo3',
         Name = 'Gambo 3',
+        Icon = 'fa-solid fa-gun',
         Weapons = {
             "WEAPON_PISTOL",
             "WEAPON_APPISTOL",
@@ -64,7 +70,9 @@ Config.Modus = {
     },
     {
         Modus = 4,
+        title = 'gambo4',
         Name = 'ficken sie sich',
+        Icon = 'fa-solid fa-cross',
         Weapons = {
             "WEAPON_PISTOL",
             "WEAPON_APPISTOL",

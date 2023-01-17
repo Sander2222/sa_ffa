@@ -1,5 +1,7 @@
 var CurrentMap
 var MaxPlayerMap
+var CurrentModus
+
 
 window.addEventListener('message', async function (event) {
   var item = event.data;
@@ -33,7 +35,7 @@ window.addEventListener('message', async function (event) {
     if (item.type === 'create') {
 
       if (item.status === 'modus') {
-        AddMode(item.ModeNumber, item.ModeName, item.Icon)
+        AddMode(item.ModeNumber, item.ModeName, item.Icon, item.Title)
       } else if (item.status === 'maps') {
         console.log("wtd")
         AddMap(item.MapNumber, item.ModeName, item.MapMaxPlayer )
@@ -106,10 +108,13 @@ async function ChangeScoreboards(kills, deaths, Name) {
   }
 }
 
-function AddMode(ModeNumber, ModeName) {
-  $('.slide').append(`
-  <li><a id="${ModeNumber}" onclick="setmode(${ModeNumber}, '${ModeName}')">${ModeName}</a></li>
-`)
+function AddMode(Number, Name, Icon, Title) {
+  $('.mode-menu').append(`
+  <div class="modus ${Title}" onclick="change_mode('${Title}', '${Name}', ${Number})">
+  <i class="${Icon}"></i>
+  <span>${Name}</span>
+</div>`
+)
 }
 
 function setmode(mode, name) {
@@ -324,20 +329,23 @@ function SearchMode(keys) {
 }
 
 /* Diese Funktion wird ausgeführt um den Modus bei der Liste zu nehmen und es in die [mode] Varible zu Speichern */
-function change_mode(type) {
+function change_mode(type, Name, Number) {
+  log(type)
+  log(Number)
   let Modelist = document.querySelector(".mode-menu");
   let Modes = Modelist.querySelectorAll(".modus");
   let Current_Mode = document.querySelector(`.${type}`);
+  Modus = Number;
 
   $('#btn-change-mode').css("color", "rgba(255,255,255,1)");
-  document.getElementById("btn-change-mode").innerText = type;
+  document.getElementById("btn-change-mode").innerText = Name;
   
 
   Modes.forEach((e) => {
     e.classList.remove("active");
   });
   Current_Mode.classList.add("active");
-  mode = type;
+  mode = Name;
   console.log("New MODUS: " + mode);
 }
 

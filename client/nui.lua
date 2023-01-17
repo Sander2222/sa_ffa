@@ -27,7 +27,9 @@ function FFAUICreate()
                 type = "create",
                 status = "modus",
                 ModeNumber = v.Modus,
-                ModeName = v.Name
+                ModeName = v.Name,
+                Icon = v.Icon,
+                Title = v.title
             })
         end
 
