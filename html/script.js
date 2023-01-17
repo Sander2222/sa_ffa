@@ -1,5 +1,5 @@
-var windows = ["ffa-create", "ffa-liste", "ffa-ui", "ffa-info-card", "ffa-join", "ffa-search"]
-
+var CurrentMap
+var MaxPlayerMap
 
 window.addEventListener('message', async function (event) {
   var item = event.data;
@@ -7,6 +7,7 @@ window.addEventListener('message', async function (event) {
   if (item.state === 'show') {
     if (item.type === "create") {
       
+      $('body').show()
       $('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()
 
     } else if (item.type === "join") {
@@ -30,9 +31,9 @@ window.addEventListener('message', async function (event) {
     }
   } else if (item.state === 'add') {
     if (item.type === 'create') {
-      console.log("folgv")
+
       if (item.status === 'modus') {
-        AddMode(item.ModeNumber, item.ModeName)
+        AddMode(item.ModeNumber, item.ModeName, item.Icon)
       } else if (item.status === 'maps') {
         console.log("wtd")
         AddMap(item.MapNumber, item.ModeName, item.MapMaxPlayer )
@@ -120,15 +121,12 @@ function setmode(mode, name) {
 
 function AddMap(Number, Name, MaxPlayer) {
   $('.map-menu').append(`
-  <div class="map" onclick="change_map(${Number})">
+  <div class="map ${Name}" onclick="change_map('${Name}', ${Number}, ${MaxPlayer})">
       <img src="images/${Name}.png">
       <span>${Name}</span>
   </div>
 `) 
 }
-
-let ffa_pics = [
-]
 
 function AddGameSearch(MaxPlayer, Player, Modus, Map, Name) {
 
@@ -251,7 +249,6 @@ function create_ffa() {
 
 
 let mode = "Gambio";
-let map = "Würfelpark";
 let FFaSearch_Visuability = "Privat";
 
 $(document).ready(function () {
@@ -332,6 +329,10 @@ function change_mode(type) {
   let Modes = Modelist.querySelectorAll(".modus");
   let Current_Mode = document.querySelector(`.${type}`);
 
+  $('#btn-change-mode').css("color", "rgba(255,255,255,1)");
+  document.getElementById("btn-change-mode").innerText = type;
+  
+
   Modes.forEach((e) => {
     e.classList.remove("active");
   });
@@ -341,10 +342,15 @@ function change_mode(type) {
 }
 
 /* Diese Funktion wird ausgeführt um die Map bei der Liste zu nehmen und es in die [map] Varible zu Speichern */
-function change_map(type) {
+function change_map(type, Number, MaxPlayer) {
   let Modelist = document.querySelector(".map-menu");
   let Modes = Modelist.querySelectorAll(".map");
   let Current_Map = document.querySelector(`.${type}`);
+  CurrentMap = Number
+  MaxPlayerMap = MaxPlayer
+
+  $('#btn-change-map').css("color", "rgba(255,255,255,1)");
+  document.getElementById("btn-change-map").innerText = type;
 
   Modes.forEach((e) => {
     e.classList.remove("active");
@@ -499,4 +505,8 @@ function formatNumber(num) {
 
 async function wait(time) {
   return new Promise((resolve) => setTimeout(resolve, time * 1000));
+}
+
+function log(msg) {
+  console.log(msg)
 }
