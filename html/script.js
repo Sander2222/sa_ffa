@@ -25,11 +25,8 @@ window.addEventListener('message', async function (event) {
 
     } else if (item.type === "score") {
 
-      display()
-      change_window("ffa-ui")
-
       $('body').show()
-
+      $('.ffa-scoreboard').fadeIn();$('.ffa-create').hide();$('.ffa-liste').hide()
     }
   } else if (item.state === 'add') {
     if (item.type === 'create') {
