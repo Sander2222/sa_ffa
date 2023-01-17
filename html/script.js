@@ -171,17 +171,28 @@ function Close() {
   $.post('https://sa_ffa/exit', JSON.stringify({}));
 }
 
+function hasSpecialChars(str) {
+  const specialCharsSet = new Set('^[!@#%/^&*()_+\-=\[\]{};:"|,.<>\/?]*$');
+  for (let letter of str) {
+    if (specialCharsSet.has(letter)) {
+      return true;
+    }
+  }
+  return false;
+}
 
 
-
+let blacklisted_words = ["nigger", "nigga", "niggers", "niger", "hitler", "adolf", "penis", "hurensohn", "nutte", "schwanz", "pedo", "milf", "hitl", "nega", "negga", "porn", "porno", "nazi", "anal", "shit", "neonazi", "huan", "huansohn", "hure"]
+var characters = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
 
 
 function create_ffa() {
   let input_name = document.getElementById("FFA-Name");
-  let input_password = document.getElementById("ffa-create-password");
-  let input_maxplayers = document.getElementById("ffa-create-maxplayers");
+  let input_password = document.getElementById("FFA-Password");
+  let input_maxplayers = document.getElementById("FFA-MaxPlayer");
   // "ffa_isroom_privat" |check if room is privat/public
   // "current_map" | get the name of current map
+  log(input_maxplayers.value)
 
   if(input_name.value.length < 3) { // if input kleiner als 3 dann also (0,1,2)
     notify("FFA", "Name muss min 3 Zeichen haben", "error");
@@ -192,33 +203,41 @@ function create_ffa() {
   else if(input_maxplayers.value <= 1 || input_maxplayers.value.match(/[^0-9]/)) { // if input = 0 or 1 and input has letters
     notify("FFA", "Max Players ist kleiner als 2 oder hat einen Buchstaben", "error");
   }
+  else if (input_maxplayers.value >= MaxPlayerMap) {
+    notify("FFA", "Du hast mehr Max-Spieler angegeben als auf der Map erlaubt sind. Max:" + MaxPlayerMap + "", "error");
+  }
   else if (blacklisted_words.some(v => input_name.value.toLowerCase().includes(v)) || hasSpecialChars(input_name.value)) {
     notify("FFA", "Der Name ist nicht gestattet!", "error");
   }
   else if (blacklisted_words.some(v => input_password.value.toLowerCase().includes(v)) || hasSpecialChars(input_password.value)) {
     notify("FFA", "Passwort ist nicht gestattet!", "error");
   }
-  else if(ffa_mode === "") {
-    notify("FFA", "Keinen Modus ausgewählt!", "error")
-  }
-  else if(ffa_mode_name === "" || ffa_mode === "" || ffa_mode_name === null || ffa_mode === null) {
-    notify("FFA", "Modus nicht gewählt!", "error")
-  }
   /* else if(input_name.value < 0 & input_password.value < 0 & input_maxplayers.value < 0) {
     console.log("Angaben nicht richtig");
   } */
   else {
+
+    var checked = 0
+
+    if (document.getElementById('pw-on-off').checked) {
+      checked = 1
+    } else {
+      checked = 0
+    }
+
+    log(CurrentModus)
     $.post('https://sa_ffa/CreateGame', JSON.stringify({
     Name: input_name.value,
     Password: input_password.value,
     MaxPlayer: input_maxplayers.value,
-    Private: ffa_isroom_privat,
-    Mode: ffa_mode,
-    Map: current_map
+    Mode: CurrentModus,
+    Private: checked,
+    Map: CurrentMap
     }));
   }
   //display()
 }
+
 
 async function notify(title, message, type) {
   let id = Math.random().toString(36).slice(2);
@@ -232,11 +251,6 @@ async function notify(title, message, type) {
   </div>
   
   `);
-  let notify_soundin = document.getElementById(`notify-soundin-${id}`);
-  let notify_soundout = document.getElementById(`notify-soundout-${id}`);
-  notify_soundin.volume = 0.05;
-  notify_soundout.volume = 0.01;
-  notify_soundin.play();
   
   setTimeout(async () => {
     notify_soundin.pause();
@@ -361,7 +375,7 @@ function change_mode(type, Name, Number) {
   let Modelist = document.querySelector(".mode-menu");
   let Modes = Modelist.querySelectorAll(".modus");
   let Current_Mode = document.querySelector(`.${type}`);
-  Modus = Number;
+  CurrentModus = Number;
 
   $('#btn-change-mode').css("color", "rgba(255,255,255,1)");
   document.getElementById("btn-change-mode").innerText = Name;

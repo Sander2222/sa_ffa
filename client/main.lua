@@ -54,8 +54,7 @@ Citizen.CreateThread(function()
         IsClose = false
 		IsAt = false
 
-        for key, value in pairs(Config.EnterCoords) do
-            local dist = #(GetEntityCoords(ped) - vector3(value[1], value[2], value[3]))
+            local dist = #(GetEntityCoords(ped) - vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]))
 
             if dist <= 2.0 then
                 IsClose = true
@@ -63,7 +62,6 @@ Citizen.CreateThread(function()
             elseif dist <= 4.0 then
                 IsClose = true
             end
-        end
     end
 end)
 
