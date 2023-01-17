@@ -203,7 +203,7 @@ end)
 --- DEBUG
 --- DEBUG
 
-if Config.debug then
+if Config.Debug then
     RegisterCommand("check", function(source, args, rawCommand)
         print(GetPlayerRoutingBucket(source))
     end, false)
