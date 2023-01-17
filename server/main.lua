@@ -216,11 +216,11 @@ if Config.debug then
     RegisterCommand("checkffa", function(source, args, rawCommand)
         print(ESX.DumpTable(Games))
     end, false)
-
-    ESX.RegisterServerCallback('sa_ffa:GetAllGames', function(source, cb)
-        cb(Games)
-    end)
 end
+
+ESX.RegisterServerCallback('sa_ffa:GetAllGames', function(source, cb)
+    cb(Games)
+end)
 
 -- Discord
 -- Discord
