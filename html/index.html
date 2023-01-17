@@ -50,12 +50,12 @@
             </div>
             <div class="maxplayers">
                 <i class="fa-solid fa-people-group"></i>
-                <input type="text" placeholder="Max Players (MAX 10)">
+                <input id="inputpassword" type="number" placeholder="Max Players (MAX 10)">
             </div>
             <!-- Das is weil sonst verschwindet der Modus immer wenn man drückt --><div class="ma">
                 <div class="mode" onclick="open_modes()">
                     <i class="fa-solid fa-gamepad"></i>
-                    <button>Wähle den Modus</button>
+                    <button id="btn-change-mode">Wähle den Modus</button>
                     <span class="arrow">></span>
                 </div>
                 <main class="mode-menu" style="display: none;">
@@ -85,7 +85,7 @@
                 
                 <div class="map" onclick="open_maps()">
                     <i class="fa-solid fa-gamepad"></i>
-                    <button>Wähle eine Map</button>
+                    <button id="btn-change-map">Wähle eine Map</button>
                     <span class="arrow">></span>
                 </div>
                 <main class="map-menu" style="display: none;">
