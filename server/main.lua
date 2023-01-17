@@ -38,7 +38,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         
         JoinGame(_source, NewGame, PlayerLoadout)
         UsedDimension = UsedDimension + 1
-        SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA[1], UserCreateInfoA[2]))
+        SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA.Name, UserCreateInfoA.Password))
         Config.SendNotifyServer(_source, 'ein Raum wurde erstellt mit dem Namen: ' ..NewGame.Name)
     end
 end)
