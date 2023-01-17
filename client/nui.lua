@@ -1,6 +1,7 @@
 local AllGames = {}
 
 function FFAUICreate()
+    print("lol")
     ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
         local ActiveGamePlayer = 0
         local Number = #ActiveGames
@@ -52,7 +53,7 @@ function FFAUICreate()
     end)
 end
 
-RegisterCommand('nui', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+RegisterCommand('12', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
     FFAUICreate()
     --[[ UI WIRD GEÖFFNET ]]
 end)
