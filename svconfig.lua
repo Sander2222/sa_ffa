@@ -9,7 +9,7 @@ SvConfig.WebhookScoreboard = 'https://canary.discord.com/api/webhooks/1001453843
 SvConfig.WebhookNameLogsScoreboard = 'FFA Scoreboard'
 
 SvConfig.WebhookText = {
-    ['PlayerCreatedGame'] = 'Der Spieler **%s** (%s) hat gerade eine Lobby erstellt: **%s** und Passwort **%s**',
+    ['PlayerCreatedGame'] = 'Der Spieler **%s** (%s) hat gerade eine Lobby erstellt. Infos zu der Lobby: \n\nName: %s \nPasswort: %s',
     ['PlayerJoinedRoom'] = 'Der Spieler **%s** (%s) ist den %s gejoint',
     ['LobbyDeleted'] = 'Die Lobby **%s** wurde gelöscht da kein Spieler mehr drin ist',
 }
