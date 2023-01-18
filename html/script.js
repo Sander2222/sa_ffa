@@ -194,7 +194,7 @@ function create_ffa() {
   if(input_name.value.length < 3) { // if input kleiner als 3 dann also (0,1,2)
     notify("FFA", "Name muss min 3 Zeichen haben", "error");
   }
-  else if(input_password.value.length <= 2) {
+  else if( document.getElementById('pw-on-off').checked && input_password.value.length <= 2) {
     notify("FFA", "Das Passwort muss mindestens 2 Zeichen lang sein", "error");
   }
   else if(input_maxplayers.value <= 1 || input_maxplayers.value.match(/[^0-9]/)) { // if input = 0 or 1 and input has letters
