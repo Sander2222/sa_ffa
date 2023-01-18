@@ -72,27 +72,23 @@ function FFAUISearch()
         SetNuiFocus(true, true)
         SendNUIMessage({state = 'show', type = 'search'})
 
-
         for i, v in ipairs(ActiveGames) do
-            if tonumber(v.PrivateGame) == 0 and tonumber(v.MaxPlayer) >
-                tonumber(v.Players) then
-                    local MapName, ModusName  = GiveDataBack(v.Modus, v.Map)
+                local MapName, ModusName  = GiveDataBack(v.Modus, v.Map)
 
-                    while ModusName == nil and MapName == nil do
-                        wait(1)
-                    end
+                while ModusName == nil and MapName == nil do
+                    wait(1)
+                end
 
-                SendNUIMessage({
-                    state = 'add',
-                    type = 'search',
-                    players = v.Players,
-                    maxplayers = v.MaxPlayer,
-                    password = v.password,
-                    map = MapName,
-                    name = v.Name,
-                    modus = ModusName
-                })
-            end
+            SendNUIMessage({
+                state = 'add',
+                type = 'search',
+                players = v.Players,
+                maxplayers = v.MaxPlayer,
+                password = v.Password,
+                map = MapName,
+                name = v.Name,
+                modus = ModusName
+            })
         end
     end)
 end

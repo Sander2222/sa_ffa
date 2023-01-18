@@ -149,11 +149,8 @@ function AddMap(Number, Name, MaxPlayer) {
 // }
 
 function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
-  if(document.querySelector(`.${Name}-${Password}`)) {
-    console.log("Existiert");
-  }
-  else {
-    console.log("Existiert nicht");
+
+  console.log("Existiert nicht");
     if(Password == 0 || Password == 1|| Password == '') {
       $(".liste").append(`
         <div class="ffa ${Name} NOPASSWORD">
@@ -191,7 +188,6 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
       `);
 
     }
-  }
 }
 
 function JoinSearchedMatch(Name) {
