@@ -16,10 +16,8 @@ window.addEventListener('message', async function (event) {
 
     } else if (item.type === "search") {
 
-      display()
-      change_window(1)
-
       $('body').show()
+      $('.ffa-liste').fadeIn();$('.ffa-create').hide();$('.ffa-scoreboard').hide()
 
     } else if (item.type === "leave") {
 
@@ -42,9 +40,9 @@ window.addEventListener('message', async function (event) {
 
     } else if (item.type === 'search') {
 
-      $(".ffa-items").html("");
+      // $(".ffa-items").html("");
       if (item.maxplayers != null && item.maxplayers != undefined) {
-        AddGameSearch(item.maxplayers, item.players, item.modus, item.map, item.name)
+        AddFFA(item.name, item.password, item.players, item.maxplayers, item.map, item.modus)
       }
 
     } else if (item.type === 'score') {
@@ -130,24 +128,70 @@ function AddMap(Number, Name, MaxPlayer) {
 `) 
 }
 
-function AddGameSearch(MaxPlayer, Player, Modus, Map, Name) {
+// function AddGameSearch(MaxPlayer, Player, Modus, Map, Name) {
 
-  $('.ffa-items').append(`
-  <div class="ffa">
-  <p>${Map}</p>
-  <hr class="center-diamond">
-  <img src="images/${Map}.webp">
+//   $('.ffa-items').append(`
+//   <div class="ffa">
+//   <p>${Map}</p>
+//   <hr class="center-diamond">
+//   <img src="images/${Map}.webp">
 
-  <div class="ffa-infos">
-      <h1>Players:</h1>
-      <span>${Player}/${MaxPlayer}</span>
-      <h2>Mode:</h2>
-      <span>${Modus}</span>
-  </div>
+//   <div class="ffa-infos">
+//       <h1>Players:</h1>
+//       <span>${Player}/${MaxPlayer}</span>
+//       <h2>Mode:</h2>
+//       <span>${Modus}</span>
+//   </div>
   
-  <button onclick="JoinSearchedMatch('${Name}')">BEITRETEN</button>
-</div>
-  `)
+//   <button onclick="JoinSearchedMatch('${Name}')">BEITRETEN</button>
+// </div>
+//   `)
+// }
+
+function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
+  if(document.querySelector(`.${Name}-${Password}`)) {
+    console.log("Existiert");
+  }
+  else {
+    console.log("Existiert nicht");
+    if(Password == 0 || Password == 1|| Password == '') {
+      $(".liste").append(`
+        <div class="ffa ${Name} NOPASSWORD">
+          <div class="ffa-map ${Map}">
+            <img src="images/${Map}.png">
+            <div class="name">${Name}</div>
+            <div class="players">${Players}/${MaxPlayers} Spieler</div>
+          </div>
+          <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
+          <span>Passwort geschützt</span>
+          <div class="ffa-password">
+            <i class="fa-solid fa-lock"></i>
+            <input type="text" placeholder="Password" id="${Password}">
+          </div>
+          <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
+        </div>
+      `);
+    }
+    else {
+      $(".liste").append(`
+        <div class="ffa ${Name}-${Password}">
+          <div class="ffa-map ${Map}">
+            <img src="images/${Map}.png">
+            <div class="name">${Name}</div>
+            <div class="players">${Players}/${MaxPlayers} Spieler</div>
+          </div>
+          <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
+          <span>Passwort geschützt</span>
+          <div class="ffa-password">
+            <i class="fa-solid fa-lock"></i>
+            <input type="text" placeholder="Password" id="${Password}">
+          </div>
+          <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
+        </div>
+      `);
+
+    }
+  }
 }
 
 function JoinSearchedMatch(Name) {
@@ -294,19 +338,19 @@ let mode = "Gambio";
 let FFaSearch_Visuability = "Privat";
 
 $(document).ready(function () {
-  AddFFA("DieProfis", 1, 2, 10, "Würfelpark.webp", "Penis");
-  AddFFA("Dieofis", "12345678", 2, 10, "Prison.png", "anal");
-  AddFFA("DiePfis", 1, 2, 10, "Prison.png", "sander");
-  AddFFA("DiePfis", "12345678", 2, 10, "Prison.png", "Oli");
-  AddFFA("DiePis", 1, 2, 10, "Prison.png", "Peni");
-  AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Ps");
-  AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Pis");
-  AddFFA("Difis", "12345678", 2, 10, "Würfelpark.webp", "Peis");
-  AddFFA("Dieofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
-  AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
-  AddFFA("Diefis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
-  AddFFA("Dieofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
-  AddFFA("ofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
+  // AddFFA("DieProfis", 1, 2, 10, "Würfelpark.webp", "Penis");
+  // AddFFA("Dieofis", "12345678", 2, 10, "Prison.png", "anal");
+  // AddFFA("DiePfis", 1, 2, 10, "Prison.png", "sander");
+  // AddFFA("DiePfis", "12345678", 2, 10, "Prison.png", "Oli");
+  // AddFFA("DiePis", 1, 2, 10, "Prison.png", "Peni");
+  // AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Ps");
+  // AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Pis");
+  // AddFFA("Difis", "12345678", 2, 10, "Würfelpark.webp", "Peis");
+  // AddFFA("Dieofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
+  // AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
+  // AddFFA("Diefis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
+  // AddFFA("Dieofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
+  // AddFFA("ofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
 });
 
 function SearchFFA(keys) {
@@ -466,52 +510,6 @@ function ChangeFFAVisual(type) {
       }
     })
 
-  }
-}
-
-function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
-  if(document.querySelector(`.${Name}-${Password}`)) {
-    //console.log("Existiert");
-  }
-  else {
-    //console.log("Existiert nicht");
-    if(Password == 0 || Password == 1) {
-      $(".liste").append(`
-        <div class="ffa ${Name} NOPASSWORD">
-          <div class="ffa-map ${Map}">
-            <img src="assets/images/ffa-orte/${Map}">
-            <div class="name">${Name}</div>
-            <div class="players">${Players}/${MaxPlayers} Spieler</div>
-          </div>
-          <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span>Passwort geschützt</span>
-          <div class="ffa-password">
-            <i class="fa-solid fa-lock"></i>
-            <input type="text" placeholder="Password" id="${Password}">
-          </div>
-          <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
-        </div>
-      `);
-    }
-    else {
-      $(".liste").append(`
-        <div class="ffa ${Name}-${Password}">
-          <div class="ffa-map ${Map}">
-            <img src="assets/images/ffa-orte/${Map}">
-            <div class="name">${Name}</div>
-            <div class="players">${Players}/${MaxPlayers} Spieler</div>
-          </div>
-          <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span>Passwort geschützt</span>
-          <div class="ffa-password">
-            <i class="fa-solid fa-lock"></i>
-            <input type="text" placeholder="Password" id="${Password}">
-          </div>
-          <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
-        </div>
-      `);
-
-    }
   }
 }
 
