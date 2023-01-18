@@ -68,39 +68,39 @@ var PRounded = NaN
 async function ChangeScoreboards(kills, deaths, Name) {
   var rounded = Math.round(((kills / deaths) + Number.EPSILON) * 100) / 100;
   document.getElementById("skull-kill").style.animation = "";
-  document.getElementById("ffa-ingame-name").innerText = Name;
+  document.getElementById("ffa-ingame-players").innerText = Name;
 
   if ( (!isNaN(PRounded) ||  !isNaN(rounded))) {
     if (PRounded != rounded) {
       if (isNaN(rounded) || rounded === Infinity) {
         document.getElementById("ffa-ingame-kd").innerText = "0";
-        document.getElementById("add-kd").classList.add("action");
+        // document.getElementById("add-kd").classList.add("action");
         await wait(0.5);
-        document.getElementById("add-kd").classList.remove("action");
+        // document.getElementById("add-kd").classList.remove("action");
       } else {
         document.getElementById("ffa-ingame-kd").innerText = rounded;
-        document.getElementById("add-kd").classList.add("action");
+        // document.getElementById("add-kd").classList.add("action");
         await wait(0.5);
-        document.getElementById("add-kd").classList.remove("action");
+        // document.getElementById("add-kd").classList.remove("action");
       }
     PRounded = rounded
     }
   }
 
   if (PKills != kills) {
-    await triggerskull()
+    // await triggerskull()
     document.getElementById("kills").innerText = kills;
-    document.getElementById("kill-title").classList.toggle("shine");
+    // document.getElementById("kill-title").classList.toggle("shine");
     await wait(1)
-    document.getElementById("kill-title").classList.toggle("shine");
+    // document.getElementById("kill-title").classList.toggle("shine");
     PKills = kills
   }
 
   if (PDeaths != deaths) {
     document.getElementById("deaths").innerText = deaths;
-    document.getElementById("death-title").classList.toggle("shine");
+    // document.getElementById("death-title").classList.toggle("shine");
     await wait(1)
-    document.getElementById("death-title").classList.toggle("shine");
+    // document.getElementById("death-title").classList.toggle("shine");
     PDeaths = deaths
   }
 }
