@@ -24,7 +24,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
     if IsNameValid == #Games then
         local NewGame = {
             Name = UserCreateInfoA.Name,
-            Password = UserCreateInfoA.Password,
+            Password = UserCreateInfoA.Password or '',
             MaxPlayer = tonumber(UserCreateInfoA.MaxPlayer),
             --Players muss 0 sein weil standard 0 Spieler in einer Runde sind
             Players = 0,
