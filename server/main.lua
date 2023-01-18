@@ -9,7 +9,12 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
     local xPlayer = ESX.GetPlayerFromId(_source)
     local PlayerLoadout = xPlayer.getLoadout()
     local IsNameValid = 0
-    
+    local NewPassword = UserCreateInfoA.Password 
+
+    if UserCreateInfoA.Password == '' or UserCreateInfoA.Password == nil then
+        NewPassword = ' '
+    end
+
     if #Games > 0 then
         for i,v in ipairs(Games) do
             if v.Name ~= UserCreateInfoA.Name then
@@ -21,10 +26,12 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         end
     end
 
+    print(UserCreateInfoA.Password)
+    print(type(UserCreateInfoA.Password))
     if IsNameValid == #Games then
         local NewGame = {
             Name = UserCreateInfoA.Name,
-            Password = UserCreateInfoA.Password or '',
+            Password = NewPassword,
             MaxPlayer = tonumber(UserCreateInfoA.MaxPlayer),
             --Players muss 0 sein weil standard 0 Spieler in einer Runde sind
             Players = 0,
