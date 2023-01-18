@@ -1,7 +1,6 @@
 local AllGames = {}
 
 function FFAUICreate()
-    print("lol")
     ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
         local ActiveGamePlayer = 0
         local Number = #ActiveGames
@@ -55,8 +54,13 @@ function FFAUICreate()
     end)
 end
 
-RegisterCommand('12', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+RegisterCommand('1', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
     FFAUICreate()
+    --[[ UI WIRD GEÖFFNET ]]
+end)
+
+RegisterCommand('2', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+    FFAUISearch()
     --[[ UI WIRD GEÖFFNET ]]
 end)
 
@@ -83,6 +87,7 @@ function FFAUISearch()
                     type = 'search',
                     players = v.Players,
                     maxplayers = v.MaxPlayer,
+                    password = v.password,
                     map = MapName,
                     name = v.Name,
                     modus = ModusName
