@@ -32,7 +32,6 @@ window.addEventListener('message', async function (event) {
       if (item.status === 'modus') {
         AddMode(item.ModeNumber, item.ModeName, item.Icon, item.Title)
       } else if (item.status === 'maps') {
-        console.log("wtd")
         AddMap(item.MapNumber, item.ModeName, item.MapMaxPlayer )
       } else if (item.status === 'maps2') {
 
@@ -205,6 +204,7 @@ document.onkeyup = function (data) {
 };
 
 function Close() {
+  ClearMapsModus();
   $.post('https://sa_ffa/exit', JSON.stringify({}));
 }
 
@@ -262,7 +262,7 @@ function create_ffa() {
       checked = 0
     }
 
-    log(CurrentModus)
+    ClearMapsModus()
     $.post('https://sa_ffa/CreateGame', JSON.stringify({
     Name: input_name.value,
     Password: input_password.value,
@@ -299,6 +299,12 @@ async function notify(title, message, type) {
     await wait(1);
     toRemove.remove();
   }, 5000);
+}
+
+function ClearMapsModus() {
+  $(".liste").innerHTML  = '';
+  $('.map-menu').innerHTML = '';
+  $('.mode-menu').innerHTML = '';
 }
 
 
