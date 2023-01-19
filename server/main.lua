@@ -26,8 +26,6 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         end
     end
 
-    print(UserCreateInfoA.Password)
-    print(type(UserCreateInfoA.Password))
     if IsNameValid == #Games then
         local NewGame = {
             Name = UserCreateInfoA.Name,
