@@ -151,7 +151,7 @@ function AddMap(Number, Name, MaxPlayer) {
 function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
 
   console.log("Existiert nicht");
-    if(Password == 0 || Password == 1|| Password == '') {
+    if(Password == 0 || Password == 1|| Password == '' || Password == ' ') {
       $(".liste").append(`
         <div class="ffa ${Name} NOPASSWORD">
           <div class="ffa-map ${Map}">
