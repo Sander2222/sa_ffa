@@ -1,4 +1,4 @@
-local isInDimension = nil
+local isInDimension = false
 local cam = nil
 local PlayerLoadout = {}
 local ActiveClientGame = {}
