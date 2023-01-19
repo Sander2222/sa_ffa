@@ -31,6 +31,8 @@ body {
   font-family: "Poppins", sans-serif;
   font-size: 25px;
   font-weight: 500;
+
+  background: #222;
 }
 
 .aad {
@@ -979,7 +981,7 @@ nav a:hover {
   filter: drop-shadow(-100px 0 100px var(--main));
   border-radius: 25%;
   
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
