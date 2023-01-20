@@ -119,4 +119,7 @@ Config.Maps = {
 
 Config.Local = {
     ['PressE'] = 'Drücke ~INPUT_CONTEXT~ um etwas zu kaufen',
+    ['NameIsInValid'] = 'Es gibt schon einen Raum mit diesem Namen',
+    ['CreatedRoom'] = 'Du hast einen Raum erstellt mit dem Namen: %s',
+    ['NoGameFound'] = 'Es wurde kein Spiel gefunden mit dem Namen: %s',
 }
