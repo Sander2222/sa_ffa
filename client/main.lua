@@ -256,7 +256,7 @@ function Loadout(Type, Modus)
         Citizen.Wait(Config.CamWait)
 
         RenderScriptCams(false, true, Config.CamWait, true, true)
-        ESX.Game.Teleport(ped, Config.EnterCoords, function()end)
+        ESX.Game.Teleport(ped, vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]), function()end)
         FreezeEntityPosition(GetPlayerPed(), false)
 
         SetCamActive(cam, false)
