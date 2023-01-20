@@ -20,7 +20,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
             if v.Name ~= UserCreateInfoA.Name then
                 IsNameValid = IsNameValid + 1
             else 
-                Config.SendNotifyServer(_source, 'Diesen Raum gibt es schon erstelle einen neuen!')
+                Config.SendNotifyServer(_source, Config.Local['NameIsInValid'])
                 break
             end
         end
@@ -52,13 +52,14 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         end
 
         SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA.Name, privat or UserCreateInfoA.Password))
-        Config.SendNotifyServer(_source, 'ein Raum wurde erstellt mit dem Namen: ' ..NewGame.Name)
+        Config.SendNotifyServer(_source, (Config.Local['CreatedRoom']):format(NewGame.Name))
     end
 end)
 
 RegisterNetEvent('sa_ffa:JoinGame')
 AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
-    local xPlayer = ESX.GetPlayerFromId(source)
+    local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
     local NameValid = false
     local PasswordValid = false
     local GameIsFull = true
@@ -70,9 +71,9 @@ AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
                 PasswordValid = true
                 if tonumber(v.Players) < tonumber(v.MaxPlayer) then
                     GameIsFull = false
-                    Config.SendNotifyServer(source, "Room wurde gefunden! Room: " .. v.Name)
+                    Config.SendNotifyServer(_source, "Room wurde gefunden! Room: " .. v.Name)
                     SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), v.Name))
-                    JoinGame(source, v, xPlayer.getLoadout())
+                    JoinGame(_source, v, xPlayer.getLoadout())
                     break
                 end
             end
@@ -80,11 +81,11 @@ AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
     end
 
     if not NameValid and not PasswordValid then
-        Config.SendNotifyServer(source, "Es wurde kein Spiel mit passendem Namen gefunden")
+        Config.SendNotifyServer(_source, (Config.Local['NoGameFound']):format(args[1]))
     elseif not PasswordValid then
-        Config.SendNotifyServer(source, "Das Game wurde gefunden aber das Passwort ist falsch")
+        Config.SendNotifyServer(_source, "Das Game wurde gefunden aber das Passwort ist falsch")
     elseif GameIsFull then
-        Config.SendNotifyServer(source, "Passwort und Name war richtig aber das Game ist voll")
+        Config.SendNotifyServer(_source, "Passwort und Name war richtig aber das Game ist voll")
     end
 end)
 
