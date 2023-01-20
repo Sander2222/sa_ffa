@@ -290,8 +290,6 @@ async function notify(title, message, type) {
   `);
   
   setTimeout(async () => {
-    notify_soundin.pause();
-    notify_soundout.play();
     const toRemove = document.getElementById(`notify-${id}`);
 
     toRemove.style.animation = "backOutLeft 1s forwards";
