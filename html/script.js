@@ -302,9 +302,9 @@ async function notify(title, message, type) {
 }
 
 function ClearMapsModus() {
-  $(".liste").innerHTML  = '';
-  $('.map-menu').innerHTML = '';
-  $('.mode-menu').innerHTML = '';
+  $(".liste").empty();
+  $('.map-menu').empty();
+  $('.mode-menu').empty();
 }
 
 
