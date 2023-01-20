@@ -2,7 +2,6 @@ var CurrentMap
 var MaxPlayerMap
 var CurrentModus
 
-
 window.addEventListener('message', async function (event) {
   var item = event.data;
 
@@ -127,26 +126,6 @@ function AddMap(Number, Name, MaxPlayer) {
 `) 
 }
 
-// function AddGameSearch(MaxPlayer, Player, Modus, Map, Name) {
-
-//   $('.ffa-items').append(`
-//   <div class="ffa">
-//   <p>${Map}</p>
-//   <hr class="center-diamond">
-//   <img src="images/${Map}.webp">
-
-//   <div class="ffa-infos">
-//       <h1>Players:</h1>
-//       <span>${Player}/${MaxPlayer}</span>
-//       <h2>Mode:</h2>
-//       <span>${Modus}</span>
-//   </div>
-  
-//   <button onclick="JoinSearchedMatch('${Name}')">BEITRETEN</button>
-// </div>
-//   `)
-// }
-
 function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
 
   console.log("Existiert nicht");
@@ -196,7 +175,6 @@ function JoinSearchedMatch(Name) {
   Close()
 }
 
-
 document.onkeyup = function (data) {
   if (data.which == 27) {
     Close()
@@ -218,10 +196,7 @@ function hasSpecialChars(str) {
   return false;
 }
 
-
 let blacklisted_words = ["nigger", "nigga", "niggers", "niger", "hitler", "adolf", "penis", "hurensohn", "nutte", "schwanz", "pedo", "milf", "hitl", "nega", "negga", "porn", "porno", "nazi", "anal", "shit", "neonazi", "huan", "huansohn", "hure"]
-var characters = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
-
 
 function create_ffa() {
   let input_name = document.getElementById("FFA-Name");
@@ -305,53 +280,14 @@ function ClearMapsModus() {
   $('.mode-menu').empty();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 {/* <a onclick="$('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()">FFA Erstellen</a>
 <a onclick="$('.ffa-liste').fadeIn();$('.ffa-create').hide();$('.ffa-scoreboard').hide()">FFA Suchen</a>
 <a onclick="$('.ffa-scoreboard').fadeIn();$('.ffa-create').hide();$('.ffa-liste').hide()">FFA Scoreboard</a>
 
  */}
 
-
-
-
-
-
-
-
-
 let mode = "Gambio";
 let FFaSearch_Visuability = "Privat";
-
-$(document).ready(function () {
-  // AddFFA("DieProfis", 1, 2, 10, "Würfelpark.webp", "Penis");
-  // AddFFA("Dieofis", "12345678", 2, 10, "Prison.png", "anal");
-  // AddFFA("DiePfis", 1, 2, 10, "Prison.png", "sander");
-  // AddFFA("DiePfis", "12345678", 2, 10, "Prison.png", "Oli");
-  // AddFFA("DiePis", 1, 2, 10, "Prison.png", "Peni");
-  // AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Ps");
-  // AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Pis");
-  // AddFFA("Difis", "12345678", 2, 10, "Würfelpark.webp", "Peis");
-  // AddFFA("Dieofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
-  // AddFFA("DieProfis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
-  // AddFFA("Diefis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
-  // AddFFA("Dieofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
-  // AddFFA("ofis", "12345678", 2, 10, "Würfelpark.webp", "Penis");
-});
 
 function SearchFFA(keys) {
   let FFAList = document.querySelector(".liste");
@@ -542,9 +478,7 @@ async function message(killer, target){
   }, 5000);
 }
  */
-function formatNumber(num) {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-}
+
 
 async function wait(time) {
   return new Promise((resolve) => setTimeout(resolve, time * 1000));
