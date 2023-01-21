@@ -142,6 +142,10 @@ AddEventHandler("sa_ffa:SaveStats", function(PlayerStats)
     end
 end)
 
+ESX.RegisterServerCallback('sa_ffa:GetSource', function(src, cb)
+    print(src)
+    cb(src)
+  end)
 
 --[[ Functions ]]
 function ChangeWeaponState(Player, State, Loadout)
@@ -184,7 +188,17 @@ function ChangePlayerCount(Player, ActiveGame, State)
     --Bei leave ist ActiveGame nur der Name von dem Game deswegen wird durchgeloopt
 
     if State == "join" then
-        ActiveGame.Players = ActiveGame.Players + 1
+        print("join")
+        for k ,v in ipairs(Games) do
+            print("loop")
+            print(ActiveGame.Name)
+            print(v.Name)
+            if v.Name == ActiveGame.Name then
+                v.Players = v.Players + 1
+                print("Add")
+            end
+        end
+        --ActiveGame.Players = ActiveGame.Players + 1
     elseif State == "leave" then
         for k, v in ipairs(Games) do
             if v.Name == ActiveGame then
