@@ -135,12 +135,21 @@ AddEventHandler('esx:onPlayerDeath', function(data)
         if Config.Invincible then
             SetEntityInvincible(GetPlayerPed(-1), true)
         end
+
+
+
+        ESX.TriggerServerCallback('sa_ffa:GetSource', function(src)
+            Config.AfterRevive(src)
+        end)
+
         Citizen.Wait(3000)
         NetworkSetFriendlyFireOption(true)
         SetCanAttackFriendly(GetPlayerPed(-1), true, true)
         if Config.Invincible then
             SetEntityInvincible(GetPlayerPed(-1), false)
         end
+        ExecuteCommand('removeTimeout 1') 
+        TriggerServerEvent('sa_ffa:TriggerCustomFunction')
     end
 end)
 
@@ -212,7 +221,7 @@ end)
 function Loadout(Type, Modus)
     
     if Type == 'Join' then
-        local ped = PlayerPedId(-1)
+        local ped = PlayerPedId()
 
         SetEntityHealth(ped, 200)
         SetPedArmour(ped, 200)
@@ -230,15 +239,12 @@ function Loadout(Type, Modus)
             end
         end
     elseif Type == 'Leave' then
-        local ped = PlayerPedId(-1)
+        local ped = PlayerPedId()
 
         SetEntityHealth(ped, 200)
         SetPedArmour(ped, 0)
         for i,v in ipairs(Config.Modus) do
-            er(ActiveClientGame.Modus)
-            er(v.Modus)
             if tonumber(v.Modus) == tonumber(ActiveClientGame.Modus) then
-                er(v.Modus)
                 for j,k in ipairs(v.Weapons) do
                     RemoveWeaponFromPed(ped, GetHashKey(k))
                 end
