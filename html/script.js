@@ -2,6 +2,15 @@ var CurrentMap
 var MaxPlayerMap
 var CurrentModus
 
+document.addEventListener("DOMContentLoaded", () => {
+  AddFFA("21312","123124", 1, 10, "WP", "Gambo2")
+  AddFFA("33AWdikawpodjawiop",1, 1, 10, "WP", "Ga3wadmbo")
+  AddFFA("22AWdikawpodjawiop",1, 1, 10, "WP", "Gambo")
+  AddFFA("11AWdikawpodjawiop",1, 1, 10, "WP", "Gasadsmbo")
+  AddFFA("456AWdikawpodjawiop",1, 1, 10, "WP", "Gambo")
+  AddFFA("5124AWdikawpodjawiop",1, 1, 10, "WP", "Gaasdasmbo")
+})
+
 window.addEventListener('message', async function (event) {
   var item = event.data;
 
@@ -129,7 +138,7 @@ function AddMap(Number, Name, MaxPlayer) {
 function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
 
     if(Password == 0 || Password == 1|| Password == '' || Password == ' ') {
-      $(".liste").append(`
+      $(".liste-öffentlich").append(`
         <div class="ffa ${Name} NOPASSWORD">
           <div class="ffa-map ${Map}">
             <img src="images/${Map}.png">
@@ -143,7 +152,7 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
       `);
     }
     else {
-      $(".liste").append(`
+      $(".liste-privat").append(`
         <div class="ffa ${Name}-${Password}">
           <div class="ffa-map ${Map}">
             <img src="images/${Map}.png">
@@ -151,7 +160,7 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
             <div class="players">${Players}/${MaxPlayers} Spieler</div>
           </div>
           <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span id="#dingsbums1">Passwort geschützt</span>
+          <span id="dingsbums1">Passwort geschützt</span>
           <div class="ffa-password">
             <i class="fa-solid fa-lock"></i>
             <input type="text" placeholder="Password" id="${Password}">
@@ -281,10 +290,20 @@ let mode = "Gambio";
 let FFaSearch_Visuability = "Privat";
 
 function SearchFFA(keys) {
-  let FFAList = document.querySelector(".liste");
-  let FFAs = FFAList.querySelectorAll(".ffa");
+  var FFAList;
 
-  FFAs.forEach((e) => {
+  if(FFaSearch_Visuability === 'Öffentlich') {
+    console.log("1");
+    FFAList = document.querySelector(".liste-öffentlich");
+  }
+  else {
+    console.log("2");
+    FFAList = document.querySelector(".liste-privat");
+  }
+
+  let ffas = FFAList.querySelectorAll(".ffa");
+
+  ffas.forEach((e) => {
     if (
       e
         .querySelector(".ffa-map")
@@ -301,9 +320,20 @@ function SearchFFA(keys) {
 }
 
 function SearchMap(keys) {
-  let FFAList = document.querySelector(".liste");
-  let FFAs = FFAList.querySelectorAll(".ffa");
-  FFAs.forEach((e) => {
+  var FFAList;
+
+  if(FFaSearch_Visuability === 'Öffentlich') {
+    console.log("1");
+    FFAList = document.querySelector(".liste-öffentlich");
+  }
+  else {
+    console.log("2");
+    FFAList = document.querySelector(".liste-privat");
+  }
+
+  let ffas = FFAList.querySelectorAll(".ffa");
+
+  ffas.forEach((e) => {
 
     if(e.querySelector(".ffa-map").classList.forEach((elem) => {
       if(elem.toLowerCase().includes(keys.toLowerCase())) {
@@ -317,24 +347,6 @@ function SearchMap(keys) {
   });
 }
 
-function SearchMode(keys) {
-  let FFAList = document.querySelector(".liste");
-  let FFAs = FFAList.querySelectorAll(".ffa");
-
-  FFAs.forEach((e) => {
-    if (
-      e
-        .querySelector(".Mode-Name")
-        .innerText.toLowerCase()
-        .includes(keys.toLowerCase())
-    ) {
-      e.classList.remove("hidden");
-      FFAList.prepend(e);
-    } else {
-      e.classList.add("hidden");
-    }
-  });
-}
 
 /* Diese Funktion wird ausgeführt um den Modus bei der Liste zu nehmen und es in die [mode] Varible zu Speichern */
 function change_mode(type, Name, Number) {
@@ -342,11 +354,11 @@ function change_mode(type, Name, Number) {
   let Modes = Modelist.querySelectorAll(".modus");
   let Current_Mode = document.querySelector(`.${type}`);
   CurrentModus = Number;
-
+  
   $('#btn-change-mode').css("color", "rgba(255,255,255,1)");
   document.getElementById("btn-change-mode").innerText = Name;
   
-
+  
   Modes.forEach((e) => {
     e.classList.remove("active");
   });
@@ -361,10 +373,10 @@ function change_map(type, Number, MaxPlayer) {
   let Current_Map = document.querySelector(`.${type}`);
   CurrentMap = Number
   MaxPlayerMap = MaxPlayer
-
+  
   $('#btn-change-map').css("color", "rgba(255,255,255,1)");
   document.getElementById("btn-change-map").innerText = type;
-
+  
   Modes.forEach((e) => {
     e.classList.remove("active");
   });
@@ -396,16 +408,49 @@ function open_modes() {
   }
 }
 
+function SearchMode(keys) {
+
+  var FFAList;
+
+  if(FFaSearch_Visuability === 'Öffentlich') {
+    console.log("1");
+    FFAList = document.querySelector(".liste-öffentlich");
+  }
+  else {
+    console.log("2");
+    FFAList = document.querySelector(".liste-privat");
+  }
+
+  let ffas = FFAList.querySelectorAll(".ffa");
+
+  ffas.forEach((e) => {
+    if (
+      e
+        .querySelector(".Mode-Name")
+        .innerText.toLowerCase()
+        .includes(keys.toLowerCase())
+    ) {
+      e.classList.remove("hidden");
+      FFAList.prepend(e);
+    } else {
+      e.classList.add("hidden");
+    }
+  });
+}
+
 function ChangeFFAVisual(type) {
   document.querySelector(".Privat").classList.remove("active");
   document.querySelector(".Öffentlich").classList.remove("active");
   document.querySelector(`.${type}`).classList.add("active");
   FFaSearch_Visuability = type;
-
-  let FFAList = document.querySelector(".liste");
+  
+  let FFAList = document.querySelector(`.liste-${type.toLowerCase()}`);
   let FFAs = FFAList.querySelectorAll(".ffa");
-
+  
+  
   if(type === 'Öffentlich') {
+    $('.liste-privat').fadeOut();
+    $('.liste-öffentlich').fadeIn();
     FFAs.forEach((e) => {
       if(e.classList.contains("NOPASSWORD")) {
         FFAList.prepend(e);
@@ -417,6 +462,9 @@ function ChangeFFAVisual(type) {
     })
   }
   else {
+    $('.liste-privat').fadeIn();
+    $('.liste-öffentlich').fadeOut();
+    FFAList.style.display = "block";
     FFAs.forEach((e) => {
       if(!e.classList.contains("NOPASSWORD")) {
         FFAList.prepend(e);

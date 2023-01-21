@@ -584,7 +584,7 @@ nav a:hover {
   background: var(--main);
 }
 
-/* ! FFA-Liste */
+/* ! FFA-liste-privat */
 
 .ffa-liste {
   position: absolute;
@@ -702,7 +702,7 @@ nav a:hover {
   color: #fff;
 }
 
-.ffa-liste .search input {
+.ffa-liste  .search input {
   position: relative;
 
   top: 0;
@@ -726,11 +726,11 @@ nav a:hover {
   transition: 0.5s;
 }
 
-.ffa-liste .search input::placeholder {
+.ffa-liste  .search input::placeholder {
   color: rgba(255, 255, 255, 0.4);
 }
 
-.ffa-liste .search input:focus {
+.ffa-liste  .search input:focus {
   right: 0;
   opacity: 1;
 }
@@ -775,7 +775,7 @@ nav a:hover {
   color: #fff;
 }
 
-.liste {
+.liste-privat {
   position: absolute;
 
   width: 92%;
@@ -792,7 +792,7 @@ nav a:hover {
   padding: 1vw 1vw;
 }
 
-.liste::-webkit-scrollbar {
+.liste-privat::-webkit-scrollbar {
   display: none;
 }
 
@@ -800,7 +800,7 @@ nav a:hover {
   opacity: 0;
 }
 
-.liste .ffa {
+.liste-privat .ffa {
   position: relative;
 
   width: 18vw;
@@ -814,14 +814,14 @@ nav a:hover {
   justify-content: center;
 }
 
-.liste .ffa .ffa-map {
+.liste-privat .ffa .ffa-map {
   position: absolute;
   top: 4%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.liste .ffa .players {
+.liste-privat .ffa .players {
   position: absolute;
 
   bottom: 0;
@@ -834,7 +834,7 @@ nav a:hover {
   border-radius: 10px;
 }
 
-.liste .ffa .name {
+.liste-privat .ffa .name {
   position: absolute;
 
   top: 0;
@@ -846,7 +846,7 @@ nav a:hover {
   border-radius: 10px;
 }
 
-.liste .ffa img {
+.liste-privat .ffa img {
   position: relative;
 
   top: -8%;
@@ -857,7 +857,7 @@ nav a:hover {
   border-radius: 10px;
 }
 
-.liste .ffa .Mode {
+.liste-privat .ffa .Mode {
   position: absolute;
   top: 55%;
   left: 7%;
@@ -870,13 +870,13 @@ nav a:hover {
   justify-content: center;
 }
 
-.liste .ffa .Mode h1 {
+.liste-privat .ffa .Mode h1 {
   position: relative;
   font-size: 0.7vw;
   font-weight: 500;
 }
 
-.liste .ffa .ffa-password {
+.liste-privat .ffa .ffa-password {
   position: absolute;
 
   bottom: 18%;
@@ -894,7 +894,7 @@ nav a:hover {
   gap: 1vw;
 }
 
-.liste .ffa .ffa-password i {
+.liste-privat .ffa .ffa-password i {
   position: absolute;
 
   left: 5%;
@@ -924,7 +924,7 @@ nav a:hover {
   font-family: "Montserrat";
 }
 
-.liste .ffa .ffa-password input {
+.liste-privat .ffa .ffa-password input {
   position: absolute;
 
   left: 15%;
@@ -938,11 +938,11 @@ nav a:hover {
   color: #fff;
 }
 
-.liste .ffa .ffa-password input::placeholder {
+.liste-privat .ffa .ffa-password input::placeholder {
   color: rgba(255, 255, 255, 0.4);
 }
 
-.liste .ffa .join {
+.liste-privat .ffa .join {
   position: absolute;
 
   bottom: 2%;
@@ -963,12 +963,207 @@ nav a:hover {
   transition: 0.4s;
 }
 
-.liste .ffa .join:hover {
+.liste-privat .ffa .join:hover {
   background: #005acf;
   letter-spacing: 2px;
 }
 
 
+/* ! FFA Öffentlich */
+
+
+.liste-öffentlich {
+  position: absolute;
+
+  width: 92%;
+  left: 4%;
+
+  height: 72%;
+
+  bottom: 0;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5vw;
+  overflow: auto;
+  padding: 1vw 1vw;
+}
+
+.liste-öffentlich::-webkit-scrollbar {
+  display: none;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.liste-öffentlich .ffa {
+  position: relative;
+
+  width: 18vw;
+  height: 18vw;
+
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.liste-öffentlich .ffa .ffa-map {
+  position: absolute;
+  top: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.liste-öffentlich .ffa .players {
+  position: absolute;
+
+  bottom: 0;
+  right: 0;
+
+  background: var(--main);
+  color: #fff;
+  font-size: 1vw;
+  padding: 0.2vw 0.5vw;
+  border-radius: 10px;
+}
+
+.liste-öffentlich .ffa .name {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  background: var(--main);
+  color: #fff;
+  font-size: 1vw;
+  padding: 0.2vw 0.5vw;
+  border-radius: 10px;
+}
+
+.liste-öffentlich .ffa img {
+  position: relative;
+
+  top: -8%;
+
+  width: 15vw;
+
+  border: 4px solid var(--main);
+  border-radius: 10px;
+}
+
+.liste-öffentlich .ffa .Mode {
+  position: absolute;
+  top: 55%;
+  left: 7%;
+  font-weight: 500;
+  font-size: 0.8vw;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.liste-öffentlich .ffa .Mode h1 {
+  position: relative;
+  font-size: 0.7vw;
+  font-weight: 500;
+}
+
+.liste-öffentlich .ffa .ffa-password {
+  position: absolute;
+
+  bottom: 18%;
+  width: 80%;
+  height: 2vw;
+
+  background: rgba(176, 186, 217, 0.2);
+  color: rgba(255, 255, 255, 0.3);
+  padding: 0.1vw 1vw;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+}
+
+.liste-öffentlich .ffa .ffa-password i {
+  position: absolute;
+
+  left: 5%;
+}
+
+#dingsbums1 {
+  position: absolute;
+
+  bottom: 30%;
+  left: 5%;
+
+  font-size: 0.75vw;
+  color: #33c75d;
+  text-shadow: 0 0 5px #33c75d;
+  font-family: "Montserrat";
+}
+
+#dingsbums2 {
+  position: absolute;
+
+  bottom: 30%;
+  left: 5%;
+
+  font-size: 0.75vw;
+  color: #d61616;
+  text-shadow: 0 0 5px #d61616;
+  font-family: "Montserrat";
+}
+
+.liste-öffentlich .ffa .ffa-password input {
+  position: absolute;
+
+  left: 15%;
+  width: 85%;
+  height: 100%;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  font-family: "Montserrat";
+  color: #fff;
+}
+
+.liste-öffentlich .ffa .ffa-password input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.liste-öffentlich .ffa .join {
+  position: absolute;
+
+  bottom: 2%;
+
+  width: 50%;
+  padding: 0.5vw 3vw;
+
+  background: var(--main);
+  border-radius: 10px;
+  color: #fff;
+  font-family: "Montserrat";
+  font-size: 1vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.4s;
+}
+
+.liste-öffentlich .ffa .join:hover {
+  background: #005acf;
+  letter-spacing: 2px;
+}
 
 
 /* ! FFA INGAME */
