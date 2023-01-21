@@ -11,14 +11,6 @@ local PlayerStats = {
     deaths = 0
 }
 
--- Test Befehl: create Arena1 23 3 0 2 1
-RegisterCommand('Create', function(source, args) -- Arg: Name, passwort, Max, Privat, Modus, Map
-    if not isInDimension then
-        Config.SendNotifyClient("Raum wird erstellt bitte warte...")
-        TriggerServerEvent('sa_ffa:CreateGame', args)
-    end
-end)
-
 RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
     if not isInDimension then
         TriggerServerEvent("sa_ffa:JoinGame", args)
@@ -26,12 +18,6 @@ RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
     else
         Config.SendNotifyClient("Du bist bereits in einem Raum!")
     end
-end)
-
--- Test Befehl: search SG 3
-RegisterCommand('Search', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
-    TriggerServerEvent("sa_ffa:SearchRandomGame", args)
-    Config.SendNotifyClient("Spielsuche gestartet!")
 end)
 
 RegisterCommand('Leave', function(source, args)
@@ -43,8 +29,8 @@ RegisterCommand('Leave', function(source, args)
     end
 end)
 
-local IsClose = false 
-local IsAt = false 
+local IsClose = false
+local IsAt = false
 
 Citizen.CreateThread(function()
     local ped = PlayerPedId()
