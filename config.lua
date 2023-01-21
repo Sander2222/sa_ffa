@@ -7,7 +7,7 @@ Config.Debug = true
 Config.StandardDimension = 0
 Config.Invincible = false
 Config.DisabledNPCS = true
-Config.UnlimitedAmmo = true
+Config.UnlimitedAmmo = false
 Config.WeaponAmmo = 1000
 Config.NotifyForKill = true
 Config.SendDiscordStats = true
@@ -27,7 +27,9 @@ Config.SendNotifyServer = function (source, msg)
     xPlayer.showNotification(msg)
 end
 
-
+Config.AfterRevive = function(source)
+    ExecuteCommand('removeTimeout ' ..tostring(source)) 
+end
 
 Config.EnterCoords = {1628.2857666016,2552.1848144531,45.564849853516}
 
