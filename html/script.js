@@ -128,7 +128,6 @@ function AddMap(Number, Name, MaxPlayer) {
 
 function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
 
-  console.log("Existiert nicht");
     if(Password == 0 || Password == 1|| Password == '' || Password == ' ') {
       $(".liste").append(`
         <div class="ffa ${Name} NOPASSWORD">
@@ -138,10 +137,9 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
             <div class="players">${Players}/${MaxPlayers} Spieler</div>
           </div>
           <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span>Passwort geschützt</span>
+          <span>Passwort nicht geschützt</span>
           <div class="ffa-password">
             <i class="fa-solid fa-lock"></i>
-            <input type="text" placeholder="Password" id="${Password}">
           </div>
           <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
         </div>
@@ -452,7 +450,12 @@ function ChangeFFAVisual(type) {
 function JoinGame(Name,Password) {
   let TheGameListItem = document.querySelector(`.${Name}-${Password}`);
 
-  console.log(TheGameListItem.getElementsByTagName("input").value);
+  log(Name)
+  log(Password)
+
+  JoinSearchedMatch(Name)
+
+  // console.log(TheGameListItem.getElementsByTagName("input").value);
 }
 
 /* 
