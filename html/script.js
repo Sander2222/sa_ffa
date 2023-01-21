@@ -2,15 +2,6 @@ var CurrentMap
 var MaxPlayerMap
 var CurrentModus
 
-document.addEventListener("DOMContentLoaded", () => {
-  AddFFA("21312","123124", 1, 10, "WP", "Gambo2")
-  AddFFA("33AWdikawpodjawiop",1, 1, 10, "WP", "Ga3wadmbo")
-  AddFFA("22AWdikawpodjawiop",1, 1, 10, "WP", "Gambo")
-  AddFFA("11AWdikawpodjawiop",1, 1, 10, "WP", "Gasadsmbo")
-  AddFFA("456AWdikawpodjawiop",1, 1, 10, "WP", "Gambo")
-  AddFFA("5124AWdikawpodjawiop",1, 1, 10, "WP", "Gaasdasmbo")
-})
-
 window.addEventListener('message', async function (event) {
   var item = event.data;
 
@@ -293,11 +284,9 @@ function SearchFFA(keys) {
   var FFAList;
 
   if(FFaSearch_Visuability === 'Öffentlich') {
-    console.log("1");
     FFAList = document.querySelector(".liste-öffentlich");
   }
   else {
-    console.log("2");
     FFAList = document.querySelector(".liste-privat");
   }
 
@@ -323,11 +312,9 @@ function SearchMap(keys) {
   var FFAList;
 
   if(FFaSearch_Visuability === 'Öffentlich') {
-    console.log("1");
     FFAList = document.querySelector(".liste-öffentlich");
   }
   else {
-    console.log("2");
     FFAList = document.querySelector(".liste-privat");
   }
 
@@ -413,11 +400,9 @@ function SearchMode(keys) {
   var FFAList;
 
   if(FFaSearch_Visuability === 'Öffentlich') {
-    console.log("1");
     FFAList = document.querySelector(".liste-öffentlich");
   }
   else {
-    console.log("2");
     FFAList = document.querySelector(".liste-privat");
   }
 
