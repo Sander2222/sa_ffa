@@ -900,7 +900,7 @@ nav a:hover {
   left: 5%;
 }
 
-.liste .ffa span {
+#dingsbums1 {
   position: absolute;
 
   bottom: 30%;
@@ -909,6 +909,18 @@ nav a:hover {
   font-size: 0.75vw;
   color: #33c75d;
   text-shadow: 0 0 5px #33c75d;
+  font-family: "Montserrat";
+}
+
+#dingsbums2 {
+  position: absolute;
+
+  bottom: 30%;
+  left: 5%;
+
+  font-size: 0.75vw;
+  color: #d61616;
+  text-shadow: 0 0 5px #d61616;
   font-family: "Montserrat";
 }
 

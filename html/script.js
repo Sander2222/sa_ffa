@@ -137,10 +137,7 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
             <div class="players">${Players}/${MaxPlayers} Spieler</div>
           </div>
           <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span>Passwort nicht geschützt</span>
-          <div class="ffa-password">
-            <i class="fa-solid fa-lock"></i>
-          </div>
+          <span id="dingsbums2">Passwort nicht geschützt</span>
           <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
         </div>
       `);
@@ -154,7 +151,7 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
             <div class="players">${Players}/${MaxPlayers} Spieler</div>
           </div>
           <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span>Passwort geschützt</span>
+          <span id="#dingsbums1">Passwort geschützt</span>
           <div class="ffa-password">
             <i class="fa-solid fa-lock"></i>
             <input type="text" placeholder="Password" id="${Password}">
