@@ -199,7 +199,6 @@ function create_ffa() {
   let input_maxplayers = document.getElementById("FFA-MaxPlayer");
   // "ffa_isroom_privat" |check if room is privat/public
   // "current_map" | get the name of current map
-  log(input_maxplayers.value)
 
   if(input_name.value.length < 3) { // if input kleiner als 3 dann also (0,1,2)
     notify("FFA", "Name muss min 3 Zeichen haben", "error");
@@ -219,9 +218,6 @@ function create_ffa() {
   else if (blacklisted_words.some(v => input_password.value.toLowerCase().includes(v)) || hasSpecialChars(input_password.value)) {
     notify("FFA", "Passwort ist nicht gestattet!", "error");
   }
-  /* else if(input_name.value < 0 & input_password.value < 0 & input_maxplayers.value < 0) {
-    console.log("Angaben nicht richtig");
-  } */
   else {
 
     var checked = 0
@@ -342,8 +338,6 @@ function SearchMode(keys) {
 
 /* Diese Funktion wird ausgeführt um den Modus bei der Liste zu nehmen und es in die [mode] Varible zu Speichern */
 function change_mode(type, Name, Number) {
-  log(type)
-  log(Number)
   let Modelist = document.querySelector(".mode-menu");
   let Modes = Modelist.querySelectorAll(".modus");
   let Current_Mode = document.querySelector(`.${type}`);
@@ -358,7 +352,6 @@ function change_mode(type, Name, Number) {
   });
   Current_Mode.classList.add("active");
   mode = Name;
-  console.log("New MODUS: " + mode);
 }
 
 /* Diese Funktion wird ausgeführt um die Map bei der Liste zu nehmen und es in die [map] Varible zu Speichern */
@@ -377,7 +370,6 @@ function change_map(type, Number, MaxPlayer) {
   });
   Current_Map.classList.add("active");
   map = type;
-  console.log("New MAP: " + map);
 }
 
 /* Diese Funktion ist nur für den Map Slide zu öffnen */
@@ -413,17 +405,13 @@ function ChangeFFAVisual(type) {
   let FFAList = document.querySelector(".liste");
   let FFAs = FFAList.querySelectorAll(".ffa");
 
-  console.log(FFaSearch_Visuability);
-
   if(type === 'Öffentlich') {
     FFAs.forEach((e) => {
       if(e.classList.contains("NOPASSWORD")) {
-        console.log("Hat kein Passwort");
         FFAList.prepend(e);
         e.classList.remove('hidden');
       }
       else {
-        console.log("Hat Passwort");
         e.classList.add("hidden")
       }
     })
@@ -431,12 +419,10 @@ function ChangeFFAVisual(type) {
   else {
     FFAs.forEach((e) => {
       if(!e.classList.contains("NOPASSWORD")) {
-        console.log("Hat kein Passwort");
         FFAList.prepend(e);
         e.classList.remove('hidden');
       }
       else {
-        console.log("Hat Passwort");
         e.classList.add("hidden")
       }
     })
@@ -446,13 +432,7 @@ function ChangeFFAVisual(type) {
 
 function JoinGame(Name,Password) {
   let TheGameListItem = document.querySelector(`.${Name}-${Password}`);
-
-  log(Name)
-  log(Password)
-
   JoinSearchedMatch(Name)
-
-  // console.log(TheGameListItem.getElementsByTagName("input").value);
 }
 
 /* 
