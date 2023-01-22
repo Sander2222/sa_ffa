@@ -2,6 +2,12 @@ var CurrentMap
 var MaxPlayerMap
 var CurrentModus
 
+document.addEventListener("DOMContentLoaded", () => {
+$('.ffa-scoreboard').hide();
+$('.ffa-create').hide();
+$('.ffa-liste').hide();
+})
+
 window.addEventListener('message', async function (event) {
   var item = event.data;
 
