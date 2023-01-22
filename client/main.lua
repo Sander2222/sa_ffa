@@ -1,5 +1,6 @@
 local isInDimension = false
 local cam = nil
+local PlayerModus = 0
 local PlayerLoadout = {}
 local ActiveClientGame = {}
 local ActiveMapInfo = {
@@ -208,18 +209,14 @@ function Loadout(Type, Modus)
     
     if Type == 'Join' then
         local ped = PlayerPedId()
+        PlayerModus = Modus
 
         SetEntityHealth(ped, 200)
         SetPedArmour(ped, 200)
         for i,v in ipairs(Config.Modus) do
             if tonumber(v.Modus) == tonumber(ActiveClientGame.Modus) then
                 for j,k in ipairs(v.Weapons) do
-                    if Config.UnlimitedAmmo then
-                        GiveWeaponToPed(ped, GetHashKey(k), 1, 0, 0)
-                        SetPedInfiniteAmmoClip(ped, true)
-                    else
-                        GiveWeaponToPed(ped, GetHashKey(k), Config.WeaponAmmo, 0, 0)
-                    end
+                    GiveWeaponToPed(ped, GetHashKey(k), 1, 0, 0)
                 end
 
             end
@@ -237,6 +234,14 @@ function Loadout(Type, Modus)
                 SetPedInfiniteAmmoClip(ped, false)
             end
         end
+
+            for k, v in ipairs(Config.Modus) do
+                for f,r in pairs(v.Weapons) do
+                    SetPedInfiniteAmmo(PlayerPedId(), false, GetHashKey(v))
+                end
+            end
+            PlayerModus = 0
+
 
         ActiveClientGame = {}
         -- Cams zum Back TP hin
@@ -285,3 +290,23 @@ if Config.Debug then
         print(msg)
     end
 end
+
+Citizen.CreateThread(function()
+    while true do
+        if PlayerModus ~= 0 then
+            while true do
+                for k, v in ipairs(Config.Modus) do
+                    if v.Modus == PlayerModus then
+                        for f,r in pairs(v.Weapons) do
+                            SetPedInfiniteAmmo(PlayerPedId(), true, GetHashKey(r))
+                        end
+                    end
+                end
+                Wait(1)
+            end
+        else
+            Wait(2000)
+        end
+        Wait(1)
+    end
+end)
