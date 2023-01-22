@@ -97,12 +97,18 @@ AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     isInDimension = false
 end)
 
+RegisterNetEvent("sa_ffa:GivePlayerHealth")
+AddEventHandler("sa_ffa:GivePlayerHealth", function()
+
+end)
+
 RegisterNetEvent("sa_ffa:UpdatePlayerStats")
 AddEventHandler("sa_ffa:UpdatePlayerStats", function(Type)
 
     if Type == 'killed' then
         PlayerStats.deaths = PlayerStats.deaths + 1
     elseif Type == 'killer' then
+        SetEntityHealth(PlayerPedId(), 200)
         PlayerStats.kills = PlayerStats.kills + 1 
     end
 
