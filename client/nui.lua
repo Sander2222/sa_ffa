@@ -95,8 +95,6 @@ end
 
 --search Callback
 RegisterNUICallback('JoinSearchedMatch', function(data, cb)
-    print(data.Game)
-
     for i, v in ipairs(AllGames) do
         if data.Game == v.Name then
             TriggerServerEvent("sa_ffa:SearchRandomGame", v)
@@ -114,12 +112,17 @@ RegisterNUICallback('exit', function(data, cb)
 end)
 
 RegisterNUICallback('CreateGame', function(data, cb)
-    print(ESX.DumpTable(data))
-    SetNuiFocus(false, false)
-    SendNUIMessage({
-        state = 'close'
-    })
-    TriggerServerEvent('sa_ffa:CreateGame', data)
+
+    if not isInDimension then
+        SetNuiFocus(false, false)
+        SendNUIMessage({
+            state = 'close'
+        })
+        TriggerServerEvent('sa_ffa:CreateGame', data)
+        Config.SendNotifyClient(Config.Local['GameCreate'])
+    else
+        Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
+    end
 end)
 
 function UpdateKDA(Death, Kill, Name)
@@ -147,7 +150,6 @@ function GiveDataBack(Modus, Map)
     for i,v in ipairs(Config.Modus) do
         if tonumber(v.Modus) == tonumber(Modus) then
             ModusName = v.Name
-            print("modus")
         end
     end
 

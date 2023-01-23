@@ -1,4 +1,4 @@
-local isInDimension = false
+isInDimension = false
 local cam = nil
 local PlayerModus = 0
 local PlayerLoadout = {}
@@ -17,7 +17,7 @@ RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
         TriggerServerEvent("sa_ffa:JoinGame", args)
         Config.SendNotifyClient("Raum wird betreten...")
     else
-        Config.SendNotifyClient("Du bist bereits in einem Raum!")
+        Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
     end
 end)
 
@@ -26,7 +26,7 @@ RegisterCommand('Leave', function(source, args)
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
     else
-        Config.SendNotifyClient("Du bist in keiner sa_ffa Lobby!")
+        Config.SendNotifyClient(Config.Local['NotInLobby'])
     end
 end)
 
@@ -187,7 +187,7 @@ Citizen.CreateThread(function()
 
             if dist >= ActiveMapInfo.ActiveMapRadius then
                 Teleport()
-                Config.SendNotifyClient("Du warst außerhalb der Zone und wurdest wieder zurück telepotier")
+                Config.SendNotifyClient(Config.Local['OutOfZone'])
             end
             Wait(1000)
         else 
@@ -241,13 +241,12 @@ function Loadout(Type, Modus)
             end
         end
 
-            for k, v in ipairs(Config.Modus) do
-                for f,r in pairs(v.Weapons) do
-                    SetPedInfiniteAmmo(PlayerPedId(), false, GetHashKey(v))
-                end
+        for k, v in ipairs(Config.Modus) do
+            for f,r in pairs(v.Weapons) do
+                SetPedInfiniteAmmo(PlayerPedId(), false, GetHashKey(v))
             end
-            PlayerModus = 0
-
+        end
+        PlayerModus = 0
 
         ActiveClientGame = {}
         -- Cams zum Back TP hin

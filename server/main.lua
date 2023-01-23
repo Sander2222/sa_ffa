@@ -143,7 +143,6 @@ AddEventHandler("sa_ffa:SaveStats", function(PlayerStats)
 end)
 
 ESX.RegisterServerCallback('sa_ffa:GetSource', function(src, cb)
-    print(src)
     cb(src)
   end)
 
@@ -188,14 +187,9 @@ function ChangePlayerCount(Player, ActiveGame, State)
     --Bei leave ist ActiveGame nur der Name von dem Game deswegen wird durchgeloopt
 
     if State == "join" then
-        print("join")
         for k ,v in ipairs(Games) do
-            print("loop")
-            print(ActiveGame.Name)
-            print(v.Name)
             if v.Name == ActiveGame.Name then
                 v.Players = v.Players + 1
-                print("Add")
             end
         end
         --ActiveGame.Players = ActiveGame.Players + 1
@@ -223,7 +217,7 @@ function GetRandomGame(Player, Game) --Arg: Map (args[1]), Modus (args[2])
 end
 
 AddEventHandler('playerDropped', function (reason)
-    print('Player ' .. GetPlayerName(source) .. ' dropped (Reason: ' .. reason .. ')')
+    --print('Player ' .. GetPlayerName(source) .. ' dropped (Reason: ' .. reason .. ')')
 end)
 
 
