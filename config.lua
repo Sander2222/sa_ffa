@@ -1,8 +1,5 @@
 Config = {}
 
---Dings bums ähmmm hier Mapping Menü reinmachen oder Fragen wenn game created wird (GTA 5 Basic Menü)
--- Wenn wer diesen Kommentar lösht fick ich seine Mutter
-
 Config.Debug = true
 Config.StandardDimension = 0
 Config.Invincible = false
@@ -30,8 +27,6 @@ Config.AfterRevive = function(source)
 end
 
 Config.EnterCoords = {1628.2857666016,2552.1848144531,45.564849853516}
-
-
 
 Config.Modus = {
     {
