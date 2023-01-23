@@ -3,6 +3,7 @@ local cam = nil
 local PlayerModus = 0
 local PlayerLoadout = {}
 local ActiveClientGame = {}
+local GameWeapons = {}
 local ActiveMapInfo = {
     ActiveMapCenter = nil,
     ActiveMapRadius = nil
@@ -109,6 +110,7 @@ AddEventHandler("sa_ffa:UpdatePlayerStats", function(Type)
         PlayerStats.deaths = PlayerStats.deaths + 1
     elseif Type == 'killer' then
         SetEntityHealth(PlayerPedId(), 200)
+        SetPedArmour(PlayerPedId(), 200)
         PlayerStats.kills = PlayerStats.kills + 1 
     end
 
@@ -224,7 +226,7 @@ function Loadout(Type, Modus)
                 for j,k in ipairs(v.Weapons) do
                     GiveWeaponToPed(ped, GetHashKey(k), 1, 0, 0)
                 end
-
+                GameWeapons = v.Weapons
             end
         end
     elseif Type == 'Leave' then
@@ -241,12 +243,8 @@ function Loadout(Type, Modus)
             end
         end
 
-        for k, v in ipairs(Config.Modus) do
-            for f,r in pairs(v.Weapons) do
-                SetPedInfiniteAmmo(PlayerPedId(), false, GetHashKey(v))
-            end
-        end
         PlayerModus = 0
+        GameWeapons = {}
 
         ActiveClientGame = {}
         -- Cams zum Back TP hin
@@ -298,20 +296,17 @@ end
 
 Citizen.CreateThread(function()
     while true do
+        ped = PlayerPedId()
         if PlayerModus ~= 0 then
             while true do
-                for k, v in ipairs(Config.Modus) do
-                    if v.Modus == PlayerModus then
-                        for f,r in pairs(v.Weapons) do
-                            SetPedInfiniteAmmo(PlayerPedId(), true, GetHashKey(r))
-                        end
-                    end
+                for k,v in pairs(GameWeapons) do
+                    AddAmmoToPed(ped, GetHashKey(v), 500)
                 end
-                Wait(1)
+                Wait(0)
             end
         else
             Wait(2000)
         end
-        Wait(1)
+        Wait(0)
     end
 end)
