@@ -266,7 +266,6 @@ function Loadout(Type, Modus)
     end
 end
 
-
 --
 --DEBUG
 --DEBUG
