@@ -169,7 +169,7 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
     }
 }
 
-function JoinSearchedMatch(Name) {
+function JoinSearchedMatch(Name, Password) {
   $.post('https://sa_ffa/JoinSearchedMatch', JSON.stringify({ Game: Name }));
 
   $(".ffa-items").html("");
@@ -470,8 +470,7 @@ function ChangeFFAVisual(type) {
 }
 
 function JoinGame(Name,Password) {
-  let TheGameListItem = document.querySelector(`.${Name}-${Password}`);
-  JoinSearchedMatch(Name)
+  JoinSearchedMatch(Name, Password)
 }
 
 /* 
