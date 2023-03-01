@@ -1,9 +1,9 @@
 Config = {}
 
-Config.Debug = true
-Config.StandardDimension = 0
-Config.Invincible = false
-Config.DisabledNPCS = true
+Config.Debug = true -- only put this on true if you know what you are doing
+Config.StandardDimension = 0 -- Put there you standard dimension
+Config.Invincible = false -- Put this on true if the player got killed have a spawnprotect
+Config.DisabledNPCS = true -- use your brain ;)
 Config.NotifyForKill = true
 Config.SendDiscordStats = true
 Config.SendDisordStatsTime = '01:35'
