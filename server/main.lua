@@ -1,7 +1,5 @@
 local UsedDimension = Config.StandardDimension + 1
-local Games = {
-
-}
+local Games = {}
 
 RegisterNetEvent('sa_ffa:CreateGame')
 AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
