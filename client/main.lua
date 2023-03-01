@@ -42,14 +42,14 @@ Citizen.CreateThread(function()
         IsClose = false
 		IsAt = false
 
-            local dist = #(GetEntityCoords(ped) - vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]))
+        local dist = #(GetEntityCoords(ped) - vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]))
 
-            if dist <= 2.0 then
-                IsClose = true
-                IsAt = true
-            elseif dist <= 4.0 then
-                IsClose = true
-            end
+        if dist <= 2.0 then
+            IsClose = true
+            IsAt = true
+        elseif dist <= 4.0 then
+            IsClose = true
+        end
     end
 end)
 
@@ -98,11 +98,6 @@ AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     isInDimension = false
 end)
 
-RegisterNetEvent("sa_ffa:GivePlayerHealth")
-AddEventHandler("sa_ffa:GivePlayerHealth", function()
-
-end)
-
 RegisterNetEvent("sa_ffa:UpdatePlayerStats")
 AddEventHandler("sa_ffa:UpdatePlayerStats", function(Type)
 
@@ -130,9 +125,7 @@ AddEventHandler('esx:onPlayerDeath', function(data)
         if Config.Invincible then
             SetEntityInvincible(GetPlayerPed(-1), true)
         end
-
-
-
+        
         ESX.TriggerServerCallback('sa_ffa:GetSource', function(src)
             Config.AfterRevive(src)
         end)
