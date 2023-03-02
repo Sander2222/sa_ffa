@@ -27,6 +27,12 @@ exports {
 	'FFAUICreate'
 }
 
+escrow_ignore {
+	'config.lua',
+	'svconfig.lua',
+	'fxmanifest.lua'
+}
+
 --Export to open FFA Search UI client side
 --exports['sa_ffa']:FFAUISearch()
 --Export to open FFA Create UI client side
@@ -35,7 +41,6 @@ exports {
 ui_page ('html/index.html')
 
 files {
-	'config.js',
 	'html/images/skull.png',
     'html/index.html',
     'html/style.css',
