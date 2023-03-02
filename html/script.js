@@ -11,11 +11,17 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("FFA-Name").placeholder = ConfigData.Locals.Name;
   document.getElementById("FFA-Password").placeholder = ConfigData.Locals.Password;
   document.getElementById("FFA-MaxPlayer").placeholder = ConfigData.Locals.MaxPlayer;
+  document.getElementById("Search-Mode").placeholder = ConfigData.Locals.Mode;
+  document.getElementById("Search-Map").placeholder = ConfigData.Locals.Map;
+  document.getElementById("Search-Name").placeholder = ConfigData.Locals.EnterName;
   document.getElementById("CreateFFAText").innerHTML  = ConfigData.Locals.CreateFFAText;
   document.getElementById("EnterThinks").innerHTML  = ConfigData.Locals.EnterData;
   document.getElementById("btn-change-mode").innerHTML  = ConfigData.Locals.ChooseMode;
   document.getElementById("btn-change-map").innerHTML  = ConfigData.Locals.ChooseMode;
   document.getElementById("CreateFFAButton").innerHTML  = ConfigData.Locals.CreateFFA;
+  document.getElementById("FFAListText").innerHTML  = ConfigData.Locals.FFAListText;
+  document.getElementById("PrivateText").innerHTML  = ConfigData.Locals.Private;
+  document.getElementById("PuplicText").innerHTML  = ConfigData.Locals.Puplic;
 })
 
 function ClearCreateInputs() {
