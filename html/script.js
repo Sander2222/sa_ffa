@@ -6,6 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
   $('.ffa-scoreboard').hide();
   $('.ffa-create').hide();
   $('.ffa-liste').hide();
+
+  // Load Data from config
+  document.getElementById("FFA-Name").placeholder = ConfigData.Locals.Name;
+  document.getElementById("FFA-Password").placeholder = ConfigData.Locals.Password;
+  document.getElementById("FFA-MaxPlayer").placeholder = ConfigData.Locals.MaxPlayer;
+  document.getElementById("CreateFFAText").innerHTML  = ConfigData.Locals.CreateFFAText;
+  document.getElementById("EnterThinks").innerHTML  = ConfigData.Locals.EnterData;
+  document.getElementById("btn-change-mode").innerHTML  = ConfigData.Locals.ChooseMode;
+  document.getElementById("btn-change-map").innerHTML  = ConfigData.Locals.ChooseMode;
+  document.getElementById("CreateFFAButton").innerHTML  = ConfigData.Locals.CreateFFA;
 })
 
 function ClearCreateInputs() {
@@ -199,8 +209,6 @@ function hasSpecialChars(str) {
   return false;
 }
 
-let blacklisted_words = ["nigger", "nigga", "niggers", "niger", "hitler", "adolf", "penis", "hurensohn", "nutte", "schwanz", "pedo", "milf", "hitl", "nega", "negga", "porn", "porno", "nazi", "anal", "shit", "neonazi", "huan", "huansohn", "hure"]
-
 function create_ffa() {
   let input_name = document.getElementById("FFA-Name");
   let input_password = document.getElementById("FFA-Password");
@@ -220,10 +228,10 @@ function create_ffa() {
   else if (input_maxplayers.value >= MaxPlayerMap) {
     notify("FFA", "Du hast mehr Max-Spieler angegeben als auf der Map erlaubt sind. Max:" + MaxPlayerMap + "", "error");
   }
-  else if (blacklisted_words.some(v => input_name.value.toLowerCase().includes(v)) || hasSpecialChars(input_name.value)) {
+  else if (ConfigData.BlacklistedWords.some(v => input_name.value.toLowerCase().includes(v)) || hasSpecialChars(input_name.value)) {
     notify("FFA", "Der Name ist nicht gestattet!", "error");
   }
-  else if (blacklisted_words.some(v => input_password.value.toLowerCase().includes(v)) || hasSpecialChars(input_password.value)) {
+  else if (ConfigData.BlacklistedWords.some(v => input_password.value.toLowerCase().includes(v)) || hasSpecialChars(input_password.value)) {
     notify("FFA", "Passwort ist nicht gestattet!", "error");
   }
   else {
