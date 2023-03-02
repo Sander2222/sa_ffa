@@ -367,6 +367,8 @@ function change_mode(type, Name, Number) {
   });
   Current_Mode.classList.add("active");
   mode = Name;
+  $('.mode-menu').hide('slow');
+  already_mode = false
 }
 
 /* Diese Funktion wird ausgeführt um die Map bei der Liste zu nehmen und es in die [map] Varible zu Speichern */
@@ -385,6 +387,9 @@ function change_map(type, Number, MaxPlayer) {
   });
   Current_Map.classList.add("active");
   map = type;
+
+  $('.map-menu').hide('slow');
+  already_map = false
 }
 
 /* Diese Funktion ist nur für den Map Slide zu öffnen */
