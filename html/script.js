@@ -8,12 +8,22 @@ $('.ffa-create').hide();
 $('.ffa-liste').hide();
 })
 
+function ClearCreateInputs() {
+  document.getElementById('FFA-Name').value='';
+  document.getElementById('FFA-Password').value='';
+  document.getElementById('FFA-MaxPlayer').value='';
+  document.getElementById('FFA-Name').value='';
+  document.getElementById('FFA-Name').value='';
+}
+
 window.addEventListener('message', async function (event) {
   var item = event.data;
 
   if (item.state === 'show') {
     if (item.type === "create") {
             
+      ClearCreateInputs()
+
       $('body').show()
       $('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()
 
