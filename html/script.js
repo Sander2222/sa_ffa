@@ -48,8 +48,6 @@ window.addEventListener('message', async function (event) {
         AddMode(item.ModeNumber, item.ModeName, item.Icon, item.Title)
       } else if (item.status === 'maps') {
         AddMap(item.MapNumber, item.ModeName, item.MapMaxPlayer )
-      } else if (item.status === 'maps2') {
-
       }
 
     } else if (item.type === 'search') {
@@ -179,7 +177,7 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
     }
 }
 
-function JoinSearchedMatch(Name, Password) {
+function JoinSearchedMatch(Name) {
   $.post('https://sa_ffa/JoinSearchedMatch', JSON.stringify({ Game: Name }));
 
   $(".ffa-items").html("");
@@ -473,8 +471,13 @@ function ChangeFFAVisual(type) {
   }
 }
 
-function JoinGame(Name,Password) {
-  JoinSearchedMatch(Name, Password)
+function JoinGame(Name, Password) {
+  var UserPassword = document.getElementById(Password).value
+  if (Password == UserPassword) {
+    JoinSearchedMatch(Name)
+  } else {
+    notify("FFA Join", "Das Passwort stimmt nicht über ein", "error")
+  }
 }
 
 /* 
