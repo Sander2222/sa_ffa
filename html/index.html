@@ -41,29 +41,29 @@
         <div class="ffa-create" style="display: none;">
             <img src="images/box.png" class="aad">
             
-            <h1>Create Your FFA</h1>
-            <h2>Gebe hier ein</h2>
+            <h1 id="CreateFFAText"></h1>
+            <h2 id="EnterThinks"></h2>
             
             <div class="name">
                 <i class="fa-solid fa-circle-user"></i>
-                <input id="FFA-Name" type="text" placeholder="Name">
+                <input id="FFA-Name" type="text" placeholder="">
             </div>
             <div class="pa">
                 <div class="password">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="text" placeholder="Password" id="FFA-Password" disabled>
+                    <input type="text" placeholder="" id="FFA-Password" disabled>
                 </div>
                 
                 <input id="pw-on-off" type="checkbox" onclick="if(!document.getElementById('pw-on-off').checked){document.getElementById('FFA-Password').disabled = true;document.getElementById('FFA-Password').value = '';}else{document.getElementById('FFA-Password').disabled = false;}">
             </div>
             <div class="maxplayers">
                 <i class="fa-solid fa-people-group"></i>
-                <input id="FFA-MaxPlayer" type="number" placeholder="Max Players (MAX 10)">
+                <input id="FFA-MaxPlayer" type="number" placeholder="">
             </div>
             <!-- Das is weil sonst verschwindet der Modus immer wenn man drückt --><div class="ma">
                 <div class="mode" onclick="open_modes()">
                     <i class="fa-solid fa-gamepad"></i>
-                    <button id="btn-change-mode">Wähle den Modus</button>
+                    <button id="btn-change-mode"></button>
                     <span class="arrow">></span>
                 </div>
                 <main class="mode-menu" style="display: none;">
@@ -74,14 +74,14 @@
                 
                 <div class="map" onclick="open_maps()">
                     <i class="fa-solid fa-gamepad"></i>
-                    <button id="btn-change-map">Wähle eine Map</button>
+                    <button id="btn-change-map"></button>
                     <span class="arrow">></span>
                 </div>
                 <main class="map-menu" style="display: none;">
                     <!-- Hier weden Maps reingeladen -->
                 </main>
             </div>
-            <div class="create" onclick="create_ffa()">FFA ERSTELLEN</div>
+            <div id="CreateFFAButton" class="create" onclick="create_ffa()"></div>
         </div>
         <div class="ffa-liste" style="*display: none;">
             <img src="images/box.png" class="aad">
