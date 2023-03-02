@@ -43,26 +43,20 @@ function FFAUICreate()
                 MapMaxPlayer = v.MaxPlayer
             })
         end
-
-        --load maps in NUI
-        SendNUIMessage({
-            state = "add",
-            type = "create",
-            status = "maps2"
-        })
-
     end)
 end
 
-RegisterCommand('1', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
-    FFAUICreate()
-    --[[ UI WIRD GEÖFFNET ]]
-end)
+if Config.Debug then
+    RegisterCommand('1', function(source, args)
+        FFAUICreate()
+    end)
+end
 
-RegisterCommand('2', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
-    FFAUISearch()
-    --[[ UI WIRD GEÖFFNET ]]
-end)
+if Config.Debug then
+    RegisterCommand('2', function(source, args)
+        FFAUISearch()
+    end)
+end
 
 function FFAUISearch()
     ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
@@ -144,8 +138,7 @@ end
 
 --Please dont ask
 function GiveDataBack(Modus, Map)
-    local MapName
-    local ModusName
+    local MapName, ModusName
 
     for i,v in ipairs(Config.Modus) do
         if tonumber(v.Modus) == tonumber(Modus) then
