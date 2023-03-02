@@ -266,12 +266,11 @@ end
 --
 
 if Config.Debug then
-    -- Test Befehl: kills 3
+
     RegisterCommand('kills', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
         PlayerStats.kills = args[1]
     end)
 
-    -- Test Befehl: deaths 3
     RegisterCommand('deaths', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
         PlayerStats.deaths = args[1]
     end)
@@ -279,7 +278,6 @@ if Config.Debug then
     RegisterCommand('game', function(source, args)
         print(ESX.DumpTable(ActiveClientGame))
     end)
-
 
     function er(msg)
         print(msg)
