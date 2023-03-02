@@ -13,7 +13,7 @@ window.addEventListener('message', async function (event) {
 
   if (item.state === 'show') {
     if (item.type === "create") {
-      
+            
       $('body').show()
       $('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()
 
@@ -175,12 +175,6 @@ function JoinSearchedMatch(Name, Password) {
   $(".ffa-items").html("");
   Close()
 }
-
-document.onkeyup = function (data) {
-  if (data.which == 27) {
-    Close()
-  }
-};
 
 function Close() {
   ClearMapsModus();
