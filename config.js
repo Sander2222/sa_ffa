@@ -1,1 +1,3 @@
 ConfigData = []
+
+ConfigData.Info = "lol"

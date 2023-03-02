@@ -3,9 +3,9 @@ var MaxPlayerMap
 var CurrentModus
 
 document.addEventListener("DOMContentLoaded", () => {
-$('.ffa-scoreboard').hide();
-$('.ffa-create').hide();
-$('.ffa-liste').hide();
+  $('.ffa-scoreboard').hide();
+  $('.ffa-create').hide();
+  $('.ffa-liste').hide();
 })
 
 function ClearCreateInputs() {
