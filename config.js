@@ -1,9 +1,13 @@
-ConfigData = []
+JSConfig = []
 
-ConfigData.Info = 'lol'
-ConfigData.BlacklistedWords = ['nigger', 'nigga', 'niggers', 'niger', 'hitler', 'adolf', 'penis', 'hurensohn', 'nutte', 'schwanz', 'pedo', 'milf', 'hitl', 'nega', 'negga', 'porn', 'porno', 'nazi', 'anal', 'shit', 'neonazi', 'huan', 'huansohn', 'hure']
+JSConfig.Info = 'lol'
+JSConfig.BlacklistedWords = ['nigger', 'nigga', 'niggers', 'niger', 'hitler', 'adolf', 'penis', 'hurensohn', 'nutte', 'schwanz', 'pedo', 'milf', 'hitl', 'nega', 'negga', 'porn', 'porno', 'nazi', 'anal', 'shit', 'neonazi', 'huan', 'huansohn', 'hure']
 
-ConfigData.Locals = {
+JSConfig.MinLengthName = 3
+JSConfig.MinLengthPassword = 3
+JSConfig.MinMaxPlayer = 2
+
+JSConfig.Locals = {
     // Create Window
     'Name': 'Name',
     'Password': 'Password',
@@ -34,5 +38,13 @@ ConfigData.Locals = {
     'KDText': 'KD',
 
     // Error
-    'WrongPassword': 'The password does not match'
+    'WrongPassword': 'The password does not match',
+    'NotEnoughCharactersName': 'Name must have min ' + JSConfig.MinLengthName + ' characters',
+    'NotEnoughCharactersPassword': 'Password must have min ' + JSConfig.MinLengthPassword + ' characters',
+    'NoNotEnoughCharactersPlayer': 'Max Players is less than ' + JSConfig.MinMaxPlayer + ' or has one letter',
+    'ToMuchPlayer': 'You have specified more Max players than are allowed on the map. Max: ',
+    'BlackListName': 'This name is on the blacklist',
+    'BlackListPassword': 'This password is on the blacklist',
+    'NoModeSelected': 'You need to select a mode',
+    'NoMapSelected': 'You need to select a map',
 }
