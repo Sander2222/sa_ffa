@@ -22,6 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("FFAListText").innerHTML  = ConfigData.Locals.FFAListText;
   document.getElementById("PrivateText").innerHTML  = ConfigData.Locals.Private;
   document.getElementById("PuplicText").innerHTML  = ConfigData.Locals.Puplic;
+
+  // KDA
+  document.getElementById("kill-title").innerHTML  = ConfigData.Locals.kills;
+  document.getElementById("death-title").innerHTML  = ConfigData.Locals.death;
+  document.getElementById("FFAStatsText").innerHTML  = ConfigData.Locals.FFAStatsText;
+  document.getElementById("GameNameText").innerHTML  = ConfigData.Locals.GameNameText;
+  document.getElementById("KDText").innerHTML  = ConfigData.Locals.KDText;
 })
 
 function ClearCreateInputs() {

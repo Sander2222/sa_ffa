@@ -21,4 +21,11 @@ ConfigData.Locals = {
     'Mode': 'Mode',
     'Map': 'Map',
     'EnterName': 'Enter the game name',
+
+    // KDA
+    'kills': 'KILLS',
+    'death': 'DEATHS',
+    'FFAStatsText': 'FFA STATS',
+    'GameNameText': 'Name',
+    'KDText': 'KD',
 }
