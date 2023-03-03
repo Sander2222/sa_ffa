@@ -31,7 +31,8 @@ exports {
 escrow_ignore {
 	'config.lua',
 	'svconfig.lua',
-	'fxmanifest.lua'
+	'fxmanifest.lua',
+	'config.js'
 }
 
 --Export to open FFA Search UI client side
