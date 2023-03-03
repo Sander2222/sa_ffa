@@ -6,7 +6,7 @@ JSConfig.BlacklistedWords = ['nigger', 'nigga', 'niggers', 'niger', 'hitler', 'a
 JSConfig.MinLengthName = 3
 JSConfig.MinLengthPassword = 3
 JSConfig.MinMaxPlayer = 2
-
+ 
 JSConfig.Locals = {
     // Create Window
     'Name': 'Name',
