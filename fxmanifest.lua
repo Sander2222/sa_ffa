@@ -41,6 +41,7 @@ escrow_ignore {
 ui_page ('html/index.html')
 
 files {
+	'config.js',
 	'html/images/skull.png',
     'html/index.html',
     'html/style.css',

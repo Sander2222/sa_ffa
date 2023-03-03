@@ -107,33 +107,24 @@ async function ChangeScoreboards(kills, deaths, Name) {
     if (PRounded != rounded) {
       if (isNaN(rounded) || rounded === Infinity) {
         document.getElementById("ffa-ingame-kd").innerText = "0";
-        // document.getElementById("add-kd").classList.add("action");
         await wait(0.5);
-        // document.getElementById("add-kd").classList.remove("action");
       } else {
         document.getElementById("ffa-ingame-kd").innerText = rounded;
-        // document.getElementById("add-kd").classList.add("action");
         await wait(0.5);
-        // document.getElementById("add-kd").classList.remove("action");
       }
     PRounded = rounded
     }
   }
 
   if (PKills != kills) {
-    // await triggerskull()
     document.getElementById("kills").innerText = kills;
-    // document.getElementById("kill-title").classList.toggle("shine");
     await wait(1)
-    // document.getElementById("kill-title").classList.toggle("shine");
     PKills = kills
   }
 
   if (PDeaths != deaths) {
     document.getElementById("deaths").innerText = deaths;
-    // document.getElementById("death-title").classList.toggle("shine");
     await wait(1)
-    // document.getElementById("death-title").classList.toggle("shine");
     PDeaths = deaths
   }
 }
@@ -171,11 +162,11 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
           <div class="ffa-map ${Map}">
             <img src="images/${Map}.png">
             <div class="name">${Name}</div>
-            <div class="players">${Players}/${MaxPlayers} Spieler</div>
+            <div class="players">${Players}/${MaxPlayers} ${ConfigData.Locals.Player}</div>
           </div>
-          <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span id="dingsbums2">Passwort nicht geschützt</span>
-          <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
+          <div class="Mode">${ConfigData.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
+          <span id="dingsbums2">${ConfigData.Locals.NoPassword}</span>
+          <div class="join" onclick="JoinGame('${Name}','${Password}')">${ConfigData.Locals.Join}</div>
         </div>
       `);
     }
@@ -185,15 +176,15 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
           <div class="ffa-map ${Map}">
             <img src="images/${Map}.png">
             <div class="name">${Name}</div>
-            <div class="players">${Players}/${MaxPlayers} Spieler</div>
+            <div class="players">${Players}/${MaxPlayers} ${ConfigData.Locals.Player}</div>
           </div>
-          <div class="Mode">Mode: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span id="dingsbums1">Passwort geschützt</span>
+          <div class="Mode">${ConfigData.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
+          <span id="dingsbums1">${ConfigData.Locals.PasswordProtected}</span>
           <div class="ffa-password">
             <i class="fa-solid fa-lock"></i>
             <input type="text" placeholder="Password" id="${Password}">
           </div>
-          <div class="join" onclick="JoinGame('${Name}','${Password}')">Beitreten</div>
+          <div class="join" onclick="JoinGame('${Name}','${Password}')">${ConfigData.Locals.Join}</div>
         </div>
       `);
 
@@ -502,34 +493,9 @@ function JoinGame(Name, Password) {
   if (Password == UserPassword) {
     JoinSearchedMatch(Name)
   } else {
-    notify("FFA Join", "Das Passwort stimmt nicht über ein", "error")
+    notify("FFA Join", ConfigData.Locals.WrongPassword, "error")
   }
 }
-
-/* 
-async function message(killer, target){
-  await wait(0.5)
-  let id = Math.random().toString(36).slice(2);
-  
-  $('.kill-feed').append(`
-    <div class="new-kill" id="${id}">
-      <span id="killer">${killer}</span>
-      <span id="target">${target}</span>
-    </div>
-  
-  `)
-  $(`#${id}`).fadeIn();
-  
-  setTimeout( async ()=>{
-    const toRemove = document.getElementById(id);
-    await wait(0.2);
-    document.getElementById(id).style.animation = "delete 1s forwards";
-    await wait(1);
-    toRemove.remove();
-  }, 5000);
-}
- */
-
 
 async function wait(time) {
   return new Promise((resolve) => setTimeout(resolve, time * 1000));

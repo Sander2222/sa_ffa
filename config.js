@@ -21,6 +21,10 @@ ConfigData.Locals = {
     'Mode': 'Mode',
     'Map': 'Map',
     'EnterName': 'Enter the game name',
+    'NoPassword': 'Not password protected',
+    'Join': 'Join',
+    'Player': 'Player',
+    'PasswordProtected': 'Password Protected',
 
     // KDA
     'kills': 'KILLS',
@@ -28,4 +32,7 @@ ConfigData.Locals = {
     'FFAStatsText': 'FFA STATS',
     'GameNameText': 'Name',
     'KDText': 'KD',
+
+    // Error
+    'WrongPassword': 'The password does not match'
 }
