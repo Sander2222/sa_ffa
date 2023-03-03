@@ -1,5 +1,7 @@
 isInDimension = false
 local cam = nil
+local IsClose = false
+local IsAt = false
 local PlayerModus = 0
 local PlayerLoadout = {}
 local ActiveClientGame = {}
@@ -16,27 +18,6 @@ local PlayerStats = {
 function IsPlayerInFFA()
     return isInDimension
 end
-
-RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
-    if not isInDimension then
-        TriggerServerEvent("sa_ffa:JoinGame", args)
-        Config.SendNotifyClient("Raum wird betreten...")
-    else
-        Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
-    end
-end)
-
-RegisterCommand('Leave', function(source, args)
-    if isInDimension or Config.Debug then
-        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
-        TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
-    else
-        Config.SendNotifyClient(Config.Local['NotInLobby'])
-    end
-end)
-
-local IsClose = false
-local IsAt = false
 
 Citizen.CreateThread(function()
     local ped = PlayerPedId()
@@ -285,6 +266,24 @@ if Config.Debug then
     function er(msg)
         print(msg)
     end
+
+    RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
+        if not isInDimension then
+            TriggerServerEvent("sa_ffa:JoinGame", args)
+            Config.SendNotifyClient("Raum wird betreten...")
+        else
+            Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
+        end
+    end)
+    
+    RegisterCommand('Leave', function(source, args)
+        if isInDimension or Config.Debug then
+            TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
+            TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
+        else
+            Config.SendNotifyClient(Config.Local['NotInLobby'])
+        end
+    end)
 end
 
 Citizen.CreateThread(function()
