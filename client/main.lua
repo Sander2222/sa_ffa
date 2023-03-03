@@ -13,6 +13,10 @@ local PlayerStats = {
     deaths = 0
 }
 
+function IsPlayerInFFA()
+    return isInDimension
+end
+
 RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
     if not isInDimension then
         TriggerServerEvent("sa_ffa:JoinGame", args)

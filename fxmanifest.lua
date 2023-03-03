@@ -24,7 +24,8 @@ client_scripts {
 
 exports {
 	'FFAUISearch',
-	'FFAUICreate'
+	'FFAUICreate',
+	'IsPlayerInFFA'
 }
 
 escrow_ignore {
@@ -37,6 +38,8 @@ escrow_ignore {
 --exports['sa_ffa']:FFAUISearch()
 --Export to open FFA Create UI client side
 --exports['sa_ffa']:FFAUICreate()
+
+--exports['sa_ffa']:IsPlayerInFFA()
 
 ui_page ('html/index.html')
 
