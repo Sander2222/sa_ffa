@@ -140,7 +140,6 @@ AddEventHandler('esx:onPlayerDeath', function(data)
         if Config.Invincible then
             SetEntityInvincible(GetPlayerPed(-1), false)
         end
-        ExecuteCommand('removeTimeout 1') 
         TriggerServerEvent('sa_ffa:TriggerCustomFunction')
     end
 end)
