@@ -8,27 +8,27 @@ document.addEventListener("DOMContentLoaded", () => {
   $('.ffa-liste').hide();
 
   // Load Data from config
-  document.getElementById("FFA-Name").placeholder = ConfigData.Locals.Name;
-  document.getElementById("FFA-Password").placeholder = ConfigData.Locals.Password;
-  document.getElementById("FFA-MaxPlayer").placeholder = ConfigData.Locals.MaxPlayer;
-  document.getElementById("Search-Mode").placeholder = ConfigData.Locals.Mode;
-  document.getElementById("Search-Map").placeholder = ConfigData.Locals.Map;
-  document.getElementById("Search-Name").placeholder = ConfigData.Locals.EnterName;
-  document.getElementById("CreateFFAText").innerHTML  = ConfigData.Locals.CreateFFAText;
-  document.getElementById("EnterThinks").innerHTML  = ConfigData.Locals.EnterData;
-  document.getElementById("btn-change-mode").innerHTML  = ConfigData.Locals.ChooseMode;
-  document.getElementById("btn-change-map").innerHTML  = ConfigData.Locals.ChooseMode;
-  document.getElementById("CreateFFAButton").innerHTML  = ConfigData.Locals.CreateFFA;
-  document.getElementById("FFAListText").innerHTML  = ConfigData.Locals.FFAListText;
-  document.getElementById("PrivateText").innerHTML  = ConfigData.Locals.Private;
-  document.getElementById("PuplicText").innerHTML  = ConfigData.Locals.Puplic;
+  document.getElementById("FFA-Name").placeholder = JSConfig.Locals.Name;
+  document.getElementById("FFA-Password").placeholder = JSConfig.Locals.Password;
+  document.getElementById("FFA-MaxPlayer").placeholder = JSConfig.Locals.MaxPlayer;
+  document.getElementById("Search-Mode").placeholder = JSConfig.Locals.Mode;
+  document.getElementById("Search-Map").placeholder = JSConfig.Locals.Map;
+  document.getElementById("Search-Name").placeholder = JSConfig.Locals.EnterName;
+  document.getElementById("CreateFFAText").innerHTML  = JSConfig.Locals.CreateFFAText;
+  document.getElementById("EnterThinks").innerHTML  = JSConfig.Locals.EnterData;
+  document.getElementById("btn-change-mode").innerHTML  = JSConfig.Locals.ChooseMode;
+  document.getElementById("btn-change-map").innerHTML  = JSConfig.Locals.ChooseMode;
+  document.getElementById("CreateFFAButton").innerHTML  = JSConfig.Locals.CreateFFA;
+  document.getElementById("FFAListText").innerHTML  = JSConfig.Locals.FFAListText;
+  document.getElementById("PrivateText").innerHTML  = JSConfig.Locals.Private;
+  document.getElementById("PuplicText").innerHTML  = JSConfig.Locals.Puplic;
 
   // KDA
-  document.getElementById("kill-title").innerHTML  = ConfigData.Locals.kills;
-  document.getElementById("death-title").innerHTML  = ConfigData.Locals.death;
-  document.getElementById("FFAStatsText").innerHTML  = ConfigData.Locals.FFAStatsText;
-  document.getElementById("GameNameText").innerHTML  = ConfigData.Locals.GameNameText;
-  document.getElementById("KDText").innerHTML  = ConfigData.Locals.KDText;
+  document.getElementById("kill-title").innerHTML  = JSConfig.Locals.kills;
+  document.getElementById("death-title").innerHTML  = JSConfig.Locals.death;
+  document.getElementById("FFAStatsText").innerHTML  = JSConfig.Locals.FFAStatsText;
+  document.getElementById("GameNameText").innerHTML  = JSConfig.Locals.GameNameText;
+  document.getElementById("KDText").innerHTML  = JSConfig.Locals.KDText;
 })
 
 function ClearCreateInputs() {
@@ -47,6 +47,8 @@ window.addEventListener('message', async function (event) {
             
       ClearCreateInputs()
 
+      CurrentMap = null
+      CurrentModus = null 
       $('body').show()
       $('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()
 
@@ -162,11 +164,11 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
           <div class="ffa-map ${Map}">
             <img src="images/${Map}.png">
             <div class="name">${Name}</div>
-            <div class="players">${Players}/${MaxPlayers} ${ConfigData.Locals.Player}</div>
+            <div class="players">${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
           </div>
-          <div class="Mode">${ConfigData.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span id="dingsbums2">${ConfigData.Locals.NoPassword}</span>
-          <div class="join" onclick="JoinGame('${Name}','${Password}')">${ConfigData.Locals.Join}</div>
+          <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
+          <span id="dingsbums2">${JSConfig.Locals.NoPassword}</span>
+          <div class="join" onclick="JoinGame('${Name}','${Password}')">${JSConfig.Locals.Join}</div>
         </div>
       `);
     }
@@ -176,15 +178,15 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
           <div class="ffa-map ${Map}">
             <img src="images/${Map}.png">
             <div class="name">${Name}</div>
-            <div class="players">${Players}/${MaxPlayers} ${ConfigData.Locals.Player}</div>
+            <div class="players">${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
           </div>
-          <div class="Mode">${ConfigData.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span id="dingsbums1">${ConfigData.Locals.PasswordProtected}</span>
+          <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
+          <span id="dingsbums1">${JSConfig.Locals.PasswordProtected}</span>
           <div class="ffa-password">
             <i class="fa-solid fa-lock"></i>
             <input type="text" placeholder="Password" id="${Password}">
           </div>
-          <div class="join" onclick="JoinGame('${Name}','${Password}')">${ConfigData.Locals.Join}</div>
+          <div class="join" onclick="JoinGame('${Name}','${Password}')">${JSConfig.Locals.Join}</div>
         </div>
       `);
 
@@ -220,23 +222,28 @@ function create_ffa() {
   // "ffa_isroom_privat" |check if room is privat/public
   // "current_map" | get the name of current map
 
-  if(input_name.value.length < 3) { // if input kleiner als 3 dann also (0,1,2)
-    notify("FFA", "Name muss min 3 Zeichen haben", "error");
+  if(input_name.value.length < JSConfig.MinLengthName) { // if input kleiner als 3 dann also (0,1,2)
+    notify("FFA", JSConfig.Locals.NotEnoughCharactersName, "error");
   }
-  else if( document.getElementById('pw-on-off').checked && input_password.value.length <= 2) {
-    notify("FFA", "Das Passwort muss mindestens 2 Zeichen lang sein", "error");
+  else if( document.getElementById('pw-on-off').checked && input_password.value.length < JSConfig.MinLengthPassword) {
+    notify("FFA", JSConfig.Locals.NotEnoughCharactersPassword, "error");
   }
-  else if(input_maxplayers.value <= 1 || input_maxplayers.value.match(/[^0-9]/)) { // if input = 0 or 1 and input has letters
-    notify("FFA", "Max Players ist kleiner als 2 oder hat einen Buchstaben", "error");
+  else if(input_maxplayers.value < JSConfig.MinMaxPlayer || input_maxplayers.value.match(/[^0-9]/)) { // if input = 0 or 1 and input has letters
+    notify("FFA", JSConfig.Locals.NoNotEnoughCharactersPlayer, "error");
   }
   else if (input_maxplayers.value >= MaxPlayerMap) {
-    notify("FFA", "Du hast mehr Max-Spieler angegeben als auf der Map erlaubt sind. Max:" + MaxPlayerMap + "", "error");
+    notify("FFA", JSConfig.Locals.ToMuchPlayer + MaxPlayerMap, "error");
   }
-  else if (ConfigData.BlacklistedWords.some(v => input_name.value.toLowerCase().includes(v)) || hasSpecialChars(input_name.value)) {
-    notify("FFA", "Der Name ist nicht gestattet!", "error");
+  else if (JSConfig.BlacklistedWords.some(v => input_name.value.toLowerCase().includes(v)) || hasSpecialChars(input_name.value)) {
+    notify("FFA", JSConfig.Locals.BlackListName, "error");
   }
-  else if (ConfigData.BlacklistedWords.some(v => input_password.value.toLowerCase().includes(v)) || hasSpecialChars(input_password.value)) {
-    notify("FFA", "Passwort ist nicht gestattet!", "error");
+  else if (JSConfig.BlacklistedWords.some(v => input_password.value.toLowerCase().includes(v)) || hasSpecialChars(input_password.value)) {
+    notify("FFA", JSConfig.Locals.BlackListPassword, "error");
+  }
+  else if (!CurrentModus) {
+    notify("FFA", JSConfig.Locals.NoModeSelected, "error");
+  } else if (!CurrentMap) {
+    notify("FFA", JSConfig.Locals.NoMapSelected, "error");
   }
   else {
 
@@ -493,7 +500,7 @@ function JoinGame(Name, Password) {
   if (Password == UserPassword) {
     JoinSearchedMatch(Name)
   } else {
-    notify("FFA Join", ConfigData.Locals.WrongPassword, "error")
+    notify("FFA Join", JSConfig.Locals.WrongPassword, "error")
   }
 }
 
