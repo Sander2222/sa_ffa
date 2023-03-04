@@ -18,11 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("CreateFFAText").innerHTML  = JSConfig.Locals.CreateFFAText;
   document.getElementById("EnterThinks").innerHTML  = JSConfig.Locals.EnterData;
   document.getElementById("btn-change-mode").innerHTML  = JSConfig.Locals.ChooseMode;
-  document.getElementById("btn-change-map").innerHTML  = JSConfig.Locals.ChooseMode;
+  document.getElementById("btn-change-map").innerHTML  = JSConfig.Locals.ChooseMap;
   document.getElementById("CreateFFAButton").innerHTML  = JSConfig.Locals.CreateFFA;
   document.getElementById("FFAListText").innerHTML  = JSConfig.Locals.FFAListText;
   document.getElementById("PrivateText").innerHTML  = JSConfig.Locals.Private;
   document.getElementById("PuplicText").innerHTML  = JSConfig.Locals.Puplic;
+
+  document.getElementById("searchid").innerHTML  = JSConfig.Locals.Create;
+  document.getElementById("createId").innerHTML  = JSConfig.Locals.Search;
 
   // KDA
   document.getElementById("kill-title").innerHTML  = JSConfig.Locals.kills;
@@ -38,16 +41,21 @@ function ClearCreateInputs() {
   document.getElementById('FFA-MaxPlayer').value='';
   document.getElementById('FFA-Name').value='';
   document.getElementById('FFA-Name').value='';
+
+  // Mein Code
+  // document.getElementById('btn-change-mode').innerHTML= '';
+  // document.getElementById('btn-change-map').innerHTML= '';
+
+  // CurrentMap = null
+  // CurrentModus = null
 }
 
 window.addEventListener('message', async function (event) {
   var item = event.data;
 
   if (item.state === 'show') {
+    ClearCreateInputs()
     if (item.type === "search") {
-      CurrentMap = null
-      CurrentModus = null
-      ClearCreateInputs()
       Change_Window('list')
       $('.switcher').fadeIn()
       $('body').show()
@@ -85,7 +93,7 @@ var PRounded = NaN
 async function ChangeScoreboards(kills, deaths, Name) {
   var rounded = Math.round(((kills / deaths) + Number.EPSILON) * 100) / 100;
   document.getElementById("skull-kill").style.animation = "";
-  if (Name.length) {
+  if (typeof Name !== "undefined") {
     if(Name.length > 6) {
       document.getElementById("ffa-ingame-players").innerText = Name[0] + Name[1] + Name[2] + Name[3] + Name[4] + Name[5] + Name[6] + Name[7] + "..";
     } else {
