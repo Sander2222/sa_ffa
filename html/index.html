@@ -38,6 +38,11 @@
             <li class="item item-8"></li>
         </ul>
         
+        <div class="switcher" style="display: none;">
+            <div class="switcher-list switch-item" onclick="Change_Window('list')">Suchen</div>
+            <div class="switcher-create switch-item" onclick="Change_Window('create')">Erstellen</div>
+        </div>
+
         <div class="ffa-create" style="display: none;">
             <img src="images/box.png" class="aad">
             
@@ -83,7 +88,7 @@
             </div>
             <div id="CreateFFAButton" class="create" onclick="create_ffa()"></div>
         </div>
-        <div class="ffa-liste" style="*display: none;">
+        <div class="ffa-liste" style="display: none;">
             <img src="images/box.png" class="aad">
             <h1 id="FFAListText"></h1>
             <div class="switch">
