@@ -258,6 +258,23 @@ function Loadout(Type, Modus)
     end
 end
 
+Citizen.CreateThread(function()
+    while true do
+        ped = PlayerPedId()
+        if PlayerModus ~= 0 then
+            while true do
+                for k,v in pairs(GameWeapons) do
+                    AddAmmoToPed(ped, GetHashKey(v), 500)
+                end
+                Wait(0)
+            end
+        else
+            Wait(2000)
+        end
+        Wait(0)
+    end
+end)
+
 --
 --DEBUG
 --DEBUG
@@ -300,20 +317,3 @@ if Config.Debug then
         end
     end)
 end
-
-Citizen.CreateThread(function()
-    while true do
-        ped = PlayerPedId()
-        if PlayerModus ~= 0 then
-            while true do
-                for k,v in pairs(GameWeapons) do
-                    AddAmmoToPed(ped, GetHashKey(v), 500)
-                end
-                Wait(0)
-            end
-        else
-            Wait(2000)
-        end
-        Wait(0)
-    end
-end)
