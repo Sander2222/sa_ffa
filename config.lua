@@ -11,11 +11,11 @@ Config.SendDiscordScoreboardLimit = 10
 Config.UseCamAnimations = true
 Config.CamWait = 2500
 
-Config.SendNotifyClient = function (msg)
+Config.SendNotifyClient = function(msg)
     ESX.ShowNotification(msg)
 end
 
-Config.SendNotifyServer = function (source, msg)
+Config.SendNotifyServer = function(source, msg)
     
     --ESX 1.3 or higher
     local xPlayer = ESX.GetPlayerFromId(source)
@@ -25,6 +25,12 @@ end
 Config.AfterRevive = function(source)
     -- ExecuteCommand('removeTimeout ' ..tostring(source)) 
 end
+
+Config.NPC = {
+    active = true,
+    hash = 0xB353629E,
+    model = 's_m_m_paramedic_01'
+}
 
 Config.EnterCoords = {1628.2857666016,2552.1848144531,45.564849853516}
 
