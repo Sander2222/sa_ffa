@@ -10,6 +10,7 @@ Config.SendDisordStatsTime = '01:35' -- Set the time where the message get sende
 Config.SendDiscordScoreboardLimit = 10 -- Set how much player should be listed in the Message
 Config.UseCamAnimations = false -- Use cam Animations for join and leave ffa
 Config.CamWait = 2500 -- Dont edit it if you dont know what are you doing
+Config.UseUINotify = false
 
 Config.SendNotifyClient = function(msg) -- add your client notify 
     ESX.ShowNotification(msg)
@@ -129,7 +130,7 @@ Config.Local = {
     ['NoGameFound'] = 'Es wurde kein Spiel gefunden mit dem Namen: %s',
     ['OutOfZone'] = 'Du bist auserhalb der Zone, deswegen wurdest du zurück teleporiert',
     ['NotInLobby'] = 'Du bist in keiner FFA Runde',
-    ['JoinGame'] = 'Raum wird betreten...'
+    ['JoinGame'] = 'Raum wird betreten...',
     ['AlreadyInLobby'] = 'Du bist schon in einer Lobby',
     ['GameCreate'] = 'Der Raum wird erstellt',
     ['RoomFound'] = 'Room wurde gefunden! Room: %s',
