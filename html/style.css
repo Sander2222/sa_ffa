@@ -464,7 +464,7 @@ nav a:hover {
 }
 
 .mode-menu::-webkit-scrollbar {
-  height: 2px;
+  height: 5px;
   border-radius: 50px;
   background: rgba(255, 255, 255, 0.2);
 }
@@ -476,8 +476,8 @@ nav a:hover {
 .modus {
   position: relative;
 
-  height: 90%;
-  width: 18%;
+  min-height: 90%;
+  min-width: 18%;
 
   background: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0.5);
@@ -515,6 +515,18 @@ nav a:hover {
     height: 15vw;
   }
 }
+
+
+.map-menu::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.map-menu::-webkit-scrollbar-thumb {
+  background: var(--main);
+}
+
 .map-menu {
   position: absolute;
   right: -115%;
@@ -522,17 +534,19 @@ nav a:hover {
 
   width: 110%;
   height: 15vw;
-  padding: 0.2vw 0.2vw;
+  padding: 0.3vw 0.2vw;
 
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   gap: 0.5vw;
   animation: slidein 1s;
+
+  overflow: auto;
 }
 
 .map-menu .map {
@@ -566,7 +580,6 @@ nav a:hover {
 .map-menu .map img {
   position: absolute;
   width: 70%;
-  right: 0;
   border-radius: 10px;
   transition: 0.3s;
   opacity: 0;
@@ -1690,4 +1703,40 @@ input[type=number]::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance:textfield;
   appearance: textfield;
+}
+
+
+
+.switcher {
+  position: absolute;
+
+  top: 5%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1vw;
+
+  
+  z-index: 5;
+  
+  transition: 0.2s;
+}
+
+.switcher .switch-item.active {
+  background: var(--main);
+}
+
+.switcher .switch-item {
+  color: #fff;
+  font-family: 'Montserrat';
+  font-size: 1vw;
+  background: rgba(255, 255, 255, 0.3);
+  
+  padding: 0.5vw 2vw;
+
+  border-radius: 20px;
+  
+  transition: 0.2s;
 }
