@@ -44,58 +44,37 @@ window.addEventListener('message', async function (event) {
   var item = event.data;
 
   if (item.state === 'show') {
-    if (item.type === "create") {
-            
-      ClearCreateInputs()
-
+    if (item.type === "search") {
       CurrentMap = null
       CurrentModus = null
-      $('.switcher').fadeIn()
-      $('body').show()
-      $('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()
-
-    } else if (item.type === "join") {
-
-    } else if (item.type === "search") {
+      ClearCreateInputs()
       Change_Window('list')
       $('.switcher').fadeIn()
       $('body').show()
       $('.ffa-liste').fadeIn();$('.ffa-create').hide();$('.ffa-scoreboard').hide()
-
-    } else if (item.type === "leave") {
-
     } else if (item.type === "score") {
-
       $('body').show()
       $('.ffa-scoreboard').fadeIn();$('.ffa-create').hide();$('.ffa-liste').hide()
     }
   } else if (item.state === 'add') {
     if (item.type === 'create') {
-
       if (item.status === 'modus') {
         AddMode(item.ModeNumber, item.ModeName, item.Icon, item.Title)
       } else if (item.status === 'maps') {
         AddMap(item.MapNumber, item.ModeName, item.MapMaxPlayer )
       }
-
     } else if (item.type === 'search') {
-
-      // $(".ffa-items").html("");
-      if (item.maxplayers != null && item.maxplayers != undefined) {
+       if (item.maxplayers != null && item.maxplayers != undefined) {
         AddFFA(item.name, item.password, item.players, item.maxplayers, item.map, item.modus)
       }
-
     } else if (item.type === 'score') {
-
       var kills = item.kill
       var deaths = item.death
       ChangeScoreboards(kills, deaths, item.Name)
-
     }
   } else if (item.state === 'close') {
-
     $('body').hide()
-
+    $('.switcher').fadeOut()
   }
 })
 
@@ -106,7 +85,13 @@ var PRounded = NaN
 async function ChangeScoreboards(kills, deaths, Name) {
   var rounded = Math.round(((kills / deaths) + Number.EPSILON) * 100) / 100;
   document.getElementById("skull-kill").style.animation = "";
-  document.getElementById("ffa-ingame-players").innerText = Name;
+  if (Name.length) {
+    if(Name.length > 6) {
+      document.getElementById("ffa-ingame-players").innerText = Name[0] + Name[1] + Name[2] + Name[3] + Name[4] + Name[5] + Name[6] + Name[7] + "..";
+    } else {
+      document.getElementById("ffa-ingame-players").innerText = Name;
+    }
+  }
 
   if ( (!isNaN(PRounded) ||  !isNaN(rounded))) {
     if (PRounded != rounded) {
@@ -156,8 +141,7 @@ function AddMap(Number, Name, MaxPlayer) {
       <img src="images/${Name}.png">
       <span>${Name}</span>
   </div>
-`) 
-}
+`)}
 
 function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
 
@@ -268,9 +252,7 @@ function create_ffa() {
     Map: CurrentMap
     }));
   }
-  //display()
 }
-
 
 async function notify(title, message, type) {
   let id = Math.random().toString(36).slice(2);
@@ -282,7 +264,6 @@ async function notify(title, message, type) {
   <h1 class="${type}">${title}</h1>
   <h2>${message}</h2>
   </div>
-  
   `);
   
   setTimeout(async () => {
@@ -300,12 +281,6 @@ function ClearMapsModus() {
   $('.map-menu').empty();
   $('.mode-menu').empty();
 }
-
-{/* <a onclick="$('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()">FFA Erstellen</a>
-<a onclick="$('.ffa-liste').fadeIn();$('.ffa-create').hide();$('.ffa-scoreboard').hide()">FFA Suchen</a>
-<a onclick="$('.ffa-scoreboard').fadeIn();$('.ffa-create').hide();$('.ffa-liste').hide()">FFA Scoreboard</a>
-
- */}
 
 let mode = "Gambio";
 let FFaSearch_Visuability = "Privat";
@@ -375,7 +350,6 @@ function change_mode(type, Name, Number) {
   $('#btn-change-mode').css("color", "rgba(255,255,255,1)");
   document.getElementById("btn-change-mode").innerText = Name;
   
-  
   Modes.forEach((e) => {
     e.classList.remove("active");
   });
@@ -431,7 +405,6 @@ function open_modes() {
 }
 
 function SearchMode(keys) {
-
   var FFAList;
 
   if(FFaSearch_Visuability === 'Öffentlich') {
@@ -466,7 +439,6 @@ function ChangeFFAVisual(type) {
   
   let FFAList = document.querySelector(`.liste-${type.toLowerCase()}`);
   let FFAs = FFAList.querySelectorAll(".ffa");
-  
   
   if(type === 'Öffentlich') {
     $('.liste-privat').fadeOut();
