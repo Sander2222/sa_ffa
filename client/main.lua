@@ -302,7 +302,7 @@ if Config.Debug then
     RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
         if not isInDimension then
             TriggerServerEvent("sa_ffa:JoinGame", args)
-            Config.SendNotifyClient("Raum wird betreten...")
+            Config.SendNotifyClient(Config.Local['JoinGame'])
         else
             Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
         end

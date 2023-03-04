@@ -129,6 +129,7 @@ Config.Local = {
     ['NoGameFound'] = 'Es wurde kein Spiel gefunden mit dem Namen: %s',
     ['OutOfZone'] = 'Du bist auserhalb der Zone, deswegen wurdest du zurück teleporiert',
     ['NotInLobby'] = 'Du bist in keiner FFA Runde',
+    ['JoinGame'] = 'Raum wird betreten...'
     ['AlreadyInLobby'] = 'Du bist schon in einer Lobby',
     ['GameCreate'] = 'Der Raum wird erstellt',
     ['RoomFound'] = 'Room wurde gefunden! Room: %s',
