@@ -58,8 +58,7 @@ RegisterNetEvent('sa_ffa:JoinGame')
 AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
     local _source = source
     local xPlayer = ESX.GetPlayerFromId(_source)
-    local NameValid = false
-    local PasswordValid = false
+    local NameValid, PasswordValid = false, false
     local GameIsFull = true
 
     for i,v in ipairs(Games) do
