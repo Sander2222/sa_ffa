@@ -1,6 +1,7 @@
 var CurrentMap
 var MaxPlayerMap
 var CurrentModus
+var CurrentWindow
 
 document.addEventListener("DOMContentLoaded", () => {
   $('.ffa-scoreboard').hide();
@@ -48,14 +49,16 @@ window.addEventListener('message', async function (event) {
       ClearCreateInputs()
 
       CurrentMap = null
-      CurrentModus = null 
+      CurrentModus = null
+      $('.switcher').fadeIn()
       $('body').show()
       $('.ffa-create').fadeIn();$('.ffa-liste').hide();$('.ffa-scoreboard').hide()
 
     } else if (item.type === "join") {
 
     } else if (item.type === "search") {
-
+      Change_Window('list')
+      $('.switcher').fadeIn()
       $('body').show()
       $('.ffa-liste').fadeIn();$('.ffa-create').hide();$('.ffa-scoreboard').hide()
 
@@ -510,4 +513,23 @@ async function wait(time) {
 
 function log(msg) {
   console.log(msg)
+}
+
+function Change_Window(window) {
+  document.querySelector(".switcher-list").classList.remove("active");
+  document.querySelector(".switcher-create").classList.remove("active");
+  document.querySelector(`.switcher-${window}`).classList.add("active");
+
+  switch(window) {
+    case 'list':
+      $('.ffa-create').fadeOut();
+      $('.ffa-liste').fadeIn();
+      break;
+    case 'create':
+      $('.ffa-liste').fadeOut();
+      $('.ffa-create').fadeIn();
+      break;
+  }
+
+  CurrentWindow = window;
 }
