@@ -2,6 +2,7 @@ var CurrentMap
 var MaxPlayerMap
 var CurrentModus
 var CurrentWindow
+var UseUINotify
 
 document.addEventListener("DOMContentLoaded", () => {
   $('.ffa-scoreboard').hide();
@@ -56,6 +57,8 @@ window.addEventListener('message', async function (event) {
   if (item.state === 'show') {
     ClearCreateInputs()
     if (item.type === "search") {
+      log(item.notify)
+      UseUINotify = item.notify
       Change_Window('list')
       $('.switcher').fadeIn()
       $('body').show()
@@ -263,25 +266,33 @@ function create_ffa() {
 }
 
 async function notify(title, message, type) {
-  let id = Math.random().toString(36).slice(2);
-  
-  $(".notify-area").append(`
-  <div class="notify ${type}" id="notify-${id}">
-  <audio src="assets/sounds/notify_in.mp3" id="notify-soundin-${id}"></audio>
-  <audio src="assets/sounds/notify_out.mp3" id="notify-soundout-${id}"></audio>
-  <h1 class="${type}">${title}</h1>
-  <h2>${message}</h2>
-  </div>
-  `);
-  
-  setTimeout(async () => {
-    const toRemove = document.getElementById(`notify-${id}`);
 
-    toRemove.style.animation = "backOutLeft 1s forwards";
-    $(`#${id}`).fadeOut();
-    await wait(1);
-    toRemove.remove();
-  }, 5000);
+  log(UseUINotify)
+  if (UseUINotify) {
+    let id = Math.random().toString(36).slice(2);
+  
+    $(".notify-area").append(`
+    <div class="notify ${type}" id="notify-${id}">
+    <audio src="assets/sounds/notify_in.mp3" id="notify-soundin-${id}"></audio>
+    <audio src="assets/sounds/notify_out.mp3" id="notify-soundout-${id}"></audio>
+    <h1 class="${type}">${title}</h1>
+    <h2>${message}</h2>
+    </div>
+    `);
+    
+    setTimeout(async () => {
+      const toRemove = document.getElementById(`notify-${id}`);
+  
+      toRemove.style.animation = "backOutLeft 1s forwards";
+      $(`#${id}`).fadeOut();
+      await wait(1);
+      toRemove.remove();
+    }, 5000);
+  } else {
+    $.post('https://sa_ffa/notify', JSON.stringify({
+      Message: message 
+    }));
+  }
 }
 
 function ClearMapsModus() {
