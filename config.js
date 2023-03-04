@@ -29,6 +29,8 @@ JSConfig.Locals = {
     'Join': 'Join',
     'Player': 'Player',
     'PasswordProtected': 'Password Protected',
+    'Create': 'Create',
+    'Search': 'Search',
 
     // KDA
     'kills': 'KILLS',
