@@ -18,7 +18,11 @@ function FFAUISearch()
         AllGames = ActiveGames
 
         SetNuiFocus(true, true)
-        SendNUIMessage({state = 'show', type = 'search'})
+        SendNUIMessage({
+            state = 'show', 
+            type = 'search',
+            notify = Config.UseUINotify
+        })
 
         for i, v in ipairs(ActiveGames) do
                 local MapName, ModusName  = GiveDataBack(v.Modus, v.Map)
@@ -82,6 +86,10 @@ RegisterNUICallback('exit', function(data, cb)
     SendNUIMessage({
         state = 'close'
     })
+end)
+
+RegisterNUICallback('notify', function(data, cb)
+    Config.SendNotifyClient(data.Message)
 end)
 
 RegisterNUICallback('CreateGame', function(data, cb)
