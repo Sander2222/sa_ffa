@@ -68,7 +68,7 @@ AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
                 PasswordValid = true
                 if tonumber(v.Players) < tonumber(v.MaxPlayer) then
                     GameIsFull = false
-                    Config.SendNotifyServer(_source, "Room wurde gefunden! Room: " .. v.Name)
+                    Config.SendNotifyServer(_source, (Config.Local['RoomFound']):format(v.Name))
                     SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), v.Name))
                     JoinGame(_source, v, xPlayer.getLoadout())
                     break
@@ -80,9 +80,9 @@ AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
     if not NameValid and not PasswordValid then
         Config.SendNotifyServer(_source, (Config.Local['NoGameFound']):format(args[1]))
     elseif not PasswordValid then
-        Config.SendNotifyServer(_source, "Das Game wurde gefunden aber das Passwort ist falsch")
+        Config.SendNotifyServer(_source, Config.Local['RommFoundWrongPassword'])
     elseif GameIsFull then
-        Config.SendNotifyServer(_source, "Passwort und Name war richtig aber das Game ist voll")
+        Config.SendNotifyServer(_source, Config.Local['RoomFoundButFull'])
     end
 end)
 
@@ -106,13 +106,13 @@ AddEventHandler("sa_ffa:PlayerKilled", function(KillData)
         TriggerClientEvent('sa_ffa:UpdatePlayerStats', killed, 'killed')
         TriggerClientEvent('sa_ffa:UpdatePlayerStats', killer, 'killer')
         if Config.NotifyForKill then
-            Config.SendNotifyServer(killed, ('Du wurdest von %s getötet'):format(GetPlayerName(killer)))
-            Config.SendNotifyServer(killer, ('Du hast %s getötet'):format(GetPlayerName(killed)))
+            Config.SendNotifyServer(killed, (Config.Local['YouGotKilled']):format(GetPlayerName(killer)))
+            Config.SendNotifyServer(killer, (Config.Local['YouKilled']):format(GetPlayerName(killed)))
         end
     else 
         TriggerClientEvent('sa_ffa:UpdatePlayerStats', killed, 'killed')
         if Config.NotifyForKill then
-            Config.SendNotifyServer(killed, 'Du hast dich selber getötet')
+            Config.SendNotifyServer(killed, Config.Local['KilledYourself'])
         end
     end
 end)
@@ -195,7 +195,7 @@ function ChangePlayerCount(Player, ActiveGame, State)
             if v.Name == ActiveGame then
                 v.Players = v.Players - 1
                 if v.Players <= 0 then
-                    Config.SendNotifyServer(Player, "Da du die letzte Person in dem Game warst wurde die Lobby gelöscht")
+                    Config.SendNotifyServer(Player, Config.Local['LastPerson'])
                     table.remove(Games, k )
                     SendDiscord((SvConfig.WebhookText['LobbyDeleted']):format(v.Name))
                 end

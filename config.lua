@@ -131,6 +131,13 @@ Config.Local = {
     ['NotInLobby'] = 'Du bist in keiner FFA Runde',
     ['AlreadyInLobby'] = 'Du bist schon in einer Lobby',
     ['GameCreate'] = 'Der Raum wird erstellt',
+    ['RoomFound'] = 'Room wurde gefunden! Room: %s',
+    ['RommFoundWrongPassword'] = 'Das Game wurde gefunden aber das Passwort ist falsch',
+    ['RoomFoundButFull'] = 'Passwort und Name war richtig aber das Game ist voll',
+    ['YouGotKilled'] = 'Du wurdest von %s getötet',
+    ['YouKilled'] = 'Du hast %s getötet',
+    ['KilledYourself'] = 'Du hast dich selber getötet',
+    ['LastPerson'] = 'Da du die letzte Person in dem Game warst wurde die Lobby gelöscht',
 }
 
 -- There are more locals in the config.js
