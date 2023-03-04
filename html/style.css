@@ -1408,7 +1408,6 @@ nav a:hover {
   
   width: 70px;
   height: 70px;
-  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1439,7 +1438,6 @@ nav a:hover {
 
 .middle-content .playtime span {
   position: absolute;
-  
   bottom: 10%;
   padding: 0px 5px;
   border-radius: 20%;
