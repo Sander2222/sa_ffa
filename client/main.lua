@@ -19,6 +19,21 @@ function IsPlayerInFFA()
     return isInDimension
 end
 
+if Config.NPC.active then
+    Citizen.CreateThread(function()
+        RequestModel(GetHashKey(Config.NPC.model))
+        while not HasModelLoaded(GetHashKey(Config.NPC.model)) do
+            Wait(15)
+        end
+
+        ped = CreatePed(4, Config.NPC.hash, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] - 1, 3374176, false, true)
+        SetEntityHeading(Config.NPC.ped, Config.NPC.heading)
+        FreezeEntityPosition(ped, true)
+        SetEntityInvincible(ped, true)
+        SetBlockingOfNonTemporaryEvents(ped, true)
+    end)
+end
+
 Citizen.CreateThread(function()
     local ped = PlayerPedId()
     while true do
