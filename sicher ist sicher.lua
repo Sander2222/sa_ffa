@@ -183,3 +183,25 @@ function GiveDataBack(Modus, Map)
 
     return MapName, ModusName
 end
+
+
+--NUI
+function FFAUICreate()
+    ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
+        local ActiveGamePlayer = 0
+        local Number = #ActiveGames
+
+        for i, v in ipairs(ActiveGames) do
+            ActiveGamePlayer = ActiveGamePlayer + v.Players
+        end
+
+        SetNuiFocus(true, true)
+        SendNUIMessage({
+            state = "show",
+            type = "create",
+            -- Soon im UI
+            -- ActiveGamePlayerN = ActiveGamePlayer,
+            -- MaxGamesN = Number
+        })
+    end)
+end
