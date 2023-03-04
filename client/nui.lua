@@ -1,51 +1,5 @@
 local AllGames = {}
 
-function FFAUICreate()
-    ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
-        local ActiveGamePlayer = 0
-        local Number = #ActiveGames
-
-        for i, v in ipairs(ActiveGames) do
-            ActiveGamePlayer = ActiveGamePlayer + v.Players
-        end
-
-        SetNuiFocus(true, true)
-        SendNUIMessage({
-            state = "show",
-            type = "create",
-            MapsA = Config.Maps,
-            -- Soon im UI
-            -- ActiveGamePlayerN = ActiveGamePlayer,
-            -- MaxGamesN = Number
-        })
-        
-        --Add Mode
-        for i,v in ipairs(Config.Modus) do
-            SendNUIMessage({
-                state = "add",
-                type = "create",
-                status = "modus",
-                ModeNumber = v.Modus,
-                ModeName = v.Name,
-                Icon = v.Icon,
-                Title = v.title
-            })
-        end
-
-        --Add Maps
-        for i,v in ipairs(Config.Maps) do
-            SendNUIMessage({
-                state = "add",
-                type = "create",
-                status = "maps",
-                MapNumber = v.Map,
-                ModeName = v.Name,
-                MapMaxPlayer = v.MaxPlayer
-            })
-        end
-    end)
-end
-
 if Config.Debug then
     RegisterCommand('1', function(source, args)
         FFAUICreate()
@@ -82,6 +36,31 @@ function FFAUISearch()
                 map = MapName,
                 name = v.Name,
                 modus = ModusName
+            })
+        end
+
+        --Add Mode
+        for i,v in ipairs(Config.Modus) do
+            SendNUIMessage({
+                state = "add",
+                type = "create",
+                status = "modus",
+                ModeNumber = v.Modus,
+                ModeName = v.Name,
+                Icon = v.Icon,
+                Title = v.title
+            })
+        end
+
+        --Add Maps
+        for i,v in ipairs(Config.Maps) do
+            SendNUIMessage({
+                state = "add",
+                type = "create",
+                status = "maps",
+                MapNumber = v.Map,
+                ModeName = v.Name,
+                MapMaxPlayer = v.MaxPlayer
             })
         end
     end)
