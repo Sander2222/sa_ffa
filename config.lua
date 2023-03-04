@@ -4,36 +4,39 @@ Config.Debug = true -- only put this on true if you know what you are doing
 Config.StandardDimension = 0 -- Put there you standard dimension
 Config.Invincible = false -- Put this on true if the player got killed have a spawnprotect
 Config.DisabledNPCS = true -- use your brain ;)
-Config.NotifyForKill = true
-Config.SendDiscordStats = true
-Config.SendDisordStatsTime = '01:35'
-Config.SendDiscordScoreboardLimit = 10
-Config.UseCamAnimations = true
-Config.CamWait = 2500
+Config.NotifyForKill = true -- If you want that the players get a notify if they die or get a kill
+Config.SendDiscordStats = true -- If you want to send a Discord message with the Stats from the Database
+Config.SendDisordStatsTime = '01:35' -- Set the time where the message get sended from the stats
+Config.SendDiscordScoreboardLimit = 10 -- Set how much player should be listed in the Message
+Config.UseCamAnimations = false -- Use cam Animations for join and leave ffa
+Config.CamWait = 2500 -- Dont edit it if you dont know what are you doing
 
-Config.SendNotifyClient = function(msg)
+Config.SendNotifyClient = function(msg) -- add your client notify 
     ESX.ShowNotification(msg)
 end
 
-Config.SendNotifyServer = function(source, msg)
+Config.SendNotifyServer = function(source, msg) -- add your server notify 
     
-    --ESX 1.3 or higher
     local xPlayer = ESX.GetPlayerFromId(source)
     xPlayer.showNotification(msg)
 end
 
+-- This Code is CLIENTSIDE, but you have source and you can create the ped if you want (PlayePedId()) the source is for execute commands like removedeathtimeout
 Config.AfterRevive = function(source)
     -- ExecuteCommand('removeTimeout ' ..tostring(source)) 
 end
 
+-- If you want a NPC to spawn at the Coords in Config.EnterCoords then add your data here
 Config.NPC = {
     active = true,
     hash = 0xB353629E,
     model = 's_m_m_paramedic_01'
 }
 
+-- Change the coord where the ffa enter coords should be
 Config.EnterCoords = {1628.2857666016,2552.1848144531,45.564849853516}
 
+-- If you want to cerate https://fontawesome.com/icons/
 Config.Modus = {
     {
         Modus = 1,
@@ -118,6 +121,7 @@ Config.Maps = {
     },
 }
 
+-- Locals
 Config.Local = {
     ['PressE'] = 'Drücke ~INPUT_CONTEXT~ um etwas zu kaufen',
     ['NameIsInValid'] = 'Es gibt schon einen Raum mit diesem Namen',
@@ -128,3 +132,5 @@ Config.Local = {
     ['AlreadyInLobby'] = 'Du bist schon in einer Lobby',
     ['GameCreate'] = 'Der Raum wird erstellt',
 }
+
+-- There are more locals in the config.js
