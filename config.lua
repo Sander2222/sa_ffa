@@ -11,9 +11,9 @@ Config.SendDisordStatsTime = '01:35' -- Set the time where the message get sende
 Config.SendDiscordScoreboardLimit = 10 -- Set how much player should be listed in the Message
 Config.UseCamAnimations = false -- Use cam Animations for join and leave ffa
 Config.CamWait = 2500 -- Dont edit it if you dont know what are you doing
-Config.UseUINotify = false
-Config.LeaveCommand = 'leave'
-Config.ShowleaveCommandNotify = true
+Config.UseUINotify = false -- This is for the UI there is a Notifysystem in the ui if you dont use it then put this on false
+Config.LeaveCommand = 'leave' -- This command ist for leave the ffa
+Config.ShowleaveCommandNotify = true -- This is if the player get a notify how the leave command ist Config.LeaveCommand
 
 Config.SendNotifyClient = function(msg) -- add your client notify 
     ESX.ShowNotification(msg)
