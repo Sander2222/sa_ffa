@@ -1,7 +1,5 @@
 isInDimension = false
 local cam = nil
-local IsClose = false
-local IsAt = false
 local PlayerModus = 0
 local PlayerLoadout = {}
 local ActiveClientGame = {}
@@ -56,36 +54,20 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
-    local ped = PlayerPedId()
     while true do
-        Wait(950)
-
-        IsClose = false
-		IsAt = false
+        Wait(1)
 
         local dist = #(GetEntityCoords(ped) - vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]))
 
-        if dist <= 2.0 then
-            IsClose = true
-            IsAt = true
-        elseif dist <= 4.0 then
-            IsClose = true
-        end
-    end
-end)
-
-Citizen.CreateThread(function()
-    while true do
-        Wait(1)
-		if  not IsClose then
-			Wait(950) 
-        end
-		if IsAt then
+        if dist <= Config.Dist then
             ESX.ShowHelpNotification(Config.Local['PressE'])
             if IsControlJustReleased(0, 38) then
                 FFAUISearch()
-            end
-		end
+            end 
+        else 
+            Wait(1000)
+        end
+
     end
 end)
 
