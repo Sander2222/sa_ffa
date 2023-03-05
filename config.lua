@@ -1,5 +1,6 @@
 Config = {}
 
+Config.CheckVersion = true
 Config.Debug = true -- only put this on true if you know what you are doing
 Config.StandardDimension = 0 -- Put there you standard dimension
 Config.Invincible = false -- Put this on true if the player got killed have a spawnprotect
