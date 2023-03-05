@@ -27,7 +27,7 @@ if Config.NPC.active then
         end
 
         ped = CreatePed(4, Config.NPC.hash, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] - 1, 3374176, false, true)
-        SetEntityHeading(Config.NPC.ped, Config.NPC.heading)
+        SetEntityHeading(ped, Config.NPC.heading)
         FreezeEntityPosition(ped, true)
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)

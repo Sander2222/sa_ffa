@@ -31,6 +31,7 @@ end
 -- If you want a NPC to spawn at the Coords in Config.EnterCoords then add your data here
 Config.NPC = {
     active = true,
+    heading = 100,
     hash = 0xB353629E,
     model = 's_m_m_paramedic_01'
 }
