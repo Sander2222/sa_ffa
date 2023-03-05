@@ -77,6 +77,7 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     ActiveClientGame = ActiveGame
     Loadout('Join', ActiveGame.Modus)
 
+    DisplayRadar(false)
     if Config.UseCamAnimations then
     --Cams
         FreezeEntityPosition(GetPlayerPed(), true)
@@ -163,6 +164,9 @@ function Teleport(Type)
                 SetCamActive(cam, false)
                 DestroyCam(cam, true)
                 cam = nil
+
+                Wait(Config.CamWait)
+                DisplayRadar(true)
             end
         end
     else 
@@ -175,6 +179,7 @@ function Teleport(Type)
                 ActiveMapInfo.ActiveMapRadius = v.MaxRadius
             end
         end
+        DisplayRadar(true)
     end
 end
 
@@ -230,6 +235,8 @@ function Loadout(Type, Modus)
     elseif Type == 'Leave' then
         local ped = PlayerPedId()
 
+        DisplayRadar(false)
+
         SetEntityHealth(ped, 200)
         SetPedArmour(ped, 0)
         for i,v in ipairs(Config.Modus) do
@@ -247,20 +254,22 @@ function Loadout(Type, Modus)
         ActiveClientGame = {}
         -- Cams zum Back TP hin
         FreezeEntityPosition(GetPlayerPed(), true)
-        cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)
-        PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
-        SetCamActive(cam, true)
-        RenderScriptCams(true, true, Config.CamWait, true, true)
-        Citizen.Wait(Config.CamWait)
+        if Config.UseCamAnimations then
+            cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)
+            PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
+            SetCamActive(cam, true)
+            RenderScriptCams(true, true, Config.CamWait, true, true)
+            Wait(Config.CamWait)
+            RenderScriptCams(false, true, Config.CamWait, true, true)
+            SetCamActive(cam, false)
+            DestroyCam(cam, true)
+            cam = nil
+            Wait(Config.CamWait)
+        end
 
-        RenderScriptCams(false, true, Config.CamWait, true, true)
         ESX.Game.Teleport(ped, vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]), function()end)
         FreezeEntityPosition(GetPlayerPed(), false)
-
-        SetCamActive(cam, false)
-        DestroyCam(cam, true)
-        cam = nil
-
+        DisplayRadar(true)
     end
 end
 
