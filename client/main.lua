@@ -19,6 +19,15 @@ function IsPlayerInFFA()
     return isInDimension
 end
 
+RegisterCommand(Config.LeaveCommand, function(source, args)
+    if isInDimension or Config.Debug then
+        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
+        TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
+    else
+        Config.SendNotifyClient(Config.Local['NotInLobby'])
+    end
+end)
+
 if Config.NPC.active then
     Citizen.CreateThread(function()
         RequestModel(GetHashKey(Config.NPC.model))
@@ -88,6 +97,9 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     end
 
     ChangeClientscoreboard('show')
+    if Config.ShowleaveCommandNotify then 
+        Config.SendNotifyClient((Config.Local['ShowLeaveCommand']):format('/'.. Config.ShowleaveCommandNotify))
+    end
     isInDimension = true
 end)
 
@@ -305,15 +317,6 @@ if Config.Debug then
             Config.SendNotifyClient(Config.Local['JoinGame'])
         else
             Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
-        end
-    end)
-    
-    RegisterCommand('Leave', function(source, args)
-        if isInDimension or Config.Debug then
-            TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
-            TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
-        else
-            Config.SendNotifyClient(Config.Local['NotInLobby'])
         end
     end)
 end
