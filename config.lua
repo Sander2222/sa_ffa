@@ -14,7 +14,7 @@ Config.CamWait = 2500 -- Dont edit it if you dont know what are you doing
 Config.UseUINotify = false -- This is for the UI there is a Notifysystem in the ui if you dont use it then put this on false
 Config.LeaveCommand = 'leave' -- This command ist for leave the ffa
 Config.ShowleaveCommandNotify = true -- This is if the player get a notify how the leave command ist Config.LeaveCommand
-Config.Dist = 3.0
+Config.Dist = 3.0 -- the distance to check at the point
 
 Config.SendNotifyClient = function(msg) -- add your client notify 
     ESX.ShowNotification(msg)
@@ -31,25 +31,24 @@ Config.AfterRevive = function(source)
     -- ExecuteCommand('removeTimeout ' ..tostring(source)) 
 end
 
-Config.ShowHelpNotify = function(Text)
+Config.ShowHelpNotify = function(Text) -- add your ShowHelpNotification
     ESX.ShowHelpNotification(Text)
 end
 
 
 -- If you want a NPC to spawn at the Coords in Config.EnterCoords then add your data here
 Config.NPC = {
-    active = true,
-    heading = 100,
-    hash = 0xB353629E,
-    model = 's_m_m_paramedic_01'
+    active = true, -- put this true if you want a NPC
+    heading = 100, -- set the heading where the NPC should look at
+    model = 'ig_ballasog' -- look here what you want for a NPC https://docs.fivem.net/docs/game-references/ped-models/
 }
 
 Config.Blip = {
-    active = true,
-    id = 84,
-    scale = 1.0,
-    color = 3,
-    text = 'FFA'
+    active = true, -- Put this true if you want a blip
+    id = 84, -- look here what you want for a blip https://docs.fivem.net/docs/game-references/blips/
+    scale = 1.0, -- how big the blip is 1.0 is basic. THIS MUST BE A FLOAT/DOUBLE
+    color = 3, -- look here what you want for a blip color https://docs.fivem.net/docs/game-references/blips/
+    text = 'FFA' -- what the blip is called
 }
 
 -- Change the coord where the ffa enter coords should be
