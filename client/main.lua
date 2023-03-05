@@ -28,8 +28,8 @@ RegisterCommand(Config.LeaveCommand, function(source, args)
     end
 end)
 
-if Config.NPC.active then
-    Citizen.CreateThread(function()
+Citizen.CreateThread(function()
+    if Config.NPC.active then
         RequestModel(GetHashKey(Config.NPC.model))
         while not HasModelLoaded(GetHashKey(Config.NPC.model)) do
             Wait(15)
@@ -40,8 +40,20 @@ if Config.NPC.active then
         FreezeEntityPosition(ped, true)
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)
-    end)
-end
+    end
+
+    if Config.Blip.active then
+        blip = AddBlipForCoord(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3])
+        SetBlipSprite(blip, Config.Blip.id)
+        SetBlipDisplay(blip, 4)
+        SetBlipScale(blip, Config.Blip.scale)
+        SetBlipColour(blip, Config.Blip.color)
+        SetBlipAsShortRange(blip, true)
+        BeginTextCommandSetBlipName("STRING")
+        AddTextComponentString(Config.Blip.text)
+        EndTextCommandSetBlipName(blip)
+    end
+end)
 
 Citizen.CreateThread(function()
     local ped = PlayerPedId()

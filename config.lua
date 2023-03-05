@@ -38,6 +38,14 @@ Config.NPC = {
     model = 's_m_m_paramedic_01'
 }
 
+Config.Blip = {
+    active = true,
+    id = 84,
+    scale = 1.0,
+    color = 3,
+    text = 'FFA'
+}
+
 -- Change the coord where the ffa enter coords should be
 Config.EnterCoords = {1628.2857666016,2552.1848144531,45.564849853516}
 
