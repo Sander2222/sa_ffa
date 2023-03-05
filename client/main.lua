@@ -62,7 +62,7 @@ Citizen.CreateThread(function()
 		if IsAt then
             ESX.ShowHelpNotification(Config.Local['PressE'])
             if IsControlJustReleased(0, 38) then
-                FFAUICreate()
+                FFAUISearch()
             end
 		end
     end
