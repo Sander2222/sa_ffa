@@ -33,7 +33,7 @@ Citizen.CreateThread(function()
             Wait(15)
         end
 
-        ped = CreatePed(4, Config.NPC.hash, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] - 1, 3374176, false, true)
+        ped = CreatePed(4, GetHashKey(Config.NPC.model), Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] - 1, 3374176, false, true)
         SetEntityHeading(ped, Config.NPC.heading)
         FreezeEntityPosition(ped, true)
         SetEntityInvincible(ped, true)
