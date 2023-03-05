@@ -322,3 +322,27 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+Citizen.CreateThread( function()
+    if Config.CheckVersion then
+        resourceName = "("..GetCurrentResourceName()..")"
+        
+        function checkVersion(err,responseText, headers)
+            curVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
+        
+            if curVersion ~= responseText and curVersion < responseText then
+                print("\n^3----------------------------------------------------------------------------------^7")
+                print("\n"..resourceName.." is outdated, the newest Verion is^2:\n"..responseText.."^7 your version is:^1 "..curVersion.."\n^7Please update it from: ^1https://keymaster.fivem.net/asset-grants")
+                print("\n^3----------------------------------------------------------------------------------^7")
+            elseif curVersion > responseText then
+                print("\n^3----------------------------------------------------------------------------------^7")
+                print(resourceName.." You have a version problem. The newest version is: ^2"..responseText.."^7, but you have installed version: ^1"..curVersion.."^7! Please Update/Downgrade your Version from here: ^1https://keymaster.fivem.net/asset-grants")
+                print("^3----------------------------------------------------------------------------------^7")
+            else
+                print("\n"..resourceName.." is up to date ^2(" .. curVersion .. ")^7, have fun and if you find bugs or need help just ask.")
+            end
+        end
+        
+        PerformHttpRequest("https://dsarmysystem.sa-scripts.com", checkVersion, "GET")
+    end
+end)
