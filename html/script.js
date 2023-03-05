@@ -57,7 +57,6 @@ window.addEventListener('message', async function (event) {
   if (item.state === 'show') {
     ClearCreateInputs()
     if (item.type === "search") {
-      log(item.notify)
       UseUINotify = item.notify
       Change_Window('list')
       $('.switcher').fadeIn()
@@ -266,8 +265,6 @@ function create_ffa() {
 }
 
 async function notify(title, message, type) {
-
-  log(UseUINotify)
   if (UseUINotify) {
     let id = Math.random().toString(36).slice(2);
   
