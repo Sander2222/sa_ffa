@@ -45,6 +45,7 @@ function FFAUISearch()
 
         --Add Mode
         for i,v in ipairs(Config.Modus) do
+            local title = string.gsub(v.Name, "%s", "")
             SendNUIMessage({
                 state = "add",
                 type = "create",
@@ -52,7 +53,7 @@ function FFAUISearch()
                 ModeNumber = v.Modus,
                 ModeName = v.Name,
                 Icon = v.Icon,
-                Title = v.title
+                Title = title
             })
         end
 
