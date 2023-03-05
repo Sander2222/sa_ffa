@@ -1,6 +1,6 @@
 Config = {}
 
-Config.CheckVersion = true
+Config.CheckVersion = true -- if you want to check the active version (suggested!!)
 Config.Debug = true -- only put this on true if you know what you are doing
 Config.StandardDimension = 0 -- Put there you standard dimension
 Config.Invincible = false -- Put this on true if the player got killed have a spawnprotect
@@ -54,50 +54,50 @@ Config.Blip = {
 -- Change the coord where the ffa enter coords should be
 Config.EnterCoords = {1628.2857666016,2552.1848144531,45.564849853516}
 
--- If you want to cerate https://fontawesome.com/icons/
+-- If you want to add more modus read the readme.md
 Config.Modus = {
     {
         Modus = 1,
-        Name = 'Gambo 1',
+        Name = 'Only Pistol',
         Icon = 'fa-solid fa-user-ninja',
         Weapons = {
             "weapon_pistol",
-            "weapon_appistol",
-            "weapon_pumpshotgun"
+            "weapon_appistol"
         }
     },
     {
         Modus = 2,
-        Name = 'Gambo 2',
+        Name = 'Only Sniper',
         Icon = 'fa-solid fa-person-praying',
         Weapons = {
-            "WEAPON_PISTOL",
-            "WEAPON_APPISTOL",
-            "weapon_assaultrifle"
+            'weapon_sniperrifle',
+            "weapon_heavysniper",
+            "weapon_marksmanrifle"
         }
     },
     {
         Modus = 3,
-        Name = 'Ga m bo 3',
+        Name = 'Only Pumpgun',
         Icon = 'fa-solid fa-gun',
         Weapons = {
-            "WEAPON_PISTOL",
-            "WEAPON_APPISTOL",
-            "weapon_smg"
+            "weapon_pumpshotgun",
+            "weapon_sawnoffshotgun",
+            "weapon_assaultshotgun"
         }
     },
     {
         Modus = 4,
-        Name = 'ficken sie sich',
+        Name = 'Only Assault',
         Icon = 'fa-solid fa-cross',
         Weapons = {
-            "WEAPON_PISTOL",
-            "WEAPON_APPISTOL",
-            "weapon_mg"
+            "weapon_assaultrifle",
+            "weapon_carbinerifle",
+            "weapon_advancedrifle"
         }
     },
 }
 
+-- If you want to add more modus read the readme.md
 Config.Maps = {
     {
         Map = 1,
@@ -139,21 +139,21 @@ Config.Maps = {
 Config.Local = {
     ['PressE'] = 'Drücke ~INPUT_CONTEXT~ um das FFA zu öffnen',
     ['NameIsInValid'] = 'Es gibt schon einen Raum mit diesem Namen',
-    ['CreatedRoom'] = 'Du hast einen Raum erstellt mit dem Namen: %s',
-    ['NoGameFound'] = 'Es wurde kein Spiel gefunden mit dem Namen: %s',
+    ['CreatedRoom'] = 'Du hast einen Raum erstellt mit dem Namen: %s', -- param 1 = FFA Name
+    ['NoGameFound'] = 'Es wurde kein Spiel gefunden mit dem Namen: %s', -- param 1 = User Enter FFA Name
     ['OutOfZone'] = 'Du bist auserhalb der Zone, deswegen wurdest du zurück teleporiert',
     ['NotInLobby'] = 'Du bist in keiner FFA Runde',
     ['JoinGame'] = 'Raum wird betreten...',
     ['AlreadyInLobby'] = 'Du bist schon in einer Lobby',
     ['GameCreate'] = 'Der Raum wird erstellt',
-    ['RoomFound'] = 'Room wurde gefunden! Room: %s',
+    ['RoomFound'] = 'Room wurde gefunden! Room: %s', -- param 1 = FFA name
     ['RommFoundWrongPassword'] = 'Das Game wurde gefunden aber das Passwort ist falsch',
     ['RoomFoundButFull'] = 'Passwort und Name war richtig aber das Game ist voll',
-    ['YouGotKilled'] = 'Du wurdest von %s getötet',
-    ['YouKilled'] = 'Du hast %s getötet',
+    ['YouGotKilled'] = 'Du wurdest von %s getötet', -- param 1 = the killer from this player (steam)
+    ['YouKilled'] = 'Du hast %s getötet', -- -- param 1 = the person you killed (steam)
     ['KilledYourself'] = 'Du hast dich selber getötet',
     ['LastPerson'] = 'Da du die letzte Person in dem Game warst wurde die Lobby gelöscht',
-    ['ShowLeaveCommand'] = 'Mit diesem Befehl kannst du das FFA jederzeit verlassen %s',
+    ['ShowLeaveCommand'] = 'Mit diesem Befehl kannst du das FFA jederzeit verlassen %s', -- -- param 1 = leave command
 }
 
 -- There are more locals in the config.js
