@@ -14,6 +14,7 @@ Config.CamWait = 2500 -- Dont edit it if you dont know what are you doing
 Config.UseUINotify = false -- This is for the UI there is a Notifysystem in the ui if you dont use it then put this on false
 Config.LeaveCommand = 'leave' -- This command ist for leave the ffa
 Config.ShowleaveCommandNotify = true -- This is if the player get a notify how the leave command ist Config.LeaveCommand
+Config.Dist = 3.0
 
 Config.SendNotifyClient = function(msg) -- add your client notify 
     ESX.ShowNotification(msg)
