@@ -60,7 +60,7 @@ Citizen.CreateThread(function()
         local dist = #(GetEntityCoords(ped) - vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]))
 
         if dist <= Config.Dist then
-            ESX.ShowHelpNotification(Config.Local['PressE'])
+            Config.ShowHelpNotify(Config.Local['PressE'])
             if IsControlJustReleased(0, 38) then
                 FFAUISearch()
             end 
@@ -92,7 +92,7 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
 
     ChangeClientscoreboard('show')
     if Config.ShowleaveCommandNotify then 
-        Config.SendNotifyClient((Config.Local['ShowLeaveCommand']):format('/'.. Config.ShowleaveCommandNotify))
+        Config.SendNotifyClient((Config.Local['ShowLeaveCommand']):format('/'.. Config.LeaveCommand))
     end
     isInDimension = true
 end)
