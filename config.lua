@@ -31,6 +31,11 @@ Config.AfterRevive = function(source)
     -- ExecuteCommand('removeTimeout ' ..tostring(source)) 
 end
 
+Config.ShowHelpNotify = function(Text)
+    ESX.ShowHelpNotification(Text)
+end
+
+
 -- If you want a NPC to spawn at the Coords in Config.EnterCoords then add your data here
 Config.NPC = {
     active = true,
@@ -54,7 +59,6 @@ Config.EnterCoords = {1628.2857666016,2552.1848144531,45.564849853516}
 Config.Modus = {
     {
         Modus = 1,
-        title = 'gambo1',
         Name = 'Gambo 1',
         Icon = 'fa-solid fa-user-ninja',
         Weapons = {
@@ -65,7 +69,6 @@ Config.Modus = {
     },
     {
         Modus = 2,
-        title = 'gambo2',
         Name = 'Gambo 2',
         Icon = 'fa-solid fa-person-praying',
         Weapons = {
@@ -76,8 +79,7 @@ Config.Modus = {
     },
     {
         Modus = 3,
-        title = 'gambo3',
-        Name = 'Gambo 3',
+        Name = 'Ga m bo 3',
         Icon = 'fa-solid fa-gun',
         Weapons = {
             "WEAPON_PISTOL",
@@ -87,7 +89,6 @@ Config.Modus = {
     },
     {
         Modus = 4,
-        title = 'gambo4',
         Name = 'ficken sie sich',
         Icon = 'fa-solid fa-cross',
         Weapons = {
@@ -137,7 +138,7 @@ Config.Maps = {
 
 -- Locals
 Config.Local = {
-    ['PressE'] = 'Drücke ~INPUT_CONTEXT~ um etwas zu kaufen',
+    ['PressE'] = 'Drücke ~INPUT_CONTEXT~ um das FFA zu öffnen',
     ['NameIsInValid'] = 'Es gibt schon einen Raum mit diesem Namen',
     ['CreatedRoom'] = 'Du hast einen Raum erstellt mit dem Namen: %s',
     ['NoGameFound'] = 'Es wurde kein Spiel gefunden mit dem Namen: %s',
