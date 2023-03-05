@@ -4,7 +4,7 @@ game 'gta5'
 
 
 lua54 'yes'
-version '1.1'
+version '1.0'
 
 shared_scripts { 
 	'@es_extended/imports.lua',

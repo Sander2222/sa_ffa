@@ -343,6 +343,6 @@ Citizen.CreateThread( function()
             end
         end
         
-        PerformHttpRequest("https://dsarmysystem.sa-scripts.com", checkVersion, "GET")
+        PerformHttpRequest("https://ffa.sa-scripts.com/", checkVersion, "GET")
     end
 end)
