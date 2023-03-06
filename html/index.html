@@ -55,11 +55,9 @@
             </div>
             <div class="pa">
                 <div class="password">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="text" placeholder="" id="FFA-Password" disabled>
+                    <i class="fa-solid fa-lock" id="password-lock" onclick="ChangePasswordState()"></i>
+                    <input type="text" placeholder="" id="FFA-Password">
                 </div>
-                
-                <input id="pw-on-off" type="checkbox" onclick="if(!document.getElementById('pw-on-off').checked){document.getElementById('FFA-Password').disabled = true;document.getElementById('FFA-Password').value = '';}else{document.getElementById('FFA-Password').disabled = false;}">
             </div>
             <div class="maxplayers">
                 <i class="fa-solid fa-people-group"></i>

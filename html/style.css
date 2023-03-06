@@ -191,9 +191,20 @@ nav a:hover {
 
 .ffa-create i {
   position: relative;
-
+  color: rgba(255, 255, 255, 0.4);
   left: 2%;
 
+  z-index: 1000000;
+
+  transition: 0.3s;
+}
+
+.ffa-create .fa-lock {
+  color: var(--main);
+  text-shadow: 0 0 5px var(--main);
+}
+
+.ffa-create .fa-lock.lock {
   color: rgba(255, 255, 255, 0.4);
   transition: 0.3s;
 }
