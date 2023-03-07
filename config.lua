@@ -15,6 +15,7 @@ Config.UseUINotify = false -- This is for the UI there is a Notifysystem in the 
 Config.LeaveCommand = 'leave' -- This command ist for leave the ffa
 Config.ShowleaveCommandNotify = true -- This is if the player get a notify how the leave command ist Config.LeaveCommand
 Config.Dist = 3.0 -- the distance to check at the point
+Config.DisableBlip = true -- put this on true if you want do disable all blips if the player is in a ffa game (beta version)
 
 Config.SendNotifyClient = function(msg) -- add your client notify 
     ESX.ShowNotification(msg)
