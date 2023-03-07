@@ -15,6 +15,17 @@ function IsPlayerInFFA()
     return isInDimension
 end
 
+function LeaveFFA()
+    if isInDimension then
+        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
+        TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
+        return true
+    else
+        print("Player is not in ffa")
+        return false
+    end
+end
+
 RegisterCommand(Config.LeaveCommand, function(source, args)
     if isInDimension or Config.Debug then
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
