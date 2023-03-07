@@ -165,6 +165,7 @@ function JoinGame(Player, GameInfo, Loadout)
     Wait(1000)
     TriggerClientEvent('sa_ffa:JoinGameClient', Player, GameInfo, Loadout)
     SetPlayerRoutingBucket(Player, GameInfo.Dimension)
+    SetRoutingBucketEntityLockdownMode(GameInfo.Dimension, 'strict')
     ChangePlayerCount(Player, GameInfo, "join")
 
     if not Config.DisabledNPCS then
