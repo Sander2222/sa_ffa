@@ -74,6 +74,7 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     PlayerLoadout = PlayerWeapons
     ActiveClientGame = ActiveGame
     Loadout('Join', ActiveGame.Modus)
+    ChangeBlipState('hide')
 
     DisplayRadar(false)
     if Config.UseCamAnimations then
@@ -99,6 +100,7 @@ end)
 RegisterNetEvent("sa_ffa:LeaveGameClient")
 AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     Loadout('Leave', Modus)
+    ChangeBlipState('show')
     ChangeClientscoreboard('close')
     isInDimension = false
 end)
@@ -320,4 +322,35 @@ if Config.Debug then
             Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
         end
     end)
+end
+
+
+function ChangeBlipState(State)
+    if Config.DisableBlip then
+        local blips = {}
+        for k = 0, 802, 1 do -- build 2372
+            local blip = GetFirstBlipInfoId(k)
+            if DoesBlipExist(blip) then
+                table.insert(blips, blip)
+                while true do
+                    local blip = GetNextBlipInfoId(k)
+                    if DoesBlipExist(blip) then
+                        table.insert(blips, blip)
+                    else
+                        break
+                    end
+                end
+            end
+        end
+        
+        if State == 'hide' then
+            for k, v in pairs(blips) do 
+                SetBlipDisplay(v, 0)
+            end
+        elseif State == 'show' then
+            for k, v in pairs(blips) do 
+                SetBlipDisplay(v, 2)
+            end
+        end
+    end
 end
