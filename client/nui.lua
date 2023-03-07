@@ -1,12 +1,6 @@
 local AllGames = {}
 
 if Config.Debug then
-    RegisterCommand('1', function(source, args)
-        FFAUICreate()
-    end)
-end
-
-if Config.Debug then
     RegisterCommand('2', function(source, args)
         FFAUISearch()
     end)
