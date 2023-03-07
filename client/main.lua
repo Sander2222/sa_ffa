@@ -1,9 +1,7 @@
 isInDimension = false
 local cam = nil
 local PlayerModus = 0
-local PlayerLoadout = {}
-local ActiveClientGame = {}
-local GameWeapons = {}
+local PlayerLoadout, ActiveClientGame, GameWeapons = {}, {}, {}  
 local ActiveMapInfo = {
     ActiveMapCenter = nil,
     ActiveMapRadius = nil
