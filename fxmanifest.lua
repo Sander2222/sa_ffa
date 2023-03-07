@@ -22,7 +22,7 @@ client_scripts {
 
 exports {
 	'FFAUISearch',
-	'FFAUICreate',
+	'LeaveFFA',
 	'IsPlayerInFFA'
 }
 
@@ -42,6 +42,8 @@ dependencies {
 --exports['sa_ffa']:FFAUISearch()
 
 --exports['sa_ffa']:IsPlayerInFFA()
+
+--exports['sa_ffa']:LeaveFFA()
 
 ui_page ('html/index.html')
 
