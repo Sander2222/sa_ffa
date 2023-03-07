@@ -3,6 +3,7 @@ var MaxPlayerMap;
 var CurrentModus;
 var CurrentWindow;
 var UseUINotify;
+let PasswordState = true // true hießt Passwort (privat) und false kein Passwort (öffentlich)
 
 document.addEventListener("DOMContentLoaded", () => {
   ClearCreateInputs()
@@ -12,25 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Load Data from config
   document.getElementById("FFA-Name").placeholder = JSConfig.Locals.Name;
-  document.getElementById("FFA-Password").placeholder =
-    JSConfig.Locals.Password;
-  document.getElementById("FFA-MaxPlayer").placeholder =
-    JSConfig.Locals.MaxPlayer;
+  document.getElementById("FFA-Password").placeholder = JSConfig.Locals.Password;
+  document.getElementById("FFA-MaxPlayer").placeholder = JSConfig.Locals.MaxPlayer;
   document.getElementById("Search-Mode").placeholder = JSConfig.Locals.Mode;
   document.getElementById("Search-Map").placeholder = JSConfig.Locals.Map;
-  document.getElementById("Search-Name").placeholder =
-    JSConfig.Locals.EnterName;
-  document.getElementById("CreateFFAText").innerHTML =
-    JSConfig.Locals.CreateFFAText;
+  document.getElementById("Search-Name").placeholder = JSConfig.Locals.EnterName;
+  document.getElementById("CreateFFAText").innerHTML = JSConfig.Locals.CreateFFAText;
   document.getElementById("EnterThinks").innerHTML = JSConfig.Locals.EnterData;
-  document.getElementById("btn-change-mode").innerHTML =
-    JSConfig.Locals.ChooseMode;
-  document.getElementById("btn-change-map").innerHTML =
-    JSConfig.Locals.ChooseMap;
-  document.getElementById("CreateFFAButton").innerHTML =
-    JSConfig.Locals.CreateFFA;
-  document.getElementById("FFAListText").innerHTML =
-    JSConfig.Locals.FFAListText;
+  document.getElementById("btn-change-mode").innerHTML = JSConfig.Locals.ChooseMode;
+  document.getElementById("btn-change-map").innerHTML = JSConfig.Locals.ChooseMap;
+  document.getElementById("CreateFFAButton").innerHTML = JSConfig.Locals.CreateFFA;
+  document.getElementById("FFAListText").innerHTML = JSConfig.Locals.FFAListText;
   document.getElementById("PrivateText").innerHTML = JSConfig.Locals.Private;
   document.getElementById("PuplicText").innerHTML = JSConfig.Locals.Puplic;
 
@@ -40,10 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // KDA
   document.getElementById("kill-title").innerHTML = JSConfig.Locals.kills;
   document.getElementById("death-title").innerHTML = JSConfig.Locals.death;
-  document.getElementById("FFAStatsText").innerHTML =
-    JSConfig.Locals.FFAStatsText;
-  document.getElementById("GameNameText").innerHTML =
-    JSConfig.Locals.GameNameText;
+  document.getElementById("FFAStatsText").innerHTML = JSConfig.Locals.FFAStatsText;
+  document.getElementById("GameNameText").innerHTML = JSConfig.Locals.GameNameText;
   document.getElementById("KDText").innerHTML = JSConfig.Locals.KDText;
 });
 
@@ -52,14 +43,14 @@ function ClearCreateInputs() {
   document.getElementById("FFA-Password").value = "";
   document.getElementById("FFA-MaxPlayer").value = "";
   document.getElementById("FFA-Name").value = "";
-  document.getElementById("FFA-Name").value = "";
 
-  // Mein Code
-  // document.getElementById('btn-change-mode').innerHTML= '';
-  // document.getElementById('btn-change-map').innerHTML= '';
+  $("#btn-change-map").css("color", "rgba(255,255,255,0.3)");
+  $("#btn-change-mode").css("color", "rgba(255,255,255,0.3)");
+  document.getElementById("btn-change-mode").innerText = JSConfig.Locals.ChooseMode;
+  document.getElementById("btn-change-map").innerText = JSConfig.Locals.ChooseMap;
 
-  // CurrentMap = null
-  // CurrentModus = null
+  CurrentMap = '';
+  CurrentModus = '';
 }
 
 window.addEventListener("message", async function (event) {
@@ -250,10 +241,7 @@ function create_ffa() {
   if (input_name.value.length < JSConfig.MinLengthName) {
     // if input kleiner als 3 dann also (0,1,2)
     notify("FFA", JSConfig.Locals.NotEnoughCharactersName, "error");
-  } else if (
-    document.getElementById("pw-on-off").checked &&
-    input_password.value.length < JSConfig.MinLengthPassword
-  ) {
+  } else if ( PasswordState && input_password.value.length < JSConfig.MinLengthPassword) {
     notify("FFA", JSConfig.Locals.NotEnoughCharactersPassword, "error");
   } else if (
     input_maxplayers.value < JSConfig.MinMaxPlayer ||
@@ -284,7 +272,7 @@ function create_ffa() {
   } else {
     var checked = 0;
 
-    if (document.getElementById("pw-on-off").checked) {
+    if (PasswordState) {
       checked = 1;
     } else {
       checked = 0;
@@ -558,11 +546,6 @@ function Change_Window(window) {
   CurrentWindow = window;
 }
 
-
-
-// Variable für Passwort ob es aktiviert ist oder nicht  true=Passwort | false=Kein Passwort
-let PasswordState = true; // hier aber nix machen
-
 function ChangePasswordState(bool) {
   let icon = document.getElementById("password-lock");
   if(PasswordState) {
@@ -571,14 +554,11 @@ function ChangePasswordState(bool) {
     PasswordState = false
     document.getElementById("FFA-Password").value = "";
     document.getElementById("FFA-Password").disabled = true;
-    
   }
   else {
     PasswordState = true
     document.getElementById("FFA-Password").disabled = false;
     icon.classList.remove("fa-lock-open");
     icon.classList.add("fa-lock");
-    
   }
-  console.log(PasswordState);
 }
