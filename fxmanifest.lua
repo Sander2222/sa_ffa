@@ -55,7 +55,5 @@ files {
 	'html/images/*.png',
 	'html/images/*.jpg',
 	'html/images/*.gif',
-	'html/images/*.webp',
-	'html/lines.svg',
-	'html/panel_lines.svg'
+	'html/images/*.webp'
 }
