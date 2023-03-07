@@ -29,3 +29,16 @@
         }
     },
 ```
+
+## Here are some exports
+
+
+### Export to open FFA Search UI clientside (no result)
+```lua
+    exports['sa_ffa']:FFAUISearch()
+```
+
+### Export to check if the player is in a FFA Game clientside(result boolean)
+```lua
+    exports['sa_ffa']:IsPlayerInFFA()
+```
