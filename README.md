@@ -43,7 +43,7 @@
     exports['sa_ffa']:IsPlayerInFFA()
 ```
 
-### Export to check if the player is in a FFA Game clientside(result boolean)
+### Export to check if the player is in a FFA Game clientside(no result)
 ```lua
     exports['sa_ffa']:LeaveFFA()
 ```
