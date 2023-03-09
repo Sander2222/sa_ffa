@@ -18,7 +18,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
             if v.Name ~= UserCreateInfoA.Name then
                 IsNameValid = IsNameValid + 1
             else 
-                Config.SendNotifyServer(_source, Config.Local['NameIsInValid'])
+                Config.SendNotifyServer(_source, Config.Local['NameIsInvalid'])
                 break
             end
         end

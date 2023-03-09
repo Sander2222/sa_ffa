@@ -139,7 +139,7 @@ Config.Maps = {
 -- Locals
 Config.Local = {
     ['PressE'] = 'Drücke ~INPUT_CONTEXT~ um das FFA zu öffnen',
-    ['NameIsInValid'] = 'Es gibt schon einen Raum mit diesem Namen',
+    ['NameIsInvalid'] = 'Es gibt schon einen Raum mit diesem Namen',
     ['CreatedRoom'] = 'Du hast einen Raum erstellt mit dem Namen: %s', -- param 1 = FFA Name
     ['NoGameFound'] = 'Es wurde kein Spiel gefunden mit dem Namen: %s', -- param 1 = User Enter FFA Name
     ['OutOfZone'] = 'Du bist auserhalb der Zone, deswegen wurdest du zurück teleporiert',
