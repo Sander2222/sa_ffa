@@ -29,6 +29,9 @@
         }
     },
 ```
+Important!!
+to add the img for tha map the picture need to be an png and need to has the same name then the Name parameter. Add the picture in html/images/test.png
+
 
 ## Here are some exports
 
