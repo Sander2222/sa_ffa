@@ -15,6 +15,10 @@ function IsPlayerInFFA()
     return isInDimension
 end
 
+if Config.UseESX12 then
+    ESX = exports["es_extended"]:getSharedObject()
+end
+
 function LeaveFFA()
     if isInDimension then
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
