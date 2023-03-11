@@ -27,8 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("PrivateText").innerHTML = JSConfig.Locals.Private;
   document.getElementById("PuplicText").innerHTML = JSConfig.Locals.Puplic;
 
-  document.getElementById("searchid").innerHTML = JSConfig.Locals.Create;
-  document.getElementById("createId").innerHTML = JSConfig.Locals.Search;
+  document.getElementById("searchid").innerHTML = JSConfig.Locals.Search;
+  document.getElementById("createId").innerHTML = JSConfig.Locals.Create;
 
   // KDA
   document.getElementById("kill-title").innerHTML = JSConfig.Locals.kills;
