@@ -46,7 +46,7 @@ CreateThread(function()
             Wait(15)
         end
 
-        ped = CreatePed(4, GetHashKey(Config.NPC.model), Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] - 1, 3374176, false, true)
+        local ped = CreatePed(4, GetHashKey(Config.NPC.model), Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] - 1, 3374176, false, true)
         SetEntityHeading(ped, Config.NPC.heading)
         FreezeEntityPosition(ped, true)
         SetEntityInvincible(ped, true)
@@ -54,7 +54,7 @@ CreateThread(function()
     end
 
     if Config.Blip.active then
-        blip = AddBlipForCoord(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3])
+        local blip = AddBlipForCoord(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3])
         SetBlipSprite(blip, Config.Blip.id)
         SetBlipDisplay(blip, 4)
         SetBlipScale(blip, Config.Blip.scale)
@@ -70,7 +70,7 @@ CreateThread(function()
     while true do
         Wait(1)
 
-        local dist = #(GetEntityCoords(ped) - vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]))
+        local dist = #(GetEntityCoords(PlayerPedId()) - vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]))
 
         if dist <= Config.Dist then
             Config.ShowHelpNotify(Config.Local['PressE'])

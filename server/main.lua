@@ -282,7 +282,7 @@ end
 CreateThread(function()
     local IsSend = false
     while Config.SendDiscordStats do
-        t = os.date ("*t")
+        local t = os.date ("*t")
         local hour = tostring(t.hour)
 
         if hour <= "9" then
@@ -330,10 +330,10 @@ end)
 
 CreateThread( function()
     if Config.CheckVersion then
-        resourceName = "("..GetCurrentResourceName()..")"
+        local resourceName = "("..GetCurrentResourceName()..")"
         
-        function checkVersion(err,responseText, headers)
-            curVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
+        function CheckVersion(err,responseText, headers)
+            local curVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
         
             if curVersion ~= responseText and curVersion < responseText then
                 print("\n^3----------------------------------------------------------------------------------^7")
@@ -348,6 +348,6 @@ CreateThread( function()
             end
         end
         
-        PerformHttpRequest("https://ffa.sa-scripts.com/", checkVersion, "GET")
+        PerformHttpRequest("https://ffa.sa-scripts.com/", CheckVersion, "GET")
     end
 end)
