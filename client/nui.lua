@@ -22,7 +22,7 @@ function FFAUISearch()
                 local MapName, ModusName  = GiveDataBack(v.Modus, v.Map)
 
                 while ModusName == nil and MapName == nil do
-                    wait(1)
+                    Wait(1)
                 end
 
             SendNUIMessage({

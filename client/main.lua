@@ -99,7 +99,7 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
         PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
         SetCamActive(cam, true)
         RenderScriptCams(true, true, Config.CamWait, true, true)
-        Citizen.Wait(Config.CamWait)
+        Wait(Config.CamWait)
         Teleport('first')
     else 
         Teleport()
@@ -136,7 +136,7 @@ end)
 AddEventHandler('esx:onPlayerDeath', function(data)
 
     if IsInDimension then
-        Citizen.Wait(1000)
+        Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
         TriggerEvent('esx_ambulancejob:revive')
         Wait(1000)
@@ -152,7 +152,7 @@ AddEventHandler('esx:onPlayerDeath', function(data)
             Config.AfterRevive(src)
         end)
 
-        Citizen.Wait(3000)
+        Wait(3000)
         NetworkSetFriendlyFireOption(true)
         SetCanAttackFriendly(GetPlayerPed(-1), true, true)
         if Config.Invincible then
@@ -199,7 +199,7 @@ function Teleport(Type)
 end
 
 --zum dist checkn
-Citizen.CreateThread(function()
+CreateThread(function()
 
     while true do
         if IsInDimension then
@@ -219,7 +219,7 @@ Citizen.CreateThread(function()
 end)
 
 --Aktualisiert KDA UI etc.
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         if IsInDimension then
             UpdateKDA(PlayerStats.deaths, PlayerStats.kills, ActiveClientGame.Name)
@@ -288,13 +288,13 @@ function Loadout(Type, Modus)
     end
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        ped = PlayerPedId()
+        Ped = PlayerPedId()
         if PlayerModus ~= 0 then
             while true do
                 for k,v in pairs(GameWeapons) do
-                    AddAmmoToPed(ped, GetHashKey(v), 500)
+                    AddAmmoToPed(Ped, GetHashKey(v), 500)
                 end
                 Wait(0)
             end
@@ -324,10 +324,6 @@ if Config.Debug then
     RegisterCommand('game', function(source, args)
         print(ESX.DumpTable(ActiveClientGame))
     end)
-
-    function er(msg)
-        print(msg)
-    end
 
     RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
         if not IsInDimension then

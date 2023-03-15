@@ -279,7 +279,7 @@ function SendFFAScoreboard(message)
     PerformHttpRequest(SvConfig.WebhookScoreboard, function(err, text, headers) end, 'POST', json.encode({username = name, embeds = embed}), { ['Content-Type'] = 'application/json' })
 end
 
-Citizen.CreateThread(function()
+CreateThread(function()
     local IsSend = false
     while Config.SendDiscordStats do
         t = os.date ("*t")
@@ -328,7 +328,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread( function()
+CreateThread( function()
     if Config.CheckVersion then
         resourceName = "("..GetCurrentResourceName()..")"
         
