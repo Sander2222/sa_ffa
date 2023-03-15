@@ -1,4 +1,4 @@
-isInDimension = false
+IsInDimension = false
 local cam = nil
 local PlayerModus = 0
 local PlayerLoadout, ActiveClientGame, GameWeapons = {}, {}, {}  
@@ -12,7 +12,7 @@ local PlayerStats = {
 }
 
 function IsPlayerInFFA()
-    return isInDimension
+    return IsInDimension
 end
 
 if Config.UseESX12 then
@@ -20,7 +20,7 @@ if Config.UseESX12 then
 end
 
 function LeaveFFA()
-    if isInDimension then
+    if IsInDimension then
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
         return true
@@ -31,7 +31,7 @@ function LeaveFFA()
 end
 
 RegisterCommand(Config.LeaveCommand, function(source, args)
-    if isInDimension or Config.Debug then
+    if IsInDimension or Config.Debug then
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
     else
@@ -39,7 +39,7 @@ RegisterCommand(Config.LeaveCommand, function(source, args)
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     if Config.NPC.active then
         RequestModel(GetHashKey(Config.NPC.model))
         while not HasModelLoaded(GetHashKey(Config.NPC.model)) do
@@ -66,7 +66,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
         Wait(1)
 
@@ -109,7 +109,7 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     if Config.ShowleaveCommandNotify then 
         Config.SendNotifyClient((Config.Local['ShowLeaveCommand']):format('/'.. Config.LeaveCommand))
     end
-    isInDimension = true
+    IsInDimension = true
 end)
 
 RegisterNetEvent("sa_ffa:LeaveGameClient")
@@ -117,7 +117,7 @@ AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     Loadout('Leave', Modus)
     ChangeBlipState('show')
     ChangeClientscoreboard('close')
-    isInDimension = false
+    IsInDimension = false
 end)
 
 RegisterNetEvent("sa_ffa:UpdatePlayerStats")
@@ -135,7 +135,7 @@ end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
 
-    if isInDimension then
+    if IsInDimension then
         Citizen.Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
         TriggerEvent('esx_ambulancejob:revive')
@@ -202,7 +202,7 @@ end
 Citizen.CreateThread(function()
 
     while true do
-        if isInDimension then
+        if IsInDimension then
             local dist = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), ActiveMapInfo.ActiveMapCenter)
 
             if dist >= ActiveMapInfo.ActiveMapRadius then
@@ -221,7 +221,7 @@ end)
 --Aktualisiert KDA UI etc.
 Citizen.CreateThread(function()
     while true do
-        if isInDimension then
+        if IsInDimension then
             UpdateKDA(PlayerStats.deaths, PlayerStats.kills, ActiveClientGame.Name)
             Wait(100)
         else 
@@ -330,7 +330,7 @@ if Config.Debug then
     end
 
     RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
-        if not isInDimension then
+        if not IsInDimension then
             TriggerServerEvent("sa_ffa:JoinGame", args)
             Config.SendNotifyClient(Config.Local['JoinGame'])
         else

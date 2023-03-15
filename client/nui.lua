@@ -89,7 +89,7 @@ end)
 
 RegisterNUICallback('CreateGame', function(data, cb)
 
-    if not isInDimension then
+    if not IsInDimension then
         SetNuiFocus(false, false)
         SendNUIMessage({
             state = 'close'
