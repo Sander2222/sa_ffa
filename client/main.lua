@@ -1,4 +1,4 @@
-isInDimension = false
+IsInDimension = false
 local cam = nil
 local PlayerModus = 0
 local PlayerLoadout = {}
@@ -14,7 +14,7 @@ local PlayerStats = {
 }
 
 RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
-    if not isInDimension then
+    if not IsInDimension then
         TriggerServerEvent("sa_ffa:JoinGame", args)
         Config.SendNotifyClient("Raum wird betreten...")
     else
@@ -23,7 +23,7 @@ RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
 end)
 
 RegisterCommand('Leave', function(source, args)
-    if isInDimension or Config.Debug then
+    if IsInDimension or Config.Debug then
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
     else
@@ -88,14 +88,14 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     end
 
     ChangeClientscoreboard('show')
-    isInDimension = true
+    IsInDimension = true
 end)
 
 RegisterNetEvent("sa_ffa:LeaveGameClient")
 AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     Loadout('Leave', Modus)
     ChangeClientscoreboard('close')
-    isInDimension = false
+    IsInDimension = false
 end)
 
 RegisterNetEvent("sa_ffa:UpdatePlayerStats")
@@ -113,7 +113,7 @@ end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
 
-    if isInDimension then
+    if IsInDimension then
         Citizen.Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
         TriggerEvent('esx_ambulancejob:revive')
@@ -177,7 +177,7 @@ end
 Citizen.CreateThread(function()
 
     while true do
-        if isInDimension then
+        if IsInDimension then
             local dist = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), ActiveMapInfo.ActiveMapCenter)
 
             if dist >= ActiveMapInfo.ActiveMapRadius then
@@ -196,7 +196,7 @@ end)
 --Aktualisiert KDA UI etc.
 Citizen.CreateThread(function()
     while true do
-        if isInDimension then
+        if IsInDimension then
             UpdateKDA(PlayerStats.deaths, PlayerStats.kills, ActiveClientGame.Name)
             Wait(100)
         else 
@@ -281,18 +281,18 @@ if Config.Debug then
     end)
 
 
-    function er(msg)
+    function Er(msg)
         print(msg)
     end
 end
 
 Citizen.CreateThread(function()
     while true do
-        ped = PlayerPedId()
+        Ped = PlayerPedId()
         if PlayerModus ~= 0 then
             while true do
                 for k,v in pairs(GameWeapons) do
-                    AddAmmoToPed(ped, GetHashKey(v), 500)
+                    AddAmmoToPed(Ped, GetHashKey(v), 500)
                 end
                 Wait(0)
             end
