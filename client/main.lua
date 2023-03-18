@@ -338,7 +338,7 @@ end
 function ChangeBlipState(State)
     if Config.DisableBlip then
         local blips = {}
-        for k = 0, 802, 1 do -- build 2372
+        for k = 0, 826, 1 do -- build 2372
             local blip = GetFirstBlipInfoId(k)
             if DoesBlipExist(blip) then
                 table.insert(blips, blip)
