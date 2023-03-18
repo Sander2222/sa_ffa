@@ -46,7 +46,7 @@ to add the img for tha map the picture need to be an png and need to has the sam
     exports['sa_ffa']:IsPlayerInFFA()
 ```
 
-### Export to check if the player is in a FFA Game clientside(no result)
+### Export to check if the player is in a FFA Game clientside(result boolean)
 ```lua
     exports['sa_ffa']:LeaveFFA()
 ```
