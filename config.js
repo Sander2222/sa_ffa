@@ -21,7 +21,7 @@ JSConfig.Locals = {
     // FFA List
     'FFAListText': 'FFA List',
     'Private': 'Private',
-    'Puplic': 'Puplic',
+    'Public': 'Public',
     'Mode': 'Mode',
     'Map': 'Map',
     'EnterName': 'Enter the game name',

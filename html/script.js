@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("CreateFFAButton").innerHTML = JSConfig.Locals.CreateFFA;
   document.getElementById("FFAListText").innerHTML = JSConfig.Locals.FFAListText;
   document.getElementById("PrivateText").innerHTML = JSConfig.Locals.Private;
-  document.getElementById("PuplicText").innerHTML = JSConfig.Locals.Puplic;
+  document.getElementById("PublicText").innerHTML = JSConfig.Locals.Public;
 
   document.getElementById("searchid").innerHTML = JSConfig.Locals.Search;
   document.getElementById("createId").innerHTML = JSConfig.Locals.Create;
