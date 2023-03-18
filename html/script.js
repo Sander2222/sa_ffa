@@ -186,7 +186,7 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
           </div>
           <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
           <span id="dingsbums2">${JSConfig.Locals.NoPassword}</span>
-          <div class="join" onclick="JoinGame('${Name}','${Password}')">${JSConfig.Locals.Join}</div>
+          <div class="join" onclick="JoinGame('${Name}')">${JSConfig.Locals.Join}</div>
         </div>
       `);
   } else {
@@ -511,11 +511,17 @@ function ChangeFFAVisual(type) {
 }
 
 function JoinGame(Name, Password) {
-  var UserPassword = document.getElementById(Password).value;
-  if (Password == UserPassword) {
+  
+  if (Password == undefined) {
     JoinSearchedMatch(Name);
   } else {
-    notify("FFA Join", JSConfig.Locals.WrongPassword, "error");
+    var UserPassword = document.getElementById(Password).value;
+
+    if (Password == UserPassword) {
+      JoinSearchedMatch(Name);
+    } else {
+      notify("FFA Join", JSConfig.Locals.WrongPassword, "error");
+    }
   }
 }
 
