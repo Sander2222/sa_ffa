@@ -25,7 +25,6 @@ function LeaveFFA()
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
         return true
     else
-        print("Player is not in ffa")
         return false
     end
 end
