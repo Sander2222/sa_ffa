@@ -16,5 +16,3 @@ SvConfig.WebhookText = {
     ['PlayerJoinedRoom'] = 'Der Spieler **%s** (%s) ist den %s gejoint', -- param 1 = ESX Player name || param 2 = Player Identifier || param 3 Room name
     ['LobbyDeleted'] = 'Die Lobby **%s** wurde gelöscht da kein Spieler mehr drin ist', -- param 1 = Room name
 }
-
---SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), v.Name))
