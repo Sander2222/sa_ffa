@@ -1,11 +1,5 @@
 local AllGames = {}
 
-if Config.Debug then
-    RegisterCommand('2', function(source, args)
-        FFAUISearch()
-    end)
-end
-
 function FFAUISearch()
     ESX.TriggerServerCallback('sa_ffa:GetAllGames', function(ActiveGames)
 
@@ -18,6 +12,7 @@ function FFAUISearch()
             notify = Config.UseUINotify
         })
 
+        -- Add Games to Gamelist
         for i, v in ipairs(ActiveGames) do
                 local MapName, ModusName  = GiveDataBack(v.Modus, v.Map)
 
@@ -38,13 +33,13 @@ function FFAUISearch()
         end
 
         --Add Mode
-        for i,v in ipairs(Config.Modus) do
+        for i, v in ipairs(Config.Modus) do
             local title = string.gsub(v.Name, "%s", "")
             SendNUIMessage({
                 state = "add",
                 type = "create",
                 status = "modus",
-                ModeNumber = v.Modus,
+                ModeNumber = i,
                 ModeName = v.Name,
                 Icon = v.Icon,
                 Title = title
@@ -52,7 +47,7 @@ function FFAUISearch()
         end
 
         --Add Maps
-        for i,v in ipairs(Config.Maps) do
+        for i, v in ipairs(Config.Maps) do
             SendNUIMessage({
                 state = "add",
                 type = "create",
@@ -123,7 +118,7 @@ function GiveDataBack(Modus, Map)
     local MapName, ModusName
 
     for i,v in ipairs(Config.Modus) do
-        if tonumber(v.Modus) == tonumber(Modus) then
+        if v.Name == Config.Modus[Modus].Name then
             ModusName = v.Name
         end
     end
