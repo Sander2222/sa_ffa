@@ -332,6 +332,12 @@ if Config.Debug then
             Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
         end
     end)
+
+    if Config.Debug then
+        RegisterCommand('2', function(source, args)
+            FFAUISearch()
+        end)
+    end
 end
 
 
