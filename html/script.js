@@ -81,14 +81,7 @@ window.addEventListener("message", async function (event) {
       }
     } else if (item.type === "search") {
       if (item.maxplayers != null && item.maxplayers != undefined) {
-        AddFFA(
-          item.name,
-          item.password,
-          item.players,
-          item.maxplayers,
-          item.map,
-          item.modus
-        );
+        AddFFA( item.name, item.password, item.players, item.maxplayers, item.map, item.modus)
       }
     } else if (item.type === "score") {
       var kills = item.kill;
@@ -504,7 +497,7 @@ function ChangeFFAVisual(type) {
         FFAList.prepend(e);
         e.classList.remove("hidden");
       } else {
-        e.classList.add("hidden");
+        e.classList.add("hidden"); 
       }
     });
   }
