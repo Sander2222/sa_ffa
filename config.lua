@@ -56,7 +56,11 @@ Config.Blip = {
 }
 
 Config.PrebuiltGames = {
-    
+    {
+        Name = 'FFA 1',
+        Mode = '',
+        Map = ''
+    }
 }
 
 -- If you want to add more modus read the readme.md
