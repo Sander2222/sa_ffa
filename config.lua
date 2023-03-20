@@ -37,6 +37,8 @@ Config.ShowHelpNotify = function(Text) -- add your ShowHelpNotification
     ESX.ShowHelpNotification(Text)
 end
 
+-- Change the coord where the ffa enter coords should be
+Config.EnterCoords = {1628.2857666016,2552.1848144531,45.564849853516}
 
 -- If you want a NPC to spawn at the Coords in Config.EnterCoords then add your data here
 Config.NPC = {
@@ -53,8 +55,9 @@ Config.Blip = {
     text = 'FFA' -- what the blip is called
 }
 
--- Change the coord where the ffa enter coords should be
-Config.EnterCoords = {1628.2857666016,2552.1848144531,45.564849853516}
+Config.PrebuiltGames = {
+    
+}
 
 -- If you want to add more modus read the readme.md
 Config.Modus = {
