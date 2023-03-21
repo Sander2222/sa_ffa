@@ -87,6 +87,8 @@ window.addEventListener("message", async function (event) {
       var kills = item.kill;
       var deaths = item.death;
       ChangeScoreboards(kills, deaths, item.Name);
+    } else if (item.type === 'nogamessearch' ) {
+      // Oli dings
     }
   } else if (item.state === "close") {
     $("body").hide();
