@@ -1304,19 +1304,6 @@ nav a:hover {
   background: #005acf;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .liste-öffentlich {
   position: absolute;
 
@@ -1326,7 +1313,6 @@ nav a:hover {
   height: 72%;
 
   bottom: 0;
-
   display: flex;
   flex-wrap: wrap;
   gap: 3vmin;
