@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <img src="https://rare-gallery.com/uploads/posts/500911-gta-5-cool-pic.jpg" style="position: absolute;">
     <div class="container" id="container">
 
         <div class="notify-area">
@@ -86,24 +87,708 @@
             </div>
             <div id="CreateFFAButton" class="create" onclick="create_ffa()"></div>
         </div>
-        <div class="ffa-liste" style="display: none;">
+        <div class="ffa-liste" style="*display: none;">
             <img src="images/box.png" class="aad">
             <h1 id="FFAListText"></h1>
-            <div class="switch">
-                <div id="PrivateText" class="Privat active" onclick="ChangeFFAVisual('Privat')"></div>
-                <div id="PublicText" class="Öffentlich" onclick="ChangeFFAVisual('Öffentlich')">Öffentlich</div>
-            </div>
-            <input type="text" placeholder="Modus" id="Search-Mode" oninput="SearchMode(document.getElementById('Search-Mode').value)">
-            <input type="text" placeholder="Map" id="Search-Map" oninput="SearchMap(document.getElementById('Search-Map').value)">
-            <div class="search">
-                <input type="text" id="Search-Name" placeholder="Gebe den Namen ein" oninput="SearchFFA(document.getElementById('Search-Name').value)">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
+            
+            <header>
+                <div class="switch">
+                    <div id="PrivateText" class="Privat active" onclick="ChangeFFAVisual('Privat')"></div>
+                    <div id="PublicText" class="Öffentlich" onclick="ChangeFFAVisual('Öffentlich')">Öffentlich</div>
+                </div>
+                <input type="text" placeholder="Modus" id="Search-Mode" oninput="SearchMode(document.getElementById('Search-Mode').value)">
+                <input type="text" placeholder="Map" id="Search-Map" oninput="SearchMap(document.getElementById('Search-Map').value)">
+                <div class="search">
+                    <input type="text" id="Search-Name" placeholder="Gebe den Namen ein" oninput="SearchFFA(document.getElementById('Search-Name').value)">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+            </header>
             
             <div class="liste-privat liste" style="*display: none;">
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
 
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
+                <div class="ffa">
+                    <div class="ffa-map">
+                        <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABVABWDA</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <div class="ffa-password">
+                          <i class="fa-solid fa-lock"></i>
+                          <input type="text" placeholder="Password GESCHÜTZT">
+                        </div>
+                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
+                    </div>
+
+                  </div>
             </div>
-            <div class="liste-öffentlich liste" style="display: none;"></div>
+            <div class="liste-öffentlich liste" style="display: none;">
+                <div class="ffa NOPASSWORD">
+                    <div class="ffa-map">
+                      <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABC123123</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players">10/20 Spieler</div>
+                    </div>
+
+                    <div class="passwd-join">
+                        <span id="dingsbums2">Kein Passwort</span>
+                        <div class="join" onclick="JoinGame('${Name}')">Join</div>
+                    </div>
+
+                  </div>
+            </div>
         </div>
         <div class="ffa-scoreboard" style="display: none;">
             <h6>SA FFA</h6>

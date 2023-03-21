@@ -8,8 +8,8 @@ let PasswordState = true // true hießt Passwort (privat) und false kein Passwor
 document.addEventListener("DOMContentLoaded", () => {
   ClearCreateInputs()
   $(".ffa-scoreboard").hide();
-  $('.ffa-create').hide();
-  $(".ffa-liste").hide();
+  //$('.ffa-create').hide();
+  //$(".ffa-liste").hide();
 
   // Load Data from config
   document.getElementById("FFA-Name").placeholder = JSConfig.Locals.Name;
@@ -475,13 +475,14 @@ function ChangeFFAVisual(type) {
   document.querySelector(".Öffentlich").classList.remove("active");
   document.querySelector(`.${type}`).classList.add("active");
   FFaSearch_Visuability = type;
-
+  
   let FFAList = document.querySelector(`.liste-${type.toLowerCase()}`);
   let FFAs = FFAList.querySelectorAll(".ffa");
-
+  
   if (type === "Öffentlich") {
     $(".liste-privat").fadeOut();
     $(".liste-öffentlich").fadeIn();
+    document.querySelector(`.liste-öffentlich`).style.display = "flex";
     FFAs.forEach((e) => {
       if (e.classList.contains("NOPASSWORD")) {
         FFAList.prepend(e);
@@ -493,6 +494,7 @@ function ChangeFFAVisual(type) {
   } else {
     $(".liste-privat").fadeIn();
     $(".liste-öffentlich").fadeOut();
+    document.querySelector(`.privat-öffentlich`).style.display = "flex";
     FFAList.style.display = "block";
     FFAs.forEach((e) => {
       if (!e.classList.contains("NOPASSWORD")) {
