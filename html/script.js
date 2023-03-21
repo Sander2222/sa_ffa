@@ -482,6 +482,7 @@ function ChangeFFAVisual(type) {
   if (type === "Öffentlich") {
     $(".liste-privat").fadeOut();
     $(".liste-öffentlich").fadeIn();
+    $(".liste-prebuild").fadeIn();
     document.querySelector(`.liste-öffentlich`).style.display = "flex";
     FFAs.forEach((e) => {
       if (e.classList.contains("NOPASSWORD")) {
@@ -494,6 +495,7 @@ function ChangeFFAVisual(type) {
   } else {
     $(".liste-privat").fadeIn();
     $(".liste-öffentlich").fadeOut();
+    $(".liste-prebuild").hide();
     document.querySelector(`.privat-öffentlich`).style.display = "flex";
     FFAList.style.display = "block";
     FFAs.forEach((e) => {
