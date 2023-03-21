@@ -66,7 +66,6 @@ Config.PrebuiltGames = {
 -- If you want to add more modus read the readme.md
 Config.Modus = {
     {
-        Modus = 1,
         Name = 'Only Pistol',
         Icon = 'fa-solid fa-user-ninja',
         Weapons = {
@@ -75,7 +74,6 @@ Config.Modus = {
         }
     },
     {
-        Modus = 2,
         Name = 'Only Sniper',
         Icon = 'fa-solid fa-person-praying',
         Weapons = {
@@ -85,7 +83,6 @@ Config.Modus = {
         }
     },
     {
-        Modus = 3,
         Name = 'Only Pumpgun',
         Icon = 'fa-solid fa-gun',
         Weapons = {
@@ -95,7 +92,6 @@ Config.Modus = {
         }
     },
     {
-        Modus = 4,
         Name = 'Only Assault',
         Icon = 'fa-solid fa-cross',
         Weapons = {
