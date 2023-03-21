@@ -305,7 +305,7 @@ CreateThread(function()
                 if result then
                     for i = 1, #result do
                         local row = result[i]
-                        message = message .. 'Platz: **' .. i .. '**\nName: **' .. row.firstname .. ' ' .. row.lastname .. '**\n' ..'Kills: **' .. row.kills .. '**\n Deaths: **' .. row.deaths .. '**\n' .. '\n\n'
+                        message = message .. 'Platz: **' .. i .. '**\nName: **' .. row.firstname .. ' ' .. row.lastname .. '**\n' ..'Kills: **' .. row.kills .. '**\nDeaths: **' .. row.deaths .. '**\n' .. '\n\n'
                         if i == #result then
                             finish = true
                         end
