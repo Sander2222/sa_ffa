@@ -132,7 +132,6 @@ AddEventHandler("sa_ffa:UpdatePlayerStats", function(Type)
 end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
-
     if IsInDimension then
         Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
@@ -327,7 +326,6 @@ if Config.Debug then
         end)
     end
 end
-
 
 function ChangeBlipState(State)
     if Config.DisableBlip then
