@@ -81,6 +81,7 @@ window.addEventListener("message", async function (event) {
       }
     } else if (item.type === "search") {
       if (item.maxplayers != null && item.maxplayers != undefined) {
+        // set display block (No Games Found)
         AddFFA( item.name, item.password, item.players, item.maxplayers, item.map, item.modus)
       }
     } else if (item.type === "score") {
