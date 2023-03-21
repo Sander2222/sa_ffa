@@ -1,7 +1,6 @@
 IsInDimension = false
 local cam = nil
-local PlayerModus = 0
-local PlayerLoadout, ActiveClientGame, GameWeapons = {}, {}, {}  
+local PlayerLoadout, ActiveClientGame = {}, {}
 local ActiveMapInfo = {
     ActiveMapCenter = nil,
     ActiveMapRadius = nil
@@ -33,6 +32,7 @@ RegisterCommand(Config.LeaveCommand, function(source, args)
     if IsInDimension or Config.Debug then
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
+        IsInDimension = false
     else
         Config.SendNotifyClient(Config.Local['NotInLobby'])
     end
@@ -87,7 +87,7 @@ RegisterNetEvent("sa_ffa:JoinGameClient")
 AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     PlayerLoadout = PlayerWeapons
     ActiveClientGame = ActiveGame
-    Loadout('Join', ActiveGame.Modus)
+    Loadout('Join')
     ChangeBlipState('hide')
 
     DisplayRadar(false)
@@ -116,7 +116,6 @@ AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     Loadout('Leave', Modus)
     ChangeBlipState('show')
     ChangeClientscoreboard('close')
-    IsInDimension = false
 end)
 
 RegisterNetEvent("sa_ffa:UpdatePlayerStats")
@@ -133,13 +132,12 @@ AddEventHandler("sa_ffa:UpdatePlayerStats", function(Type)
 end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
-
     if IsInDimension then
         Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
         TriggerEvent('esx_ambulancejob:revive')
         Wait(1000)
-        Loadout('Join', ActiveClientGame.Modus)
+        Loadout('Join')
         Teleport()
         NetworkSetFriendlyFireOption(false)
         SetCanAttackFriendly(GetPlayerPed(-1), false, false)
@@ -234,18 +232,15 @@ function Loadout(Type, Modus)
     
     if Type == 'Join' then
         local ped = PlayerPedId()
-        PlayerModus = Modus
 
         SetEntityHealth(ped, 200)
         SetPedArmour(ped, 200)
-        for i,v in ipairs(Config.Modus) do
-            if tonumber(v.Modus) == tonumber(ActiveClientGame.Modus) then
-                for j,k in ipairs(v.Weapons) do
+            if ActiveClientGame.Modus ~= nil or ActiveClientGame.Modus ~= 0 then
+                for j,k in ipairs(Config.Modus[ActiveClientGame.Modus].Weapons) do
                     GiveWeaponToPed(ped, GetHashKey(k), 1, 0, 0)
                 end
-                GameWeapons = v.Weapons
             end
-        end
+        
     elseif Type == 'Leave' then
         local ped = PlayerPedId()
 
@@ -253,17 +248,12 @@ function Loadout(Type, Modus)
 
         SetEntityHealth(ped, 200)
         SetPedArmour(ped, 0)
-        for i,v in ipairs(Config.Modus) do
-            if tonumber(v.Modus) == tonumber(ActiveClientGame.Modus) then
-                for j,k in ipairs(v.Weapons) do
-                    RemoveWeaponFromPed(ped, GetHashKey(k))
-                end
-                SetPedInfiniteAmmoClip(ped, false)
+
+        if ActiveClientGame.Modus ~= nil or ActiveClientGame.Modus ~= 0 then
+            for j,k in ipairs(Config.Modus[ActiveClientGame.Modus].Weapons) do
+                RemoveWeaponFromPed(ped, GetHashKey(k))
             end
         end
-
-        PlayerModus = 0
-        GameWeapons = {}
 
         ActiveClientGame = {}
         -- Cams zum Back TP hin
@@ -289,14 +279,11 @@ end
 
 CreateThread(function()
     while true do
-        Ped = PlayerPedId()
-        if PlayerModus ~= 0 then
-            while true do
-                for k,v in pairs(GameWeapons) do
-                    AddAmmoToPed(Ped, GetHashKey(v), 500)
+        if IsInDimension then
+                for k,v in pairs(Config.Modus[ActiveClientGame.Modus].Weapons) do
+                    AddAmmoToPed(PlayerPedId(), GetHashKey(v), 500)
                 end
-                Wait(0)
-            end
+            Wait(50)
         else
             Wait(2000)
         end
@@ -339,7 +326,6 @@ if Config.Debug then
         end)
     end
 end
-
 
 function ChangeBlipState(State)
     if Config.DisableBlip then
