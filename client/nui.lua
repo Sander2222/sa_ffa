@@ -12,23 +12,30 @@ function FFAUISearch()
             notify = Config.UseUINotify
         })
 
+        if #ActiveGames > 0 then
         -- Add Games to Gamelist
-        for i, v in ipairs(ActiveGames) do
+            for i, v in ipairs(ActiveGames) do
                 local MapName, ModusName  = GiveDataBack(v.Modus, v.Map)
 
                 while ModusName == nil and MapName == nil do
                     Wait(1)
                 end
-
+ 
+                SendNUIMessage({
+                    state = 'add',
+                    type = 'search',
+                    players = v.Players,
+                    maxplayers = v.MaxPlayer,
+                    password = v.Password,
+                    map = MapName,
+                    name = v.Name,
+                    modus = ModusName
+                })
+            end
+        else
             SendNUIMessage({
                 state = 'add',
-                type = 'search',
-                players = v.Players,
-                maxplayers = v.MaxPlayer,
-                password = v.Password,
-                map = MapName,
-                name = v.Name,
-                modus = ModusName
+                type = 'nogamessearch'
             })
         end
 
