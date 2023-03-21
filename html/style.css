@@ -1499,8 +1499,24 @@ nav a:hover {
   background: #005acf;
 }
 
+.liste-öffentlich {
+  position: absolute;
 
+  width: 92%;
+  left: 4%;
 
+  height: 72%;
+
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3vmin;
+  overflow: auto;
+}
+
+.liste-öffentlich::-webkit-scrollbar {
+  display: none;
+}
 
 /* ! FFA INGAME */
 
