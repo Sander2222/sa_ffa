@@ -193,7 +193,7 @@ nav a:hover {
   position: relative;
 }
 
-.ffa-create i {
+.ffa-create  {
   position: relative;
   color: rgba(255, 255, 255, 0.4);
   left: 2%;
@@ -1127,7 +1127,6 @@ nav a:hover {
 
   border-bottom: 2px solid rgba(255, 255, 255, 0.8);
 
-  
   display: flex;
   flex-wrap: wrap;
   gap: 3vmin;
@@ -1302,7 +1301,7 @@ nav a:hover {
 
   height: 39.5%;
 
-  bottom: 0;
+  top: 60.5%;
 
   display: flex;
   flex-wrap: wrap;
@@ -2063,4 +2062,39 @@ input[type=number] {
   border-radius: 20px;
   
   transition: 0.2s;
+}
+
+
+.nogames {
+  position: absolute;
+
+  top: 40%;
+  left: 50%;
+
+  transform: translate(-50%,-50%);
+
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.nogames i {
+  color: #E03444;
+  text-shadow: 0 0 10px #E03444;
+  font-size: 3vmin;
+
+  animation: icon-pulse 1s;
+}
+
+@keyframes icon-pulse {
+  0% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
