@@ -59,7 +59,7 @@ function FFAUISearch()
                 state = "add",
                 type = "create",
                 status = "maps",
-                MapNumber = v.Map,
+                MapNumber = i,
                 ModeName = v.Name,
                 MapMaxPlayer = v.MaxPlayer
             })
@@ -131,7 +131,7 @@ function GiveDataBack(Modus, Map)
     end
 
     for i,v in ipairs(Config.Maps) do
-        if tonumber(v.Map) == tonumber(Map) then
+        if v.Name == Config.Maps[Map].Name then
             MapName = v.Name
         end
     end
