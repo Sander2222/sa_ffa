@@ -8,7 +8,7 @@ let PasswordState = true // true hießt Passwort (privat) und false kein Passwor
 document.addEventListener("DOMContentLoaded", () => {
   ClearCreateInputs()
   $(".ffa-scoreboard").hide();
-  //$('.ffa-create').hide();
+  $('.ffa-create').hide();
   //$(".ffa-liste").hide();
 
   // Load Data from config
@@ -172,34 +172,85 @@ function AddMap(Number, Name, MaxPlayer) {
 }
 
 function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
+
+  /* Is für den "Keine Räume gefunden" scheiß */
+  if(document.querySelector(`.liste-privat`).querySelector(".nogames")) {
+    document.querySelector(`.liste-privat`).querySelector(".nogames").remove();
+  } else if(document.querySelector(`.liste-öffentlich`).querySelector(".nogames")) {
+      document.querySelector(`.liste-öffentlich`).querySelector(".nogames").remove();
+    }
   if (Password == 0 || Password == 1 || Password == "" || Password == " ") {
+
+    //Alter Code von der öffentlich box
+    /* <div class="ffa ${Name} NOPASSWORD">
+      <div class="ffa-map ${Map}">
+        <img src="images/${Map}.png">
+        <div class="name">${Name}</div>
+        <div class="players">${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
+      </div>
+      <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
+      <span id="dingsbums2">${JSConfig.Locals.NoPassword}</span>
+      <div class="join" onclick="JoinGame('${Name}')">${JSConfig.Locals.Join}</div>
+    </div> */
+
+    
+
     $(".liste-öffentlich").append(`
         <div class="ffa ${Name} NOPASSWORD">
-          <div class="ffa-map ${Map}">
-            <img src="images/${Map}.png">
-            <div class="name">${Name}</div>
-            <div class="players">${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
-          </div>
-          <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span id="dingsbums2">${JSConfig.Locals.NoPassword}</span>
-          <div class="join" onclick="JoinGame('${Name}')">${JSConfig.Locals.Join}</div>
+            <div class="ffa-map ${Map}">
+              <img src="images/${Map}.png">
+            </div>
+            <div class="text-box">
+                <div class="name">${Name}</div>
+                <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
+                <div class="players">${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
+            </div>
+
+            <div class="passwd-join">
+                <span id="dingsbums2">Kein Passwort</span>
+                <div class="join" onclick="JoinGame('${Name}')">Join</div>
+            </div>
         </div>
       `);
   } else {
+
+    //Alter Code von privat box
+    /* <div class="ffa ${Name}-${Password}">
+      <div class="ffa-map ${Map}">
+        <img src="images/${Map}.png">
+        <div class="name">${Name}</div>
+        <div class="players"><i class="fa-solid fa-people-group"></i> ${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
+      </div>
+      <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
+      <span id="dingsbums1">${JSConfig.Locals.PasswordProtected}</span>
+      <div class="ffa-password">
+        <i class="fa-solid fa-lock"></i>
+        <input type="text" placeholder="Password" id="${Password}">
+      </div>
+      <div class="join" onclick="JoinGame('${Name}','${Password}')">${JSConfig.Locals.Join}</div>
+    </div> */
+
+
     $(".liste-privat").append(`
+
         <div class="ffa ${Name}-${Password}">
           <div class="ffa-map ${Map}">
-            <img src="images/${Map}.png">
-            <div class="name">${Name}</div>
-            <div class="players">${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
+              <img src="images/${Map}.png">
           </div>
-          <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
-          <span id="dingsbums1">${JSConfig.Locals.PasswordProtected}</span>
-          <div class="ffa-password">
-            <i class="fa-solid fa-lock"></i>
-            <input type="text" placeholder="Password" id="${Password}">
+          <div class="text-box">
+              <div class="name">${Name}</div>
+              <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
+              <div class="players"><i class="fa-solid fa-people-group"></i> ${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
           </div>
-          <div class="join" onclick="JoinGame('${Name}','${Password}')">${JSConfig.Locals.Join}</div>
+
+          <div class="passwd-join">
+              <div class="ffa-password">
+                <i class="fa-solid fa-lock"></i>
+                <input type="text" placeholder="${JSConfig.Locals.PasswordProtected}" id="${Password}">
+              </div>
+              <div class="join" onclick="JoinGame('${Name}','${Password}')">${JSConfig.Locals.Join}</div>
+          </div>
+
         </div>
       `);
   }
@@ -476,15 +527,36 @@ function ChangeFFAVisual(type) {
   document.querySelector(".Öffentlich").classList.remove("active");
   document.querySelector(`.${type}`).classList.add("active");
   FFaSearch_Visuability = type;
-  
+
+  const NoGamesHTML = `
+  <div class="nogames">
+    <i class="fa-solid fa-circle-question"></i>
+    Keine Räume gefunden!
+  </div>
+  `
+
   let FFAList = document.querySelector(`.liste-${type.toLowerCase()}`);
   let FFAs = FFAList.querySelectorAll(".ffa");
-  
+
+  /* Entfernt die "Keine Räume gefunden!" elemente  */
+  if(document.querySelector(`.liste-privat`).querySelector(".nogames")) {
+    document.querySelector(`.liste-privat`).querySelector(".nogames").remove();
+  } else if(document.querySelector(`.liste-öffentlich`).querySelector(".nogames")) {
+      document.querySelector(`.liste-öffentlich`).querySelector(".nogames").remove();
+  }
+
+  /* "Keine Räume gefunden!" elemente wird hinzugefügt  */
+  if(document.querySelector(`.liste-${type.toLowerCase()}`).children.length < 1) {
+    console.log("No Games");
+    FFAList.innerHTML = NoGamesHTML;
+  }
+
   if (type === "Öffentlich") {
     $(".liste-privat").fadeOut();
     $(".liste-öffentlich").fadeIn();
     $(".liste-prebuild").fadeIn();
     document.querySelector(`.liste-öffentlich`).style.display = "flex";
+    document.querySelector(`.liste-prebuild`).style.display = "flex";
     FFAs.forEach((e) => {
       if (e.classList.contains("NOPASSWORD")) {
         FFAList.prepend(e);
@@ -497,8 +569,8 @@ function ChangeFFAVisual(type) {
     $(".liste-privat").fadeIn();
     $(".liste-öffentlich").fadeOut();
     $(".liste-prebuild").hide();
-    document.querySelector(`.privat-öffentlich`).style.display = "flex";
     FFAList.style.display = "block";
+    document.querySelector(`.liste-privat`).style.display = "flex";
     FFAs.forEach((e) => {
       if (!e.classList.contains("NOPASSWORD")) {
         FFAList.prepend(e);
@@ -508,6 +580,7 @@ function ChangeFFAVisual(type) {
       }
     });
   }
+
 }
 
 function JoinGame(Name, Password) {

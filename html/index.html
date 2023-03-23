@@ -1,142 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/a6c44b414d.js" crossorigin="anonymous"></script>
-    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/a6c44b414d.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Orbitron"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
     <script src="../config.js"></script>
-</head>
+  </head>
 
-<body>
-    <img src="https://rare-gallery.com/uploads/posts/500911-gta-5-cool-pic.jpg" style="position: absolute;">
+  <body>
+    <img
+      src="https://rare-gallery.com/uploads/posts/500911-gta-5-cool-pic.jpg"
+      style="position: absolute"
+    />
     <div class="container" id="container">
-
-        <div class="notify-area">
-            <!-- <div class="notify error">
+      <div class="notify-area">
+        <!-- <div class="notify error">
                 <audio src="assets/sounds/notify.mp3" id="notify-sound" volume="0.3"></audio>
                 <h1 class="error">Information</h1>
                 <h2>Passwort ist zu kurz!</h2>
             </div> -->
-        </div>
-        
-        <ul class="loader" style="display: none;">
-            <li class="center"></li>
-            <li class="item item-1"></li>
-            <li class="item item-2"></li>
-            <li class="item item-3"></li>
-            <li class="item item-4"></li>
-            <li class="item item-5"></li>
-            <li class="item item-6"></li>
-            <li class="item item-7"></li>
-            <li class="item item-8"></li>
-        </ul>
-        
-        <div class="switcher" style="display: none;">
-            <div id="searchid" class="switcher-list switch-item" onclick="Change_Window('list')">Suchen</div>
-            <div id="createId" class="switcher-create switch-item" onclick="Change_Window('create')">Erstellen</div>
-        </div>
+      </div>
 
-        <div class="ffa-create" style="display: none;">
-            <img src="images/box.png" class="aad">
-            
-            <h1 id="CreateFFAText"></h1>
-            <h2 id="EnterThinks"></h2>
-            
-            <div class="name">
-                <i class="fa-solid fa-circle-user"></i>
-                <input id="FFA-Name" type="text" placeholder="">
-            </div>
-            <div class="pa">
-                <div class="password">
-                    <i class="fa-solid fa-lock" id="password-lock" onclick="ChangePasswordState()"></i>
-                    <input type="text" placeholder="" id="FFA-Password">
-                </div>
-            </div>
-            <div class="maxplayers">
-                <i class="fa-solid fa-people-group"></i>
-                <input id="FFA-MaxPlayer" type="number" placeholder="">
-            </div>
-            <!-- Das is weil sonst verschwindet der Modus immer wenn man drückt --><div class="ma">
-                <div class="mode" onclick="open_modes()">
-                    <i class="fa-solid fa-gamepad"></i>
-                    <button id="btn-change-mode"></button>
-                    <span class="arrow">></span>
-                </div>
-                <main class="mode-menu" style="display: none;">
-                    <!-- Hier wird Modus reingeladen -->
-                </main>
-            </div>
-            <!-- Hier das gleiche --><div class="mp">
-                
-                <div class="map" onclick="open_maps()">
-                    <i class="fa-solid fa-gamepad"></i>
-                    <button id="btn-change-map"></button>
-                    <span class="arrow">></span>
-                </div>
-                <main class="map-menu" style="display: none;">
-                    <!-- Hier weden Maps reingeladen -->
-                </main>
-            </div>
-            <div id="CreateFFAButton" class="create" onclick="create_ffa()"></div>
+      <ul class="loader" style="display: none">
+        <li class="center"></li>
+        <li class="item item-1"></li>
+        <li class="item item-2"></li>
+        <li class="item item-3"></li>
+        <li class="item item-4"></li>
+        <li class="item item-5"></li>
+        <li class="item item-6"></li>
+        <li class="item item-7"></li>
+        <li class="item item-8"></li>
+      </ul>
+
+      <div class="switcher" style="display: none">
+        <div
+          id="searchid"
+          class="switcher-list switch-item"
+          onclick="Change_Window('list')"
+        >
+          Suchen
         </div>
-        <div class="ffa-liste" style="*display: none;">
-            <img src="images/box.png" class="aad">
-            <h1 id="FFAListText"></h1>
-            
-            <header>
-                <div class="switch">
-                    <div id="PrivateText" class="Privat active" onclick="ChangeFFAVisual('Privat')"></div>
-                    <div id="PublicText" class="Öffentlich" onclick="ChangeFFAVisual('Öffentlich')">Öffentlich</div>
-                </div>
-                <input type="text" placeholder="Modus" id="Search-Mode" oninput="SearchMode(document.getElementById('Search-Mode').value)">
-                <input type="text" placeholder="Map" id="Search-Map" oninput="SearchMap(document.getElementById('Search-Map').value)">
-                <div class="search">
-                    <input type="text" id="Search-Name" placeholder="Gebe den Namen ein" oninput="SearchFFA(document.getElementById('Search-Name').value)">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
-            </header>
-            
-            <div class="liste-privat liste" style="display: none;">
-                <div class="ffa">
+        <div
+          id="createId"
+          class="switcher-create switch-item"
+          onclick="Change_Window('create')"
+        >
+          Erstellen
+        </div>
+      </div>
+
+      <div class="ffa-create" style="display: none">
+        <img src="images/box.png" class="aad" />
+
+        <h1 id="CreateFFAText"></h1>
+        <h2 id="EnterThinks"></h2>
+
+        <div class="name">
+          <i class="fa-solid fa-circle-user"></i>
+          <input id="FFA-Name" type="text" placeholder="" />
+        </div>
+        <div class="pa">
+          <div class="password">
+            <i
+              class="fa-solid fa-lock"
+              id="password-lock"
+              onclick="ChangePasswordState()"
+            ></i>
+            <input type="text" placeholder="" id="FFA-Password" />
+          </div>
+        </div>
+        <div class="maxplayers">
+          <i class="fa-solid fa-people-group"></i>
+          <input id="FFA-MaxPlayer" type="number" placeholder="" />
+        </div>
+        <!-- Das is weil sonst verschwindet der Modus immer wenn man drückt -->
+        <div class="ma">
+          <div class="mode" onclick="open_modes()">
+            <i class="fa-solid fa-gamepad"></i>
+            <button id="btn-change-mode"></button>
+            <span class="arrow">></span>
+          </div>
+          <main class="mode-menu" style="display: none">
+            <!-- Hier wird Modus reingeladen -->
+          </main>
+        </div>
+        <!-- Hier das gleiche -->
+        <div class="mp">
+          <div class="map" onclick="open_maps()">
+            <i class="fa-solid fa-gamepad"></i>
+            <button id="btn-change-map"></button>
+            <span class="arrow">></span>
+          </div>
+          <main class="map-menu" style="display: none">
+            <!-- Hier weden Maps reingeladen -->
+          </main>
+        </div>
+        <div id="CreateFFAButton" class="create" onclick="create_ffa()"></div>
+      </div>
+      <div class="ffa-liste" style="*display: none">
+        <img src="images/box.png" class="aad" />
+        <h1 id="FFAListText"></h1>
+
+        <header>
+          <div class="switch">
+            <div
+              id="PrivateText"
+              class="Privat active"
+              onclick="ChangeFFAVisual('Privat')"
+            >
+              Privat
+            </div>
+            <div
+              id="PublicText"
+              class="Öffentlich"
+              onclick="ChangeFFAVisual('Öffentlich')"
+            >
+              Öffentlich
+            </div>
+          </div>
+          <input
+            type="text"
+            placeholder="Modus"
+            id="Search-Mode"
+            oninput="SearchMode(document.getElementById('Search-Mode').value)"
+          />
+          <input
+            type="text"
+            placeholder="Map"
+            id="Search-Map"
+            oninput="SearchMap(document.getElementById('Search-Map').value)"
+          />
+          <div class="search">
+            <input
+              type="text"
+              id="Search-Name"
+              placeholder="Gebe den Namen ein"
+              oninput="SearchFFA(document.getElementById('Search-Name').value)"
+            />
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+        </header>
+
+        <div class="liste-privat liste" style="display: none"></div>
+        <div class="liste-prebuild" style="display: none">
+          <!-- <div class="ffa NOPASSWORD">
                     <div class="ffa-map">
-                        <img src="images/WP.png">
+                      <img src="images/WP.png">
                     </div>
                     <div class="text-box">
-                        <div class="name">ABVABWDA</div>
+                        <div class="name">ABC123123</div>
+                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
+                        <div class="players">10/20 Spieler</div>
+                    </div>
+    
+                    <div class="join">Join</div>
+                </div>
+                <div class="ffa NOPASSWORD">
+                    <div class="ffa-map">
+                      <img src="images/WP.png">
+                    </div>
+                    <div class="text-box">
+                        <div class="name">ABC123123</div>
                         <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
                         <div class="players"><i class="fa-solid fa-people-group"></i> 10/20 Spieler</div>
                     </div>
-
-                    <div class="passwd-join">
-                        <div class="ffa-password">
-                          <i class="fa-solid fa-lock"></i>
-                          <input type="text" placeholder="Password GESCHÜTZT">
-                        </div>
-                        <div class="join" onclick="JoinGame('${Name}','${Password}')">Join</div>
-                    </div>
-
-                  </div>
-                
-            </div>
-
-            <div class="liste-prebuild" style="*display: none;">
-                <div class="ffa NOPASSWORD">
-                    <div class="ffa-map">
-                      <img src="images/WP.png">
-                    </div>
-                    <div class="text-box">
-                        <div class="name">ABC123123</div>
-                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
-                        <div class="players">10/20 Spieler</div>
-                    </div>
     
                     <div class="join">Join</div>
                 </div>
@@ -176,76 +228,46 @@
     
                     <div class="join">Join</div>
                 </div>
-                <div class="ffa NOPASSWORD">
-                    <div class="ffa-map">
-                      <img src="images/WP.png">
-                    </div>
-                    <div class="text-box">
-                        <div class="name">ABC123123</div>
-                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
-                        <div class="players">10/20 Spieler</div>
-                    </div>
-    
-                    <div class="join">Join</div>
-                </div>
-            </div>
-
-            <div class="liste-öffentlich liste" style="*display: none;">
-                <div class="ffa NOPASSWORD">
-                    <div class="ffa-map">
-                      <img src="images/WP.png">
-                    </div>
-                    <div class="text-box">
-                        <div class="name">ABC123123</div>
-                        <div class="Mode">Modus: <h1 class="Mode-Name">Gambo</h1></div>
-                        <div class="players">10/20 Spieler</div>
-                    </div>
-
-                    <div class="passwd-join">
-                        <span id="dingsbums2">Kein Passwort</span>
-                        <div class="join" onclick="JoinGame('${Name}')">Join</div>
-                    </div>
-
-                </div>
-            </div>
+            </div> -->
         </div>
-        <div class="ffa-scoreboard" style="display: none;">
-            <h6>SA FFA</h6>
-            
-            <div class="kills">
-                <h1 id="kill-title"></h1>
-                <span id="kills">0</span>
-            </div>
-            <div class="deaths">
-                <h1 id="death-title"></h1>
-                <span id="deaths">0</span>
-            </div>
-            <div class="middle-content">
-                <h1 id="FFAStatsText"></h1>
-                
-                <div class="playtime">
-                    <h2 id="GameNameText">Playtime</h2>
-                    <span id="ffa-ingame-players">Loading...</span>
-                </div>
-                
-                <div class="player-kd">
-                    <h3 id="KDText">KD</h3>
-                    <span id="ffa-ingame-kd">0</span>
-                </div>
-                
-                <img src="images/skull.png" id="skull-kill">
-            </div>
+        <div class="liste-öffentlich liste" style="display: none"></div>
+      </div>
+
+      <div class="ffa-scoreboard" style="display: none">
+        <h6>SA FFA</h6>
+
+        <div class="kills">
+          <h1 id="kill-title"></h1>
+          <span id="kills">0</span>
         </div>
+        <div class="deaths">
+          <h1 id="death-title"></h1>
+          <span id="deaths">0</span>
+        </div>
+        <div class="middle-content">
+          <h1 id="FFAStatsText"></h1>
+
+          <div class="playtime">
+            <h2 id="GameNameText">Playtime</h2>
+            <span id="ffa-ingame-players">Loading...</span>
+          </div>
+
+          <div class="player-kd">
+            <h3 id="KDText">KD</h3>
+            <span id="ffa-ingame-kd">0</span>
+          </div>
+
+          <img src="images/skull.png" id="skull-kill" />
+        </div>
+      </div>
     </div>
-    
-</body>
+  </body>
 
-<script>
+  <script>
     document.onkeyup = function (data) {
-  if (data.which == 27) {
-    Close()
-  }
-};
-</script>
-
+      if (data.which == 27) {
+        Close();
+      }
+    };
+  </script>
 </html>
