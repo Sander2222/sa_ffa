@@ -108,7 +108,7 @@ Config.Maps = {
         Name = 'SG',
         MaxPlayer = 187,
         MapCenter = vector3(1644.9177246094,2513.39453125,45.564910888672),
-        MaxRadius = 200,
+        MaxRadius = 100,
         Teleports = {
             vector3(1629.33, 2496.81, 44.56),
             vector3(1622.69, 2561.02, 44.56),
@@ -124,7 +124,7 @@ Config.Maps = {
         Name = 'WP',
         MaxPlayer = 187,
         MapCenter = vector3(198.85273742676,-931.42071533203,30.689985275269),
-        MaxRadius = 200,
+        MaxRadius = 100,
         Teleports = {
             vector3(257.35, -873.52, 28.21),
             vector3(186.51, -847.52, 30.21),
