@@ -4,7 +4,6 @@
 
 ```lua
     {
-        Modus = -- This Need to be a Number, every Mode need to have different number then the others (Integer),
         Name = -- This is the Name from the Mode (string),
         Icon = -- This need to be an icon name from this list (https://fontawesome.com/icons/) but you can let this emtpy if you dont want an icon (string),
         Weapons = {
@@ -18,7 +17,6 @@
 
 ```lua
     {
-        Map = -- This Need to be a Number, every Map need to have different number then the others (Integer),
         Name = -- This is the Name from the Map (string), 
         MaxPlayer = -- This is the max player that can enter the Map (interger), 
         MapCenter = -- This is the Map Center where the distance get checked from (vector3),  
