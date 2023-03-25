@@ -105,7 +105,6 @@ Config.Modus = {
 -- If you want to add more modus read the readme.md
 Config.Maps = {
     {
-        Map = 1,
         Name = 'SG',
         MaxPlayer = 187,
         MapCenter = vector3(1644.9177246094,2513.39453125,45.564910888672),
@@ -122,7 +121,6 @@ Config.Maps = {
         }
     },
     {
-        Map = 2,
         Name = 'WP',
         MaxPlayer = 187,
         MapCenter = vector3(198.85273742676,-931.42071533203,30.689985275269),
