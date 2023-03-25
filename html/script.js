@@ -1,15 +1,15 @@
-var CurrentMap;
-var MaxPlayerMap;
-var CurrentModus;
-var CurrentWindow;
-var UseUINotify;
+var CurrentMap
+var MaxPlayerMap
+var CurrentModus
+var CurrentWindow
+var UseUINotify
 let PasswordState = true // true hießt Passwort (privat) und false kein Passwort (öffentlich)
 
 document.addEventListener("DOMContentLoaded", () => {
   ClearCreateInputs()
   $(".ffa-scoreboard").hide();
   $('.ffa-create').hide();
-  //$(".ffa-liste").hide();
+  $(".ffa-liste").hide();
 
   // Load Data from config
   document.getElementById("FFA-Name").placeholder = JSConfig.Locals.Name;
@@ -74,7 +74,7 @@ window.addEventListener("message", async function (event) {
     }
   } else if (item.state === "add") {
     if (item.type === "create") {
-      if (item.status === "modus") {
+      if (item.status === "modus") { 
         AddMode(item.ModeNumber, item.ModeName, item.Icon, item.Title);
       } else if (item.status === "maps") {
         AddMap(item.MapNumber, item.ModeName, item.MapMaxPlayer);
@@ -89,7 +89,7 @@ window.addEventListener("message", async function (event) {
       var deaths = item.death;
       ChangeScoreboards(kills, deaths, item.Name);
     } else if (item.type === 'nogamessearch' ) {
-      // Oli dings
+      ChangeFFAVisual('Privat')
     }
   } else if (item.state === "close") {
     $("body").hide();
@@ -531,7 +531,7 @@ function ChangeFFAVisual(type) {
   const NoGamesHTML = `
   <div class="nogames">
     <i class="fa-solid fa-circle-question"></i>
-    Keine Räume gefunden!
+      ${JSConfig.Locals.NoGamesFound}
   </div>
   `
 
@@ -547,7 +547,6 @@ function ChangeFFAVisual(type) {
 
   /* "Keine Räume gefunden!" elemente wird hinzugefügt  */
   if(document.querySelector(`.liste-${type.toLowerCase()}`).children.length < 1) {
-    console.log("No Games");
     FFAList.innerHTML = NoGamesHTML;
   }
 
