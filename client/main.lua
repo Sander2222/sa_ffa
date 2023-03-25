@@ -128,15 +128,14 @@ AddEventHandler("sa_ffa:UpdatePlayerStats", function(Type)
         SetPedArmour(PlayerPedId(), 200)
         PlayerStats.kills = PlayerStats.kills + 1 
     end
-
 end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
     if IsInDimension then
         Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
-        TriggerEvent('esx_ambulancejob:revive')
         Wait(1000)
+        TriggerEvent('esx_ambulancejob:revive')
         Loadout('Join')
         Teleport()
         NetworkSetFriendlyFireOption(false)
@@ -162,34 +161,32 @@ end)
 function Teleport(Type)
     if Type == 'first' then 
         for i,v in ipairs(Config.Maps) do
-            if tonumber(v.Map) == tonumber(ActiveClientGame.Map) then
-                local RandomPoint = v.Teleports[math.random(1, #v.Teleports)]
+            local Map = Config.Maps[ActiveClientGame.Map]
+            local RandomPoint = Map.Teleports[math.random(1, #Map.Teleports)]
 
-                RenderScriptCams(false, true, Config.CamWait, true, true)
-                DoScreenFadeOut(100)
-                ESX.Game.Teleport(PlayerPedId(), RandomPoint, function()end)
-                DoScreenFadeIn(100)
-                FreezeEntityPosition(GetPlayerPed(), false)
-                ActiveMapInfo.ActiveMapCenter = v.MapCenter
-                ActiveMapInfo.ActiveMapRadius = v.MaxRadius
+            RenderScriptCams(false, true, Config.CamWait, true, true)
+            DoScreenFadeOut(100)
+            ESX.Game.Teleport(PlayerPedId(), RandomPoint, function()end)
+            DoScreenFadeIn(100)
+            FreezeEntityPosition(GetPlayerPed(), false)
+            ActiveMapInfo.ActiveMapCenter = v.MapCenter
+            ActiveMapInfo.ActiveMapRadius = v.MaxRadius
 
-                SetCamActive(cam, false)
-                DestroyCam(cam, true)
-                cam = nil
+            SetCamActive(cam, false)
+            DestroyCam(cam, true)
+            cam = nil
 
-                Wait(Config.CamWait)
-                DisplayRadar(true)
-            end
+            Wait(Config.CamWait)
+            DisplayRadar(true)
         end
     else 
         for i,v in ipairs(Config.Maps) do
-            if tonumber(v.Map) == tonumber(ActiveClientGame.Map) then
-                DoScreenFadeOut(100)
-                ESX.Game.Teleport(PlayerPedId(), v.Teleports[math.random(1, #v.Teleports)], function()end)
-                DoScreenFadeIn(100)
-                ActiveMapInfo.ActiveMapCenter = v.MapCenter
-                ActiveMapInfo.ActiveMapRadius = v.MaxRadius
-            end
+            local Map = Config.Maps[ActiveClientGame.Map]
+            DoScreenFadeOut(100)
+            ESX.Game.Teleport(PlayerPedId(), Map.Teleports[math.random(1, #Map.Teleports)], function()end)
+            DoScreenFadeIn(100)
+            ActiveMapInfo.ActiveMapCenter = v.MapCenter
+            ActiveMapInfo.ActiveMapRadius = v.MaxRadius
         end
         DisplayRadar(true)
     end
