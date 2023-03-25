@@ -31,6 +31,7 @@ JSConfig.Locals = {
     'PasswordProtected': 'Password Protected',
     'Create': 'Create',
     'Search': 'Search',
+    'NoGamesFound': 'No games found!',
 
     // KDA
     'kills': 'KILLS',
