@@ -20,6 +20,8 @@ end
 
 function LeaveFFA()
     if IsInDimension then
+        PlayerStats.kills = 0
+        PlayerStats.deaths = 0
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
         return true
@@ -30,6 +32,8 @@ end
 
 RegisterCommand(Config.LeaveCommand, function(source, args)
     if IsInDimension or Config.Debug then
+        PlayerStats.kills = 0
+        PlayerStats.deaths = 0
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
         IsInDimension = false
@@ -99,16 +103,20 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
         SetCamActive(cam, true)
         RenderScriptCams(true, true, Config.CamWait, true, true)
         Wait(Config.CamWait)
+        ChangeClientscoreboard('show')
+        if Config.ShowleaveCommandNotify then 
+            Config.SendNotifyClient((Config.Local['ShowLeaveCommand']):format('/'.. Config.LeaveCommand))
+        end
+        IsInDimension = true
         Teleport('first')
     else 
+        ChangeClientscoreboard('show')
+        if Config.ShowleaveCommandNotify then 
+            Config.SendNotifyClient((Config.Local['ShowLeaveCommand']):format('/'.. Config.LeaveCommand))
+        end
+        IsInDimension = true
         Teleport('first')
     end
-
-    ChangeClientscoreboard('show')
-    if Config.ShowleaveCommandNotify then 
-        Config.SendNotifyClient((Config.Local['ShowLeaveCommand']):format('/'.. Config.LeaveCommand))
-    end
-    IsInDimension = true
 end)
 
 RegisterNetEvent("sa_ffa:LeaveGameClient")
@@ -134,8 +142,8 @@ AddEventHandler('esx:onPlayerDeath', function(data)
     if IsInDimension then
         Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
-        Wait(1000)
         TriggerEvent('esx_ambulancejob:revive')
+        Wait(1000)
         Loadout('Join')
         Teleport()
         NetworkSetFriendlyFireOption(false)
@@ -168,9 +176,6 @@ function Teleport(Type)
         ESX.Game.Teleport(PlayerPedId(), RandomPoint, function()end)
         DoScreenFadeIn(100)
         FreezeEntityPosition(GetPlayerPed(), false)
-        print(ActiveClientGame.Map)
-        print(ESX.DumpTable(Config.Maps[ActiveClientGame.Map]))
-        print(Config.Maps[ActiveClientGame.Map].MapCenter)
         ActiveMapInfo.ActiveMapCenter = Config.Maps[ActiveClientGame.Map].MapCenter
         ActiveMapInfo.ActiveMapRadius = Config.Maps[ActiveClientGame.Map].MaxRadius
 
@@ -303,15 +308,6 @@ if Config.Debug then
 
     RegisterCommand('game', function(source, args)
         print(ESX.DumpTable(ActiveClientGame))
-    end)
-
-    RegisterCommand('Join', function(source, args) -- Arg: Name, Passwort
-        if not IsInDimension then
-            TriggerServerEvent("sa_ffa:JoinGame", args)
-            Config.SendNotifyClient(Config.Local['JoinGame'])
-        else
-            Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
-        end
     end)
 
     if Config.Debug then
