@@ -58,8 +58,8 @@ Config.Blip = {
 Config.PrebuiltGames = {
     {
         Name = 'FFA 1',
-        Mode = '',
-        Map = ''
+        Mode = 'only pistol',
+        Map = 'SG'
     }
 }
 
