@@ -82,7 +82,7 @@ window.addEventListener("message", async function (event) {
     } else if (item.type === "search") {
       if (item.maxplayers != null && item.maxplayers != undefined) {
         // set display block (No Games Found)
-        AddFFA( item.name, item.password, item.players, item.maxplayers, item.map, item.modus)
+        AddFFA( item.name, item.password, item.players, item.maxplayers, item.map, item.modus, item.prebuild)
       }
     } else if (item.type === "score") {
       var kills = item.kill;
@@ -90,12 +90,18 @@ window.addEventListener("message", async function (event) {
       ChangeScoreboards(kills, deaths, item.Name);
     } else if (item.type === 'nogamessearch' ) {
       ChangeFFAVisual('Privat')
+    } else if (item.type = "searchprebuild") {
+      AddPreBuildFFA()
     }
   } else if (item.state === "close") {
     $("body").hide();
     $(".switcher").fadeOut();
   }
 });
+
+function AddPreBuildFFA(params) {
+  log("lol")
+}
 
 var PKills = 0;
 var PDeaths = 0;
@@ -171,7 +177,7 @@ function AddMap(Number, Name, MaxPlayer) {
 `);
 }
 
-function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode) {
+function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode, PreBuild) {
 
   /* Is für den "Keine Räume gefunden" scheiß */
   if(document.querySelector(`.liste-privat`).querySelector(".nogames")) {
@@ -543,6 +549,8 @@ function ChangeFFAVisual(type) {
     document.querySelector(`.liste-privat`).querySelector(".nogames").remove();
   } else if(document.querySelector(`.liste-öffentlich`).querySelector(".nogames")) {
       document.querySelector(`.liste-öffentlich`).querySelector(".nogames").remove();
+  } else if(document.querySelector(".liste-prebuild").querySelector(".nogames")) {
+    document.querySelector(".liste-prebuild").querySelector(".nogames").remove();
   }
 
   /* "Keine Räume gefunden!" elemente wird hinzugefügt  */
@@ -551,9 +559,22 @@ function ChangeFFAVisual(type) {
   }
 
   if (type === "Öffentlich") {
+    
+    if(document.querySelector(".liste-prebuild").children.length < 1) {
+      console.log("No Prebuilds!");
+      $(".liste-prebuild").fadeOut();
+      document.querySelector(".liste-öffentlich").style = `
+      width: 92%;
+      left: 4%;
+      height: 72%;
+      bottom: 0;
+      `
+    } else {
+      $(".liste-prebuild").fadeIn();
+    }
+
     $(".liste-privat").fadeOut();
     $(".liste-öffentlich").fadeIn();
-    $(".liste-prebuild").fadeIn();
     document.querySelector(`.liste-öffentlich`).style.display = "flex";
     document.querySelector(`.liste-prebuild`).style.display = "flex";
     FFAs.forEach((e) => {
