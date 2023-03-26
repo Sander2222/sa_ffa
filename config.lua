@@ -1,6 +1,6 @@
 Config = {}
 
-Config.CheckVersion = true -- if you want to check the active version (suggested!!)
+Config.CheckVersion = false -- if you want to check the active version (suggested!!)
 Config.Debug = true -- only put this on true if you know what you are doing
 Config.StandardDimension = 0 -- Put there you standard dimension
 Config.Invincible = false -- Put this on true if the player got killed have a spawnprotect
@@ -58,8 +58,9 @@ Config.Blip = {
 Config.PrebuiltGames = {
     {
         Name = 'FFA 1',
-        Mode = 'only pistol',
-        Map = 'SG'
+        Mode = 'only Sniper',
+        Map = 'WP',
+        MaxPlayer = 123
     }
 }
 
