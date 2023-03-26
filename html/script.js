@@ -91,17 +91,13 @@ window.addEventListener("message", async function (event) {
     } else if (item.type === 'nogamessearch' ) {
       ChangeFFAVisual('Privat')
     } else if (item.type = "searchprebuild") {
-      AddPreBuildFFA()
+      AddPreBuildFFA(item.players, item.maxplayers, item.map, item.name, item.mode)
     }
   } else if (item.state === "close") {
     $("body").hide();
     $(".switcher").fadeOut();
   }
 });
-
-function AddPreBuildFFA(params) {
-  log("lol")
-}
 
 var PKills = 0;
 var PDeaths = 0;
@@ -260,6 +256,32 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode, PreBuild) {
         </div>
       `);
   }
+}
+
+function AddPreBuildFFA(Players, Maxplayers, Map, Name, Mode) {
+$(".liste-prebuild").append(`
+
+  <div class="ffa NOPASSWORD">
+      <div class="ffa-map">
+          <img src="images/${Map}.png">
+      </div>
+      <div class="text-box">
+          <div class="name">${Name}</div>
+          <div class="Mode">Modus: <h1 class="Mode-Name">${Mode}</h1>
+          </div>
+          <div class="players"><i class="fa-solid fa-people-group"></i> ${Players}/${Maxplayers} Spieler</div>
+      </div>
+
+      <div class="join" onclick="JoinPreBuildGame('${Name}')">Join</div>
+  </div>
+`);
+}
+
+function JoinPreBuildGame(Name) {
+  $.post("https://sa_ffa/JoinPreBuild", JSON.stringify({ Game: Name }));
+
+  $(".ffa-items").html("");
+  Close();
 }
 
 function JoinSearchedMatch(Name) {
