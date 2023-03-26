@@ -5,6 +5,7 @@ if Config.UseESX12 then
     ESX = exports["es_extended"]:getSharedObject()
 end
 
+-- Games in die liste hinzufügen
 RegisterNetEvent('sa_ffa:CreateGame')
 AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
     local _source = source
@@ -58,38 +59,6 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
     end
 end)
 
-RegisterNetEvent('sa_ffa:JoinGame')
-AddEventHandler('sa_ffa:JoinGame', function(args) -- Arg: Name, Passwort
-    local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
-    local NameValid, PasswordValid = false, false
-    local GameIsFull = true
-
-    for i,v in ipairs(Games) do
-        if v.Name == args[1] then
-            NameValid = true
-            if v.Password == args[2] then
-                PasswordValid = true
-                if tonumber(v.Players) < tonumber(v.MaxPlayer) then
-                    GameIsFull = false
-                    Config.SendNotifyServer(_source, (Config.Local['RoomFound']):format(v.Name))
-                    SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), v.Name))
-                    JoinGame(_source, v, xPlayer.getLoadout())
-                    break
-                end
-            end
-        end
-    end
-
-    if not NameValid and not PasswordValid then
-        Config.SendNotifyServer(_source, (Config.Local['NoGameFound']):format(args[1]))
-    elseif not PasswordValid then
-        Config.SendNotifyServer(_source, Config.Local['RommFoundWrongPassword'])
-    elseif GameIsFull then
-        Config.SendNotifyServer(_source, Config.Local['RoomFoundButFull'])
-    end
-end)
-
 RegisterNetEvent('sa_ffa:LeaveGame')
 AddEventHandler('sa_ffa:LeaveGame', function(PlayerWeapons, ActiveClientGame)
     ChangeWeaponState(source, "leave", PlayerWeapons)
@@ -98,7 +67,10 @@ end)
 
 RegisterNetEvent("sa_ffa:SearchRandomGame")
 AddEventHandler("sa_ffa:SearchRandomGame", function(Game)
-    GetRandomGame(source, Game)
+    local xPlayer = ESX.GetPlayerFromId(source)
+
+    Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..Game.Name)
+    JoinGame(source, Game, xPlayer.getLoadout())
 end)
 
 RegisterNetEvent("sa_ffa:PlayerKilled")
@@ -208,14 +180,6 @@ function ChangePlayerCount(Player, ActiveGame, State)
             end
         end
     end
-end
-
-
-function GetRandomGame(Player, Game) --Arg: Map (args[1]), Modus (args[2])
-    local xPlayer = ESX.GetPlayerFromId(Player)
-
-    Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..Game.Name)
-    JoinGame(Player, Game, xPlayer.getLoadout())
 end
 
 AddEventHandler('playerDropped', function (reason)
