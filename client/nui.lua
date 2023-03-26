@@ -12,15 +12,43 @@ function FFAUISearch()
             notify = Config.UseUINotify
         })
 
+        local CreatedGames = 0
+        for i,v in ipairs(ActiveGames) do
+            if v.PreBuild == 1 then
+                print(ESX.DumpTable(v))
+                print(v.Modus)
+                local MapName, ModusName  = GiveNamesBack(v.Modus, v.Map)
+
+                SendNUIMessage({
+                    state = 'add',
+                    type = 'searchprebuild',
+                    players = v.Players,
+                    maxplayers = v.MaxPlayer,
+                    map = MapName,
+                    name = v.Name,
+                    modus = ModusName
+                })
+                CreatedGames = CreatedGames + 1
+            end
+        end
+
+        if CreatedGames == #ActiveGames then
+            SendNUIMessage({
+                state = 'add',
+                type = 'nogamessearch'
+            })
+        end
+
         if #ActiveGames > 0 then
         -- Add Games to Gamelist
-            for i, v in ipairs(ActiveGames) do
-                local MapName, ModusName  = GiveDataBack(v.Modus, v.Map)
+        for i, v in ipairs(ActiveGames) do
+            if v.PreBuild == 0 then
+                local MapName, ModusName  = GiveNamesBack(v.Modus, v.Map)
 
                 while ModusName == nil and MapName == nil do
                     Wait(1)
                 end
- 
+
                 SendNUIMessage({
                     state = 'add',
                     type = 'search',
@@ -32,6 +60,7 @@ function FFAUISearch()
                     modus = ModusName
                 })
             end
+        end
         else
             SendNUIMessage({
                 state = 'add',
@@ -121,7 +150,7 @@ function ChangeClientscoreboard(State)
 end
 
 --Please dont ask
-function GiveDataBack(Modus, Map)
+function GiveNamesBack(Modus, Map)
     local MapName, ModusName
 
     for i,v in ipairs(Config.Modus) do
