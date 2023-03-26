@@ -33,6 +33,130 @@ body {
   font-weight: 500;
 }
 
+.container .notify-area {
+  position: absolute;
+
+
+  left: 0.5%;
+
+  width: 15%;
+  height: 50%;
+
+
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.container .notify-area .notify {
+  position: relative;
+
+  width: 95%;
+
+  background: rgba(0, 0, 0, 0.541);
+
+  border-radius: 15px;
+  border-top-left-radius: 5px;
+
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+
+  animation: notify 2s;
+
+  z-index: 10000000000;
+}
+
+.container .notify-area .notify::before {
+  content: '';
+  position: absolute;
+
+  left: -2%;
+  top: -10%;
+
+  width: 13px;
+  height: 13px;
+
+  border-radius: 30%;
+}
+
+.container .notify-area .notify.error::before {
+  background: rgb(224, 0, 0);
+  box-shadow: 0 0 5px rgb(224, 0, 0);
+}
+.container .notify-area .notify.success::before {
+  background: rgba(26, 224, 0, 1);
+  box-shadow: 0 0 5px rgba(26, 224, 0, 1);
+}
+
+@keyframes notify {
+  0% {
+      width: 110%;
+  }
+  50% {
+      width: 105%;
+  }
+  100% {
+      width: 95%;
+  }
+}
+
+.container .notify-area .notify h1 {
+  position: relative;
+
+  left: 2%;
+  top: 8%;
+  
+  font-size: 15px;
+  font-weight: 600;
+
+  z-index: 10000;
+}
+
+.container .notify-area .notify h2 {
+  position: relative;
+
+  left: 2%;
+  top: 10%;
+
+  width: 230px;
+
+  margin-bottom: 25px;
+
+  color: rgba(255, 255, 255, 0.815);
+  text-shadow: none;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  animation: ntext 3s;
+}
+
+@keyframes ntext {
+  0% {
+      color: transparent;
+  }
+  100% {
+      color: rgba(255, 255, 255, 0.815);
+  }
+}
+
+.success {
+  color: rgba(26, 224, 0, 1);
+  text-shadow: 0 0 5px rgba(26, 224, 0, 1);
+  *background: rgba(26, 224, 0, 0.7);
+
+  --notify-color: 26,224,0;
+}
+
+.error {
+  color: rgb(224, 0, 0);
+  text-shadow: 0 0 10px rgb(224, 0, 0);
+  *background: rgb(224, 0, 0,0.7);
+  --notify-color: 224,0,0;
+}
+
 .aad {
   position: fixed;
 
@@ -196,9 +320,8 @@ nav a:hover {
 .ffa-create  {
   position: relative;
   color: rgba(255, 255, 255, 0.4);
-  left: 2%;
 
-  z-index: 1000000;
+  /* z-index: 1000000; */
 
   transition: 0.3s;
 }
@@ -219,7 +342,7 @@ nav a:hover {
   width: 20vw;
   height: 100%;
 
-  padding: 0 1vw;
+  padding: 0 1.5vw;
   font-size: 0.75vw;
   outline: none;
   border: none;
@@ -230,6 +353,11 @@ nav a:hover {
   transition: 0.3s;
 }
 
+.ffa-create i {
+  position: relative;
+  padding-left: 1vmin;
+}
+
 .ffa-create input:disabled {
   color: transparent;
 }
@@ -238,129 +366,7 @@ nav a:hover {
   color: transparent;
 }
 
-.container .notify-area {
-  position: absolute;
 
-
-  left: 0.5%;
-
-  width: 15%;
-  height: 50%;
-
-
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.container .notify-area .notify {
-  position: relative;
-
-  width: 95%;
-
-  background: rgba(0, 0, 0, 0.541);
-
-  border-radius: 15px;
-  border-top-left-radius: 5px;
-
-  display: flex;
-  justify-content: left;
-  flex-direction: column;
-
-  animation: notify 2s;
-
-  z-index: 10000000000;
-}
-
-.container .notify-area .notify::before {
-  content: '';
-  position: absolute;
-
-  left: -2%;
-  top: -10%;
-
-  width: 13px;
-  height: 13px;
-
-  border-radius: 30%;
-}
-
-.container .notify-area .notify.error::before {
-  background: rgb(224, 0, 0);
-  box-shadow: 0 0 5px rgb(224, 0, 0);
-}
-.container .notify-area .notify.success::before {
-  background: rgba(26, 224, 0, 1);
-  box-shadow: 0 0 5px rgba(26, 224, 0, 1);
-}
-
-@keyframes notify {
-  0% {
-      width: 110%;
-  }
-  50% {
-      width: 105%;
-  }
-  100% {
-      width: 95%;
-  }
-}
-
-.container .notify-area .notify h1 {
-  position: relative;
-
-  left: 2%;
-  top: 8%;
-  
-  font-size: 15px;
-  font-weight: 600;
-
-  z-index: 10000;
-}
-
-.container .notify-area .notify h2 {
-  position: relative;
-
-  left: 2%;
-  top: 10%;
-
-  width: 230px;
-
-  margin-bottom: 25px;
-
-  color: rgba(255, 255, 255, 0.815);
-  text-shadow: none;
-
-  font-size: 13px;
-  font-weight: 500;
-
-  animation: ntext 3s;
-}
-
-@keyframes ntext {
-  0% {
-      color: transparent;
-  }
-  100% {
-      color: rgba(255, 255, 255, 0.815);
-  }
-}
-
-.success {
-  color: rgba(26, 224, 0, 1);
-  text-shadow: 0 0 5px rgba(26, 224, 0, 1);
-  *background: rgba(26, 224, 0, 0.7);
-
-  --notify-color: 26,224,0;
-}
-
-.error {
-  color: rgb(224, 0, 0);
-  text-shadow: 0 0 10px rgb(224, 0, 0);
-  *background: rgb(224, 0, 0,0.7);
-  --notify-color: 224,0,0;
-}
 
 .ffa-create input::placeholder {
   color: rgba(255, 255, 255, 0.3);
@@ -860,7 +866,7 @@ nav a:hover {
 
   background: rgba(255, 255, 255, 0.041);
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  *box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   border: 1px solid transparent;
 
