@@ -15,8 +15,6 @@ function FFAUISearch()
         local CreatedGames = 0
         for i,v in ipairs(ActiveGames) do
             if v.PreBuild == 1 then
-                print(ESX.DumpTable(v))
-                print(v.Modus)
                 local MapName, ModusName  = GiveNamesBack(v.Modus, v.Map)
 
                 SendNUIMessage({
@@ -112,6 +110,10 @@ RegisterNUICallback('exit', function(data, cb)
     SendNUIMessage({
         state = 'close'
     })
+end)
+
+RegisterNUICallback('JoinPreBuild', function(data, cb)
+    print(ESX.DumpTable(data))
 end)
 
 RegisterNUICallback('notify', function(data, cb)
