@@ -1,16 +1,49 @@
-local UsedDimension = Config.StandardDimension + 1
 local Games = {}
+local UsedDimension = Config.StandardDimension + 1
 
 if Config.UseESX12 then
     ESX = exports["es_extended"]:getSharedObject()
+end
+
+CreateThread(function()
+    for k ,v in ipairs(Config.PrebuiltGames) do
+        local ModeNumber, MapNumber = GiveIDBack(v.Mode, v.Map)
+
+        local  Data = {
+            Name = v.Name,
+            Map = MapNumber,
+            Mode =  ModeNumber,
+            PreBuild = 1,
+            MaxPlayer = v.MaxPlayer
+        }
+        TriggerEvent('sa_ffa:CreateGame', Data)
+    end
+end)
+
+function GiveIDBack(Mode, Map)
+    local ModeNumber, MapNumber 
+
+    for k,v in ipairs(Config.Modus) do
+        if string.lower(v.Name) == string.lower(Mode) then
+            ModeNumber = k
+            break
+        end
+    end
+
+    for k,v in ipairs(Config.Maps) do
+        if string.lower(v.Name) == string.lower(Map) then
+            MapNumber = k
+            break
+        end
+    end
+
+    return ModeNumber, MapNumber
 end
 
 -- Games in die liste hinzufügen
 RegisterNetEvent('sa_ffa:CreateGame')
 AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
     local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
-    local PlayerLoadout = xPlayer.getLoadout()
     local IsNameValid = 0
     local NewPassword = UserCreateInfoA.Password 
 
@@ -23,7 +56,11 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
             if v.Name ~= UserCreateInfoA.Name then
                 IsNameValid = IsNameValid + 1
             else 
-                Config.SendNotifyServer(_source, Config.Local['NameIsInvalid'])
+                if UserCreateInfoA.PreBuild == 1 then
+                    print("^1[ERROR]^7: There are 2 or more prebuild games that have the same name please change that name:^1" ..UserCreateInfoA.Name)
+                else
+                    Config.SendNotifyServer(_source, Config.Local['NameIsInvalid'])
+                end
                 break
             end
         end
@@ -36,15 +73,19 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
             MaxPlayer = tonumber(UserCreateInfoA.MaxPlayer),
             --Players muss 0 sein weil standard 0 Spieler in einer Runde sind
             Players = 0,
-            PrivateGame = UserCreateInfoA.Private,
+            PrivateGame = UserCreateInfoA.Private or 2,
             Modus = UserCreateInfoA.Mode,
             Map = UserCreateInfoA.Map,
-            Dimension = UsedDimension
+            Dimension = UsedDimension,
+            PreBuild = UserCreateInfoA.PreBuild or 0
         }
     
         table.insert(Games, NewGame)
-        
-        JoinGame(_source, NewGame, PlayerLoadout)
+        if UserCreateInfoA.PreBuild ~= 1 then
+            local xPlayer = ESX.GetPlayerFromId(_source)
+            local PlayerLoadout = xPlayer.getLoadout()
+            JoinGame(_source, NewGame, PlayerLoadout)
+        end
         UsedDimension = UsedDimension + 1
 
         local privat 
@@ -53,9 +94,10 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         else
             privat = nil
         end
-
-        SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA.Name, privat or UserCreateInfoA.Password))
-        Config.SendNotifyServer(_source, (Config.Local['CreatedRoom']):format(NewGame.Name))
+        if UserCreateInfoA.PreBuild ~= 1 then 
+            SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA.Name, privat or UserCreateInfoA.Password))
+            Config.SendNotifyServer(_source, (Config.Local['CreatedRoom']):format(NewGame.Name))
+        end
     end
 end)
 
@@ -92,7 +134,6 @@ AddEventHandler("sa_ffa:PlayerKilled", function(KillData)
         end
     end
 end)
-
 
 RegisterNetEvent("sa_ffa:SaveStats")
 AddEventHandler("sa_ffa:SaveStats", function(PlayerStats)
