@@ -24,7 +24,7 @@ function FFAUISearch()
                     maxplayers = v.MaxPlayer,
                     map = MapName,
                     name = v.Name,
-                    modus = ModusName
+                    mode = ModusName
                 })
                 CreatedGames = CreatedGames + 1
             end
