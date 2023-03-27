@@ -46,7 +46,6 @@ files {
     'html/index.html',
     'html/style.css',
     'html/script.js',
-    'html/assets/css/*.css',
 	'html/images/*.png',
 	'html/images/*.jpg',
 	'html/images/*.gif',
