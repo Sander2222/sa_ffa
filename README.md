@@ -1,5 +1,16 @@
 # sa_ffa
 
+## if you want to add a prebuild games then this is the Template
+
+```lua
+    {
+        Name = -- This is the name the is shown to the players (string)
+        Mode = -- This need to be the name from a mode in config.Modus (string) (upper and lower case is ignored)
+        Map = -- This need to be the name from a map in config.map (string) (upper and lower case is ignored)
+        MaxPlayer = -- this is the max player that can join a mode (integer)
+    }
+```
+
 ## if you want to add a mode then this is the Template
 
 ```lua
@@ -48,3 +59,5 @@ to add the img for tha map the picture need to be an png and need to has the sam
 ```lua
     exports['sa_ffa']:LeaveFFA()
 ```
+
+## If you have more questions just ask in the discord
