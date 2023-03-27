@@ -44,6 +44,8 @@ function ClearCreateInputs() {
   document.getElementById("FFA-MaxPlayer").value = "";
   document.getElementById("FFA-Name").value = "";
 
+
+  $('.liste-prebuild').empty();
   $("#btn-change-map").css("color", "rgba(255,255,255,0.3)");
   $("#btn-change-mode").css("color", "rgba(255,255,255,0.3)");
   document.getElementById("btn-change-mode").innerText = JSConfig.Locals.ChooseMode;
