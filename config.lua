@@ -55,6 +55,7 @@ Config.Blip = {
     text = 'FFA' -- what the blip is called
 }
 
+-- If you want to add more prebuild games read the readme.md
 Config.PrebuiltGames = {
     {
         Name = 'FFA 1',
