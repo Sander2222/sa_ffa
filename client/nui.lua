@@ -113,7 +113,12 @@ RegisterNUICallback('exit', function(data, cb)
 end)
 
 RegisterNUICallback('JoinPreBuild', function(data, cb)
-    print(ESX.DumpTable(data))
+    for i, v in ipairs(AllGames) do
+        if data.Game == v.Name then
+            TriggerServerEvent("sa_ffa:SearchRandomGame", v)
+            AllGames = {}
+        end
+    end
 end)
 
 RegisterNUICallback('notify', function(data, cb)
