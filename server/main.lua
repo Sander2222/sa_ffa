@@ -212,12 +212,14 @@ function ChangePlayerCount(Player, ActiveGame, State)
         for k, v in ipairs(Games) do
             if v.Name == ActiveGame then
                 v.Players = v.Players - 1
-                if v.Players <= 0 then
-                    Config.SendNotifyServer(Player, Config.Local['LastPerson'])
-                    table.remove(Games, k )
-                    SendDiscord((SvConfig.WebhookText['LobbyDeleted']):format(v.Name))
+                if ActiveGame.PreBuild == 0 then
+                    if v.Players <= 0 then
+                        Config.SendNotifyServer(Player, Config.Local['LastPerson'])
+                        table.remove(Games, k )
+                        SendDiscord((SvConfig.WebhookText['LobbyDeleted']):format(v.Name))
+                    end
+                    break
                 end
-                break
             end
         end
     end
