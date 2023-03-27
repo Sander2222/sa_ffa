@@ -38,13 +38,6 @@ dependencies {
 	'es_extended'
 }
 
---Export to open FFA Search UI client side
---exports['sa_ffa']:FFAUISearch()
-
---exports['sa_ffa']:IsPlayerInFFA()
-
---exports['sa_ffa']:LeaveFFA()
-
 ui_page ('html/index.html')
 
 files {
