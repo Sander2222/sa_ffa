@@ -108,7 +108,7 @@ Config.Modus = {
 Config.Maps = {
     {
         Name = 'SG',
-        MaxPlayer = 187,
+        MaxPlayer = 15,
         MapCenter = vector3(1644.9177246094,2513.39453125,45.564910888672),
         MaxRadius = 200,
         Teleports = {
@@ -124,7 +124,7 @@ Config.Maps = {
     },
     {
         Name = 'WP',
-        MaxPlayer = 187,
+        MaxPlayer = 10,
         MapCenter = vector3(198.85273742676,-931.42071533203,30.689985275269),
         MaxRadius = 200,
         Teleports = {
