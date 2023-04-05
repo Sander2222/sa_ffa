@@ -95,6 +95,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
             privat = nil
         end
         if UserCreateInfoA.PreBuild ~= 1 then 
+            local xPlayer = ESX.GetPlayerFromId(_source)
             SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA.Name, privat or UserCreateInfoA.Password))
             Config.SendNotifyServer(_source, (Config.Local['CreatedRoom']):format(NewGame.Name))
         end
@@ -210,7 +211,7 @@ function ChangePlayerCount(Player, ActiveGame, State)
         --ActiveGame.Players = ActiveGame.Players + 1
     elseif State == "leave" then
         for k, v in ipairs(Games) do
-            if v.Name == ActiveGame then
+            if v.Name == ActiveGame.Name then
                 v.Players = v.Players - 1
                 if ActiveGame.PreBuild == 0 then
                     if v.Players <= 0 then
