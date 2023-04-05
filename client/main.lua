@@ -22,7 +22,7 @@ function LeaveFFA()
     if IsInDimension then
         PlayerStats.kills = 0
         PlayerStats.deaths = 0
-        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
+        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
         return true
     else
@@ -34,7 +34,7 @@ RegisterCommand(Config.LeaveCommand, function(source, args)
     if IsInDimension or Config.Debug then
         PlayerStats.kills = 0
         PlayerStats.deaths = 0
-        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame.Name)
+        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
         IsInDimension = false
     else
