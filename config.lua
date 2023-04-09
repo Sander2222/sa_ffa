@@ -17,6 +17,7 @@ Config.ShowleaveCommandNotify = true -- This is if the player get a notify how t
 Config.Dist = 3.0 -- the distance to check at the point
 Config.DisableBlip = true -- put this on true if you want do disable all blips if the player is in a ffa game (beta version)
 Config.UseESX12 = false -- not recommended and not tested!!! (if you use 1.2 or lower please update your ESX Version)
+Config.UseOXInventory = true -- if you use ox_inventory put this on true
 
 Config.SendNotifyClient = function(msg) -- add your client notify 
     ESX.ShowNotification(msg)

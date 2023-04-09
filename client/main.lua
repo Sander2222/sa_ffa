@@ -93,6 +93,9 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     ActiveClientGame = ActiveGame
     Loadout('Join')
     ChangeBlipState('hide')
+    if Config.UseOXInventory then
+        exports.ox_inventory:weaponWheel(true)
+    end
 
     DisplayRadar(false)
     if Config.UseCamAnimations then
@@ -123,6 +126,9 @@ RegisterNetEvent("sa_ffa:LeaveGameClient")
 AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     Loadout('Leave', Modus)
     ChangeBlipState('show')
+    if Config.UseOXInventory then
+        exports.ox_inventory:weaponWheel(false)
+    end
     ChangeClientscoreboard('close')
 end)
 
