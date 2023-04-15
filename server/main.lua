@@ -159,7 +159,7 @@ end)
 
 ESX.RegisterServerCallback('sa_ffa:GetSource', function(src, cb)
     cb(src)
-  end)
+end)
 
 --[[ Functions ]]
 function ChangeWeaponState(Player, State, Loadout)
