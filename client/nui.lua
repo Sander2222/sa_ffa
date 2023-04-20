@@ -98,7 +98,7 @@ end
 RegisterNUICallback('JoinSearchedMatch', function(data, cb)
     for i, v in ipairs(AllGames) do
         if data.Game == v.Name then
-            TriggerServerEvent("sa_ffa:SearchRandomGame", v)
+            TriggerServerEvent("sa_ffa:JoinGameServer", v)
             AllGames = {}
         end
     end
@@ -115,7 +115,7 @@ end)
 RegisterNUICallback('JoinPreBuild', function(data, cb)
     for i, v in ipairs(AllGames) do
         if data.Game == v.Name then
-            TriggerServerEvent("sa_ffa:SearchRandomGame", v)
+            TriggerServerEvent("sa_ffa:JoinGameServer", v)
             AllGames = {}
         end
     end
@@ -132,6 +132,7 @@ RegisterNUICallback('CreateGame', function(data, cb)
         SendNUIMessage({
             state = 'close'
         })
+        data.Time = 15
         TriggerServerEvent('sa_ffa:CreateGame', data)
         Config.SendNotifyClient(Config.Local['GameCreate'])
     else

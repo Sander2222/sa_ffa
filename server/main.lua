@@ -5,51 +5,13 @@ if Config.UseESX12 then
     ESX = exports["es_extended"]:getSharedObject()
 end
 
-CreateThread(function()
-    for k ,v in ipairs(Config.PrebuiltGames) do
-        local ModeNumber, MapNumber = GiveIDBack(v.Mode, v.Map)
-
-        local  Data = {
-            Name = v.Name,
-            Map = MapNumber,
-            Mode =  ModeNumber,
-            PreBuild = 1,
-            MaxPlayer = v.MaxPlayer
-        }
-        TriggerEvent('sa_ffa:CreateGame', Data)
-    end
-end)
-
-function GiveIDBack(Mode, Map)
-    local ModeNumber, MapNumber 
-
-    for k,v in ipairs(Config.Modus) do
-        if string.lower(v.Name) == string.lower(Mode) then
-            ModeNumber = k
-            break
-        end
-    end
-
-    for k,v in ipairs(Config.Maps) do
-        if string.lower(v.Name) == string.lower(Map) then
-            MapNumber = k
-            break
-        end
-    end
-
-    return ModeNumber, MapNumber
-end
-
 -- Games in die liste hinzufügen
 RegisterNetEvent('sa_ffa:CreateGame')
 AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
     local _source = source
     local IsNameValid = 0
-    local NewPassword = UserCreateInfoA.Password 
-
-    if UserCreateInfoA.Password == '' or UserCreateInfoA.Password == nil then
-        NewPassword = ' '
-    end
+    local NewPassword = UserCreateInfoA.Password
+    local Players = {""}
 
     if #Games > 0 then
         for i,v in ipairs(Games) do
@@ -66,6 +28,14 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         end
     end
 
+    if UserCreateInfoA.Password == '' or UserCreateInfoA.Password == nil then
+        NewPassword = ' '
+    end
+
+    if source ~= '' then
+        Players = {source}
+    end
+
     if IsNameValid == #Games then
         local NewGame = {
             Name = UserCreateInfoA.Name,
@@ -77,9 +47,11 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
             Modus = UserCreateInfoA.Mode,
             Map = UserCreateInfoA.Map,
             Dimension = UsedDimension,
-            PreBuild = UserCreateInfoA.PreBuild or 0
+            PreBuild = UserCreateInfoA.PreBuild or 0,
+            Time = UserCreateInfoA.Time,
+            IDPlayers = Players
         }
-    
+
         table.insert(Games, NewGame)
         if UserCreateInfoA.PreBuild ~= 1 then
             local xPlayer = ESX.GetPlayerFromId(_source)
@@ -88,12 +60,13 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         end
         UsedDimension = UsedDimension + 1
 
-        local privat 
+        local privat
         if UserCreateInfoA.Password == '' then
             privat = 'Privat'
         else
             privat = nil
         end
+
         if UserCreateInfoA.PreBuild ~= 1 then 
             local xPlayer = ESX.GetPlayerFromId(_source)
             SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA.Name, privat or UserCreateInfoA.Password))
@@ -102,19 +75,39 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
     end
 end)
 
-RegisterNetEvent('sa_ffa:LeaveGame')
-AddEventHandler('sa_ffa:LeaveGame', function(PlayerWeapons, ActiveClientGame)
-    ChangeWeaponState(source, "leave", PlayerWeapons)
-    LeaveGame(source, ActiveClientGame)
-end)
-
-RegisterNetEvent("sa_ffa:SearchRandomGame")
-AddEventHandler("sa_ffa:SearchRandomGame", function(Game)
+RegisterNetEvent("sa_ffa:JoinGameServer")
+AddEventHandler("sa_ffa:JoinGameServer", function(Game)
     local xPlayer = ESX.GetPlayerFromId(source)
 
     Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..Game.Name)
     JoinGame(source, Game, xPlayer.getLoadout())
 end)
+
+function JoinGame(PlayerID, GameArray, Loadout)
+    ChangeWeaponState(PlayerID, 'join', Loadout)
+    Wait(1000)
+    TriggerClientEvent('sa_ffa:JoinGameClient', PlayerID, GameArray, Loadout)
+    SetPlayerRoutingBucket(PlayerID, GameArray.Dimension)
+    SetRoutingBucketEntityLockdownMode(GameArray.Dimension, 'strict')
+    ChangePlayerCount(PlayerID, GameArray, "join")
+
+    if not Config.DisabledNPCS then
+        SetRoutingBucketPopulationEnabled(GameInfo.Dimension, false)
+    end
+end
+
+RegisterNetEvent('sa_ffa:LeaveGame')
+AddEventHandler('sa_ffa:LeaveGame', function(PlayerWeapons, GameArray)
+    print(ESX.DumpTable(GameArray))
+    ChangeWeaponState(source, "leave", PlayerWeapons)
+    LeaveGame(source, GameArray)
+end)
+
+function LeaveGame(Player, GameInfo)
+    SetPlayerRoutingBucket(Player, Config.StandardDimension)
+    TriggerClientEvent('sa_ffa:LeaveGameClient', Player, GameInfo.Modus)
+    ChangePlayerCount(Player, GameInfo, "leave")
+end
 
 RegisterNetEvent("sa_ffa:PlayerKilled")
 AddEventHandler("sa_ffa:PlayerKilled", function(KillData)
@@ -161,9 +154,9 @@ ESX.RegisterServerCallback('sa_ffa:GetSource', function(src, cb)
     cb(src)
 end)
 
---[[ Functions ]]
 function ChangeWeaponState(Player, State, Loadout)
     local xPlayer = ESX.GetPlayerFromId(Player)
+
     if State == 'join' then
         -- Waffen entnehmen
         for i,v in ipairs(Loadout) do
@@ -178,24 +171,7 @@ function ChangeWeaponState(Player, State, Loadout)
     end
 end
 
-function JoinGame(Player, GameInfo, Loadout)
-    ChangeWeaponState(Player, 'join', Loadout)
-    Wait(1000)
-    TriggerClientEvent('sa_ffa:JoinGameClient', Player, GameInfo, Loadout)
-    SetPlayerRoutingBucket(Player, GameInfo.Dimension)
-    SetRoutingBucketEntityLockdownMode(GameInfo.Dimension, 'strict')
-    ChangePlayerCount(Player, GameInfo, "join")
 
-    if not Config.DisabledNPCS then
-        SetRoutingBucketPopulationEnabled(GameInfo.Dimension, false)
-    end
-end
-
-function LeaveGame(Player, GameInfo)
-    SetPlayerRoutingBucket(Player, Config.StandardDimension)
-    TriggerClientEvent('sa_ffa:LeaveGameClient', Player, GameInfo.Modus)
-    ChangePlayerCount(Player, GameInfo, "leave")
-end
 
 function ChangePlayerCount(Player, ActiveGame, State)
 
@@ -206,6 +182,7 @@ function ChangePlayerCount(Player, ActiveGame, State)
         for k ,v in ipairs(Games) do
             if v.Name == ActiveGame.Name then
                 v.Players = v.Players + 1
+                v.IDPlayers = table.insert(v.IDPlayers, Player)
             end
         end
         --ActiveGame.Players = ActiveGame.Players + 1
@@ -213,6 +190,7 @@ function ChangePlayerCount(Player, ActiveGame, State)
         for k, v in ipairs(Games) do
             if v.Name == ActiveGame.Name then
                 v.Players = v.Players - 1
+                RemovePlayerId(Player, v.Name)
                 if ActiveGame.PreBuild == 0 then
                     if v.Players <= 0 then
                         Config.SendNotifyServer(Player, Config.Local['LastPerson'])
@@ -223,6 +201,17 @@ function ChangePlayerCount(Player, ActiveGame, State)
                 end
             end
         end
+    end
+end
+
+function RemovePlayerId(Player, Game)
+    for i,v in ipairs(Games) do
+        -- for k,d in pairs(v.IDPlayers) do
+        --     if d == Player then
+        --         table.remove( v.IDPlayers, k )
+        --         print("remove")
+        --     end
+        -- end
     end
 end
 
@@ -359,3 +348,38 @@ CreateThread( function()
         PerformHttpRequest("https://ffa.sa-scripts.com/", CheckVersion, "GET")
     end
 end)
+
+CreateThread(function()
+    for k ,v in ipairs(Config.PrebuiltGames) do
+        local ModeNumber, MapNumber = GiveIDBack(v.Mode, v.Map)
+
+        local  Data = {
+            Name = v.Name,
+            Map = MapNumber,
+            Mode =  ModeNumber,
+            PreBuild = 1,
+            MaxPlayer = v.MaxPlayer
+        }
+        TriggerEvent('sa_ffa:CreateGame', Data)
+    end
+end)
+
+function GiveIDBack(Mode, Map)
+    local ModeNumber, MapNumber 
+
+    for k,v in ipairs(Config.Modus) do
+        if string.lower(v.Name) == string.lower(Mode) then
+            ModeNumber = k
+            break
+        end
+    end
+
+    for k,v in ipairs(Config.Maps) do
+        if string.lower(v.Name) == string.lower(Map) then
+            MapNumber = k
+            break
+        end
+    end
+
+    return ModeNumber, MapNumber
+end

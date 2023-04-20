@@ -16,7 +16,7 @@ end
 
 if Config.UseESX12 then
     ESX = exports["es_extended"]:getSharedObject()
-end
+end 
 
 function LeaveFFA()
     if IsInDimension then
@@ -91,6 +91,7 @@ RegisterNetEvent("sa_ffa:JoinGameClient")
 AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
     PlayerLoadout = PlayerWeapons
     ActiveClientGame = ActiveGame
+    print(ESX.DumpTable(ActiveClientGame))
     Loadout('Join')
     ChangeBlipState('hide')
     if Config.UseOXInventory then
