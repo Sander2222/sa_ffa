@@ -282,7 +282,7 @@ CreateThread(function()
         local t = os.date ("*t")
         local hour = tostring(t.hour)
 
-        if hour <= "9" then
+        if tonumber(hour) <= 9 then
             hour = "0" ..tostring(t.hour)
         end
         local ActiveTime = hour .. ':' .. tostring(t.min)
