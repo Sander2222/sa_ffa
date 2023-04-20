@@ -80,6 +80,7 @@ AddEventHandler("sa_ffa:JoinGameServer", function(Game)
     local xPlayer = ESX.GetPlayerFromId(source)
 
     Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..Game.Name)
+    SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), Game.Name))
     JoinGame(source, Game, xPlayer.getLoadout())
 end)
 
