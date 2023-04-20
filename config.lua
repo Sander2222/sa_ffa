@@ -6,9 +6,6 @@ Config.StandardDimension = 0 -- Put there you standard dimension
 Config.Invincible = false -- Put this on true if the player got killed have a spawnprotect
 Config.DisabledNPCS = true -- use your brain ;)
 Config.NotifyForKill = true -- If you want that the players get a notify if they die or get a kill
-Config.SendDiscordStats = true -- If you want to send a Discord message with the Stats from the Database
-Config.SendDisordStatsTime = '01:35' -- Set the time where the message get sended from the stats
-Config.SendDiscordScoreboardLimit = 10 -- Set how much player should be listed in the Message
 Config.UseCamAnimations = false -- Use cam Animations for join and leave ffa
 Config.CamWait = 2500 -- Dont edit it if you dont know what are you doing
 Config.UseUINotify = false -- This is for the UI there is a Notifysystem in the ui if you dont use it then put this on false
@@ -160,6 +157,12 @@ Config.Local = {
     ['KilledYourself'] = 'Du hast dich selber getötet',
     ['LastPerson'] = 'Da du die letzte Person in dem Game warst wurde die Lobby gelöscht',
     ['ShowLeaveCommand'] = 'Mit diesem Befehl kannst du das FFA jederzeit verlassen %s', -- -- param 1 = leave command
+    
+    ['Place'] = 'Place',
+    ['Name'] = 'Name',
+    ['Kills'] = 'Kills',
+    ['Deaths'] = 'Deaths',
+    ['FFATop'] = 'FFA Top × ',
 }
 
 -- There are more locals in the config.js
