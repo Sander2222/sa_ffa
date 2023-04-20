@@ -1,5 +1,9 @@
 SvConfig = {}
 
+SvConfig.SendDisordStatsTime = '21:27' -- Set the time where the message get sended from the stats
+SvConfig.SendDiscordStats = true -- If you want to send a Discord message with the Stats from the Database
+SvConfig.SendDiscordScoreboardLimit = 10 -- Set how much player should be listed in the Message
+
 -- This Webhook is where the logs get send
 SvConfig.WebhookLogs = 'https://canary.discord.com/api/webhooks/1001453843227361350/sbbCM02f6Yl0lOrtVmlchPDYEd_EwIPJwVpkZeJJRHVncyX-pH2cYQUmrO81cUc_mLNW' -- URL
 SvConfig.WebhookNameLogs = 'FFA' -- Header
@@ -16,3 +20,17 @@ SvConfig.WebhookText = {
     ['PlayerJoinedRoom'] = 'Player **%s** (%s) has joined the game: %s', -- param 1 = ESX Player name || param 2 = Player Identifier || param 3 Room name
     ['LobbyDeleted'] = 'The lobby **%s** was deleted because no one was in the lobby', -- param 1 = Room name
 }
+
+SvConfig.ScoreboardDesign = 1
+
+--[[ 
+    
+Here are the designs
+
+Design 1
+Link: https://media.discordapp.net/attachments/1001453825330249798/1098668913870524446/image.png?width=157&height=629
+
+Design 2
+Link: 
+
+]]--
