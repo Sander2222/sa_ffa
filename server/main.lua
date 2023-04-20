@@ -279,7 +279,7 @@ end
 
 CreateThread(function()
     local IsSend = false
-    while Config.SendDiscordStats do
+    while SvConfig.SendDiscordStats do
         local t = os.date ("*t")
         local hour = tostring(t.hour)
 
@@ -294,17 +294,25 @@ CreateThread(function()
             Wait(60000)
         end
 
-        if ActiveTime == Config.SendDisordStatsTime then
+        if ActiveTime == SvConfig.SendDisordStatsTime then
             if not IsSend then
                 local message = ''
                 local finish = false
-            
-                local result = MySQL.query.await('SELECT ffa.*, users.* FROM ffa INNER JOIN users ON ffa.identifier = users.identifier ORDER BY ffa.kills DESC LIMIT ' ..tostring(Config.SendDiscordScoreboardLimit), {})
-                if result then
+
+                if SvConfig.ScoreboardDesign == 2 then
+                    message = '**' .. Config.Local['FFATop'] .. ' ' .. SvConfig.SendDiscordScoreboardLimit ..'**\n\n'
+                end
+
+                local result = MySQL.query.await('SELECT ffa.*, users.* FROM ffa INNER JOIN users ON ffa.identifier = users.identifier ORDER BY ffa.kills DESC LIMIT ' ..tostring(SvConfig.SendDiscordScoreboardLimit), {})
+                if result and result ~= {} then
                     for i = 1, #result do
                         local row = result[i]
-                        message = message .. 'Platz: **' .. i .. '**\nName: **' .. row.firstname .. ' ' .. row.lastname .. '**\n' ..'Kills: **' .. row.kills .. '**\nDeaths: **' .. row.deaths .. '**\n' .. '\n\n'
-                        if i == #result then
+                        if SvConfig.ScoreboardDesign == 1 then
+                            message = message .. Config.Local['Place'] ..': **' .. i .. '**\n' .. Config.Local['Name'] .. ': **' .. row.firstname .. ' ' .. row.lastname .. '**\n' .. Config.Local['Kills'] ..': **' .. row.kills .. '**\n ' .. Config.Local['Deaths'] .. ': **' .. row.deaths .. '**\n' .. '\n\n'
+                        elseif SvConfig.ScoreboardDesign == 2 then
+                            message = message .. '**#' .. i  .. '** '.. row.firstname .. ' ' .. row.lastname .. ' | ' .. Config.Local['Kills'] .. ': ' .. row.kills .. ' - ' .. Config.Local['Deaths'] .. ': ' .. row.deaths .. '\n'
+                        end
+                            if i == #result then
                             finish = true
                         end
                     end
