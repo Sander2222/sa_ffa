@@ -22,6 +22,7 @@ function LeaveFFA()
     if IsInDimension then
         TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
+        IsInDimension = false
         PlayerStats.kills = 0
         PlayerStats.deaths = 0
         return true

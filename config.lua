@@ -16,11 +16,11 @@ Config.DisableBlip = true -- put this on true if you want do disable all blips i
 Config.UseESX12 = false -- not recommended and not tested!!! (if you use 1.2 or lower please update your ESX Version)
 Config.UseOXInventory = false -- if you use ox_inventory put this on true
 
-Config.SendNotifyClient = function(msg) -- add your client notify 
+Config.SendNotifyClient = function(msg) -- add your client notify
     ESX.ShowNotification(msg)
 end
 
-Config.SendNotifyServer = function(source, msg) -- add your server notify 
+Config.SendNotifyServer = function(source, msg) -- add your server notify
     
     local xPlayer = ESX.GetPlayerFromId(source)
     xPlayer.showNotification(msg)
