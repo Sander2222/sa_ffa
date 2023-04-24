@@ -337,10 +337,10 @@ end)
 CreateThread( function()
     if Config.CheckVersion then
         local resourceName = "("..GetCurrentResourceName()..")"
-        
+
         function CheckVersion(err,responseText, headers)
             local curVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
-        
+
             if curVersion ~= responseText and curVersion < responseText then
                 print("\n^3----------------------------------------------------------------------------------^7")
                 print("\n"..resourceName.." is outdated, the newest Verion is^2:\n"..responseText.."^7 your version is:^1 "..curVersion.."\n^7Please update it from: ^1https://keymaster.fivem.net/asset-grants")
@@ -353,7 +353,6 @@ CreateThread( function()
                 print("\n"..resourceName.." is up to date ^2(" .. curVersion .. ")^7, have fun and if you find bugs or need help just ask.")
             end
         end
-        
         PerformHttpRequest("https://ffa.sa-scripts.com/", CheckVersion, "GET")
     end
 end)
@@ -374,7 +373,7 @@ CreateThread(function()
 end)
 
 function GiveIDBack(Mode, Map)
-    local ModeNumber, MapNumber 
+    local ModeNumber, MapNumber
 
     for k,v in ipairs(Config.Modus) do
         if string.lower(v.Name) == string.lower(Mode) then
