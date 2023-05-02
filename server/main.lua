@@ -1,4 +1,5 @@
 local Games = {}
+local PlayerLoadouts = {}
 local UsedDimension = Config.StandardDimension + 1
 
 if Config.UseESX12 then
@@ -55,8 +56,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         table.insert(Games, NewGame)
         if UserCreateInfoA.PreBuild ~= 1 then
             local xPlayer = ESX.GetPlayerFromId(_source)
-            local PlayerLoadout = xPlayer.getLoadout()
-            JoinGame(_source, NewGame, PlayerLoadout)
+            JoinGame(_source, NewGame, xPlayer.getLoadout())
         end
         UsedDimension = UsedDimension + 1
 
@@ -85,9 +85,13 @@ AddEventHandler("sa_ffa:JoinGameServer", function(Game)
 end)
 
 function JoinGame(PlayerID, GameArray, Loadout)
+    local xPlayer = ESX.GetPlayerFromId(PlayerID)
+
+    PlayerLoadouts[xPlayer.getIdentifier()] = {Loadout}
+
     ChangeWeaponState(PlayerID, 'join', Loadout)
     Wait(1000)
-    TriggerClientEvent('sa_ffa:JoinGameClient', PlayerID, GameArray, Loadout)
+    TriggerClientEvent('sa_ffa:JoinGameClient', PlayerID, GameArray)
     SetPlayerRoutingBucket(PlayerID, GameArray.Dimension)
     SetRoutingBucketEntityLockdownMode(GameArray.Dimension, 'strict')
     ChangePlayerCount(PlayerID, GameArray, "join")
@@ -98,9 +102,9 @@ function JoinGame(PlayerID, GameArray, Loadout)
 end
 
 RegisterNetEvent('sa_ffa:LeaveGame')
-AddEventHandler('sa_ffa:LeaveGame', function(PlayerWeapons, GameArray)
+AddEventHandler('sa_ffa:LeaveGame', function(GameArray)
     print(ESX.DumpTable(GameArray))
-    ChangeWeaponState(source, "leave", PlayerWeapons)
+    ChangeWeaponState(source, "leave")
     LeaveGame(source, GameArray)
 end)
 
@@ -165,10 +169,11 @@ function ChangeWeaponState(Player, State, Loadout)
         end
     elseif State == 'leave' then
         --Waffen hinzufügen
-        for i,v in ipairs(Loadout) do
+        for i,v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
             xPlayer.addWeapon(v.name)
             SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
         end
+        PlayerLoadouts[xPlayer.getIdentifier()] = nil
     end
 end
 
@@ -215,6 +220,24 @@ function RemovePlayerId(Player, Game)
         -- end
     end
 end
+
+AddEventHandler("playerConnecting", function()
+    local Player = source
+    local xPlayer
+    while xPlayer == nil do
+        xPlayer =  ESX.GetPlayerFromId(Player)
+        Wait(1)
+    end
+
+    if PlayerLoadouts[xPlayer.getIdentifier()] ~= nil then
+        for k, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
+            xPlayer.addWeapon(v.name)
+            SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
+        end
+        PlayerLoadouts[xPlayer.getIdentifier()] = nil
+    end
+end)
+
 
 AddEventHandler('playerDropped', function (reason)
     --print('Player ' .. GetPlayerName(source) .. ' dropped (Reason: ' .. reason .. ')')

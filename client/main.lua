@@ -1,6 +1,6 @@
 IsInDimension = false
 local cam = nil
-local PlayerLoadout, ActiveClientGame = {}, {}
+local ActiveClientGame = {}
 local ActiveMapInfo = {
     ActiveMapCenter = nil,
     ActiveMapRadius = nil
@@ -20,7 +20,7 @@ end
 
 function LeaveFFA()
     if IsInDimension then
-        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame)
+        TriggerServerEvent('sa_ffa:LeaveGame', ActiveClientGame)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
         IsInDimension = false
         PlayerStats.kills = 0
@@ -33,7 +33,7 @@ end
 
 RegisterCommand(Config.LeaveCommand, function(source, args)
     if IsInDimension or Config.Debug then
-        TriggerServerEvent('sa_ffa:LeaveGame', PlayerLoadout, ActiveClientGame)
+        TriggerServerEvent('sa_ffa:LeaveGame', ActiveClientGame)
         TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
         IsInDimension = false
         PlayerStats.kills = 0
@@ -44,10 +44,8 @@ RegisterCommand(Config.LeaveCommand, function(source, args)
 end)
 
 RegisterNetEvent("sa_ffa:JoinGameClient")
-AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame, PlayerWeapons)
-    PlayerLoadout = PlayerWeapons
+AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame)
     ActiveClientGame = ActiveGame
-    print(ESX.DumpTable(ActiveClientGame))
     Loadout('Join')
     ChangeBlipState('hide')
     if Config.UseOXInventory then
