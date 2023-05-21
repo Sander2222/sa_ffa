@@ -12,7 +12,7 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 
     local _source = source
     local IsNameValid = 0
     local NewPassword = FFAInfo.Password
-    local Players = {""}
+    local FFAPlayerID = {""}
 
     if #Games > 0 then
         for i,v in ipairs(Games) do
@@ -34,23 +34,23 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 
     end
 
     if source ~= '' then
-        Players = {source}
+        FFAPlayerID = {source}
     end
 
     if IsNameValid == #Games then
         local NewGame = {
             Name = FFAInfo.Name,
             Password = NewPassword,
+            Test = FFAPlayerID,
             MaxPlayer = tonumber(FFAInfo.MaxPlayer),
             --Players muss 0 sein weil standard 0 Spieler in einer Runde sind
             Players = 0,
             PrivateGame = FFAInfo.Private or 2,
             Modus = FFAInfo.Mode,
             Map = FFAInfo.Map,
-            Dimension = FFAInfo,
+            Dimension = FFAInfo.Dimension,
             PreBuild = FFAInfo.PreBuild or 0,
             Time = FFAInfo.Time,
-            IDPlayers = Players
         }
 
         table.insert(Games, NewGame)
@@ -188,7 +188,7 @@ function ChangePlayerCount(Player, ActiveGame, State)
         for k ,v in ipairs(Games) do
             if v.Name == ActiveGame.Name then
                 v.Players = v.Players + 1
-                v.IDPlayers = table.insert(v.IDPlayers, Player)
+                v.FFAPlayerID = table.insert(v.FFAPlayerID, Player)
             end
         end
         --ActiveGame.Players = ActiveGame.Players + 1
@@ -212,9 +212,9 @@ end
 
 function RemovePlayerId(Player, Game)
     for i,v in ipairs(Games) do
-        -- for k,d in pairs(v.IDPlayers) do
+        -- for k,d in pairs(v.FFAPlayerID) do
         --     if d == Player then
-        --         table.remove( v.IDPlayers, k )
+        --         table.remove( v.FFAPlayerID, k )
         --         print("remove")
         --     end
         -- end
