@@ -8,19 +8,19 @@ end
 
 -- Games in die liste hinzufügen
 RegisterNetEvent('sa_ffa:CreateGame')
-AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
+AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
     local _source = source
     local IsNameValid = 0
-    local NewPassword = UserCreateInfoA.Password
+    local NewPassword = FFAInfo.Password
     local Players = {""}
 
     if #Games > 0 then
         for i,v in ipairs(Games) do
-            if v.Name ~= UserCreateInfoA.Name then
+            if v.Name ~= FFAInfo.Name then
                 IsNameValid = IsNameValid + 1
             else 
-                if UserCreateInfoA.PreBuild == 1 then
-                    print("^1[ERROR]^7: There are 2 or more prebuild games that have the same name please change that name:^1" ..UserCreateInfoA.Name)
+                if FFAInfo.PreBuild == 1 then
+                    print("^1[ERROR]^7: There are 2 or more prebuild games that have the same name please change that name:^1" ..FFAInfo.Name)
                 else
                     Config.SendNotifyServer(_source, Config.Local['NameIsInvalid'])
                 end
@@ -29,7 +29,7 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
         end
     end
 
-    if UserCreateInfoA.Password == '' or UserCreateInfoA.Password == nil then
+    if FFAInfo.Password == '' or FFAInfo.Password == nil then
         NewPassword = ' '
     end
 
@@ -39,37 +39,37 @@ AddEventHandler('sa_ffa:CreateGame', function(UserCreateInfoA) -- Arg: Name 1, P
 
     if IsNameValid == #Games then
         local NewGame = {
-            Name = UserCreateInfoA.Name,
+            Name = FFAInfo.Name,
             Password = NewPassword,
-            MaxPlayer = tonumber(UserCreateInfoA.MaxPlayer),
+            MaxPlayer = tonumber(FFAInfo.MaxPlayer),
             --Players muss 0 sein weil standard 0 Spieler in einer Runde sind
             Players = 0,
-            PrivateGame = UserCreateInfoA.Private or 2,
-            Modus = UserCreateInfoA.Mode,
-            Map = UserCreateInfoA.Map,
-            Dimension = UsedDimension,
-            PreBuild = UserCreateInfoA.PreBuild or 0,
-            Time = UserCreateInfoA.Time,
+            PrivateGame = FFAInfo.Private or 2,
+            Modus = FFAInfo.Mode,
+            Map = FFAInfo.Map,
+            Dimension = FFAInfo,
+            PreBuild = FFAInfo.PreBuild or 0,
+            Time = FFAInfo.Time,
             IDPlayers = Players
         }
 
         table.insert(Games, NewGame)
-        if UserCreateInfoA.PreBuild ~= 1 then
+        if FFAInfo.PreBuild ~= 1 then
             local xPlayer = ESX.GetPlayerFromId(_source)
             JoinGame(_source, NewGame, xPlayer.getLoadout())
         end
         UsedDimension = UsedDimension + 1
 
         local privat
-        if UserCreateInfoA.Password == '' then
+        if FFAInfo.Password == '' then
             privat = 'Privat'
         else
             privat = nil
         end
 
-        if UserCreateInfoA.PreBuild ~= 1 then 
+        if FFAInfo.PreBuild ~= 1 then 
             local xPlayer = ESX.GetPlayerFromId(_source)
-            SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), UserCreateInfoA.Name, privat or UserCreateInfoA.Password))
+            SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), FFAInfo.Name, privat or FFAInfo.Password))
             Config.SendNotifyServer(_source, (Config.Local['CreatedRoom']):format(NewGame.Name))
         end
     end
