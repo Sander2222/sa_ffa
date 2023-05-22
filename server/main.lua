@@ -12,7 +12,7 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 
     local _source = source
     local IsNameValid = 0
     local NewPassword = FFAInfo.Password
-    local FFAPlayerID = {""}
+    local FFAPlayerIDS = {}
 
     if #Games > 0 then
         for i,v in ipairs(Games) do
@@ -33,15 +33,11 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 
         NewPassword = ' '
     end
 
-    if source ~= '' then
-        FFAPlayerID = {source}
-    end
-
     if IsNameValid == #Games then
         local NewGame = {
             Name = FFAInfo.Name,
             Password = NewPassword,
-            Test = FFAPlayerID,
+            FFAPlayerID = FFAPlayerIDS,
             MaxPlayer = tonumber(FFAInfo.MaxPlayer),
             --Players muss 0 sein weil standard 0 Spieler in einer Runde sind
             Players = 0,
@@ -81,12 +77,14 @@ AddEventHandler("sa_ffa:JoinGameServer", function(Game)
 
     Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..Game.Name)
     SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), Game.Name))
+    print(ESX.DumpTable("Player Weapons", xPlayer.getLoadout()))
     JoinGame(source, Game, xPlayer.getLoadout())
 end)
 
 function JoinGame(PlayerID, GameArray, Loadout)
     local xPlayer = ESX.GetPlayerFromId(PlayerID)
 
+    print(ESX.DumpTable(Loadout))
     PlayerLoadouts[xPlayer.getIdentifier()] = {Loadout}
 
     ChangeWeaponState(PlayerID, 'join', Loadout)
@@ -103,7 +101,6 @@ end
 
 RegisterNetEvent('sa_ffa:LeaveGame')
 AddEventHandler('sa_ffa:LeaveGame', function(GameArray)
-    print(ESX.DumpTable(GameArray))
     ChangeWeaponState(source, "leave")
     LeaveGame(source, GameArray)
 end)
@@ -169,7 +166,8 @@ function ChangeWeaponState(Player, State, Loadout)
         end
     elseif State == 'leave' then
         --Waffen hinzufügen
-        for i,v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
+        print("lodl", ESX.DumpTable(PlayerLoadouts[xPlayer.getIdentifier()]))
+        for i, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
             xPlayer.addWeapon(v.name)
             SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
         end
@@ -188,7 +186,7 @@ function ChangePlayerCount(Player, ActiveGame, State)
         for k ,v in ipairs(Games) do
             if v.Name == ActiveGame.Name then
                 v.Players = v.Players + 1
-                v.FFAPlayerID = table.insert(v.FFAPlayerID, Player)
+                table.insert(v.FFAPlayerID, Player)
             end
         end
         --ActiveGame.Players = ActiveGame.Players + 1
@@ -196,7 +194,13 @@ function ChangePlayerCount(Player, ActiveGame, State)
         for k, v in ipairs(Games) do
             if v.Name == ActiveGame.Name then
                 v.Players = v.Players - 1
-                RemovePlayerId(Player, v.Name)
+
+                        for k,d in pairs(v.FFAPlayerID) do
+                            if d == Player then
+                                table.remove( v.FFAPlayerID, k )
+                            end
+                        end
+
                 if ActiveGame.PreBuild == 0 then
                     if v.Players <= 0 then
                         Config.SendNotifyServer(Player, Config.Local['LastPerson'])
@@ -207,17 +211,6 @@ function ChangePlayerCount(Player, ActiveGame, State)
                 end
             end
         end
-    end
-end
-
-function RemovePlayerId(Player, Game)
-    for i,v in ipairs(Games) do
-        -- for k,d in pairs(v.FFAPlayerID) do
-        --     if d == Player then
-        --         table.remove( v.FFAPlayerID, k )
-        --         print("remove")
-        --     end
-        -- end
     end
 end
 
