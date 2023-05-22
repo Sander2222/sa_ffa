@@ -77,15 +77,17 @@ AddEventHandler("sa_ffa:JoinGameServer", function(Game)
 
     Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..Game.Name)
     SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), Game.Name))
-    print(ESX.DumpTable("Player Weapons", xPlayer.getLoadout()))
     JoinGame(source, Game, xPlayer.getLoadout())
 end)
 
 function JoinGame(PlayerID, GameArray, Loadout)
     local xPlayer = ESX.GetPlayerFromId(PlayerID)
 
-    print(ESX.DumpTable(Loadout))
-    PlayerLoadouts[xPlayer.getIdentifier()] = {Loadout}
+    if next(Loadout) == nil then
+        PlayerLoadouts[xPlayer.getIdentifier()] = {}
+    else 
+        PlayerLoadouts[xPlayer.getIdentifier()] = Loadout
+    end
 
     ChangeWeaponState(PlayerID, 'join', Loadout)
     Wait(1000)
@@ -95,7 +97,7 @@ function JoinGame(PlayerID, GameArray, Loadout)
     ChangePlayerCount(PlayerID, GameArray, "join")
 
     if not Config.DisabledNPCS then
-        SetRoutingBucketPopulationEnabled(GameInfo.Dimension, false)
+        SetRoutingBucketPopulationEnabled(GameArray.Dimension, false)
     end
 end
 
@@ -166,7 +168,8 @@ function ChangeWeaponState(Player, State, Loadout)
         end
     elseif State == 'leave' then
         --Waffen hinzufügen
-        print("lodl", ESX.DumpTable(PlayerLoadouts[xPlayer.getIdentifier()]))
+        print(ESX.DumpTable(PlayerLoadouts))
+        -- print("lodl", ESX.DumpTable(PlayerLoadouts[xPlayer.getIdentifier()]))
         for i, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
             xPlayer.addWeapon(v.name)
             SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
