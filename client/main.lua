@@ -1,7 +1,7 @@
 IsInDimension = false
 ActiveClientGame = {}
 local cam = nil
-local ActiveMapInfo = {
+ActiveMapInfo = {
     ActiveMapCenter = nil,
     ActiveMapRadius = nil
 }
