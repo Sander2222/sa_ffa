@@ -92,8 +92,13 @@ window.addEventListener("message", async function (event) {
       ChangeScoreboards(kills, deaths, item.Name);
     } else if (item.type === 'nogamessearch' ) {
       ChangeFFAVisual('Privat')
-    } else if (item.type = "searchprebuild") {
+    } else if (item.type == "searchprebuild") {
       AddPreBuildFFA(item.players, item.maxplayers, item.map, item.name, item.mode)
+    } else if (item.type == 'LoadData') {
+      log(item.GameCount)
+      log(item.PlayerCount)
+      document.getElementById("GameCount").textContent = item.GameCount;
+      document.getElementById("PlayerCount").textContent = item.PlayerCount;
     }
   } else if (item.state === "close") {
     $("body").hide();

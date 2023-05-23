@@ -12,6 +12,25 @@ function FFAUISearch()
             notify = Config.UseUINotify
         })
 
+        local PlayerCount = 0
+        for k, v in ipairs(ActiveGames) do
+            PlayerCount = PlayerCount + v.Players
+        end
+
+        local GameCount = 0
+        for k, v in ipairs(ActiveGames) do
+            if v.PreBuild ~= 1 then
+                GameCount = GameCount + 1
+            end
+        end
+
+        SendNUIMessage({
+            state = 'add',
+            type = 'LoadData',
+            GameCount = GameCount,
+            PlayerCount = PlayerCount
+        })
+
         local CreatedGames = 0
         for i,v in ipairs(ActiveGames) do
             if v.PreBuild == 1 then
