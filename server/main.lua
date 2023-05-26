@@ -67,9 +67,25 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 
             local xPlayer = ESX.GetPlayerFromId(_source)
             SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), FFAInfo.Name, privat or FFAInfo.Password))
             Config.SendNotifyServer(_source, (Config.Local['CreatedRoom']):format(NewGame.Name))
+            StartTimer(FFAInfo.Time, FFAInfo.Name)
         end
     end
 end)
+
+function StartTimer(minutes, game)
+    Wait(minutes * 60 * 1000) -- Wartet für die angegebene Zeit
+    print("Timer für " .. minutes .. " Minuten abgelaufen!" .. game)
+    for k, v in ipairs(Games) do
+        if v.Name == game then
+            for f, d in pairs(v.FFAPlayerID) do
+                print(d)
+                print(ESX.DumpTable(v))
+                TriggerEvent('sa_ffa:LeaveGame', v, d)
+            end
+        end
+    end
+end
+
 
 RegisterNetEvent("sa_ffa:JoinGameServer")
 AddEventHandler("sa_ffa:JoinGameServer", function(Game)
@@ -102,9 +118,11 @@ function JoinGame(PlayerID, GameArray, Loadout)
 end
 
 RegisterNetEvent('sa_ffa:LeaveGame')
-AddEventHandler('sa_ffa:LeaveGame', function(GameArray)
-    ChangeWeaponState(source, "leave")
-    LeaveGame(source, GameArray)
+AddEventHandler('sa_ffa:LeaveGame', function(GameArray, player)
+    print(player)
+    print(source)
+    ChangeWeaponState(player or source, "leave")
+    LeaveGame(player or source, GameArray)
 end)
 
 function LeaveGame(Player, GameInfo)

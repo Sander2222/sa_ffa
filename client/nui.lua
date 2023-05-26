@@ -151,7 +151,7 @@ RegisterNUICallback('CreateGame', function(data, cb)
         SendNUIMessage({
             state = 'close'
         })
-        data.Time = 15
+        data.Time = 1
         TriggerServerEvent('sa_ffa:CreateGame', data)
         Config.SendNotifyClient(Config.Local['GameCreate'])
     else
