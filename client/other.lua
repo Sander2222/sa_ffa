@@ -48,7 +48,7 @@ CreateThread(function()
 
         if IsInDimension then
             DrawSphere(ActiveMapInfo.ActiveMapCenter.x, ActiveMapInfo.ActiveMapCenter.y, ActiveMapInfo.ActiveMapCenter.z, ActiveMapInfo.ActiveMapRadius + .0, Config.Sphere.r, Config.Sphere.g, Config.Sphere.b, Config.Sphere.opacity)
-        else 
+        else
             Wait(1000)
         end
     end
