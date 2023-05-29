@@ -79,12 +79,13 @@ function StartTimer(Game)
         if v.Name == Game then
             GameInfo = v
             while v.Time > 0 do
-                print(v.Time)
+
                 v.Time = v.Time - 1
                 for f, g in pairs(v.FFAPlayerID) do
                     print("lflf")
                     TriggerClientEvent('sa_ffa:UpdateTime', g, v.Time)
                 end
+                print(v.Time)
                 Wait(60000)
             end
 
@@ -105,7 +106,7 @@ RegisterNetEvent("sa_ffa:JoinGameServer")
 AddEventHandler("sa_ffa:JoinGameServer", function(Game)
     local xPlayer = ESX.GetPlayerFromId(source)
 
-    Config.SendNotifyServer(source, "Es wurde eine Lobby gefunden mit dem Namen: " ..Game.Name)
+    Config.SendNotifyServer(source, (Config.Local['GameFound']):format(Game.Name))
     SendDiscord((SvConfig.WebhookText['PlayerJoinedRoom']):format( xPlayer.getName(), xPlayer.getIdentifier(), Game.Name))
     JoinGame(source, Game, xPlayer.getLoadout())
 end)

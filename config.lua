@@ -152,6 +152,7 @@ Config.Local = {
     ['NameIsInvalid'] = 'Es gibt schon einen Raum mit diesem Namen',
     ['CreatedRoom'] = 'Du hast einen Raum erstellt mit dem Namen: %s', -- param 1 = FFA Name
     ['NoGameFound'] = 'Es wurde kein Spiel gefunden mit dem Namen: %s', -- param 1 = User Enter FFA Name
+    ['GameFound'] = 'Es wurde ein Spiel gefunden: %s', -- param 1 = FFA Name
     ['OutOfZone'] = 'Du bist auserhalb der Zone, deswegen wurdest du zurück teleporiert',
     ['NotInLobby'] = 'Du bist in keiner FFA Runde',
     ['JoinGame'] = 'Raum wird betreten...',
