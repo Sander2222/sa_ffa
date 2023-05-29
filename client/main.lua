@@ -10,6 +10,10 @@ PlayerStats = {
     deaths = 0
 }
 
+-- 
+-- Export machen LeaveFFA()
+-- 
+
 function IsPlayerInFFA()
     return IsInDimension
 end
@@ -20,11 +24,7 @@ end
 
 function LeaveFFA()
     if IsInDimension then
-        TriggerServerEvent('sa_ffa:LeaveGame', ActiveClientGame)
-        TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
-        IsInDimension = false
-        PlayerStats.kills = 0
-        PlayerStats.deaths = 0
+        LeaveFFA()
         return true
     else
         return false
@@ -33,15 +33,19 @@ end
 
 RegisterCommand(Config.LeaveCommand, function(source, args)
     if IsInDimension or Config.Debug then
-        TriggerServerEvent('sa_ffa:LeaveGame', ActiveClientGame)
-        TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
-        IsInDimension = false
-        PlayerStats.kills = 0
-        PlayerStats.deaths = 0
+        LeaveFFA()
     else
         Config.SendNotifyClient(Config.Local['NotInLobby'])
     end
 end)
+
+function LeaveFFA()
+    TriggerServerEvent('sa_ffa:LeaveGame', ActiveClientGame)
+    TriggerServerEvent('sa_ffa:SaveStats', PlayerStats)
+    IsInDimension = false
+    PlayerStats.kills = 0
+    PlayerStats.deaths = 0
+end
 
 RegisterNetEvent("sa_ffa:JoinGameClient")
 AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame)
