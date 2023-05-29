@@ -47,6 +47,16 @@ function LeaveFFA()
     PlayerStats.deaths = 0
 end
 
+RegisterNetEvent("sa_ffa:UpdateTime")
+AddEventHandler("sa_ffa:UpdateTime", function(Time)
+    print(Time)
+end)
+
+RegisterNetEvent("sa_ffa:KickPlayer")
+AddEventHandler("sa_ffa:KickPlayer", function()
+    LeaveFFA()
+end)
+
 RegisterNetEvent("sa_ffa:JoinGameClient")
 AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame)
     ActiveClientGame = ActiveGame
