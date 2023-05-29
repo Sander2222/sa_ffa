@@ -20,6 +20,14 @@ Config.SendNotifyClient = function(msg) -- add your client notify
     ESX.ShowNotification(msg)
 end
 
+Config.Sphere = {
+    Active = true,
+    r = 255, -- 0 to 255 (rgb)
+    g = 0, -- 0 to 255 (rgb)
+    b = 0, -- 0 to 255 (rgb)
+    opacity = 0.3 -- 0.1 to 1.0
+}
+
 Config.SendNotifyServer = function(source, msg) -- add your server notify
     
     local xPlayer = ESX.GetPlayerFromId(source)
