@@ -157,7 +157,6 @@ Config.Local = {
     ['NotInLobby'] = 'Du bist in keiner FFA Runde',
     ['JoinGame'] = 'Raum wird betreten...',
     ['AlreadyInLobby'] = 'Du bist schon in einer Lobby',
-    ['GameCreate'] = 'Der Raum wird erstellt',
     ['RoomFound'] = 'Room wurde gefunden! Room: %s', -- param 1 = FFA name
     ['RommFoundWrongPassword'] = 'Das Game wurde gefunden aber das Passwort ist falsch',
     ['RoomFoundButFull'] = 'Passwort und Name war richtig aber das Game ist voll',
