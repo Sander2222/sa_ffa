@@ -13,6 +13,7 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 
     local IsNameValid = 0
     local NewPassword = FFAInfo.Password
     local FFAPlayerIDS = {}
+    local Time = nil
 
     if #Games > 0 then
         for i,v in ipairs(Games) do
@@ -33,6 +34,10 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 
         NewPassword = ' '
     end
 
+    if FFAInfo.Time ~= nil then
+        Time = tonumber(FFAInfo.Time) - 1
+    end
+
     if IsNameValid == #Games then
         local NewGame = {
             Name = FFAInfo.Name,
@@ -46,7 +51,8 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 
             Map = FFAInfo.Map,
             Dimension = FFAInfo.Dimension,
             PreBuild = FFAInfo.PreBuild or 0,
-            Time = FFAInfo.Time,
+            TimeMin = Time,
+            TimeSec = 60
         }
 
         table.insert(Games, NewGame)
@@ -67,31 +73,54 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 
             local xPlayer = ESX.GetPlayerFromId(_source)
             SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), FFAInfo.Name, privat or FFAInfo.Password))
             Config.SendNotifyServer(_source, (Config.Local['CreatedRoom']):format(NewGame.Name))
-            StartTimer(NewGame.Name)
         end
 
 
     end
 end)
 
+CreateThread(function()
+    while true do
+        for k, v in ipairs(Games) do
+            if v.PreBuild ~= 1 then
+            print(v.TimeSec)
+            print(v.TimeMin)
+            if v.TimeSec <= 0 then
+                if v.TimeMin <= 0 then
+                    for f, g in pairs(v.FFAPlayerID) do
+                        TriggerClientEvent('sa_ffa:KickPlayer', g)
+                    end
+                else 
+                    v.TimeMin = v.TimeMin - 1
+                    v.TimeSec = 60
+                end
+            else 
+                v.TimeSec = v.TimeSec - 1
+            end
+        end
+    end
+        Wait(995 - #Games)
+    end
+end)
+
 function StartTimer(Game)
     for k, v in ipairs(Games) do
         if v.Name == Game then
-            GameInfo = v
+            local IsSended = false
             while v.Time > 0 do
 
-                v.Time = v.Time - 1
-                for f, g in pairs(v.FFAPlayerID) do
-                    print("lflf")
-                    TriggerClientEvent('sa_ffa:UpdateTime', g, v.Time)
+                if not IsSended then
+                    for f, g in pairs(v.FFAPlayerID) do
+                        TriggerClientEvent('sa_ffa:SetTime', g, v.Time)
+                    end
+                    IsSended = true
                 end
-                print(v.Time)
+                v.Time = v.Time - 1
                 Wait(60000)
             end
 
             if v.Time <= 0 then
                 for f, g in pairs(v.FFAPlayerID) do
-                    print("fklflk")
                     TriggerClientEvent('sa_ffa:KickPlayer', g)
                 end
 
@@ -120,6 +149,9 @@ function JoinGame(PlayerID, GameArray, Loadout)
         PlayerLoadouts[xPlayer.getIdentifier()] = Loadout
     end
 
+    TriggerClientEvent('sa_ffa:SetTime', source, GameArray.TimeMin, GameArray.TimeSec)
+
+
     ChangeWeaponState(PlayerID, 'join', Loadout)
     Wait(1000)
     TriggerClientEvent('sa_ffa:JoinGameClient', PlayerID, GameArray)
@@ -134,8 +166,6 @@ end
 
 RegisterNetEvent('sa_ffa:LeaveGame')
 AddEventHandler('sa_ffa:LeaveGame', function(GameArray, player)
-    print(player)
-    print(source)
     ChangeWeaponState(player or source, "leave")
     LeaveGame(player or source, GameArray)
 end)
@@ -201,8 +231,6 @@ function ChangeWeaponState(Player, State, Loadout)
         end
     elseif State == 'leave' then
         --Waffen hinzufügen
-        print(ESX.DumpTable(PlayerLoadouts))
-        -- print("lodl", ESX.DumpTable(PlayerLoadouts[xPlayer.getIdentifier()]))
         for i, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
             xPlayer.addWeapon(v.name)
             SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
