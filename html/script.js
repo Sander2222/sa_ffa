@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("FFA-MaxPlayer").placeholder = JSConfig.Locals.MaxPlayer;
   document.getElementById("Search-Mode").placeholder = JSConfig.Locals.Mode;
   document.getElementById("Search-Map").placeholder = JSConfig.Locals.Map;
+  document.getElementById("FFA-Timer").placeholder = JSConfig.Locals.Time;
   document.getElementById("Search-Name").placeholder = JSConfig.Locals.EnterName;
   document.getElementById("CreateFFAText").innerHTML = JSConfig.Locals.CreateFFAText;
   document.getElementById("EnterThinks").innerHTML = JSConfig.Locals.EnterData;
@@ -43,6 +44,7 @@ function ClearCreateInputs() {
   document.getElementById("FFA-Password").value = "";
   document.getElementById("FFA-MaxPlayer").value = "";
   document.getElementById("FFA-Name").value = "";
+  document.getElementById("FFA-Timer").value = "";
 
 
   $('.liste-prebuild').empty();
