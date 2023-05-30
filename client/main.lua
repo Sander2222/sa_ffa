@@ -47,9 +47,10 @@ function LeaveFFA()
     PlayerStats.deaths = 0
 end
 
-RegisterNetEvent("sa_ffa:UpdateTime")
-AddEventHandler("sa_ffa:UpdateTime", function(Time)
-    print(Time)
+RegisterNetEvent("sa_ffa:SetTime")
+AddEventHandler("sa_ffa:SetTime", function(TimeMin, TimeSec)
+    print(TimeMin, TimeSec)
+    UpdateTimerUI(TimeMin, TimeSec)
 end)
 
 RegisterNetEvent("sa_ffa:KickPlayer")
