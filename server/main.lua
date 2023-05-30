@@ -99,37 +99,9 @@ CreateThread(function()
             end
         end
     end
-        Wait(995 - #Games)
+        Wait(Config.OneSecondWait - #Games)
     end
 end)
-
-function StartTimer(Game)
-    for k, v in ipairs(Games) do
-        if v.Name == Game then
-            local IsSended = false
-            while v.Time > 0 do
-
-                if not IsSended then
-                    for f, g in pairs(v.FFAPlayerID) do
-                        TriggerClientEvent('sa_ffa:SetTime', g, v.Time)
-                    end
-                    IsSended = true
-                end
-                v.Time = v.Time - 1
-                Wait(60000)
-            end
-
-            if v.Time <= 0 then
-                for f, g in pairs(v.FFAPlayerID) do
-                    TriggerClientEvent('sa_ffa:KickPlayer', g)
-                end
-
-                Wait(500)
-                table.remove(Games, k)
-            end
-        end
-    end
-end
 
 RegisterNetEvent("sa_ffa:JoinGameServer")
 AddEventHandler("sa_ffa:JoinGameServer", function(Game)
