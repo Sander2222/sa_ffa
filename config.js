@@ -17,6 +17,7 @@ JSConfig.Locals = {
     'ChooseMode': 'Choose Mode',
     'ChooseMap': 'Choose Map',
     'CreateFFA': 'Create FFA',
+    'Time': 'Timer',
 
     // FFA List
     'FFAListText': 'FFA List',
