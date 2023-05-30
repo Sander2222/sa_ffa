@@ -6,6 +6,7 @@ JSConfig.BlacklistedWords = ['nigger', 'nigga', 'niggers', 'niger', 'hitler', 'a
 JSConfig.MinLengthName = 3
 JSConfig.MinLengthPassword = 3
 JSConfig.MinMaxPlayer = 2
+JSConfig.MaxTime = 20
  
 JSConfig.Locals = {
     // Create Window
@@ -51,4 +52,5 @@ JSConfig.Locals = {
     'BlackListPassword': 'This password is on the blacklist',
     'NoModeSelected': 'You need to select a mode',
     'NoMapSelected': 'You need to select a map',
+    'TimeToHigh': 'You can set your maximum time to: ' + JSConfig.MaxTime
 }
