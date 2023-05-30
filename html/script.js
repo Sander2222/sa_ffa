@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("kill-title").innerHTML = JSConfig.Locals.kills;
   document.getElementById("death-title").innerHTML = JSConfig.Locals.death;
   document.getElementById("FFAStatsText").innerHTML = JSConfig.Locals.FFAStatsText;
-  document.getElementById("GameNameText").innerHTML = JSConfig.Locals.GameNameText;
+  document.getElementById("GameTimeText").innerHTML = JSConfig.Locals.GameTimeText;
   document.getElementById("KDText").innerHTML = JSConfig.Locals.KDText;
 });
 
@@ -89,16 +89,16 @@ window.addEventListener("message", async function (event) {
     } else if (item.type === "score") {
       var kills = item.kill;
       var deaths = item.death;
-      ChangeScoreboards(kills, deaths, item.Name);
+      ChangeScoreboards(kills, deaths);
     } else if (item.type === 'nogamessearch' ) {
       ChangeFFAVisual('Privat')
     } else if (item.type == "searchprebuild") {
       AddPreBuildFFA(item.players, item.maxplayers, item.map, item.name, item.mode)
     } else if (item.type == 'LoadData') {
-      log(item.GameCount)
-      log(item.PlayerCount)
       document.getElementById("GameCount").textContent = item.GameCount;
       document.getElementById("PlayerCount").textContent = item.PlayerCount;
+    } else if  (item.type == 'changetimer') {
+      startTimer(item.timemin, item.timesec)
     }
   } else if (item.state === "close") {
     $("body").hide();
@@ -110,25 +110,9 @@ var PKills = 0;
 var PDeaths = 0;
 var PRounded = NaN;
 
-async function ChangeScoreboards(kills, deaths, Name) {
+async function ChangeScoreboards(kills, deaths) {
   var rounded = Math.round((kills / deaths + Number.EPSILON) * 100) / 100;
   document.getElementById("skull-kill").style.animation = "";
-  if (typeof Name !== "undefined") {
-    if (Name.length > 6) {
-      document.getElementById("ffa-ingame-players").innerText =
-        Name[0] +
-        Name[1] +
-        Name[2] +
-        Name[3] +
-        Name[4] +
-        Name[5] +
-        Name[6] +
-        Name[7] +
-        "..";
-    } else {
-      document.getElementById("ffa-ingame-players").innerText = Name;
-    }
-  }
 
   if (!isNaN(PRounded) || !isNaN(rounded)) {
     if (PRounded != rounded) {
@@ -162,6 +146,31 @@ function AddMode(Number, Name, Icon, Title) {
   <i class="${Icon}"></i>
   <span>${Name}</span>
 </div>`);
+}
+
+var intervalId
+
+function startTimer(minutes, seconds) {
+  let timer = minutes * 60 + seconds; // Umrechnung in Sekunden
+  let intervalId;
+
+  intervalId = setInterval(function() {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    document.getElementById("ffa-ingame-players").textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+      stopTimer(intervalId);
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(intervalId);
 }
 
 function setmode(mode, name) {
@@ -590,7 +599,6 @@ function ChangeFFAVisual(type) {
   if (type === "Öffentlich") {
     
     if(document.querySelector(".liste-prebuild").children.length < 1) {
-      console.log("No Prebuilds!");
       $(".liste-prebuild").fadeOut();
       document.querySelector(".liste-öffentlich").style = `
       width: 92%;
