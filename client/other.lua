@@ -110,7 +110,7 @@ end
 CreateThread(function()
     while true do
         if IsInDimension then
-            UpdateKDA(PlayerStats.deaths, PlayerStats.kills, ActiveClientGame.Name)
+            UpdateKDA(PlayerStats.deaths, PlayerStats.kills)
             Wait(100)
         else 
             Wait(2000)
