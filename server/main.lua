@@ -83,23 +83,22 @@ CreateThread(function()
     while true do
         for k, v in ipairs(Games) do
             if v.PreBuild ~= 1 then
-            print(v.TimeSec)
-            print(v.TimeMin)
-            if v.TimeSec <= 0 then
-                if v.TimeMin <= 0 then
-                    for f, g in pairs(v.FFAPlayerID) do
-                        TriggerClientEvent('sa_ffa:KickPlayer', g)
+                if v.TimeSec <= 0 then
+                    if v.TimeMin <= 0 then
+                        for f, g in pairs(v.FFAPlayerID) do
+                            TriggerClientEvent('sa_ffa:KickPlayer', g)
+                        end
+                    else 
+                        v.TimeMin = v.TimeMin - 1
+                        v.TimeSec = 60
                     end
                 else 
-                    v.TimeMin = v.TimeMin - 1
-                    v.TimeSec = 60
+                    v.TimeSec = v.TimeSec - 1
                 end
-            else 
-                v.TimeSec = v.TimeSec - 1
             end
         end
-    end
-        Wait(Config.OneSecondWait - #Games)
+
+    Wait(Config.OneSecondWait - #Games)
     end
 end)
 
