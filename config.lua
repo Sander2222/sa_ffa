@@ -15,6 +15,7 @@ Config.Dist = 3.0 -- the distance to check at the point
 Config.DisableBlip = true -- put this on true if you want do disable all blips if the player is in a ffa game (beta version)
 Config.UseESX12 = false -- not recommended and not tested!!! (if you use 1.2 or lower please update your ESX Version)
 Config.UseOXInventory = false -- if you use ox_inventory put this on true
+Config.OneSecondWait = 995 -- With this you can experiment, this is the time that waits for the time basic ffa to update the time, is the TimeSync is slow or to fast change this. But dont change it when you dont know what your doing
 
 Config.SendNotifyClient = function(msg) -- add your client notify
     ESX.ShowNotification(msg)
