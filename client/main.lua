@@ -49,7 +49,6 @@ end
 
 RegisterNetEvent("sa_ffa:SetTime")
 AddEventHandler("sa_ffa:SetTime", function(TimeMin, TimeSec)
-    print(TimeMin, TimeSec)
     UpdateTimerUI(TimeMin, TimeSec)
 end)
 
