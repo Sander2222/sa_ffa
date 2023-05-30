@@ -37,7 +37,7 @@ JSConfig.Locals = {
     'kills': 'KILLS',
     'death': 'DEATHS',
     'FFAStatsText': 'FFA STATS',
-    'GameNameText': 'Name',
+    'GameTimeText': 'Time',
     'KDText': 'KD',
 
     // Error
