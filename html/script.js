@@ -328,6 +328,7 @@ function create_ffa() {
   let input_name = document.getElementById("FFA-Name");
   let input_password = document.getElementById("FFA-Password");
   let input_maxplayers = document.getElementById("FFA-MaxPlayer");
+  let input_time = document.getElementById("FFA-Timer");
   // "ffa_isroom_privat" |check if room is privat/public
   // "current_map" | get the name of current map
 
@@ -362,6 +363,8 @@ function create_ffa() {
     notify("FFA", JSConfig.Locals.NoModeSelected, "error");
   } else if (!CurrentMap) {
     notify("FFA", JSConfig.Locals.NoMapSelected, "error");
+  } else if (input_time.value > JSConfig.MaxTime) {
+    notify("FFA", JSConfig.Locals.TimeToHigh, "error");
   } else {
     var checked = 0;
 
@@ -381,6 +384,7 @@ function create_ffa() {
         Mode: CurrentModus,
         Private: checked,
         Map: CurrentMap,
+        Time: input_time.value
       })
     );
   }
