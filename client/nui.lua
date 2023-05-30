@@ -160,7 +160,6 @@ RegisterNUICallback('CreateGame', function(data, cb)
         SendNUIMessage({
             state = 'close'
         })
-        data.Time = 2
         TriggerServerEvent('sa_ffa:CreateGame', data)
     else
         Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
