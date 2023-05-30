@@ -140,6 +140,15 @@ RegisterNUICallback('JoinPreBuild', function(data, cb)
     end
 end)
 
+function UpdateTimerUI(timemin, timesec)
+    SendNUIMessage({
+        state = 'add',
+        type = 'changetimer',
+        timemin = timemin,
+        timesec = timesec
+    }) 
+end
+
 RegisterNUICallback('notify', function(data, cb)
     Config.SendNotifyClient(data.Message)
 end)
@@ -151,9 +160,8 @@ RegisterNUICallback('CreateGame', function(data, cb)
         SendNUIMessage({
             state = 'close'
         })
-        data.Time = 1
+        data.Time = 2
         TriggerServerEvent('sa_ffa:CreateGame', data)
-        Config.SendNotifyClient(Config.Local['GameCreate'])
     else
         Config.SendNotifyClient(Config.Local['AlreadyInLobby'])
     end
@@ -164,8 +172,7 @@ function UpdateKDA(Death, Kill, Name)
         state = 'add',
         type = 'score',
         death = Death,
-        kill = Kill,
-        Name = Name
+        kill = Kill
     })
 end
 
