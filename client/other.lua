@@ -121,6 +121,7 @@ end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
     if IsInDimension then
+        ConfigFun.OnPlayerDeath()
         Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
         TriggerEvent('esx_ambulancejob:revive')

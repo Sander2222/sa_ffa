@@ -99,6 +99,8 @@ AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
         exports.ox_inventory:weaponWheel(false)
     end
     ChangeClientscoreboard('close')
+
+    ConfigFun.PlayerLeavGame()
 end)
 
 RegisterNetEvent("sa_ffa:UpdatePlayerStats")
