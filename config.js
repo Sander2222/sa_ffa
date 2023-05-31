@@ -52,5 +52,6 @@ JSConfig.Locals = {
     'BlackListPassword': 'This password is on the blacklist',
     'NoModeSelected': 'You need to select a mode',
     'NoMapSelected': 'You need to select a map',
-    'TimeToHigh': 'You can set your maximum time to: ' + JSConfig.MaxTime
+    'TimeToHigh': 'You can set your maximum time to: ' + JSConfig.MaxTime,
+    'NoTimeInput': 'You need to enter Time',
 }
