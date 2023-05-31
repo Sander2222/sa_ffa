@@ -6,7 +6,8 @@ version '1.3'
 
 shared_scripts { 
 	'@es_extended/imports.lua',
-	'config.lua'
+	'config.lua',
+	'functions.lua'
 }
 
 server_scripts {
