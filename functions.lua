@@ -1,6 +1,6 @@
 ConfigFun = {}
 
-ConfigFun.PlayerLeavGame = function()
+ConfigFun.PlayerLeaveGame = function()
 -- Your Code
 end
 

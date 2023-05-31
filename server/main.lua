@@ -88,7 +88,7 @@ CreateThread(function()
                         for f, g in pairs(v.FFAPlayerID) do
                             TriggerClientEvent('sa_ffa:KickPlayer', g)
                         end
-                    else 
+                    else
                         v.TimeMin = v.TimeMin - 1
                         v.TimeSec = 60
                     end

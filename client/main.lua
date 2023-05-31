@@ -100,7 +100,7 @@ AddEventHandler("sa_ffa:LeaveGameClient", function(Modus)
     end
     ChangeClientscoreboard('close')
 
-    ConfigFun.PlayerLeavGame()
+    ConfigFun.PlayerLeaveGame()
 end)
 
 RegisterNetEvent("sa_ffa:UpdatePlayerStats")
@@ -112,7 +112,7 @@ AddEventHandler("sa_ffa:UpdatePlayerStats", function(Type)
         SetEntityHealth(PlayerPedId(), 200)
         SetPedArmour(PlayerPedId(), 200)
         PlayerStats.kills = PlayerStats.kills + 1
-    end 
+    end
 end)
 
 function Teleport(Type)
