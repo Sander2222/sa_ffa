@@ -100,7 +100,8 @@ window.addEventListener("message", async function (event) {
       document.getElementById("GameCount").textContent = item.GameCount;
       document.getElementById("PlayerCount").textContent = item.PlayerCount;
     } else if  (item.type == 'changetimer') {
-      startTimer(item.timemin, item.timesec)
+      document.getElementById("ffa-ingame-players").textContent = item.timemin + ":" + item.timesec;
+
     }
   } else if (item.state === "close") {
     $("body").hide();
@@ -148,31 +149,6 @@ function AddMode(Number, Name, Icon, Title) {
   <i class="${Icon}"></i>
   <span>${Name}</span>
 </div>`);
-}
-
-var intervalId
-
-function startTimer(minutes, seconds) {
-  let timer = minutes * 60 + seconds; // Umrechnung in Sekunden
-  let intervalId;
-
-  intervalId = setInterval(function() {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
-
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-    document.getElementById("ffa-ingame-players").textContent = minutes + ":" + seconds;
-
-    if (--timer < 0) {
-      stopTimer(intervalId);
-    }
-  }, 1000);
-}
-
-function stopTimer() {
-  clearInterval(intervalId);
 }
 
 function setmode(mode, name) {

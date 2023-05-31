@@ -90,10 +90,12 @@ CreateThread(function()
                         end
                     else
                         v.TimeMin = v.TimeMin - 1
-                        v.TimeSec = 60
+                        v.TimeSec = 59
+                        SendPlayerTime(v.FFAPlayerID, v.TimeMin, v.TimeSec)
                     end
                 else 
                     v.TimeSec = v.TimeSec - 1
+                    SendPlayerTime(v.FFAPlayerID, v.TimeMin, v.TimeSec)
                 end
             end
         end
@@ -101,6 +103,12 @@ CreateThread(function()
     Wait(Config.OneSecondWait - #Games)
     end
 end)
+
+function SendPlayerTime(playerarray, min, sec)
+    for k, v in pairs(playerarray) do
+        TriggerClientEvent('sa_ffa:SetTime', v, min, sec)
+    end
+end
 
 RegisterNetEvent("sa_ffa:JoinGameServer")
 AddEventHandler("sa_ffa:JoinGameServer", function(Game)
@@ -120,7 +128,7 @@ function JoinGame(PlayerID, GameArray, Loadout)
         PlayerLoadouts[xPlayer.getIdentifier()] = Loadout
     end
 
-    TriggerClientEvent('sa_ffa:SetTime', source, GameArray.TimeMin, GameArray.TimeSec)
+    -- TriggerClientEvent('sa_ffa:SetTime', source, GameArray.TimeMin, GameArray.TimeSec)
 
 
     ChangeWeaponState(PlayerID, 'join', Loadout)
