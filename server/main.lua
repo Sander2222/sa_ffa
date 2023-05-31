@@ -274,12 +274,6 @@ AddEventHandler("playerConnecting", function()
     end
 end)
 
-
-AddEventHandler('playerDropped', function (reason)
-    --print('Player ' .. GetPlayerName(source) .. ' dropped (Reason: ' .. reason .. ')')
-end)
-
-
 --- DEBUG
 --- DEBUG
 --- DEBUG
