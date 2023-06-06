@@ -22,6 +22,16 @@ Config.SendNotifyClient = function(msg) -- add your client notify
     ESX.ShowNotification(msg)
 end
 
+Config.SendNotifyServer = function(source, msg) -- add your server notify
+    
+    local xPlayer = ESX.GetPlayerFromId(source)
+    xPlayer.showNotification(msg)
+end
+
+Config.ShowHelpNotify = function(Text) -- add your ShowHelpNotification
+    ESX.ShowHelpNotification(Text)
+end
+
 Config.Sphere = {
     Active = true,
     r = 255, -- 0 to 255 (rgb)
@@ -30,19 +40,9 @@ Config.Sphere = {
     opacity = 0.3 -- 0.1 to 1.0
 }
 
-Config.SendNotifyServer = function(source, msg) -- add your server notify
-    
-    local xPlayer = ESX.GetPlayerFromId(source)
-    xPlayer.showNotification(msg)
-end
-
 -- This Code is CLIENTSIDE, but you have source and you can create the ped if you want (PlayePedId()) the source is for execute commands like removedeathtimeout
 Config.AfterRevive = function(source)
     -- ExecuteCommand('removeTimeout ' ..tostring(source)) 
-end
-
-Config.ShowHelpNotify = function(Text) -- add your ShowHelpNotification
-    ESX.ShowHelpNotification(Text)
 end
 
 -- Change the coord where the ffa enter coords should be
