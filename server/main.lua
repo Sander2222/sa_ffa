@@ -8,7 +8,7 @@ end
 
 -- Games in die liste hinzufügen
 RegisterNetEvent('sa_ffa:CreateGame')
-AddEventHandler('sa_ffa:CreateGame', function(FFAInfo) -- Arg: Name 1, Password 2, Max 3, Privat 4, Modus 5, Maps 6
+AddEventHandler('sa_ffa:CreateGame', function(FFAInfo)
     local _source = source
     local IsNameValid = 0
     local NewPassword = FFAInfo.Password
@@ -128,9 +128,6 @@ function JoinGame(PlayerID, GameArray, Loadout)
         PlayerLoadouts[xPlayer.getIdentifier()] = Loadout
     end
 
-    -- TriggerClientEvent('sa_ffa:SetTime', source, GameArray.TimeMin, GameArray.TimeSec)
-
-
     ChangeWeaponState(PlayerID, 'join', Loadout)
     Wait(1000)
     TriggerClientEvent('sa_ffa:JoinGameClient', PlayerID, GameArray)
@@ -212,7 +209,6 @@ function ChangeWeaponState(Player, State, Loadout)
         --Waffen hinzufügen
         for i, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
             xPlayer.addWeapon(v.name, v.ammo)
-            -- SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
         end
         PlayerLoadouts[xPlayer.getIdentifier()] = nil
     end
@@ -232,7 +228,6 @@ function ChangePlayerCount(Player, ActiveGame, State)
                 table.insert(v.FFAPlayerID, Player)
             end
         end
-        --ActiveGame.Players = ActiveGame.Players + 1
     elseif State == "leave" then
         for k, v in ipairs(Games) do
             if v.Name == ActiveGame.Name then
@@ -340,7 +335,6 @@ CreateThread(function()
             hour = "0" ..tostring(t.hour)
         end
         local ActiveTime = hour .. ':' .. tostring(t.min)
-        --Checkt alle 60 sek 
         if Config.Debug then
             Wait(500)
         else

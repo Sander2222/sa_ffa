@@ -10,10 +10,6 @@ PlayerStats = {
     deaths = 0
 }
 
--- 
--- Export machen LeaveFFA()
--- 
-
 function IsPlayerInFFA()
     return IsInDimension
 end
@@ -68,7 +64,6 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame)
 
     DisplayRadar(false)
     if Config.UseCamAnimations then
-    --Cams
         FreezeEntityPosition(GetPlayerPed(), true)
         cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)
         PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
@@ -141,9 +136,8 @@ function Teleport(Type)
     end
 end
 
---zum dist checkn
-CreateThread(function()
 
+CreateThread(function()
     while true do
         if IsInDimension then
             local dist = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), ActiveMapInfo.ActiveMapCenter)
@@ -189,7 +183,6 @@ function Loadout(Type, Modus)
         end
 
         ActiveClientGame = {}
-        -- Cams zum Back TP hin
         FreezeEntityPosition(GetPlayerPed(), true)
         if Config.UseCamAnimations then
             cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)

@@ -56,11 +56,11 @@ end)
 
 if Config.Debug then
 
-    RegisterCommand('kills', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+    RegisterCommand('kills', function(source, args)
         PlayerStats.kills = args[1]
     end)
 
-    RegisterCommand('deaths', function(source, args) -- Arg: Map, Modus (Die braucht man nicht umbedingt)
+    RegisterCommand('deaths', function(source, args)
         PlayerStats.deaths = args[1]
     end)
 
@@ -106,7 +106,6 @@ function ChangeBlipState(State)
     end
 end
 
---Aktualisiert KDA UI etc.
 CreateThread(function()
     while true do
         if IsInDimension then
