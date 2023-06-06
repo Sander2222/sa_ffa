@@ -211,8 +211,8 @@ function ChangeWeaponState(Player, State, Loadout)
     elseif State == 'leave' then
         --Waffen hinzufügen
         for i, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
-            xPlayer.addWeapon(v.name)
-            SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
+            xPlayer.addWeapon(v.name, v.ammo)
+            -- SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
         end
         PlayerLoadouts[xPlayer.getIdentifier()] = nil
     end
