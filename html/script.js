@@ -341,8 +341,7 @@ function create_ffa() {
     notify("FFA", JSConfig.Locals.NoMapSelected, "error");
   } else if (input_time.value == '') {
     notify("FFA", JSConfig.Locals.NoTimeInput, "error");
-  } else if (input_time.value > JSConfig.MaxTime) {
-    console.log(input_time.value)
+  } else if (input_time.value > JSConfig.MaxTime || input_time.value == 0) {
     notify("FFA", JSConfig.Locals.TimeToHigh, "error");
   } else {
     var checked = 0;
@@ -352,7 +351,6 @@ function create_ffa() {
     } else {
       checked = 0;
     }
-    console.log(input_time.value + 'ff')
 
     ClearMapsModus();
     $.post(
