@@ -100,7 +100,7 @@ CreateThread(function()
             end
         end
 
-    Wait(Config.OneSecondWait - #Games)
+    Wait(1000)
     end
 end)
 
