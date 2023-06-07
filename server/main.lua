@@ -97,6 +97,8 @@ CreateThread(function()
                     v.TimeSec = v.TimeSec - 1
                     SendPlayerTime(v.FFAPlayerID, v.TimeMin, v.TimeSec)
                 end
+            else 
+                SendPlayerTime(v.FFAPlayerID, nil, nil)
             end
         end
 

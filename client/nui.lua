@@ -141,18 +141,18 @@ RegisterNUICallback('JoinPreBuild', function(data, cb)
 end)
 
 function UpdateTimerUI(timemin, timesec)
-
-    local sec = tostring(timesec)
-
-    if tonumber(sec) < 10 then
-        sec = "0" .. sec
-    end
-
     SendNUIMessage({
         state = 'add',
         type = 'changetimer',
         timemin = timemin,
-        timesec = sec
+        timesec = timesec
+    }) 
+end
+
+function UpdateTimerUIPreBuild()
+    SendNUIMessage({
+        state = 'add',
+        type = 'changetimerprebuild'
     }) 
 end
 

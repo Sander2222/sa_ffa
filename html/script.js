@@ -101,7 +101,8 @@ window.addEventListener("message", async function (event) {
       document.getElementById("PlayerCount").textContent = item.PlayerCount;
     } else if  (item.type == 'changetimer') {
       document.getElementById("ffa-ingame-players").textContent = item.timemin + ":" + item.timesec;
-
+    } else if (item.type == 'changetimerprebuild') {
+      document.getElementById("ffa-ingame-players").textContent = '∞'
     }
   } else if (item.state === "close") {
     $("body").hide();
