@@ -152,6 +152,10 @@ function LeaveGame(Player, GameInfo)
     SetPlayerRoutingBucket(Player, Config.StandardDimension)
     TriggerClientEvent('sa_ffa:LeaveGameClient', Player, GameInfo.Modus)
     ChangePlayerCount(Player, GameInfo, "leave")
+
+    local xPlayer = ESX.GetPlayerFromId(Player) 
+
+    SendDiscord((SvConfig.WebhookText['PlayerLeavedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), GameInfo.Name))
 end
 
 RegisterNetEvent("sa_ffa:PlayerKilled")
