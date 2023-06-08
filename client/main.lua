@@ -47,7 +47,7 @@ RegisterNetEvent("sa_ffa:SetTime")
 AddEventHandler("sa_ffa:SetTime", function(TimeMin, TimeSec)
     if TimeMin == nil and TimeSec == nil then
         UpdateTimerUIPreBuild()
-    else 
+    else
         UpdateTimerUI(TimeMin, TimeSec)
     end
 end)
