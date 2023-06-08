@@ -19,6 +19,7 @@ SvConfig.WebhookText = {
     ['PlayerCreatedGame'] = 'Player **%s** (%s) has created an lobby. Information about the lobby: \n\nName: %s \nPasswort: %s', -- param 1 = ESX Player Name || param 2 = Player Indentifer || param = 3 Room name || param 4 || Room Password
     ['PlayerJoinedRoom'] = 'Player **%s** (%s) has joined the game: %s', -- param 1 = ESX Player name || param 2 = Player Identifier || param 3 Room name
     ['LobbyDeleted'] = 'The lobby **%s** was deleted because no one was in the lobby', -- param 1 = Room name
+    ['PlayerLeavedGame'] = 'Player **%s** (%s) leaved a game: %s' -- param 1 PlayerName || param 2 Player Identifier || param 3 Romm Name
 }
 
 SvConfig.ScoreboardDesign = 1
