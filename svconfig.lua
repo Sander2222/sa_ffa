@@ -1,6 +1,6 @@
 SvConfig = {}
 
-SvConfig.SendDisordStatsTime = '21:27' -- Set the time where the message get sended from the stats
+SvConfig.SendDisordStatsTime = '15:47' -- Set the time where the message get sended from the stats
 SvConfig.SendDiscordStats = true -- If you want to send a Discord message with the Stats from the Database
 SvConfig.SendDiscordScoreboardLimit = 10 -- Set how much player should be listed in the Message
 
@@ -32,6 +32,6 @@ Design 1
 Link: https://media.discordapp.net/attachments/1001453825330249798/1098668913870524446/image.png?width=157&height=629
 
 Design 2
-Link: 
+Link: https://media.discordapp.net/attachments/892386561323331642/1116362809169678356/image.png
 
 ]]--
