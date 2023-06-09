@@ -100,7 +100,7 @@ window.addEventListener("message", async function (event) {
       document.getElementById("GameCount").textContent = item.GameCount;
       document.getElementById("PlayerCount").textContent = item.PlayerCount;
     } else if  (item.type == 'changetimer') {
-      document.getElementById("ffa-ingame-players").textContent = item.timemin + ":" + item.timesec;
+      UpdateTimer(item.timemin, item.timesec)
     } else if (item.type == 'changetimerprebuild') {
       document.getElementById("ffa-ingame-players").textContent = '∞'
     }
@@ -109,6 +109,14 @@ window.addEventListener("message", async function (event) {
     $(".switcher").fadeOut();
   }
 });
+
+function UpdateTimer(Min, Sec) {
+  if (Sec > 10) {
+    document.getElementById("ffa-ingame-players").textContent = Min + ":" + "0" + Sec;
+  } else {
+    document.getElementById("ffa-ingame-players").textContent = Min + ":" + Sec;
+  }
+}
 
 var PKills = 0;
 var PDeaths = 0;
