@@ -111,7 +111,7 @@ window.addEventListener("message", async function (event) {
 });
 
 function UpdateTimer(Min, Sec) {
-  if (Sec > 10) {
+  if (Sec < 10) {
     document.getElementById("ffa-ingame-players").textContent = Min + ":" + "0" + Sec;
   } else {
     document.getElementById("ffa-ingame-players").textContent = Min + ":" + Sec;
