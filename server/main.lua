@@ -49,7 +49,7 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo)
             PrivateGame = FFAInfo.Private or 2,
             Modus = FFAInfo.Mode,
             Map = FFAInfo.Map,
-            Dimension = FFAInfo.Dimension,
+            Dimension = UsedDimension,
             PreBuild = FFAInfo.PreBuild or 0,
             TimeMin = Time,
             TimeSec = 60
