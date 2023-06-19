@@ -356,7 +356,7 @@ CreateThread(function()
                     message = '**' .. Config.Local['FFATop'] .. ' ' .. SvConfig.SendDiscordScoreboardLimit ..'**\n\n'
                 end
 
-                local result = MySQL.query.await('SELECT ffa.*, users.* FROM ffa INNER JOIN users ON ffa.identifier = users.identifier ORDER BY ffa.kills DESC LIMIT ' ..tostring(SvConfig.SendDiscordScoreboardLimit), {})
+                local result = MySQL.query.await('SELECT ffa.kills, ffa.deaths, users.firstname, users.lastname  FROM ffa INNER JOIN users ON ffa.identifier = users.identifier ORDER BY ffa.kills DESC LIMIT ' ..tostring(SvConfig.SendDiscordScoreboardLimit), {})
                 if result and result ~= {} then
                     for i = 1, #result do
                         local row = result[i]
