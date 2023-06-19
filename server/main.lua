@@ -347,7 +347,7 @@ CreateThread(function()
             Wait(60000)
         end
 
-        if ActiveTime == SvConfig.SendDisordStatsTime or Config.Debug then
+        if ActiveTime == SvConfig.SendDisordStatsTime then
             if not IsSend then
                 local message = ''
                 local finish = false
@@ -356,7 +356,8 @@ CreateThread(function()
                     message = '**' .. Config.Local['FFATop'] .. ' ' .. SvConfig.SendDiscordScoreboardLimit ..'**\n\n'
                 end
 
-                local result = MySQL.query.await('SELECT ffa.kills, ffa.deaths, users.firstname, users.lastname  FROM ffa INNER JOIN users ON ffa.identifier = users.identifier ORDER BY ffa.kills DESC LIMIT ' ..tostring(SvConfig.SendDiscordScoreboardLimit), {})                if result and result ~= {} then
+                local result = MySQL.query.await('SELECT ffa.*, users.* FROM ffa INNER JOIN users ON ffa.identifier = users.identifier ORDER BY ffa.kills DESC LIMIT ' ..tostring(SvConfig.SendDiscordScoreboardLimit), {})
+                if result and result ~= {} then
                     for i = 1, #result do
                         local row = result[i]
                         if SvConfig.ScoreboardDesign == 1 then
