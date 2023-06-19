@@ -23,7 +23,6 @@ Config.SendNotifyClient = function(msg) -- add your client notify
 end
 
 Config.SendNotifyServer = function(source, msg) -- add your server notify
-    
     local xPlayer = ESX.GetPlayerFromId(source)
     xPlayer.showNotification(msg)
 end
