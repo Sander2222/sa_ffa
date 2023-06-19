@@ -40,9 +40,35 @@ Config.Sphere = {
     opacity = 0.3 -- 0.1 to 1.0
 }
 
--- This Code is CLIENTSIDE, but you have source and you can create the ped if you want (PlayePedId()) the source is for execute commands like removedeathtimeout
+Config.AfterDeath = function(data)
+    if IsInDimension then
+        Wait(1000)
+        TriggerServerEvent('sa_ffa:PlayerKilled', data)
+        TriggerEvent('esx_ambulancejob:revive')
+        Wait(1000)
+        Loadout('Join')
+        Teleport()
+        NetworkSetFriendlyFireOption(false)
+        SetCanAttackFriendly(PlayerPedId(), false, false)
+        if Config.Invincible then
+            SetEntityInvincible(PlayerPedId(), true)
+        end
+        
+        -- This Code is CLIENTSIDE, but you have source and you can create the ped if you want (PlayePedId()) the source is for execute commands like removedeathtimeout
+        ESX.TriggerServerCallback('sa_ffa:GetSource', function(src)
+            -- ExecuteCommand('removeTimeout ' ..tostring(source)) 
+        end)
+
+        Wait(3000)
+        NetworkSetFriendlyFireOption(true)
+        SetCanAttackFriendly(PlayerPedId(), true, true)
+        if Config.Invincible then
+            SetEntityInvincible(PlayerPedId(), false)
+        end
+    end
+end
+
 Config.AfterRevive = function(source)
-    -- ExecuteCommand('removeTimeout ' ..tostring(source)) 
 end
 
 -- Change the coord where the ffa enter coords should be

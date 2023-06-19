@@ -119,29 +119,5 @@ CreateThread(function()
 end)
 
 AddEventHandler('esx:onPlayerDeath', function(data)
-    if IsInDimension then
-        Wait(1000)
-        TriggerServerEvent('sa_ffa:PlayerKilled', data)
-        TriggerEvent('esx_ambulancejob:revive')
-        Wait(1000)
-        Loadout('Join')
-        Teleport()
-        NetworkSetFriendlyFireOption(false)
-        SetCanAttackFriendly(GetPlayerPed(-1), false, false)
-        if Config.Invincible then
-            SetEntityInvincible(GetPlayerPed(-1), true)
-        end
-        
-        ESX.TriggerServerCallback('sa_ffa:GetSource', function(src)
-            Config.AfterRevive(src)
-        end)
-
-        Wait(3000)
-        NetworkSetFriendlyFireOption(true)
-        SetCanAttackFriendly(GetPlayerPed(-1), true, true)
-        if Config.Invincible then
-            SetEntityInvincible(GetPlayerPed(-1), false)
-        end
-        TriggerServerEvent('sa_ffa:TriggerCustomFunction')
-    end
+    Config.AfterDeath(data)
 end)
