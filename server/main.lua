@@ -161,11 +161,7 @@ end
 RegisterNetEvent("sa_ffa:PlayerKilled")
 AddEventHandler("sa_ffa:PlayerKilled", function(KillData)
     local killed = source
-    local killer
-    
-    if KillData.killerServerId ~= nil then
-       killer = KillData.killerServerId  
-    end
+    local killer = KillData.killerServerId
 
     if KillData.killerServerId ~= nil then
         TriggerClientEvent('sa_ffa:UpdatePlayerStats', killed, 'killed')
