@@ -68,7 +68,7 @@ AddEventHandler("sa_ffa:JoinGameClient", function(ActiveGame)
 
     DisplayRadar(false)
     if Config.UseCamAnimations then
-        FreezeEntityPosition(PlayerPedId, true)
+        FreezeEntityPosition(GetPlayerPed(), true)
         cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)
         PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
         SetCamActive(cam, true)
@@ -121,7 +121,7 @@ function Teleport(Type)
         DoScreenFadeOut(100)
         ESX.Game.Teleport(PlayerPedId(), RandomPoint, function()end)
         DoScreenFadeIn(100)
-        FreezeEntityPosition(PlayerPedId, false)
+        FreezeEntityPosition(GetPlayerPed(), false)
         ActiveMapInfo.ActiveMapCenter = Config.Maps[ActiveClientGame.Map].MapCenter
         ActiveMapInfo.ActiveMapRadius = Config.Maps[ActiveClientGame.Map].MaxRadius
 
@@ -187,7 +187,7 @@ function Loadout(Type, Modus)
         end
 
         ActiveClientGame = {}
-        FreezeEntityPosition(PlayerPedId, true)
+        FreezeEntityPosition(GetPlayerPed(), true)
         if Config.UseCamAnimations then
             cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 250.0, 300.00, 0.00 ,0.00, 70.00, false, 0)
             PointCamAtCoord(cam, Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3] + 2.0)
@@ -202,7 +202,7 @@ function Loadout(Type, Modus)
         end
 
         ESX.Game.Teleport(ped, vector3(Config.EnterCoords[1], Config.EnterCoords[2], Config.EnterCoords[3]), function()end)
-        FreezeEntityPosition(PlayerPedId, false)
+        FreezeEntityPosition(GetPlayerPed(), false)
         DisplayRadar(true)
     end
 end
