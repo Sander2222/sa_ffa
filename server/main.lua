@@ -68,8 +68,8 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo)
         else
             privat = nil
         end
-
-        if FFAInfo.PreBuild ~= 1 then 
+        
+        if FFAInfo.PreBuild ~= 1 then
             local xPlayer = ESX.GetPlayerFromId(_source)
             SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), FFAInfo.Name, privat or FFAInfo.Password))
             Config.SendNotifyServer(_source, (Config.Local['CreatedRoom']):format(NewGame.Name))
@@ -215,6 +215,10 @@ function ChangeWeaponState(Player, State, Loadout)
         --Waffen hinzufügen
         for i, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
             xPlayer.addWeapon(v.name, v.ammo)
+
+            for e, f in pairs(v.components) do
+                xPlayer.addWeaponComponent(v.name, f)
+            end
         end
         PlayerLoadouts[xPlayer.getIdentifier()] = nil
     end
