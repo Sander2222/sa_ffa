@@ -213,14 +213,7 @@ function ChangeWeaponState(Player, State, Loadout)
         end
     elseif State == 'leave' then
         --Waffen hinzufügen
-        for i, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
-            xPlayer.addWeapon(v.name, v.ammo)
-
-            for e, f in pairs(v.components) do
-                xPlayer.addWeaponComponent(v.name, f)
-            end
-        end
-        PlayerLoadouts[xPlayer.getIdentifier()] = nil
+        GivePlayerWeaponsBack(Player)
     end
 end
 
@@ -262,21 +255,29 @@ function ChangePlayerCount(Player, ActiveGame, State)
     end
 end
 
-AddEventHandler("playerConnecting", function()
-    local Player = source
-    local xPlayer
-    while xPlayer == nil do
-        xPlayer =  ESX.GetPlayerFromId(Player)
-        Wait(1)
-    end
+
+
+function GivePlayerWeaponsBack(Player)
+    local xPlayer = ESX.GetPlayerFromId(Player)
 
     if PlayerLoadouts[xPlayer.getIdentifier()] ~= nil then
         for k, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
             xPlayer.addWeapon(v.name)
             SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
+
+            for e, f in pairs(v.components) do
+                xPlayer.addWeaponComponent(v.name, f)
+            end
         end
         PlayerLoadouts[xPlayer.getIdentifier()] = nil
     end
+end
+
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded',function(xPlayer, isNew, skin)
+    Wait(5000)
+
+    GivePlayerWeaponsBack(xPlayer)
 end)
 
 --- DEBUG
