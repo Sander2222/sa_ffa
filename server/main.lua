@@ -341,11 +341,17 @@ CreateThread(function()
     while SvConfig.SendDiscordStats do
         local t = os.date ("*t")
         local hour = tostring(t.hour)
+        local minute = tostring(t.min)
 
         if tonumber(hour) <= 9 then
             hour = "0" ..tostring(t.hour)
         end
-        local ActiveTime = hour .. ':' .. tostring(t.min)
+
+        if tonumber(minute) <= 9 then
+            minute = "0" ..tostring(t.min)
+        end
+
+        local ActiveTime = hour .. ':' .. minute
         if Config.Debug then
             Wait(500)
         else
