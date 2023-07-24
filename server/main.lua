@@ -263,7 +263,7 @@ function GivePlayerWeaponsBack(Player)
     if PlayerLoadouts[xPlayer.getIdentifier()] ~= nil then
         for k, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
             xPlayer.addWeapon(v.name)
-            SetPedAmmo(GetPlayerPed(Player), v.name, v.ammo)
+            xPlayer.addWeaponAmmo(v.name, v.ammo)
 
             for e, f in pairs(v.components) do
                 xPlayer.addWeaponComponent(v.name, f)
