@@ -61,3 +61,80 @@ to add the img for tha map the picture need to be an png and need to has the sam
 ```
 
 ## If you have more questions just ask in the discord
+
+
+### Support Chezza Inventory
+
+If you want to use chezza inventory you need to put Config.UseChezza on true and you need to change following code in the chezza inventory:
+
+File: inventory/plugins/hotbar/cl_hotbar.lua
+
+then you have this loops and you need to edit them to this:
+
+# First
+
+before
+```lua
+  CreateThread(function()
+    while true do
+      Wait(1)
+        HideHudComponentThisFrame(19)
+        HideHudComponentThisFrame(20)
+        HideHudComponentThisFrame(17)
+    end
+  end)
+```
+
+after
+```lua
+  CreateThread(function()
+    while true do
+      Wait(1)
+      if not exports['sa_ffa']:IsPlayerInFFA() then
+        HideHudComponentThisFrame(19)
+        HideHudComponentThisFrame(20)
+        HideHudComponentThisFrame(17)
+      end
+    end
+  end)
+```
+
+# Second
+
+before
+```lua
+  CreateThread(function()
+    while true do
+      Wait(1)
+        DisableControlAction(0, 37, true) --Disable Tab
+        if WeaponLock then
+          DisableControlAction(1, 25, true)
+          DisableControlAction(1, 140, true)
+          DisableControlAction(1, 141, true)
+          DisableControlAction(1, 142, true)
+          DisableControlAction(1, 23, true)
+          DisablePlayerFiring(PlayerPedId(), true)
+      end
+    end
+  end)
+```
+
+after
+```lua
+  CreateThread(function()
+    while true do
+      Wait(1)
+      if not exports['sa_ffa']:IsPlayerInFFA() then
+        DisableControlAction(0, 37, true) --Disable Tab
+        if WeaponLock then
+          DisableControlAction(1, 25, true)
+          DisableControlAction(1, 140, true)
+          DisableControlAction(1, 141, true)
+          DisableControlAction(1, 142, true)
+          DisableControlAction(1, 23, true)
+          DisablePlayerFiring(PlayerPedId(), true)
+        end
+      end
+    end
+  end)
+```
