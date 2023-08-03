@@ -465,7 +465,6 @@ end
 
 CreateThread(function()
     if Config.UseChezza then
-        print("lol")
         if GetResourceState(Config.ChezzaRessourceName) == 'missing' then
             print("\n^3----------------------------------------------------------------------------------^7")
             print("\n You don't have the Chezza Inventory ^2installed^7 or renamed. Please rename it")
