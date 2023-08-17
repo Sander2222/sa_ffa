@@ -16,6 +16,7 @@ Config.DisableBlip = true -- put this on true if you want do disable all blips i
 Config.UseESX12 = false -- not recommended and not tested!!! (if you use 1.2 or lower please update your ESX Version)
 Config.UseChezza = false --Put this on true if you use  Chezza Inventory
 Config.UseOXInventory = false -- if you use ox_inventory put this on true
+Config.DisableRadar = true -- Put this on true if you want do disable the minimap while the player is in a game
 
 
 Config.SendNotifyClient = function(msg) -- add your client notify
