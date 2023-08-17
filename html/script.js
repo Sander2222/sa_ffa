@@ -186,20 +186,6 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode, PreBuild) {
     }
   if (Password == 0 || Password == 1 || Password == "" || Password == " ") {
 
-    //Alter Code von der öffentlich box
-    /* <div class="ffa ${Name} NOPASSWORD">
-      <div class="ffa-map ${Map}">
-        <img src="images/${Map}.png">
-        <div class="name">${Name}</div>
-        <div class="players">${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
-      </div>
-      <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
-      <span id="dingsbums2">${JSConfig.Locals.NoPassword}</span>
-      <div class="join" onclick="JoinGame('${Name}')">${JSConfig.Locals.Join}</div>
-    </div> */
-
-    
-
     $(".liste-öffentlich").append(`
         <div class="ffa ${Name} NOPASSWORD">
             <div class="ffa-map ${Map}">
@@ -213,29 +199,11 @@ function AddFFA(Name, Password, Players, MaxPlayers, Map, Mode, PreBuild) {
 
             <div class="passwd-join">
                 <span id="dingsbums2">Kein Passwort</span>
-                <div class="join" onclick="JoinGame('${Name}')">Join</div>
+                <div class="join" onclick="JoinGame('${Name}')">${JSConfig.Locals.Join}</div>
             </div>
         </div>
       `);
   } else {
-
-    //Alter Code von privat box
-    /* <div class="ffa ${Name}-${Password}">
-      <div class="ffa-map ${Map}">
-        <img src="images/${Map}.png">
-        <div class="name">${Name}</div>
-        <div class="players"><i class="fa-solid fa-people-group"></i> ${Players}/${MaxPlayers} ${JSConfig.Locals.Player}</div>
-      </div>
-      <div class="Mode">${JSConfig.Locals.Mode}: <h1 class="Mode-Name">${Mode}</h1></div>
-      <span id="dingsbums1">${JSConfig.Locals.PasswordProtected}</span>
-      <div class="ffa-password">
-        <i class="fa-solid fa-lock"></i>
-        <input type="text" placeholder="Password" id="${Password}">
-      </div>
-      <div class="join" onclick="JoinGame('${Name}','${Password}')">${JSConfig.Locals.Join}</div>
-    </div> */
-
-
     $(".liste-privat").append(`
 
         <div class="ffa ${Name}-${Password}">
@@ -275,7 +243,7 @@ $(".liste-prebuild").append(`
           <div class="players"><i class="fa-solid fa-people-group"></i> ${Players}/${Maxplayers} Spieler</div>
       </div>
 
-      <div class="join" onclick="JoinPreBuildGame('${Name}')">Join</div>
+      <div class="join" onclick="JoinPreBuildGame('${Name}')">${JSConfig.Locals.Join}</div>
   </div>
 `);
 }
