@@ -54,6 +54,17 @@ CreateThread(function()
     end
 end)
 
+CreateThread(function()
+    while Config.DisableRadar do 
+        if IsInDimension then
+            DisplayRadar(false)
+            Wait(1)
+        else
+            Wait(1000)
+        end
+    end
+end)
+
 if Config.Debug then
 
     RegisterCommand('kills', function(source, args)
