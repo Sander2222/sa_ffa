@@ -17,6 +17,7 @@ Config.UseESX12 = false -- not recommended and not tested!!! (if you use 1.2 or 
 Config.UseChezza = false --Put this on true if you use  Chezza Inventory
 Config.UseOXInventory = false -- if you use ox_inventory put this on true
 Config.DisableRadar = true -- Put this on true if you want do disable the minimap while the player is in a game
+Config.UseWasabi = true -- If you use the Wasabi Ambulance script put this on true
 
 
 Config.SendNotifyClient = function(msg) -- add your client notify
@@ -44,7 +45,11 @@ Config.AfterDeath = function(data)
     if IsInDimension then
         Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
-        TriggerEvent('esx_ambulancejob:revive')
+        if Config.UseWasabi then
+            TriggerEvent('esx_ambulancejob:revive')
+        else
+            TriggerServerEvent('sa_ffa:Wasabi')
+        end
         Wait(1000)
         Loadout('Join')
         Teleport()
@@ -66,9 +71,6 @@ Config.AfterDeath = function(data)
             SetEntityInvincible(PlayerPedId(), false)
         end
     end
-end
-
-Config.AfterRevive = function(source)
 end
 
 -- Change the coord where the ffa enter coords should be

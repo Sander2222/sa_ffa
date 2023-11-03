@@ -148,6 +148,16 @@ AddEventHandler('sa_ffa:LeaveGame', function(GameArray, player)
     LeaveGame(player or source, GameArray)
 end)
 
+RegisterNetEvent('sa_ffa:Wasabi')
+AddEventHandler('sa_ffa:Wasabi', function()
+    source = source
+    if GetResourceState('wasabi_ambulance') == 'started' then
+        exports.wasabi_ambulance:RevivePlayer(source)
+    else 
+        print("renamed problem")
+    end
+end)
+
 function LeaveGame(Player, GameInfo)
     SetPlayerRoutingBucket(Player, Config.StandardDimension)
     TriggerClientEvent('sa_ffa:LeaveGameClient', Player, GameInfo.Modus)
