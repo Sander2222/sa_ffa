@@ -163,7 +163,7 @@ function LeaveGame(Player, GameInfo)
     TriggerClientEvent('sa_ffa:LeaveGameClient', Player, GameInfo.Modus)
     ChangePlayerCount(Player, GameInfo, "leave")
 
-    local xPlayer = ESX.GetPlayerFromId(Player) 
+    local xPlayer = ESX.GetPlayerFromId(Player)
 
     SendDiscord((SvConfig.WebhookText['PlayerLeavedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), GameInfo.Name))
 end
@@ -460,6 +460,18 @@ function GiveIDBack(Mode, Map)
             MapNumber = k
             break
         end
+    end
+
+    if ModeNumber == nil then
+        print("^1[ERROR]^7: Your Name for a Mode is not Valid^1: ".. Mode)
+
+        return
+    end
+
+    if MapNumber == nil then
+        print("^1[ERROR]^7: Your Name for a Map is not Valid^1: ".. Mode)
+
+        return
     end
 
     return ModeNumber, MapNumber
