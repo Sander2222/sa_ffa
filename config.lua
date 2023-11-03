@@ -50,11 +50,13 @@ Config.AfterDeath = function(data)
         else
             TriggerServerEvent('sa_ffa:Wasabi')
         end
+
         Wait(1000)
         Loadout('Join')
         Teleport()
         NetworkSetFriendlyFireOption(false)
         SetCanAttackFriendly(PlayerPedId(), false, false)
+
         if Config.Invincible then
             SetEntityInvincible(PlayerPedId(), true)
         end
@@ -67,6 +69,7 @@ Config.AfterDeath = function(data)
         Wait(3000)
         NetworkSetFriendlyFireOption(true)
         SetCanAttackFriendly(PlayerPedId(), true, true)
+        
         if Config.Invincible then
             SetEntityInvincible(PlayerPedId(), false)
         end
