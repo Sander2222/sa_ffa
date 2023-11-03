@@ -78,6 +78,7 @@
         "GetCurrentResourceName",
         "GetResourceMetadata",
         "SetPedAmmo",
-        "DrawSphere"
+        "DrawSphere",
+        "GetResourceState"
     ]
 }
