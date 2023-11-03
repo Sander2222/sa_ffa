@@ -107,7 +107,9 @@ AddEventHandler("sa_ffa:UpdatePlayerStats", function(Type)
         PlayerStats.deaths = PlayerStats.deaths + 1
     elseif Type == 'killer' then
         SetEntityHealth(PlayerPedId(), 200)
-        SetPedArmour(PlayerPedId(), 200)
+        if Config.Modus[ActiveClientGame.Modus].Armour then
+            SetPedArmour(PlayerPedId(), 200)
+        end
         PlayerStats.kills = PlayerStats.kills + 1
     end
 end)
@@ -165,8 +167,12 @@ function Loadout(Type, Modus)
         local ped = PlayerPedId()
 
         SetEntityHealth(ped, 200)
-        SetPedArmour(ped, 200)
+        if Config.Modus[ActiveClientGame.Modus].Armour then
+            SetPedArmour(ped, 200)
+        end
+        
             if ActiveClientGame.Modus ~= nil or ActiveClientGame.Modus ~= 0 then
+                print(Config.Modus[ActiveClientGame.Modus].Armour)
                 for j,k in ipairs(Config.Modus[ActiveClientGame.Modus].Weapons) do
                     GiveWeaponToPed(ped, GetHashKey(k), 1, 0, 0)
                 end

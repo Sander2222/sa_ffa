@@ -109,6 +109,7 @@ Config.Modus = {
     {
         Name = 'Only Pistol',
         Icon = 'fa-solid fa-user-ninja',
+        Armour = true,
         Weapons = {
             "weapon_pistol",
             "weapon_appistol"
@@ -117,6 +118,7 @@ Config.Modus = {
     {
         Name = 'Only Sniper',
         Icon = 'fa-solid fa-person-praying',
+        Armour = false,
         Weapons = {
             'weapon_sniperrifle',
             "weapon_heavysniper",
@@ -126,6 +128,7 @@ Config.Modus = {
     {
         Name = 'Only Pumpgun',
         Icon = 'fa-solid fa-gun',
+        Armour = true,
         Weapons = {
             "weapon_pumpshotgun",
             "weapon_sawnoffshotgun",
@@ -135,6 +138,7 @@ Config.Modus = {
     {
         Name = 'Only Assault',
         Icon = 'fa-solid fa-cross',
+        Armour = true,
         Weapons = {
             "weapon_assaultrifle",
             "weapon_carbinerifle",
