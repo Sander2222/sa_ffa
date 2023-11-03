@@ -45,7 +45,7 @@ Config.AfterDeath = function(data)
     if IsInDimension then
         Wait(1000)
         TriggerServerEvent('sa_ffa:PlayerKilled', data)
-        if Config.UseWasabi then
+        if not Config.UseWasabi then
             TriggerEvent('esx_ambulancejob:revive')
         else
             TriggerServerEvent('sa_ffa:Wasabi')
