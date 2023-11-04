@@ -202,6 +202,7 @@ Config.Local = {
     ['KilledYourself'] = 'Du hast dich selber getötet',
     ['LastPerson'] = 'Da du die letzte Person in dem Game warst wurde die Lobby gelöscht',
     ['ShowLeaveCommand'] = 'Mit diesem Befehl kannst du das FFA jederzeit verlassen %s', -- -- param 1 = leave command
+    ['NoBoardData'] = 'Es gibt gerade keine Daten für das Scoreboard',
     
     ['Place'] = 'Place',
     ['Name'] = 'Name',
