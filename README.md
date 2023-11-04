@@ -17,6 +17,7 @@
     {
         Name = -- This is the Name from the Mode (string),
         Icon = -- This need to be an icon name from this list (https://fontawesome.com/icons/) but you can let this emtpy if you dont want an icon (string),
+        Amour = -- this can you put on true so that the player get amour and on false the player doenst armour in this mode
         Weapons = {
             'weapon_sniperrifle', -- This is a list (array) from the weapons that are in this mode, you get the list from here: https://wiki.rage.mp/index.php?title=Weapons
             'weapon_heavysniper'
