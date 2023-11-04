@@ -74,8 +74,6 @@ AddEventHandler('sa_ffa:CreateGame', function(FFAInfo)
             SendDiscord((SvConfig.WebhookText['PlayerCreatedGame']):format( xPlayer.getName(), xPlayer.getIdentifier(), FFAInfo.Name, privat or FFAInfo.Password))
             Config.SendNotifyServer(_source, (Config.Local['CreatedRoom']):format(NewGame.Name))
         end
-
-
     end
 end)
 
@@ -154,7 +152,7 @@ AddEventHandler('sa_ffa:Wasabi', function()
     if GetResourceState('wasabi_ambulance') == 'started' then
         exports.wasabi_ambulance:RevivePlayer(source)
     else 
-        print("renamed problem")
+        SendError('The Ressource wasabi_ambulance is not on the server but you actived Config.UseWasabi')
     end
 end)
 
@@ -227,8 +225,6 @@ function ChangeWeaponState(Player, State, Loadout)
     end
 end
 
-
-
 function ChangePlayerCount(Player, ActiveGame, State)
 
     --Bei join ist ActiveGame ein Array mit dem Ganzen Game 
@@ -248,7 +244,7 @@ function ChangePlayerCount(Player, ActiveGame, State)
 
                         for k,d in pairs(v.FFAPlayerID) do
                             if d == Player then
-                                table.remove( v.FFAPlayerID, k )
+                                table.remove(v.FFAPlayerID, k)
                             end
                         end
 
@@ -264,8 +260,6 @@ function ChangePlayerCount(Player, ActiveGame, State)
         end
     end
 end
-
-
 
 function GivePlayerWeaponsBack(Player)
     local xPlayer = ESX.GetPlayerFromId(Player)
@@ -311,11 +305,6 @@ end
 ESX.RegisterServerCallback('sa_ffa:GetAllGames', function(source, cb)
     cb(Games)
 end)
-
--- Discord
--- Discord
--- Discord
-
 
 function SendDiscord(message)
     local embed = {
@@ -396,7 +385,7 @@ CreateThread(function()
                     finish = false
                     message = ''
                 else
-                    message = 'Es gibt gerade noch keine Daten für das Scoreboard'
+                    message = Config.Local['NoBoardData']
                     SendFFAScoreboard(message)
                     finish = false
                     message = ''
@@ -463,16 +452,20 @@ function GiveIDBack(Mode, Map)
     end
 
     if ModeNumber == nil then
-        print("^1[ERROR]^7: Your Name for a Mode is not Valid^1: ".. Mode)
+        SendError('Your Name for a Mode is not Valid^1: '.. Mode)
 
         return
     end
 
     if MapNumber == nil then
-        print("^1[ERROR]^7: Your Name for a Map is not Valid^1: ".. Mode)
+        SendError('Your Name for a Map is not Valid^1: '.. Mode)
 
         return
     end
 
     return ModeNumber, MapNumber
+end
+
+function SendError(Message)
+    print('^1[ERROR]^7: '.. Message)
 end
