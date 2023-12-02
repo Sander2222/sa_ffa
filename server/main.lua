@@ -265,8 +265,16 @@ function GivePlayerWeaponsBack(Player)
     local xPlayer = ESX.GetPlayerFromId(Player)
 
     if PlayerLoadouts[xPlayer.getIdentifier()] ~= nil then
+
         for k, v in ipairs(PlayerLoadouts[xPlayer.getIdentifier()]) do
-            xPlayer.addWeapon(v.name, v.ammo or 0)
+
+            xPlayer.addWeapon(v.name, 0)
+            if v.ammo == nil then
+                xPlayer.addWeaponAmmo(v.name, 0)
+            else 
+                print(v.name, v.ammo)
+                xPlayer.addWeaponAmmo(v.name, v.ammo)
+            end
 
             for e, f in pairs(v.components) do
                 xPlayer.addWeaponComponent(v.name, f)
@@ -464,8 +472,4 @@ function GiveIDBack(Mode, Map)
     end
 
     return ModeNumber, MapNumber
-end
-
-function SendError(Message)
-    print('^1[ERROR]^7: '.. Message)
 end
