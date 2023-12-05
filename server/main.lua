@@ -152,7 +152,7 @@ AddEventHandler('sa_ffa:Wasabi', function()
     if GetResourceState('wasabi_ambulance') == 'started' then
         exports.wasabi_ambulance:RevivePlayer(source)
     else 
-        SendError('The Ressource wasabi_ambulance is not on the server but you actived Config.UseWasabi')
+        print('The Ressource wasabi_ambulance is not on the server but you actived Config.UseWasabi')
     end
 end)
 
@@ -460,13 +460,13 @@ function GiveIDBack(Mode, Map)
     end
 
     if ModeNumber == nil then
-        SendError('Your Name for a Mode is not Valid^1: '.. Mode)
+        print('Your Name for a Mode is not Valid^1: '.. Mode)
 
         return
     end
 
     if MapNumber == nil then
-        SendError('Your Name for a Map is not Valid^1: '.. Mode)
+        print('Your Name for a Map is not Valid^1: '.. Mode)
 
         return
     end
