@@ -211,3 +211,5 @@ function GiveNamesBack(Modus, Map)
 
     return MapName, ModusName
 end
+
+exports('FFAUISearch', FFAUISearch)

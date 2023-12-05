@@ -226,3 +226,6 @@ CreateThread(function()
         Wait(0)
     end
 end)
+
+exports('IsPlayerInFFA', IsPlayerInFFA)
+exports('LeaveFFA', LeaveFFA)

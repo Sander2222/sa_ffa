@@ -21,12 +21,6 @@ client_scripts {
 	'client/other.lua'
 }
 
-exports {
-	'FFAUISearch',
-	'LeaveFFA',
-	'IsPlayerInFFA'
-}
-
 escrow_ignore {
 	'config.lua',
 	'svconfig.lua',
